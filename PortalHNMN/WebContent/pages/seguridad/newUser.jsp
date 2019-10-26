@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.Tbl_user, datos.DT_usuario;"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Usuario</title>
+<title>Nuevo Usuario</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -25,19 +25,6 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* RECUPERAMOS EL VALOR DE LA VARIABLE userID */
-String idUser = "";
-idUser = request.getParameter("userID");
-idUser = idUser==null?"0":idUser;
-
-int user = 0;
-user = Integer.parseInt(idUser); 
-
-/* OBTENEMOS LOS DATOS DE USUARIO A SER EDITADOS */
-Tbl_user tus = new Tbl_user();
-DT_usuario dtus = new DT_usuario();
-
-tus = dtus.obtenerUser(user);
 
 %>
 
@@ -60,12 +47,12 @@ tus = dtus.obtenerUser(user);
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Edición [Usuario]</h1>
+	            <h1>Registro [Nuevo Usuario]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
 	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Seguridad</a></li>
-	              <li class="breadcrumb-item active">Edición Usuario</li>
+	              <li class="breadcrumb-item active">Nuevo Usuario</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -81,14 +68,13 @@ tus = dtus.obtenerUser(user);
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edición Usuario</h3>
+                <h3 class="card-title">Nuevo Usuario</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form role="form" action="../../SL_usuario" method="post">
                 <div class="card-body">
-                  <input name="opc" id="opc" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
-                  <input name="IdUser" id="IdUser" type="hidden"> <!-- ESTE INPUT ES UTILIZADO EL ID_USER A EDITAR -->
+                  <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nombre de Usuario:</label>
                     <input type="text" id="username" name="username" class="form-control" 
@@ -102,7 +88,7 @@ tus = dtus.obtenerUser(user);
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Confirmar Contraseña: </label>
-                    <input type="password" id="password2" name="password2" onchange="pwdEquals()" class="form-control" 
+                    <input type="password" id="password2" name="password2" class="form-control" 
                     title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
                     placeholder="Ingrese nuevamente su Contraseña" required>
                   </div>
@@ -135,8 +121,8 @@ tus = dtus.obtenerUser(user);
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                  <button type="button" class="btn btn-danger">Cancelar</button>
+                  <button type="submit" class="btn btn-primary">Registrar</button>
+                  <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
             </div>
@@ -159,48 +145,11 @@ tus = dtus.obtenerUser(user);
   <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
-  <script>
-  function pwdEquals()
-  {
-	  var pwd1 = "";
-	  var pwd2 = "";
-	  
-	  pwd1 = $("#password").val();
-	  pwd2 = $("#password2").val();
-	  
-	  if(pwd1 != pwd2)
-	  {
-		  errorAlert('Error', 'Revise la contraseña ingresada');
-		  $("#password").css("border-color", "red");
-		  $("#password").val("");
-		  $("#password2").css("border-color", "red");
-		  $("#password2").val("");
-	  }
-	  else
-		{
-		  $("#password").css("border-color", "#ced4da");
-		  $("#password2").css("border-color", "#ced4da");
-		}
-		  
-  }
-  </script>
+  
   
   <script>
     $(document).ready(function ()
     {
-		/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
-    	
-    	$("#IdUser").val("<%=tus.getId_user()%>");
-    	$("#username").val("<%=tus.getUsername()%>");
-    	$("#password").val("<%=tus.getPassword()%>");
-    	$("#password2").val("<%=tus.getPassword()%>");
-    	$("#nombre1").val("<%=tus.getNombre1()%>");
-    	$("#nombre2").val("<%=tus.getNombre2()%>");
-    	$("#apellido1").val("<%=tus.getApellido1()%>");
-    	$("#apellido2").val("<%=tus.getApellido2()%>");
-    	$("#email").val("<%=tus.getEmail()%>");
-    	
-    	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
      
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
@@ -208,7 +157,7 @@ tus = dtus.obtenerUser(user);
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'El registro ha sido modificado!!!');
+        successAlert('Éxito', 'El nuevo registro ha sido almacenado!!!');
       }
       if(nuevo == "2")
       {
