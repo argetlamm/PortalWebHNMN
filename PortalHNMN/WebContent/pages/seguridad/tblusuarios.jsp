@@ -11,7 +11,7 @@
 	System.out.println("miPagina ="+miPagina);
 	boolean permiso = false;
 	String opcionActual = "";
-	//Buscamos si el rol tiene permisos para ver esta pagina
+	//Buscamos si el rol tiene permisos para ver esta pagina.
 	for(V_tbl_Rol_Opcion vro : listOpciones)
 	{
 		opcionActual = vro.getOpcion().trim();
