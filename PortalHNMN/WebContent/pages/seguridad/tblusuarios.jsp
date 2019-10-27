@@ -2,7 +2,6 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
 <% 
-
     ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <V_tbl_Rol_Opcion>) session.getAttribute("listOpciones");
@@ -697,7 +696,7 @@ function deleteUser(user)
      function(e,btn)
      {
        e.preventDefault();
-       //errorAlert('Denied!');
+       //errorAlert('Denied!'); //123
      });
 	
 }

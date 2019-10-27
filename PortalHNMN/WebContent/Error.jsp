@@ -663,6 +663,7 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<!-- ./wrapper -->
 
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
