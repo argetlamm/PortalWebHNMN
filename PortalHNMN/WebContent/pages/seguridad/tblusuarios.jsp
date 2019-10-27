@@ -696,7 +696,7 @@ function deleteUser(user)
      function(e,btn)
      {
        e.preventDefault();
-       //errorAlert('Denied!'); //123
+       //errorAlert('Denied!');
      });
 	
 }
