@@ -76,7 +76,35 @@ public class SL_rol extends HttpServlet {
 					System.out.println("Servlet: Error al guardar el rol!!!");
 				}
 				break;
-				
+			}
+			case 2:
+			{
+				try
+				{
+					trl.setId_rol(Integer.parseInt(request.getParameter("IdRol")));
+					trl.setRol_name(request.getParameter("rolname"));
+					trl.setRol_desc(request.getParameter("roldesc"));
+					
+					if(drol.modificarRol(trl))
+					{
+						response.sendRedirect("./pages/seguridad/tblRol.jsp?msj=1");
+					}
+					else
+					{
+						response.sendRedirect("./pages/seguridad/tblRol.jsp?msj=2");
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.out.println("Servlet: Error al editar el rol!!!");
+				}
+				break;
+			}
+			
+			default:
+			{
+				response.sendRedirect("../seguridad/newRol.jsp?msj=ERROR");
 			}
 		}
 	}

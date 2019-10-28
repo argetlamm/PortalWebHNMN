@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
 <% 
-    ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
+    /*ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <V_tbl_Rol_Opcion>) session.getAttribute("listOpciones");
 	//Recuperamos la url de la pag actual
@@ -30,7 +30,7 @@
 	if(!permiso)
 	{
 		response.sendRedirect("../../Error.jsp");
-	}
+	}*/
 %>
 <!DOCTYPE html>
 <html>
@@ -66,8 +66,6 @@
 	String mensaje = "";
 	mensaje = request.getParameter("msj");
 	mensaje = mensaje==null?"":mensaje;
-
-
 %>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -722,7 +720,6 @@ function deleteUser(user)
         'excel',
         'print'
         ]
-
       });
   });
   
@@ -734,7 +731,6 @@ function deleteUser(user)
     /////////// VARIABLES DE CONTROL MSJ ///////////
     var msj = 0;
     msj = "<%=mensaje%>";
-
     if(msj == "1")
     {
       successAlert('Éxito', 'El registro ha sido editado!!!');
@@ -754,7 +750,6 @@ function deleteUser(user)
    
   
     
-
   });
   </script>
 </body>

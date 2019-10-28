@@ -45,6 +45,34 @@ public class DT_rol
 		
 		return listaRol;
 	}
+	
+	
+	public Tbl_rol obtenerRol(int idRol)
+	{
+		Tbl_rol trl  = new Tbl_rol();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_rol where id_rol = ? and estado<>3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idRol);
+			rsRol = ps.executeQuery();
+			if(rsRol.next())
+			{
+				trl.setId_rol(rsRol.getInt("id_rol"));
+				trl.setRol_name(rsRol.getString("rol_name"));
+				trl.setRol_desc(rsRol.getString("rol_desc"));
+				trl.setEstado(rsRol.getInt("estado"));
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerRol() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return trl;
+	}
 
 	//Metodo para guardar rol
 	public boolean guardarRol(Tbl_rol trl)
@@ -70,6 +98,36 @@ public class DT_rol
 		}
 		
 		return guardado;
+	}
+	
+	public boolean modificarRol(Tbl_rol trl)
+	{
+		boolean modificado=false;	
+		try
+		{
+			this.listRol();
+			rsRol.beforeFirst();
+			while (rsRol.next())
+			{
+				if(rsRol.getInt(1)==trl.getId_rol())
+				{
+					rsRol.updateString("rol_name", trl.getRol_name());
+					rsRol.updateString("rol_desc", trl.getRol_desc());
+					rsRol.updateInt("estado", 2);
+					rsRol.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+			
+		}
+		catch (Exception e) 
+		{
+			System.err.println("ERROR modificarRol(): "+e.getMessage());
+			e.printStackTrace();
+		}
+			
+		return modificado;
 	}
 	
 	///////////////////////////// METODO PARA LISTAR ROL & OPCIONES /////////////////////////////

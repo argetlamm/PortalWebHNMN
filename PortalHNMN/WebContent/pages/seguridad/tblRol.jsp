@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
 <% 
-    ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
+/*ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <V_tbl_Rol_Opcion>) session.getAttribute("listOpciones");
 	//Recuperamos la url de la pag actual
@@ -30,7 +30,7 @@
 	if(!permiso)
 	{
 		response.sendRedirect("../../Error.jsp");
-	}
+	}*/
 %>
 <!DOCTYPE html>
 <html>
@@ -116,45 +116,31 @@
                 <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Descripcion</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                	DT_usuario dtus = new DT_usuario();
-  	        		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
-  	        		listUser = dtus.listUser();
+                	DT_rol drol = new DT_rol();
+  	        		ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+  	        		listRol = drol.listRol();
   	        		
-  	        		String nombreCompleto = "";
-  	        		String nombre2="";
-  	        		String apellido2="";
-  	        		String apellidos= "";
   	        		String estado = "";
-  	        		for(Tbl_user tus : listUser)
+  	        		for(Tbl_rol trl : listRol)
   	        		{
-  	        			nombre2=tus.getNombre2();
-  	        			nombre2=nombre2==null?" ":nombre2;
-  	        			apellido2=tus.getApellido2();
-  	        			apellido2=apellido2==null?" ":apellido2;
-  	        			nombreCompleto = tus.getNombre1()+" "+nombre2;
-  	        			apellidos = tus.getApellido1()+" "+apellido2;
-  	        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
+  	        			estado = trl.getEstado()==1||trl.getEstado()==2?"ACTIVO":"";
                 %>
 	                <tr>
-	                  <td><%=tus.getId_user()%></td>
-	                  <td><%=nombreCompleto %></td>
-	                  <td><%=apellidos %></td>
-	                  <td><%=tus.getUsername() %></td>
-	                  <td><%=tus.getEmail() %></td>
+	                  <td><%=trl.getId_rol() %></td>
+	                  <td><%=trl.getRol_name() %></td>
+	                  <td><%=trl.getRol_desc() %></td>
 	                  <td><%=estado %></td>
 	                  <td>
-	                  	<a href="#" onclick="linkEditUser('<%=tus.getId_user()%>');"><i class="far fa-edit" title="Editar"></i></a>&nbsp;&nbsp;
-	                  	<a href="#" onclick="deleteUser('<%=tus.getId_user()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
+	                  	<a href="#" onclick="linkEditRol('<%=trl.getId_rol()%>');"><i class="far fa-edit" title="Editar"></i></a>&nbsp;&nbsp;
+	                  	<a href="#" onclick="deleteUser('<%=trl.getId_rol()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
 	                  	
 	                  </td>
 	                </tr>
@@ -165,10 +151,8 @@
                 <tfoot>
                 <tr>
                   <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Descripcion</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
@@ -677,10 +661,10 @@
   <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
 <script>
-function linkEditUser(user)
+function linkEditRol(rol)
 {
-	var idUsuario = user;
-	window.location.href="../../pages/seguridad/editUser.jsp?userID="+idUsuario;	
+	var idRol = rol;
+	window.location.href="../../pages/seguridad/editRol.jsp?rolID="+idRol;	
 }
 </script>
 <script>
