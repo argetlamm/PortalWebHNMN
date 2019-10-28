@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Tbl_rol;
+import entidades.Tbl_user;
 import datos.DT_rol;
+import datos.DT_usuario;
 /**
  * Servlet implementation class SL_rol
  */
@@ -38,7 +40,52 @@ public class SL_rol extends HttpServlet {
 		opcion = Integer.parseInt(opc);
 		System.out.println("opcion: "+opcion);
 		
+		String idEliminar = request.getParameter("rolID");
+		int idRol = 0;
 		
+		idEliminar = idEliminar==null?"0":idEliminar;
+		System.out.println("idEliminar: "+idEliminar);
+		idRol = Integer.parseInt(idEliminar);
+		System.out.println("idUser: "+idRol);
+		
+		Tbl_rol trl = new Tbl_rol();
+		DT_rol drol = new DT_rol();
+		
+		switch(opcion)
+		{
+			case 1:
+			{
+				try
+				{
+					trl.setId_rol(idRol);
+					
+					if(drol.eliminarRol(trl))
+					{
+						response.sendRedirect("./pages/seguridad/tblRol.jsp?msj=3");
+					}
+					else
+					{
+						response.sendRedirect("./pages/seguridad/tblRol.jsp?msj=4");
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.out.println("Servlet: Error eliminarRol()");
+				}
+				break;
+			}
+			case 2:
+			{
+				//SIN CODIGO AUN
+				break;
+			}
+			
+			default:
+			{
+				response.sendRedirect("../seguridad/tblusuarios.jsp?msj=ERROR");
+			}
+		}
 	}
 
 	/**

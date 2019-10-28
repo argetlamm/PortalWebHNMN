@@ -130,6 +130,33 @@ public class DT_rol
 		return modificado;
 	}
 	
+	
+	public boolean eliminarRol(Tbl_rol trl)
+	{
+		boolean eliminado=false;	
+		try
+		{
+			this.listRol();
+			rsRol.beforeFirst();
+			while (rsRol.next())
+			{
+				if(rsRol.getInt(1)==trl.getId_rol())
+				{
+					rsRol.updateInt("estado",3);
+					rsRol.updateRow();
+					eliminado=true;
+					break;
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			System.err.println("ERROR eliminarRol() "+e.getMessage());
+			e.printStackTrace();
+		}
+		return eliminado;
+	}
+	
 	///////////////////////////// METODO PARA LISTAR ROL & OPCIONES /////////////////////////////
 	public ArrayList<V_tbl_Rol_Opcion> listRolOpc(int idRol)
 	{
