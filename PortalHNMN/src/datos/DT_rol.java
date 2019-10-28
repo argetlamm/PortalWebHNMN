@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import entidades.Tbl_rol;
+import entidades.Tbl_user;
 import entidades.V_tbl_Rol_Opcion;
 
 public class DT_rol 
@@ -45,6 +46,32 @@ public class DT_rol
 		return listaRol;
 	}
 
+	//Metodo para guardar rol
+	public boolean guardarRol(Tbl_rol trl)
+	{
+		boolean guardado = false;
+		
+		try
+		{
+			this.listRol();
+			rsRol.moveToInsertRow();
+			
+			rsRol.updateString("rol_name", trl.getRol_name());
+			rsRol.updateString("rol_desc", trl.getRol_desc());
+			rsRol.updateInt("estado", 1);
+			rsRol.insertRow();
+			rsRol.moveToCurrentRow();
+			guardado = true;
+		}
+		catch (Exception e) 
+		{
+			System.err.println("ERROR guardarRol(): "+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return guardado;
+	}
+	
 	///////////////////////////// METODO PARA LISTAR ROL & OPCIONES /////////////////////////////
 	public ArrayList<V_tbl_Rol_Opcion> listRolOpc(int idRol)
 	{
