@@ -32,7 +32,61 @@ public class SL_opcion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String opc = request.getParameter("opc");
+		int opcion = 0;
+		
+		opc = opc==null?"0":opc;
+		System.out.println("opc: "+opc);
+		opcion = Integer.parseInt(opc);
+		System.out.println("opcion: "+opcion);
+		
+		String idEliminar = request.getParameter("opcID");
+		int idOpc = 0;
+		
+		idEliminar = idEliminar==null?"0":idEliminar;
+		System.out.println("idEliminar: "+idEliminar);
+		idOpc = Integer.parseInt(idEliminar);
+		System.out.println("idUser: "+idOpc);
+		
+		Tbl_opcion topc = new Tbl_opcion();
+		DT_opcion dopc = new DT_opcion();
+		
+		switch(opcion)
+		{
+			case 1:
+			{
+				try
+				{
+					topc.setId_opcion(idOpc);
+					
+					if(dopc.eliminarOpcion(topc))
+					{
+						response.sendRedirect("./pages/seguridad/tblOpcion.jsp?msj=3");
+					}
+					else
+					{
+						response.sendRedirect("./pages/seguridad/tblOpcion.jsp?msj=4");
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.out.println("Servlet: Error eliminarOpcion()");
+				}
+				break;
+			}
+			case 2:
+			{
+				//SIN CODIGO AUN
+				break;
+			}
+			
+			default:
+			{
+				response.sendRedirect("../seguridad/tblopcion.jsp?msj=ERROR");
+			}
+		}
 	}
 
 	/**
@@ -70,7 +124,30 @@ public class SL_opcion extends HttpServlet {
 					System.out.println("Servlet: Error al guardar la opcion!!!");
 				}
 				break;
-				
+			}
+			case 2:
+			{
+				try
+				{
+					top.setId_opcion(Integer.parseInt(request.getParameter("IdOpc")));
+					top.setOpcion(request.getParameter("opcioname"));
+					top.setOpcion_desc(request.getParameter("opciondesc"));
+					
+					if(dopc.modificarOpcion(top))
+					{
+						response.sendRedirect("./pages/seguridad/tblOpcion.jsp?msj=1");
+					}
+					else
+					{
+						response.sendRedirect("./pages/seguridad/tblOpcion.jsp?msj=2");
+					}
+				}
+				catch(Exception e)
+				{
+					e.printStackTrace();
+					System.out.println("Servlet: Error al editar la opcion!!!");
+				}
+				break;
 			}
 		}	
 
