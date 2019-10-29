@@ -13,18 +13,6 @@
       </li>
     </ul>
 
-    <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Notifications Dropdown Menu -->
@@ -35,8 +23,11 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <span class="dropdown-item dropdown-header">Salir del Sistema</span>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item dropdown-footer" href="index.jsp"> <i class="fa fa-power-off"></i>
+          <!-- <a class="dropdown-item dropdown-footer" href="index.jsp"> <i class="fa fa-power-off"></i>
 			<span>Cerrar Sesión</span>
+		  </a> -->
+		  <a class="dropdown-item dropdown-footer" href="${pageContext.request.contextPath}/index.jsp"> <i class="fa fa-power-off"></i>
+		  <span>Cerrar Sesión</span>
 		  </a>
           
         </div>
