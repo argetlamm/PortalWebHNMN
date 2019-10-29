@@ -1,5 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.DT_usuario, java.util.*;"%>
+
+<% 
+    ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
+	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
+	listOpciones = (ArrayList <V_tbl_Rol_Opcion>) session.getAttribute("listOpciones");
+	//Recuperamos la url de la pag actual
+	int index = request.getRequestURL().lastIndexOf("/");
+	String miPagina = request.getRequestURL().substring(index+1);
+	System.out.println("miPagina ="+miPagina);
+	boolean permiso = false;
+	String opcionActual = "";
+	//Buscamos si el rol tiene permisos para ver esta pagina
+	for(V_tbl_Rol_Opcion vro : listOpciones)
+	{
+		opcionActual = vro.getOpcion().trim();
+		System.out.println("opcionActual ="+opcionActual);
+		if(opcionActual.equals(miPagina.trim()))
+		{
+			permiso = true;
+			break;
+		}
+		else
+		{
+			permiso = false;
+		}
+		
+	}
+	
+	if(!permiso)
+	{
+		response.sendRedirect("../../Error.jsp");
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>

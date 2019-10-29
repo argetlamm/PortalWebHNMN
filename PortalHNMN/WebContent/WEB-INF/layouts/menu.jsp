@@ -383,7 +383,18 @@
                   <p>Control Usuarios</p>
                 </a>
               </li>
-              
+              <li class="nav-item">
+                <a href="pages/seguridad/tblRol.jsp" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Control Rol</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/seguridad/tblOpcion.jsp" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Control Opcion</p>
+                </a>
+              </li>
               
               
             </ul>

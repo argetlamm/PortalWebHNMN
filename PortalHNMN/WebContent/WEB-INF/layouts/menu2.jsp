@@ -377,12 +377,23 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../seguridad/tblusuarios.jsp" class="nav-link active">
+                <a href="../seguridad/tblusuarios.jsp" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Control Usuarios</p>
                 </a>
               </li>
-              
+              <li class="nav-item">
+                <a href="../seguridad/tblRol.jsp" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Control Rol</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../seguridad/tblOpcion.jsp" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Control Opcion</p>
+                </a>
+              </li>
             </ul>
           </li>
           

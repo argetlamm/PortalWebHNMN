@@ -56,6 +56,7 @@ public class SL_login_usuarios extends HttpServlet {
 				HttpSession hts = request.getSession(true);
 				hts.setAttribute("login", login);
 				hts.setAttribute("idRol", rolId);
+				System.out.println("hts.getAttribute(\"idRol\") = " + hts.getAttribute("idRol"));
 				response.sendRedirect("sistema.jsp");
 				
 			}

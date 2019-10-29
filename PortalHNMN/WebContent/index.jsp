@@ -2,12 +2,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
     
-<%--     <%
-    	reponse.setHeader("Pragma","no-cache0000");
-    	reponse.setHeader("Cache-Control","no-store");
-    	reponse.setHeader("Expires, 0");
-    	reponse.setHeader("Expires, -1");
-    %> --%>
+
+<%	
+   response.setHeader( "Pragma", "no-cache" );
+   response.setHeader( "Cache-Control", "no-store" );
+   response.setDateHeader( "Expires", 0 );
+   response.setDateHeader( "Expires", -1 );
+%>
+
+<%
+	HttpSession hts = request.getSession(false);
+	hts.removeAttribute("login");
+	hts.removeAttribute("idRol");
+	hts.invalidate();	
+%>
     
 <!DOCTYPE html>
 <html>
@@ -37,7 +45,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin </b>Herbario Nacional</a>
+    <a href="#"><b>Admin </b>Herbario Nacional</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
@@ -95,7 +103,7 @@
         <a href="#">He olvidado mi contraseña</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Registrar una nueva membresia</a>
+        <a href="#" class="text-center">Registrar una nueva membresia</a>
       </p>
     </div>
     <!-- /.login-card-body -->

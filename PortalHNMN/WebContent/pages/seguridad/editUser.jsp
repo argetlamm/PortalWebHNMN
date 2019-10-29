@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.DT_usuario, java.util.*;"%>
-    
-<%--     <% 
+
+<% 
     ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <V_tbl_Rol_Opcion>) session.getAttribute("listOpciones");
@@ -15,6 +15,7 @@
 	for(V_tbl_Rol_Opcion vro : listOpciones)
 	{
 		opcionActual = vro.getOpcion().trim();
+		System.out.println("opcionActual ="+opcionActual);
 		if(opcionActual.equals(miPagina.trim()))
 		{
 			permiso = true;
@@ -31,8 +32,7 @@
 	{
 		response.sendRedirect("../../Error.jsp");
 	}
-%> --%>
-    
+%>
 <!DOCTYPE html>
 <html>
 <head>

@@ -23,11 +23,14 @@
 	}
 	else
 	{
-		ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>(); 
+		ArrayList<V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
 		DT_rol dtr = new DT_rol();
-		listOpciones = dtr.listRolOpc(1);
-		HttpSession hts2 = request.getSession(true);
-		hts2.setAttribute("listOpciones", listOpciones);
+    	HttpSession hts2 = request.getSession(true);
+   		System.out.println("hts.getAttribute(\"idRol\") en sistema = " + hts2.getAttribute("idRol"));
+    	int idRol = Integer.parseInt( hts2.getAttribute("idRol").toString());
+    	System.out.println("idRol = " + idRol);
+   		listOpciones = dtr.listRolOpc(idRol);
+    	hts2.setAttribute("listOpciones", listOpciones);
 		
 		
 // 		HttpSession hts4 = request.getSession(true);
