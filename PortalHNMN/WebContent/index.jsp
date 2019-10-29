@@ -1,12 +1,20 @@
 <%@page import="entidades.Tbl_rol"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+    
+<%--     <%
+    	reponse.setHeader("Pragma","no-cache0000");
+    	reponse.setHeader("Cache-Control","no-store");
+    	reponse.setHeader("Expires, 0");
+    	reponse.setHeader("Expires, -1");
+    %> --%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <title>AdminLTE 3 | Log in</title>
+ <title>Admin Herbario Nacional | Iniciar Sesion</title>
  <!-- Tell the browser to be responsive to screen width -->
  <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,12 +37,12 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="../../index2.html"><b>Admin </b>Herbario Nacional</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Inicia Sesion</p>
 
       <form action="./SL_login_usuarios" method="post">
         <div class="input-group mb-3">
@@ -84,10 +92,10 @@
 
       
       <p class="mb-1">
-        <a href="#">I forgot my password</a>
+        <a href="#">He olvidado mi contraseña</a>
       </p>
       <p class="mb-0">
-        <a href="register.html" class="text-center">Register a new membership</a>
+        <a href="register.html" class="text-center">Registrar una nueva membresia</a>
       </p>
     </div>
     <!-- /.login-card-body -->
