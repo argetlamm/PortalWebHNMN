@@ -43,15 +43,8 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="card">
-              <div class="card-body" style="background: url('../dist/img/mapa.jpeg'); width: 100%; height: 100vh">
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+              <div class="card-body">
+              <img alt="sitemap" src="../dist/img/sitemap.png" height="600px" width="900px">
               </div>
             </div>
           </div>
