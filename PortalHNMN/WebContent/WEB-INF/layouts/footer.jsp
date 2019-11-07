@@ -5,11 +5,12 @@
             <div class="widget">
               <h5 class="widgetheading">Enlaces externos</h5>
               <ul class="link-list">
-                <li><a href="#">About our company</a></li>
-                <li><a href="#">Our services</a></li>
-                <li><a href="#">Meet our team</a></li>
-                <li><a href="#">Explore our portfolio</a></li>
-                <li><a href="#">Get in touch with us</a></li>
+                <li><a href="#">Herbario 1</a></li>
+                <li><a href="#">Herbario 2</a></li>
+                <li><a href="#">Enlace de Wikipedia 1</a></li>
+                <li><a href="#">Enlace de Wikipedia 2</a></li>
+                <li><a href="#">Enlace de blog ciéntifico 1</a></li>
+                <li><a href="#">Enlace de blog ciéntifico 2</a></li>
               </ul>
             </div>
           </div>
@@ -18,10 +19,9 @@
               <h5 class="widgetheading">Quizás te interese...</h5>
               <ul class="link-list">
                 <li><a href="mapasitio.jsp">Mapa de Sitio</a></li>
-                <li><a href="#">Terms and conditions</a></li>
-                <li><a href="#">Privacy policy</a></li>
-                <li><a href="#">Career center</a></li>
-                <li><a href="#">Flattern forum</a></li>
+                <li><a href="donaciones.jsp">Donaciones</a></li>
+                <li><a href="cursos.jsp">Últimos cursos</a></li>
+                <li><a href="colecciones.jsp">Colección</a></li>
               </ul>
             </div>
           </div>

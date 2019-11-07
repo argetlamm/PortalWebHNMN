@@ -525,48 +525,6 @@ select.selectmenu {
   display: block;
 }
 
-/* Caption styles */
-
-.nivo-caption {
-  position: absolute;
-  left: 80px;
-  bottom: 20px;
-  background: #000;
-  color: #fff;
-  width: 30%;
-  z-index: 8;
-  padding: 20px;
-  opacity: 0.8;
-  overflow: hidden;
-  display: none;
-  -moz-opacity: 0.8;
-  filter: alpha(opacity=8);
-  -webkit-box-sizing: border-box;
-  /* Safari/Chrome, other WebKit */
-  -moz-box-sizing: border-box;
-  /* Firefox, other Gecko */
-  box-sizing: border-box;
-  /* Opera/IE 8+ */
-}
-
-.nivo-caption h2 {
-  color: #fff;
-  font-size: 26px;
-  line-height: 1em;
-}
-
-.nivo-caption p {
-  margin-bottom: 20px;
-}
-
-.nivo-caption a {
-  display: inline !important;
-}
-
-.nivo-html-caption {
-  display: none;
-}
-
 /* Direction nav styles (e.g. Next & Prev) */
 
 .nivo-directionNav a {

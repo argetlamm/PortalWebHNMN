@@ -27,10 +27,11 @@
                       <a href="index.jsp">Inicio</a>
                     </li>
                     <li class="dropdown">
-                      <a href="#">Noticias <i class="icon-angle-down"></i></a>
+                      <a href="noticias.jsp">Noticias <i class="icon-angle-down"></i></a>
                       <ul class="dropdown-menu">
                         <li><a href="articulos.jsp">Artículos</a></li>
                         <li><a href="eventos.jsp">Eventos</a></li>
+                        <li><a href="cursos.jsp">Cursos</a></li>
                       </ul>
                     </li>
                     <li class="dropdown">

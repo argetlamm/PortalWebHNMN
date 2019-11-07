@@ -40,11 +40,11 @@
       <div id="nivo-slider">
         <div class="nivo-slider">
           <!-- Slide #1 image -->
-          <img src="img/slides/nivo/bg-1.jpg" alt="" title="#caption-1" />
+          <img src="img/slides/nivo/foto-arbol.jpg" alt="" title="#caption-1" />
           <!-- Slide #2 image -->
-          <img src="img/slides/nivo/bg-2.jpg" alt="" title="#caption-2" />
+          <img src="img/slides/nivo/foto-bosque.jpg" alt="" title="#caption-2" />
           <!-- Slide #3 image -->
-          <img src="img/slides/nivo/bg-3.jpg" alt="" title="#caption-3" />
+          <img src="img/slides/nivo/foto-bosque-dos.jpg" alt="" title="#caption-3" />
         </div>
       </div>
       <!-- end slider -->
@@ -70,48 +70,48 @@
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <i class="icon-book icon-circled icon-64 active"></i>
+                    <i class="icon-briefcase icon-circled icon-64 active"></i>
                   </div>
                   <div class="text">
                     <h6>Servicios</h6>
-					<p>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass. </p>
-                    <a href="servicios.jsp">Ver más</a>
+					<p>El Herbario Nacional de Nicaragua ofrece muchos servicios de reconocimiento de especies, cursos y y toures, ¿quieres saber más? ¡Adéntrate! </p>
+                    <a href="servicios.jsp">Infórmate...</a>
                   </div>
                 </div>
               </div>
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <i class="icon-desktop icon-circled icon-64 active"></i>
+                    <i class="icon-book icon-circled icon-64 active"></i>
                   </div>
                   <div class="text">
                     <h6>Cursos</h6>
-                    <p>Look, just because I don't be givin' no man a foot massage don't make it right for Marsellus to throw Antwone into a glass motherfuckin' house, fuckin' up the way the nigger talks. Motherfucker do that shit to me, he better paralyze my ass, 'cause I'll kill the motherfucker, know what I'm sayin'? </p>
-                    <a href="cursos.jsp">Ver más</a>
+                    <p> Ofrecemos una gran variedad de cursos a costos accesibles para todo el público, ¿quieres saber qué cursos ofrecemos y a qué costo? ¡Adéntrate! </p>
+                    <a href="cursos.jsp">Infórmate...</a>
                   </div>
                 </div>
               </div>
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <i class="icon-beaker icon-circled icon-64 active"></i>
+                    <i class="icon-bullhorn icon-circled icon-64 active"></i>
                   </div>
                   <div class="text">
                     <h6>Noticias</h6>
-                    <p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing. </p>
-                    <a href="noticias.jsp">Ver más</a>
+                    <p> Nuevos cursos, eventos planeados e información de interés acerca del mundo de la herbología, ¿quieres ver esto y mucho más? ¡Adéntrate! </p>
+                    <a href="noticias.jsp">Infórmate...</a>
                   </div>
                 </div>
               </div>
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <i class="icon-coffee icon-circled icon-64 active"></i>
+                    <i class="icon-gift icon-circled icon-64 active"></i>
                   </div>
                   <div class="text">
                     <h6>Donaciones</h6>
-					<p>Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends. </p>
-                    <a href="donaciones.jsp">Ver más</a>
+					<p> ¿Quieres contribuir al desarrollo del Herbario Nacional de Nicaragua? Todo tipo de donación, desde efectivo hasta material ciéntifico es muy valorado. ¿Quieres saber cómo hacerlo? ¡Adéntrate! </p>
+                    <a href="donaciones.jsp">Infórmate...</a>
                   </div>
                 </div>
               </div>
