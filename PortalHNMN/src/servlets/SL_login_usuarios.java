@@ -57,7 +57,7 @@ public class SL_login_usuarios extends HttpServlet {
 				hts.setAttribute("login", login);
 				hts.setAttribute("idRol", rolId);
 				System.out.println("hts.getAttribute(\"idRol\") = " + hts.getAttribute("idRol"));
-				response.sendRedirect("sistema.jsp");
+				response.sendRedirect("CMS/sistema.jsp");
 				
 			}
 			else
