@@ -47,13 +47,13 @@
         <div class="row">
           <div class="span4">
             <div class="inner-heading">
-              <h2>Acerca de</h2>
+              <h2>¿Quiénes Somos?</h2>
             </div>
           </div>
           <div class="span8">
             <ul class="breadcrumb">
               <li><a href="index.jsp"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-              <li class="active">Acerca de</li>
+              <li class="active">¿Quiénes Somos?</li>
             </ul>
           </div>
         </div>
@@ -61,6 +61,41 @@
     </section>
     <section id="content">
       <div class="container">
+         <div class="row">
+          <div class="span6">
+            <h2><strong>¿Quiénes Somos?</strong></h2>
+			<p>Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.  </p>
+
+			<p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing. </p>
+
+			<p>Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends. </p>
+          </div>
+          <div class="span6">
+            <!-- start flexslider -->
+            <div class="flexslider">
+              <ul class="slides">
+                <li>
+                  <img src="img/works/full/image-01-full.jpg" alt="" />
+                </li>
+                <li>
+                  <img src="img/works/full/image-02-full.jpg" alt="" />
+                </li>
+                <li>
+                  <img src="img/works/full/image-03-full.jpg" alt="" />
+                </li>
+              </ul>
+            </div>
+            <!-- end flexslider -->
+          </div>
+        </div>
+         <!-- divider -->
+        <div class="row">
+          <div class="span12">
+            <div class="solidline">
+            </div>
+          </div>
+        </div>
+        <!-- end divider -->
         <div class="row">
           <div class="span6">
             <h2><strong>Historia</strong></h2>

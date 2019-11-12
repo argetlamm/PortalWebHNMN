@@ -70,7 +70,7 @@
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <i class="icon-briefcase icon-circled icon-64 active"></i>
+                    <a href="servicios.jsp"><i class="icon-briefcase icon-circled icon-64 active"></i></a>
                   </div>
                   <div class="text">
                     <h6>Servicios</h6>
@@ -82,7 +82,7 @@
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <i class="icon-book icon-circled icon-64 active"></i>
+                    <a href= "cursos.jsp"><i class="icon-book icon-circled icon-64 active"></i></a>
                   </div>
                   <div class="text">
                     <h6>Cursos</h6>
@@ -94,24 +94,12 @@
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <i class="icon-bullhorn icon-circled icon-64 active"></i>
+                    <a href = "noticias.jsp"><i class="icon-bullhorn icon-circled icon-64 active"></i></a>
                   </div>
                   <div class="text">
                     <h6>Noticias</h6>
                     <p> Nuevos cursos, eventos planeados e información de interés acerca del mundo de la herbología, ¿quieres ver esto y mucho más? ¡Adéntrate! </p>
                     <a href="noticias.jsp">Infórmate...</a>
-                  </div>
-                </div>
-              </div>
-              <div class="span3">
-                <div class="box aligncenter">
-                  <div class="aligncenter icon">
-                    <i class="icon-gift icon-circled icon-64 active"></i>
-                  </div>
-                  <div class="text">
-                    <h6>Donaciones</h6>
-					<p> ¿Quieres contribuir al desarrollo del Herbario Nacional de Nicaragua? Todo tipo de donación, desde efectivo hasta material ciéntifico es muy valorado. ¿Quieres saber cómo hacerlo? ¡Adéntrate! </p>
-                    <a href="donaciones.jsp">Infórmate...</a>
                   </div>
                 </div>
               </div>

@@ -81,9 +81,6 @@
                   <li><i class="icon-ok"></i> Duración: 60 horas</li>
                 </ul>
               </div>
-              <div class="pricing-action">
-                <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i> Aplica ahora</a>
-              </div>
             </div>
           </div>
           <div class="span4">
@@ -103,9 +100,6 @@
                   <li><i class="icon-ok"></i> Duración: 72 horas</li>
                 </ul>
               </div>
-              <div class="pricing-action">
-                <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i> Aplica ahora</a>
-              </div>
             </div>
           </div>
           <div class="span4">
@@ -124,9 +118,6 @@
                   <li><i class="icon-ok"></i> Almuerzo garantizado</li>
                   <li><i class="icon-ok"></i> Duración: 90 horas</li>
                 </ul>
-              </div>
-              <div class="pricing-action">
-                <a href="#" class="btn btn-medium btn-theme"><i class="icon-bolt"></i> Aplica ahora</a>
               </div>
             </div>
           </div>
