@@ -61,10 +61,9 @@
         <div class="row">
           <div class="span12">
             <ul class="portfolio-categ filter">
-              <li class="all active"><a href="#">All</a></li>
-              <li class="web"><a href="#" title="">Managua</a></li>
-              <li class="icon"><a href="#" title="">Estelí</a></li>
-              <li class="graphic"><a href="#" title="">Rivas</a></li>
+              <li class="all active"><a href="#">Todas</a></li>
+              <li class="web"><a href="#" title="">Pacífico</a></li>
+              <li class="icon"><a href="#" title="">Caribe</a></li>
             </ul>
             <div class="clearfix">
             </div>
@@ -94,15 +93,6 @@
                   </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-2" data-type="graphic">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="muestra-individual.jsp">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-03.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
                   <!-- End Item Project -->
                   <!-- Item Project and Filter Name -->
                   <li class="item-thumbs span3 design" data-id="id-0" data-type="web">

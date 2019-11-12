@@ -84,7 +84,7 @@
                 <!-- end flexslider -->
               </div>
               <p>
-                Esta es una planta bonita
+                Foto tomada por: Joshua Hernández
               </p>
             </article>
           </div>
@@ -95,12 +95,10 @@
                 <ul class="folio-detail">
                   <li><label>Nombre :</label> Planta tuani</li>
                   <li><label>Nombre científico :</label>Tuanis plantus</li>
-                  <li><label>Fecha de recolección :</label> 09 de Junio de 1999</li>
-                  <li><label>Recolector :</label><a href="#">Julio Calero</a></li>
                 </ul>
               </div>
               <div class="widget">
-                <h5 class="widgetheading">Información adicional</h5>
+                <h5 class="widgetheading">Ecología</h5>
                 <p>
                   Esta es una planta recolectada en la universidad centroamericana UCA - Managua, Nicaragua. Gimnosperma, de más de 20 años de antigüedad. Pertenece a la familia x y posee flores aparte de fruto. 
                 </p>
