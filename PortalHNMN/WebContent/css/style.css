@@ -87,8 +87,15 @@ a:active {
   background: #fff;
 }
 
+footer .container {
+  padding: 15px 10px;
+margin-left: 224px;
+  position: relative;
+}
+
 .row, .row-fluid {
   margin-bottom: 30px;
+  
 }
 
 .row .row, .row-fluid .row-fluid {
@@ -1094,6 +1101,7 @@ h4.heading strong {
 .widgetheading {
   width: 100%;
   padding: 0;
+  text-align: center;
 }
 
 #bottom .widgetheading {
@@ -1883,7 +1891,9 @@ footer {
   background: #111;
   padding: 50px 0 0 0;
   color: #bbb;
+  text-align: center;
 }
+
 
 footer a {
   color: #eee;
