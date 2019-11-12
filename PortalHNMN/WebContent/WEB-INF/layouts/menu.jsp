@@ -1,3 +1,5 @@
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
  <!-- start header -->
     <header>
       <div class="container ">
@@ -22,9 +24,15 @@
             <div class="navbar navbar-static-top">
               <div class="navigation">
                 <nav>
+                <%
+                	DT_publicaciones dtpus = new DT_publicaciones();
+                	Tbl_publicaciones tblp = new Tbl_publicaciones();
+                	tblp = dtpus.itemMenu();
+                	System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
+                %>
                   <ul class="nav topnav">
                     <li class="dropdown active">
-                      <a href="index.jsp">Inicio</a>
+                      <a href="index.jsp"><%=tblp.getPublic_titulo()%></a>
                     </li>
                     <li class="dropdown">
                       <a href="noticias.jsp">Noticias <i class="icon-angle-down"></i></a>
