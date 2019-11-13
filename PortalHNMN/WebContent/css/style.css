@@ -89,8 +89,8 @@ a:active {
 
 footer .container {
   padding: 15px 10px;
-margin-left: 224px;
-  position: relative;
+  margin-left: 224px;
+  position: fixed;
 }
 
 .row, .row-fluid {
