@@ -21,11 +21,11 @@
   <!-- Theme skin -->
   <link href="skins/default.css" rel="stylesheet" />
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png" />
-  <link rel="shortcut icon" href="ico/favicon.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-touch-icon-144.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-touch-icon-114.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-touch-icon-57.png" />
+  <link rel="shortcut icon" href="ico/favicon.png" type="image/x-icon" />
 
 </head>
 
@@ -39,12 +39,24 @@
       <!-- Slider -->
       <div id="nivo-slider">
         <div class="nivo-slider">
-          <!-- Slide #1 image -->
-          <img src="img/slides/nivo/foto-arbol.jpg" alt="" title="#caption-1" />
-          <!-- Slide #2 image -->
-          <img src="img/slides/nivo/foto-bosque.jpg" alt="" title="#caption-2" />
-          <!-- Slide #3 image -->
-          <img src="img/slides/nivo/foto-bosque-dos.jpg" alt="" title="#caption-3" />
+        	<%
+        		DT_publicaciones dtpus = new DT_publicaciones();
+        	ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
+            listaBanner = dtpus.imagenesBanner();
+            String publicado = "publicado";
+            String url = "";
+            int contador = 1;
+            
+            for (Tbl_publicaciones tpublc : listaBanner){
+            	if(tpublc.getPublic_estado().trim().equals(publicado)){
+            		url = tpublc.getPublic_titulo();
+        	%>
+          	<img src=<%=url %> alt="" title="#caption-<%=contador %>"/>
+           <% 
+           		contador++;
+            	} 
+            }
+         	%>
         </div>
       </div>
       <!-- end slider -->
@@ -100,6 +112,18 @@
                     <h6>Noticias</h6>
                     <p> Nuevos cursos, eventos planeados e información de interés acerca del mundo de la herbología, ¿quieres ver esto y mucho más? ¡Adéntrate! </p>
                     <a href="noticias.jsp">Infórmate...</a>
+                  </div>
+                </div>
+              </div>
+              <div class="span3">
+                <div class="box aligncenter">
+                  <div class="aligncenter icon">
+                    <a href = "visitas.jsp"><i class="icon-plane icon-circled icon-64 active"></i></a>
+                  </div>
+                  <div class="text">
+                    <h6>Visitas</h6>
+                    <p> Visitas, capacitaciones, jornadas de recolección y demás, ¿quieres enterarte de hacia dónde iremos próximamente? ¡Adéntrate! </p>
+                    <a href="visitas.jsp">Infórmate...</a>
                   </div>
                 </div>
               </div>

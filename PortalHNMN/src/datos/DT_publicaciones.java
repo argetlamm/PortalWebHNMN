@@ -106,7 +106,68 @@ public class DT_publicaciones {
 		
 		return listaItemsF;
 	}
-
 	
-
+	public ArrayList<Tbl_publicaciones> imagenesBanner()
+	{
+		ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'bannerI'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				listaBanner.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return listaBanner;
+	}
+	
+	public ArrayList<Tbl_publicaciones> QuienesSomos()
+	{
+		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'QuienesSomos'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			System.out.println("PASA POR AQUI 1");
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				listaBdy.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return listaBdy;
+	}
 }

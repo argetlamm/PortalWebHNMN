@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <title>Acerca de - Herbario Nacional de Nicaragua</title>
+  <title>Quiénes somos - Herbario Nacional de Nicaragua</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="" />
   <meta name="author" content="" />
@@ -23,11 +23,11 @@
   <!-- boxed bg -->
   <link id="bodybg" href="bodybg/bg1.css" rel="stylesheet" type="text/css" />
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png" />
-  <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png" />
-  <link rel="shortcut icon" href="ico/favicon.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-touch-icon-144.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-touch-icon-114.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-touch-icon-57.png" />
+  <link rel="shortcut icon" href="ico/favicon.png" type="image/x-icon" />
 
   <!-- =======================================================
     Theme Name: Flattern
@@ -63,12 +63,28 @@
       <div class="container">
          <div class="row">
           <div class="span6">
-            <h2><strong>¿Quiénes Somos?</strong></h2>
-			<p>Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.  </p>
-
-			<p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing. </p>
-
-			<p>Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends. </p>
+            <%
+                	DT_publicaciones dtpus = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
+                listatTblp = dtpus.QuienesSomos();
+                String publicado = "publicado";
+                String item1="", item2="", item3="";
+                for (Tbl_publicaciones tpublc : listatTblp){
+                	if(tpublc.getPublic_estado().trim().equals(publicado)){
+                		if(tpublc.getMenu_order() == 1){
+                			item1 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 2){
+                			item2 = tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 3){
+                			item3 = tpublc.getPublic_content();
+                		}
+                	}
+                }
+                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
+                %>
+                <h2><b><%=item1 %></b></h2>
+                <p><%=item2 %></p>
+                <p><%=item3 %></p>
           </div>
           <div class="span6">
             <!-- start flexslider -->
@@ -98,12 +114,31 @@
         <!-- end divider -->
         <div class="row">
           <div class="span6">
-            <h2><strong>Historia</strong></h2>
-			<p>Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.  </p>
-
-			<p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing. </p>
-
-			<p>Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends. </p>
+          <%
+                	/*DT_publicaciones dtpus = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();*/
+                listatTblp = dtpus.QuienesSomos();
+                //String publicado = "publicado";
+                String item4="", item5="", item6="", item7="";
+                for (Tbl_publicaciones tpublc : listatTblp){
+                	if(tpublc.getPublic_estado().trim().equals(publicado)){
+                		if(tpublc.getMenu_order() == 4){
+                			item4 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 5){
+                			item5 = tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 6){
+                			item6 = tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 7){
+                			item7 = tpublc.getPublic_content();
+                		}
+                	}
+                }
+                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
+                %>
+                <h2><b><%=item4 %></b></h2>
+                <p><%=item5 %></p>
+                <p><%=item6 %></p>
+                <p><%=item7 %></p>
           </div>
           <div class="span6">
             <!-- start flexslider -->
@@ -133,12 +168,69 @@
         <!-- end divider -->
         <div class="row">
           <div class="span6">
-            <h2><strong>Misión</strong></h2>
-            <p>Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends. </p>
-
-			<p>My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else and get it, I'm gonna shoot you in the head then and there. Then I'm gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I'm talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand? </p>
-
-			<p>Do you see any Teletubbies in here? Do you see a slender plastic tag clipped to my shirt with my name printed on it? Do you see a little Asian child with a blank expression on his face sitting outside on a mechanical helicopter that shakes when you put quarters in it? No? Well, that's what you see at a toy store. And you must think you're in a toy store, because you're here shopping for an infant named Jeb. </p>
+				<%
+                	/*DT_publicaciones dtpus = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();*/
+                listatTblp = dtpus.QuienesSomos();
+                //String publicado = "publicado";
+                String item8="", item9="";
+                for (Tbl_publicaciones tpublc : listatTblp){
+                	if(tpublc.getPublic_estado().trim().equals(publicado)){
+                		if(tpublc.getMenu_order() == 8){
+                			item8 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 9){
+                			item9 = tpublc.getPublic_content();
+                		}
+                	}
+                }
+                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
+                %>
+                <h2><b><%=item8 %></b></h2>
+                <p><%=item9 %></p>
+          </div>
+          <div class="span6">
+            <!-- start flexslider -->
+            <div class="flexslider">
+              <ul class="slides">
+                <li>
+                  <img src="img/works/full/image-01-full.jpg" alt="" />
+                </li>
+                <li>
+                  <img src="img/works/full/image-02-full.jpg" alt="" />
+                </li>
+                <li>
+                  <img src="img/works/full/image-03-full.jpg" alt="" />
+                </li>
+              </ul>
+            </div>
+            <!-- end flexslider -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="span6">
+				<%
+                	/*DT_publicaciones dtpus = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();*/
+                listatTblp = dtpus.QuienesSomos();
+                //String publicado = "publicado";
+                String item10="", item11="", item12="";
+                for (Tbl_publicaciones tpublc : listatTblp){
+                	if(tpublc.getPublic_estado().trim().equals(publicado)){
+                		if(tpublc.getMenu_order() == 10){
+                			item10 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 11){
+                			item11 = tpublc.getPublic_content();
+                		}
+                		else if(tpublc.getMenu_order() == 12){
+                			item12 = tpublc.getPublic_content();
+                		}
+                	}
+                }
+                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
+                %>
+                <h2><b><%=item10 %></b></h2>
+                <p><%=item11 %></p>
+                <p><%=item12 %></p>
           </div>
           <div class="span6">
             <!-- start flexslider -->
@@ -166,33 +258,6 @@
           </div>
         </div>
         <!-- end divider -->
-                <div class="row">
-          <div class="span6">
-            <h2><strong>Visión</strong></h2>
-			<p>Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like they're actually proud of that shit.  </p>
-
-			<p>Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing. </p>
-
-			<p>Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends. </p>
-          </div>
-          <div class="span6">
-            <!-- start flexslider -->
-            <div class="flexslider">
-              <ul class="slides">
-                <li>
-                  <img src="img/works/full/image-01-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-02-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-03-full.jpg" alt="" />
-                </li>
-              </ul>
-            </div>
-            <!-- end flexslider -->
-          </div>
-        </div>
       </div>
     </section>
   <!-- Footer -->
