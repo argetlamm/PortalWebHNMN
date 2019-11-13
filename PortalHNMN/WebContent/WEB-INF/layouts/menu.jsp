@@ -22,8 +22,8 @@
           </div>
           <div class="span8">
             <div class="navbar navbar-static-top">
-              <div class="navigation">
-                <nav>
+              <div class="navigation"> 
+                <nav> 
                 <%
                 	DT_publicaciones dtpus = new DT_publicaciones();
                 ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();

@@ -29,7 +29,6 @@
 		  <a class="dropdown-item dropdown-footer" href="${pageContext.request.contextPath}/CMS/index.jsp"> <i class="fa fa-power-off"></i>
 		  <span>Cerrar Sesión</span>
 		  </a>
-          
         </div>
       </li>
     </ul>
