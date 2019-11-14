@@ -61,11 +61,11 @@ public class SL_rol extends HttpServlet {
 					
 					if(drol.eliminarRol(trl))
 					{
-						response.sendRedirect("./pages/seguridad/tblRol.jsp?msj=3");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=3");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/tblRol.jsp?msj=4");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=4");
 					}
 				}
 				catch(Exception e)
@@ -83,7 +83,7 @@ public class SL_rol extends HttpServlet {
 			
 			default:
 			{
-				response.sendRedirect("../seguridad/tblusuarios.jsp?msj=ERROR");
+				response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblrol.jsp?msj=ERROR");
 			}
 		}
 	}
@@ -112,11 +112,11 @@ public class SL_rol extends HttpServlet {
 					trl.setRol_name(request.getParameter("rolname"));
 					trl.setRol_desc(request.getParameter("roldesc"));
 					if(drol.guardarRol(trl)) {
-						response.sendRedirect("./pages/seguridad/newRol.jsp?msj=1");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=1");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/newRol.jsp?msj=2");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=2");
 					}
 				}catch(Exception e) {
 					e.printStackTrace();
@@ -134,11 +134,11 @@ public class SL_rol extends HttpServlet {
 					
 					if(drol.modificarRol(trl))
 					{
-						response.sendRedirect("./pages/seguridad/tblRol.jsp?msj=1");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=1");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/tblRol.jsp?msj=2");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=2");
 					}
 				}
 				catch(Exception e)
@@ -151,7 +151,7 @@ public class SL_rol extends HttpServlet {
 			
 			default:
 			{
-				response.sendRedirect("../seguridad/newRol.jsp?msj=ERROR");
+				response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=ERROR");
 			}
 		}
 	}

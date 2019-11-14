@@ -5,7 +5,7 @@
 <head>
   <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Error</title>
+  <title>Error | Error</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -26,7 +26,7 @@
   <!-- /.navbar -->
 
   <!-- SIDEBAR -->
-  	<jsp:include page="/CMS/layouts/menu2.jsp"></jsp:include>
+  	<jsp:include page="/CMS/layouts/menu.jsp"></jsp:include>
   <!-- SIDEBAR -->
 
   <!-- Content Wrapper. Contains page content -->

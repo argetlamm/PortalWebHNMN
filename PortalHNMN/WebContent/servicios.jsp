@@ -4,10 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Eventos - Herbario Nacional de Nicaragua</title>
+<title>Servicios - Herbario Nacional de Nicaragua</title>
 </head>
 <body>
-
 <img alt="" src="img/building.jpeg">
 </body>
 </html>

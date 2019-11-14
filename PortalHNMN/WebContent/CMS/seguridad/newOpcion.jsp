@@ -30,26 +30,26 @@
 	
 	if(!permiso)
 	{
-		response.sendRedirect("../../Error.jsp");
+		response.sendRedirect("../Error.jsp");
 	}
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Nuevo Rol</title>
+<title>Nueva opción </title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+<link rel="stylesheet" href="../dist/css/adminlte.min.css">
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 <!-- jAlert css  -->
-<link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+<link rel="stylesheet" href="../plugins/jAlert/dist/jAlert.css" />
 
 
 <%
@@ -80,12 +80,12 @@ mensaje = mensaje==null?"":mensaje;
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Registro [Nuevo Rol]</h1>
+	            <h1>Registro [Nueva opcion]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="tblRol.jsp">Seguridad</a></li>
-	              <li class="breadcrumb-item active">Nuevo Rol</li>
+	              <li class="breadcrumb-item"><a href="tblOpcion.jsp">Seguridad</a></li>
+	              <li class="breadcrumb-item active">Nueva opcion</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -101,23 +101,23 @@ mensaje = mensaje==null?"":mensaje;
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Nuevo Rol</h3>
+                <h3 class="card-title">Nuevo opcion</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="../../SL_rol" method="post">
+              <form role="form" action="${pageContext.request.contextPath}/SL_opcion" method="post">
                 <div class="card-body">
                   <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre del Rol:</label>
-                    <input type="text" id="rolname" name="rolname" class="form-control" 
-                    placeholder="Nombre del Rol" required>
+                    <label for="exampleInputEmail1">Opcion:</label>
+                    <input type="text" id="opcioname" name="opcioname" class="form-control" 
+                    placeholder="Ruta de la opcion" required>
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Descripcion: </label>
-                    <input type="text" id="roldesc" name="roldesc" class="form-control" 
-                    title="Breve descripcion del rol" 
-                    placeholder="Ingrese una breve descripcion del rol">
+                    <input type="text" id="opciondesc" name="opciondesc" class="form-control" 
+                    title="Breve descripcion de la opcion" 
+                    placeholder="Ingrese una breve descripcion de la opcion">
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -141,11 +141,11 @@ mensaje = mensaje==null?"":mensaje;
 
 </div>
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../plugins/jquery/jquery.min.js"></script>
 
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  <script src="../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
   <script>
     $(document).ready(function ()

@@ -30,7 +30,7 @@
 	
 	if(!permiso)
 	{
-		response.sendRedirect("../../Error.jsp");
+		response.sendRedirect("../Error.jsp");
 	}
 %>
 <!DOCTYPE html>
@@ -41,15 +41,15 @@
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+<link rel="stylesheet" href="../dist/css/adminlte.min.css">
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 <!-- jAlert css  -->
-<link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+<link rel="stylesheet" href="../plugins/jAlert/dist/jAlert.css" />
 
 
 <%
@@ -118,7 +118,7 @@ tus = dtus.obtenerUser(user);
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="../../SL_usuario" method="post">
+              <form role="form" action="${pageContext.request.contextPath}/SL_usuario" method="post">
                 <div class="card-body">
                   <input name="opc" id="opc" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   <input name="IdUser" id="IdUser" type="hidden"> <!-- ESTE INPUT ES UTILIZADO EL ID_USER A EDITAR -->
@@ -186,11 +186,11 @@ tus = dtus.obtenerUser(user);
 
 </div>
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../plugins/jquery/jquery.min.js"></script>
 
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  <script src="../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
   <script>
   function pwdEquals()

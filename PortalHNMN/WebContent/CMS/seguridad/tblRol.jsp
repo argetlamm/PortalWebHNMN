@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
-<%
-    ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
+<% 
+	ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <V_tbl_Rol_Opcion>) session.getAttribute("listOpciones");
 	//Recuperamos la url de la pag actual
@@ -30,44 +30,45 @@
 	
 	if(!permiso)
 	{
-		response.sendRedirect("../../Error.jsp");
+		response.sendRedirect("../Error.jsp");
 	}
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | DataTables</title>
+  <title>Control Roles | Herbario Nacional de Nicaragua</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
 <!--   <link rel="stylesheet" href="../../plugins/datatables-bs4/css/dataTables.bootstrap4.css"> -->
   
   <!-- DATATABLE NEW -->
-    <link href="../../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- DATATABLE NEW buttons -->
-    <link href="../../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
   
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   
   <!-- jAlert css  -->
-<link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+<link rel="stylesheet" href="../plugins/jAlert/dist/jAlert.css" />
   
   <%
 	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
 	String mensaje = "";
 	mensaje = request.getParameter("msj");
 	mensaje = mensaje==null?"":mensaje;
+
+
 %>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -90,12 +91,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Control de Usuarios</h1>
+            <h1>Control de Rol</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Seguridad</a></li>
-              <li class="breadcrumb-item active">Control de Usuarios</li>
+              <li class="breadcrumb-item"><a href="tblRol.jsp">Seguridad</a></li>
+              <li class="breadcrumb-item active">Control de Rol</li>
             </ol>
           </div>
         </div>
@@ -108,10 +109,11 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Tabla de Usuarios Registrados</h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+              <h3 class="card-title">Tabla de Roles Registrados</h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
               &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
               &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              <a href="../../pages/seguridad/newUser.jsp"><i class="fas fa-plus" title="Nuevo Usuario"></i></a>
+              &emsp;&nbsp;&nbsp;
+              <a href="././newRol.jsp"><i class="fas fa-plus" title="Nuevo Rol"></i></a>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -119,45 +121,31 @@
                 <thead>
                 <tr>
                   <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Descripcion</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <%
-                	DT_usuario dtus = new DT_usuario();
-  	        		ArrayList<Tbl_user> listUser = new ArrayList<Tbl_user>();
-  	        		listUser = dtus.listUser();
+                	DT_rol drol = new DT_rol();
+  	        		ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
+  	        		listRol = drol.listRol();
   	        		
-  	        		String nombreCompleto = "";
-  	        		String nombre2="";
-  	        		String apellido2="";
-  	        		String apellidos= "";
   	        		String estado = "";
-  	        		for(Tbl_user tus : listUser)
+  	        		for(Tbl_rol trl : listRol)
   	        		{
-  	        			nombre2=tus.getNombre2();
-  	        			nombre2=nombre2==null?" ":nombre2;
-  	        			apellido2=tus.getApellido2();
-  	        			apellido2=apellido2==null?" ":apellido2;
-  	        			nombreCompleto = tus.getNombre1()+" "+nombre2;
-  	        			apellidos = tus.getApellido1()+" "+apellido2;
-  	        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
+  	        			estado = trl.getEstado()==1||trl.getEstado()==2?"ACTIVO":"";
                 %>
 	                <tr>
-	                  <td><%=tus.getId_user()%></td>
-	                  <td><%=nombreCompleto %></td>
-	                  <td><%=apellidos %></td>
-	                  <td><%=tus.getUsername() %></td>
-	                  <td><%=tus.getEmail() %></td>
+	                  <td><%=trl.getId_rol() %></td>
+	                  <td><%=trl.getRol_name() %></td>
+	                  <td><%=trl.getRol_desc() %></td>
 	                  <td><%=estado %></td>
 	                  <td>
-	                  	<a href="#" onclick="linkEditUser('<%=tus.getId_user()%>');"><i class="far fa-edit" title="Editar"></i></a>&nbsp;&nbsp;
-	                  	<a href="#" onclick="deleteUser('<%=tus.getId_user()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
+	                  	<a href="#" onclick="linkEditRol('<%=trl.getId_rol()%>');"><i class="far fa-edit" title="Editar"></i></a>&nbsp;&nbsp;
+	                  	<a href="#" onclick="deleteRol('<%=trl.getId_rol()%>');"><i class="far fa-trash-alt" title="Eliminar"></i> </a>
 	                  	
 	                  </td>
 	                </tr>
@@ -168,10 +156,8 @@
                 <tfoot>
                 <tr>
                   <th>Id</th>
-                  <th>Nombres</th>
-                  <th>Apellidos</th>
-                  <th>UserName</th>
-                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Descripcion</th>
                   <th>Estado</th>
                   <th>Opciones</th>
                 </tr>
@@ -200,60 +186,60 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- DataTables -->
 <!-- <script src="../../plugins/datatables/jquery.dataTables.js"></script> -->
 <!-- <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script> -->
 
 <!-- DATATABLE NEW -->
-  <script src="../../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+  <script src="../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
 
 <!-- DATATABLE NEW buttons -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
+  <script src="../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
 
 <!-- js DATATABLE NEW buttons print -->
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
+  <script src="../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+  <script src="../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
 
    <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
+  <script src="../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
+  <script src="../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
 
   <!-- js DATATABLE NEW buttons excel -->
-  <script src="../../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
+  <script src="../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
 
 
 
 
 
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="../dist/js/demo.js"></script>
 <!-- page script -->
 
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  <script src="../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
 
 <script>
-function linkEditUser(user)
+function linkEditRol(rol)
 {
-	var idUsuario = user;
-	window.location.href="../../pages/seguridad/editUser.jsp?userID="+idUsuario;	
+	var idRol = rol;
+	window.location.href="${pageContext.request.contextPath}/CMS/seguridad/editRol.jsp?rolID="+idRol;	
 }
 </script>
 <script>
-function deleteUser(user)
+function deleteRol(rol)
 {
-	var idUsuario = user;
+	var idRol = rol;
 	confirm(function(e,btn)
      { 	//event + button clicked
      	e.preventDefault();
-     	window.location.href="../../SL_usuario?opc=1&userID="+idUsuario;
+     	window.location.href="${pageContext.request.contextPath}/SL_rol?opc=1&rolID="+idRol;
        	//successAlert('Confirmed!');
      }, 
      function(e,btn)
@@ -285,6 +271,7 @@ function deleteUser(user)
         'excel',
         'print'
         ]
+
       });
   });
   
@@ -296,6 +283,7 @@ function deleteUser(user)
     /////////// VARIABLES DE CONTROL MSJ ///////////
     var msj = 0;
     msj = "<%=mensaje%>";
+
     if(msj == "1")
     {
       successAlert('Éxito', 'El registro ha sido editado!!!');
@@ -315,6 +303,7 @@ function deleteUser(user)
    
   
     
+
   });
   </script>
 </body>

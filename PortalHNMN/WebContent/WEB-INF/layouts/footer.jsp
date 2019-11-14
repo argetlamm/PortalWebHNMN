@@ -69,9 +69,9 @@
             
               <h5 class="widgetheading"><%=titulo4 %></h5>
               <ul class="link-list">
-                <li><a href="mapasitio.jsp"><%=item13 %></a></li>
-                <li><a href="donaciones.jsp"><%=item14 %></a></li>
-                <li><a href="cursos.jsp"><%=item15 %></a></li>
+                <li><%=item13 %></li>
+                <li><%=item14 %></li>
+                <li><%=item15 %></li>
               </ul>
             </div>
           </div>

@@ -7,8 +7,8 @@
           <div class="span12">
             <div class="headnav">
               <ul>
-                <li><a href="#mySignup" data-toggle="modal"><i class="icon-user"></i> Regístrate</a></li>
-                <li><a href="././CMS/index.jsp" data-toggle="modal">Iniciar Sesión</a></li>
+                <li><a href="registro.jsp"><i class="icon-user"></i> Regístrate</a></li>
+                <li><a href="././CMS/index.jsp">Iniciar Sesión</a></li>
               </ul>
             </div>
           </div>

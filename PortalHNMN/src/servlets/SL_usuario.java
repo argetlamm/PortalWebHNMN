@@ -64,11 +64,11 @@ public class SL_usuario extends HttpServlet {
 					
 					if(dtus.eliminarUser(tus))
 					{
-						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=3");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblusuarios.jsp?msj=3");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=4");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblusuarios.jsp?msj=4");
 					}
 				}
 				catch(Exception e)
@@ -86,7 +86,7 @@ public class SL_usuario extends HttpServlet {
 			
 			default:
 			{
-				response.sendRedirect("../seguridad/tblusuarios.jsp?msj=ERROR");
+				response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblusuarios.jsp?msj=ERROR");
 			}
 		}
 	}
@@ -126,11 +126,11 @@ public class SL_usuario extends HttpServlet {
 					
 					if(dtus.guardarUser(tus))
 					{
-						response.sendRedirect("./pages/seguridad/newUser.jsp?msj=1");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newUser.jsp?msj=1");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/newUser.jsp?msj=2");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newUser.jsp?msj=2");
 					}
 				}
 				catch(Exception e)
@@ -155,11 +155,11 @@ public class SL_usuario extends HttpServlet {
 					
 					if(dtus.modificarUser(tus))
 					{
-						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=1");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblusuarios.jsp?msj=1");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/tblusuarios.jsp?msj=2");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblusuarios.jsp?msj=2");
 					}
 				}
 				catch(Exception e)
@@ -172,7 +172,7 @@ public class SL_usuario extends HttpServlet {
 			
 			default:
 			{
-				response.sendRedirect("../seguridad/newUser.jsp?msj=ERROR");
+				response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newUser.jsp?msj=ERROR");
 			}
 		}
 		

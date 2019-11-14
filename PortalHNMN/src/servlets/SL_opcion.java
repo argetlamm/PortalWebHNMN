@@ -62,11 +62,11 @@ public class SL_opcion extends HttpServlet {
 					
 					if(dopc.eliminarOpcion(topc))
 					{
-						response.sendRedirect("./pages/seguridad/tblOpcion.jsp?msj=3");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblOpcion.jsp?msj=3");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/tblOpcion.jsp?msj=4");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblOpcion.jsp?msj=4");
 					}
 				}
 				catch(Exception e)
@@ -84,7 +84,7 @@ public class SL_opcion extends HttpServlet {
 			
 			default:
 			{
-				response.sendRedirect("../seguridad/tblopcion.jsp?msj=ERROR");
+				response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblopcion.jsp?msj=ERROR");
 			}
 		}
 	}
@@ -113,11 +113,11 @@ public class SL_opcion extends HttpServlet {
 					top.setOpcion(request.getParameter("opcioname"));
 					top.setOpcion_desc(request.getParameter("opciondesc"));
 					if(dopc.guardarOpcion(top)) {
-						response.sendRedirect("./pages/seguridad/newOpcion.jsp?msj=1");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newOpcion.jsp?msj=1");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/newOpcion.jsp?msj=2");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newOpcion.jsp?msj=2");
 					}
 				}catch(Exception e) {
 					e.printStackTrace();
@@ -135,11 +135,11 @@ public class SL_opcion extends HttpServlet {
 					
 					if(dopc.modificarOpcion(top))
 					{
-						response.sendRedirect("./pages/seguridad/tblOpcion.jsp?msj=1");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblOpcion.jsp?msj=1");
 					}
 					else
 					{
-						response.sendRedirect("./pages/seguridad/tblOpcion.jsp?msj=2");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblOpcion.jsp?msj=2");
 					}
 				}
 				catch(Exception e)

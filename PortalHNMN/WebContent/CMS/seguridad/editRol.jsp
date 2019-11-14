@@ -30,26 +30,26 @@
 	
 	if(!permiso)
 	{
-		response.sendRedirect("../../Error.jsp");
+		response.sendRedirect("../Error.jsp");
 	}
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Nuevo Rol</title>
+<title>Editar Rol</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
-<link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+<link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
 <!-- Ionicons -->
 <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+<link rel="stylesheet" href="../dist/css/adminlte.min.css">
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 <!-- jAlert css  -->
-<link rel="stylesheet" href="../../plugins/jAlert/dist/jAlert.css" />
+<link rel="stylesheet" href="../plugins/jAlert/dist/jAlert.css" />
 
 
 <%
@@ -113,11 +113,11 @@ trl = drol.obtenerRol(rol);
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Nuevo Rol</h3>
+                <h3 class="card-title">Editar Rol</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="../../SL_rol" method="post">
+              <form role="form" action="${pageContext.request.contextPath}/SL_rol" method="post">
                 <div class="card-body">
                   <input name="opc" id="opc" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   <input name="IdRol" id="IdRol" type="hidden">
@@ -136,7 +136,7 @@ trl = drol.obtenerRol(rol);
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Registrar</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>
@@ -154,11 +154,11 @@ trl = drol.obtenerRol(rol);
 
 </div>
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="../plugins/jquery/jquery.min.js"></script>
 
 <!-- jAlert js -->
-  <script src="../../plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="../../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  <script src="../plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   
   <script>
     $(document).ready(function ()
