@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import entidades.Tbl_user;
+import java.math.BigInteger; 
+import java.security.MessageDigest; 
+import java.security.NoSuchAlgorithmException; 
 
 public class DT_usuario 
 {
@@ -97,7 +100,7 @@ public class DT_usuario
 			rsUsuario.updateString("nombre2", tus.getNombre2());
 			rsUsuario.updateString("apellido1", tus.getApellido1());
 			rsUsuario.updateString("apellido2", tus.getApellido2());
-			rsUsuario.updateString("password", tus.getPassword());
+			rsUsuario.updateString("password", getMd5(tus.getPassword()));
 			rsUsuario.updateString("email", tus.getEmail());
 			rsUsuario.updateInt("estado", 1);
 			rsUsuario.insertRow();
@@ -185,6 +188,7 @@ public class DT_usuario
 			PreparedStatement ps = c.prepareStatement(SQL);
 			ps.setString(1, user);
 			ps.setString(2, pwd);
+			ps.setString(2, getMd5(pwd).trim());
 			ps.setInt(3, idRol);
 			ResultSet rs = null;
 			rs = ps.executeQuery();
@@ -204,6 +208,37 @@ public class DT_usuario
 	
 		return existe;
 	}
+	
+	
+	public static String getMd5(String input) 
+    { 
+        try { 
+  
+            // Static getInstance method is called with hashing MD5 
+            MessageDigest md = MessageDigest.getInstance("MD5"); 
+  
+            // digest() method is called to calculate message digest 
+            //  of an input digest() return array of byte 
+            byte[] messageDigest = md.digest(input.getBytes()); 
+  
+            // Convert byte array into signum representation 
+            BigInteger no = new BigInteger(1, messageDigest); 
+  
+            // Convert message digest into hex value 
+            String hashtext = no.toString(16); 
+            while (hashtext.length() < 32) 
+            { 
+                hashtext = "0" + hashtext; 
+            } 
+            return hashtext; 
+        }  
+  
+        // For specifying wrong message digest algorithms 
+        catch (NoSuchAlgorithmException e) 
+        { 
+            throw new RuntimeException(e); 
+        } 
+    } 
 	
 
 }
