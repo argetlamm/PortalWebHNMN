@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-
+ 
   <!-- css -->
   <link href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" rel="stylesheet">
   <link href="css/bootstrap.css" rel="stylesheet" />
@@ -63,28 +63,43 @@
       <div class="container">
          <div class="row">
           <div class="span6">
-            <%
-                	DT_publicaciones dtpus = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
-                listatTblp = dtpus.QuienesSomos();
-                String publicado = "publicado";
-                String item1="", item2="", item3="";
-                for (Tbl_publicaciones tpublc : listatTblp){
+          	<%
+          		DT_publicaciones dtpus = new DT_publicaciones();
+            	ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
+            	listatTblp = dtpus.titulosQuienesSomos();
+            	String publicado = "publicado";
+            	String titulo1="",titulo2="",titulo3="", titulo4="";
+  
+            	for(Tbl_publicaciones tpublc : listatTblp){
                 	if(tpublc.getPublic_estado().trim().equals(publicado)){
                 		if(tpublc.getMenu_order() == 1){
-                			item1 = tpublc.getPublic_titulo();
+                			titulo1=tpublc.getPublic_titulo();
                 		}else if(tpublc.getMenu_order() == 2){
-                			item2 = tpublc.getPublic_content();
+                			titulo2 = tpublc.getPublic_titulo();
                 		}else if(tpublc.getMenu_order() == 3){
-                			item3 = tpublc.getPublic_content();
+                			titulo3 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 4){
+                			titulo4 = tpublc.getPublic_titulo();
                 		}
                 	}
                 }
-                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
+          	%>
+          	<h2><b><%=titulo1 %></b></h2>
+            <%
+                	DT_publicaciones dtpusdos = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listaIQSomos = new ArrayList<Tbl_publicaciones>();
+                listaIQSomos = dtpusdos.itemsQuienesSomos();
+                String parrafo="";
+               
+                for (Tbl_publicaciones tpublc : listaIQSomos){
+                	if(tpublc.getPublic_estado().trim().equals(publicado)){
+                		parrafo=tpublc.getPublic_content();
                 %>
-                <h2><b><%=item1 %></b></h2>
-                <p><%=item2 %></p>
-                <p><%=item3 %></p>
+                <p><%=parrafo %></p>
+                <%
+                	}
+                }
+                %>
           </div>
           <div class="span6">
             <!-- start flexslider -->
@@ -114,31 +129,22 @@
         <!-- end divider -->
         <div class="row">
           <div class="span6">
+          	<h2><b><%=titulo2 %></b></h2>
           <%
-                	/*DT_publicaciones dtpus = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();*/
-                listatTblp = dtpus.QuienesSomos();
-                //String publicado = "publicado";
-                String item4="", item5="", item6="", item7="";
-                for (Tbl_publicaciones tpublc : listatTblp){
+                	DT_publicaciones dtpusTres = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listaIHistoria = new ArrayList<Tbl_publicaciones>();
+                listaIHistoria = dtpusdos.itemsHistoria();
+                String parrafoH="";
+               
+                for (Tbl_publicaciones tpublc : listaIHistoria){
                 	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		if(tpublc.getMenu_order() == 4){
-                			item4 = tpublc.getPublic_titulo();
-                		}else if(tpublc.getMenu_order() == 5){
-                			item5 = tpublc.getPublic_content();
-                		}else if(tpublc.getMenu_order() == 6){
-                			item6 = tpublc.getPublic_content();
-                		}else if(tpublc.getMenu_order() == 7){
-                			item7 = tpublc.getPublic_content();
-                		}
+                		parrafoH=tpublc.getPublic_content();
+                %>
+                <p><%=parrafoH %></p>
+                <%
                 	}
                 }
-                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
                 %>
-                <h2><b><%=item4 %></b></h2>
-                <p><%=item5 %></p>
-                <p><%=item6 %></p>
-                <p><%=item7 %></p>
           </div>
           <div class="span6">
             <!-- start flexslider -->
@@ -168,25 +174,22 @@
         <!-- end divider -->
         <div class="row">
           <div class="span6">
-				<%
-                	/*DT_publicaciones dtpus = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();*/
-                listatTblp = dtpus.QuienesSomos();
-                //String publicado = "publicado";
-                String item8="", item9="";
-                for (Tbl_publicaciones tpublc : listatTblp){
+				<h2><b><%=titulo3 %></b></h2>
+          <%
+                	DT_publicaciones dtpusCuatro = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listaIVision = new ArrayList<Tbl_publicaciones>();
+                listaIVision = dtpusdos.itemsVision();
+                String parrafoV="";
+               
+                for (Tbl_publicaciones tpublc : listaIVision){
                 	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		if(tpublc.getMenu_order() == 8){
-                			item8 = tpublc.getPublic_titulo();
-                		}else if(tpublc.getMenu_order() == 9){
-                			item9 = tpublc.getPublic_content();
-                		}
+                		parrafoV=tpublc.getPublic_content();
+                %>
+                <p><%=parrafoV %></p>
+                <%
                 	}
                 }
-                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
                 %>
-                <h2><b><%=item8 %></b></h2>
-                <p><%=item9 %></p>
           </div>
           <div class="span6">
             <!-- start flexslider -->
@@ -208,29 +211,22 @@
         </div>
         <div class="row">
           <div class="span6">
-				<%
-                	/*DT_publicaciones dtpus = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();*/
-                listatTblp = dtpus.QuienesSomos();
-                //String publicado = "publicado";
-                String item10="", item11="", item12="";
-                for (Tbl_publicaciones tpublc : listatTblp){
+				<h2><b><%=titulo4 %></b></h2>
+          <%
+                	DT_publicaciones dtpusCinco = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listaIMision = new ArrayList<Tbl_publicaciones>();
+                listaIMision = dtpusdos.itemsMision();
+                String parrafoM="";
+               
+                for (Tbl_publicaciones tpublc : listaIMision){
                 	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		if(tpublc.getMenu_order() == 10){
-                			item10 = tpublc.getPublic_titulo();
-                		}else if(tpublc.getMenu_order() == 11){
-                			item11 = tpublc.getPublic_content();
-                		}
-                		else if(tpublc.getMenu_order() == 12){
-                			item12 = tpublc.getPublic_content();
-                		}
+                		parrafoM=tpublc.getPublic_content();
+                %>
+                <p><%=parrafoM %></p>
+                <%
                 	}
                 }
-                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
                 %>
-                <h2><b><%=item10 %></b></h2>
-                <p><%=item11 %></p>
-                <p><%=item12 %></p>
           </div>
           <div class="span6">
             <!-- start flexslider -->

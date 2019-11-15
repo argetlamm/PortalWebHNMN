@@ -53,7 +53,7 @@
           <div class="span8">
             <ul class="breadcrumb">
               <li><a href="index.jsp"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-              <li><a href="colecciones.jsp">Noticias</a><i class="icon-angle-right"></i></li>
+              <li><a href="noticias.jsp">Noticias</a><i class="icon-angle-right"></i></li>
               <li class="active">Artículos</li>
             </ul>
           </div>

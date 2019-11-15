@@ -29,7 +29,8 @@
             }
             
             listatTfoot = dtpus.itemsFtr();
-            String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="",item9="",item10="",item11="",item12="",item13="",item14="",item15="";
+            String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="",item9="",
+            		item10="",item11="",item12="",item13="",item14="",item15="", item16="";
             for(Tbl_publicaciones tpublc : listatTfoot){
             	if(tpublc.getPublic_estado().trim().equals(publicado)){
             		if(tpublc.getMenu_order() == 1){
@@ -62,27 +63,19 @@
             			item14 = tpublc.getPublic_titulo();
             		}else if(tpublc.getMenu_order() == 15){
             			item15 = tpublc.getPublic_titulo();
-            		}	
+            		}else if(tpublc.getMenu_order() == 16){
+        				item16 = tpublc.getPublic_titulo();
+        			}	
             	}
             }
             %>
             
-              <h5 class="widgetheading"><%=titulo4 %></h5>
-              <ul class="link-list">
-                <li><%=item13 %></li>
-                <li><%=item14 %></li>
-                <li><%=item15 %></li>
-              </ul>
-            </div>
-          </div>
-          <div class="span3">
-            <div class="widget">
               <h5 class="widgetheading"><%=titulo1 %></h5>
               <ul class="link-list">
-                <li><a href="mapasitio.jsp"><%=item1 %></a></li>
-                <li><a href="donaciones.jsp"><%=item2 %></a></li>
-                <li><a href="cursos.jsp"><%=item3 %></a></li>
-                <li><a href="colecciones.jsp"><%=item4 %></a></li>
+                <li><%=item1 %></li>
+                <li><%=item2 %></li>
+                <li><%=item3 %></li>
+                <li><%=item4 %></li>
               </ul>
             </div>
           </div>
@@ -90,23 +83,34 @@
             <div class="widget">
               <h5 class="widgetheading"><%=titulo2 %></h5>
               <ul class="link-list">
-                <li><a href="mapasitio.jsp"><%=item5 %></a></li>
-                <li><a href="donaciones.jsp"><%=item6 %></a></li>
-                <li><a href="cursos.jsp"><%=item7 %></a></li>
-                <li><a href="colecciones.jsp"><%=item8 %></a></li>
+                <li><a href="#"><%=item5 %></a></li>
+                <li><a href="#"><%=item6 %></a></li>
+                <li><a href="#"><%=item7 %></a></li>
+                <li><a href="#"><%=item8 %></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="span3">
+            <div class="widget">
+              <h5 class="widgetheading"><%=titulo3 %></h5>
+              <ul class="link-list">
+                <li><a href="mapasitio.jsp"><%=item9 %></a></li>
+                <li><a href="visitas.jsp"><%=item10 %></a></li>
+                <li><a href="cursos.jsp"><%=item11 %></a></li>
+                <li><a href="colecciones.jsp"><%=item12 %></a></li>
               </ul>
             </div>
           </div>
                     <div class="span3">
             <div class="widget">
-              <h5 class="widgetheading"><%=titulo3 %></h5>
+              <h5 class="widgetheading"><%=titulo4 %></h5>
               <address>
-			  <strong><%=item9 %></strong>
-			  <br> <%=item10 %>
+			  <strong><%=item13 %></strong>
+			  <br> <%=item14 %>
 			 </address>
               <p>
-                <i class="icon-phone"></i><%=item11 %><br>
-                <i class="icon-envelope-alt"></i><%=item12 %>
+                <i class="icon-phone"></i><%=item15 %><br>
+                <i class="icon-envelope-alt"></i><%=item16 %>
               </p>
             </div>
           </div>

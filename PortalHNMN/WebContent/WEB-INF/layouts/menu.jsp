@@ -58,21 +58,21 @@
                       <a href="index.jsp"><%=item1 %></a>
                     </li>
                     <li class="dropdown">
-                      <a href="noticias.jsp"><%=item2 %>
+                      <a href="acercade.jsp"><%=item2 %></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="colecciones.jsp"><%=item3 %></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="noticias.jsp"><%=item4 %>
                       <i class="icon-angle-down">
                       </i>
                       </a>
                       <ul class="dropdown-menu">
-                        <li><a href="articulos.jsp"><%=item3 %></a></li>
-                        <li><a href="eventos.jsp"><%=item4 %></a></li>
-                        <li><a href="cursos.jsp"><%=item5 %></a></li>
+                        <li><a href="articulos.jsp"><%=item5 %></a></li>
+                        <li><a href="eventos.jsp"><%=item6 %></a></li>
+                        <li><a href="cursos.jsp"><%=item7 %></a></li>
                       </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a href="colecciones.jsp"><%=item6 %></a>
-                    </li>
-                    <li class="dropdown">
-                      <a href="acercade.jsp"><%=item7 %> </a>
                     </li>
                     <li>
                       <a href="contacto.jsp"><%=item8 %> </a>
