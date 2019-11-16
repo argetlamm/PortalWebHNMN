@@ -66,7 +66,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="seguridad/addUserRol.jsp" class="nav-link">
+              <a href="seguridad/listUserRol.jsp" class="nav-link">
                 <i class="fas fa-toolbox nav-icon"></i>
                 <p>Roles de Usuario</p>
               </a>

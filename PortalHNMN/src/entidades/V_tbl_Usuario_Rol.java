@@ -4,6 +4,7 @@ package entidades;
 public class V_tbl_Usuario_Rol {
 	
 	//ATRIBUTOS
+	private int id_user_rol;
 	private int id_user;
 	private String username;
 	private String password;
@@ -54,6 +55,12 @@ public class V_tbl_Usuario_Rol {
 	}
 	public void setRol_estado(int rol_estado) {
 		this.rol_estado = rol_estado;
+	}
+	public int getId_user_rol() {
+		return id_user_rol;
+	}
+	public void setId_user_rol(int id_user_rol) {
+		this.id_user_rol = id_user_rol;
 	}
 		
 

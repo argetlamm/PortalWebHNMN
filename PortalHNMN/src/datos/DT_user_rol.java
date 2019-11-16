@@ -12,28 +12,31 @@ import entidades.V_tbl_Usuario_Rol;
 public class DT_user_rol {
 	PoolConexion pc = PoolConexion.getInstance(); 
 	Connection c = PoolConexion.getConnection();
-	private static final String SQL_ENCONTRAR = "SELECT id_user FROM tbl_user where username=?;";
-	private ResultSet rsUserRol;
 	
+	private static final String SQL_SELECT_ALL_VISTA = "SELECT * FROM public.\"V_tbl_Usuario_Rol\"";
+	private ResultSet rsVUserRol;
 ///////////////////////////// METODO PARA LISTAR VISTA DE USUARIOS ROL/////////////////////////////
 	public ArrayList<V_tbl_Usuario_Rol> vlistUserRol()
 	{
+		
 		ArrayList<V_tbl_Usuario_Rol> vlistaUserRol = new ArrayList<V_tbl_Usuario_Rol>();
 		
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * from V_tbl_Usuario_Rol", 
-					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
-					ResultSet.HOLD_CURSORS_OVER_COMMIT);
-			rsUserRol = ps.executeQuery();
-			while(rsUserRol.next())
+			PreparedStatement ps = c.prepareStatement(SQL_SELECT_ALL_VISTA, ResultSet.TYPE_SCROLL_SENSITIVE, 
+    				ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsVUserRol = ps.executeQuery();
+			//System.out.println("auida");
+			while(rsVUserRol.next())
 			{
+				//System.out.println("auida2");
 				V_tbl_Usuario_Rol tur  = new V_tbl_Usuario_Rol();
-				tur.setId_user(rsUserRol.getInt("id_user"));
-				tur.setUsername(rsUserRol.getString("username"));
-				tur.setPassword(rsUserRol.getString("password"));
-				tur.setId_rol(rsUserRol.getInt("id_rol"));
-				tur.setRol_name(rsUserRol.getString("rol_name"));
+				tur.setId_user_rol(rsVUserRol.getInt("id_user_rol"));
+				tur.setId_user(rsVUserRol.getInt("id_user"));
+				tur.setUsername(rsVUserRol.getString("username"));
+				tur.setPassword(rsVUserRol.getString("password"));
+				tur.setId_rol(rsVUserRol.getInt("id_rol"));
+				tur.setRol_name(rsVUserRol.getString("rol_name"));
 				vlistaUserRol.add(tur);
 			}
 		}
@@ -45,6 +48,9 @@ public class DT_user_rol {
 		
 		return vlistaUserRol;
 	}
+	
+	private static final String SQL_ENCONTRAR = "SELECT id_user FROM tbl_user where username=?;";
+	private ResultSet rsUserRol;
 	
 ///////////////////////////// METODO PARA LISTAR TABLA USUARIOS ROL /////////////////////////////
 
@@ -99,63 +105,6 @@ public class DT_user_rol {
 		return guardado;
 	}
 	
-//	public boolean guardarUserRolEstudiante (Tbl_user tus, Tbl_user_rol tur){
-//		boolean guardado = false;
-//		try
-//		{
-//			PreparedStatement ps = c.prepareStatement("SELECT id_user FROM tbl_user where username= '" + tus.getUsername() + "' and "
-//					+ "estado <> 3;",
-//                    ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,
-//                    ResultSet.HOLD_CURSORS_OVER_COMMIT);
-//			//ps.setInt(1, tus.getUsername());
-//            rsUserRol = ps.executeQuery();
-//            while(rsUserRol.next()) {
-//            	tur.setUser_id(rsUserRol.getInt("id_user"));
-//            }
-//			this.listUserRol();
-//			rsUserRol.moveToInsertRow();
-//			rsUserRol.updateInt("user_id", tur.getUser_id());
-//			rsUserRol.updateInt("rol_id", 3);
-//			rsUserRol.insertRow();
-//			rsUserRol.moveToCurrentRow();
-//			guardado = true;
-//		}
-//		catch (Exception e) 
-//		{
-//			System.err.println("ERROR guardarUserRolEstudiante(): "+e.getMessage());
-//			e.printStackTrace();
-//		}
-//		return guardado;
-//	}
-//	
-//	public boolean guardarUserRolTutor (Tbl_user tus, Tbl_user_rol tur){
-//		boolean guardado = false;
-//		try
-//		{
-//			PreparedStatement ps = c.prepareStatement("SELECT id_user FROM tbl_user where username= '" + tus.getUsername() + "' and "
-//					+ "estado <> 3;",
-//					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,
-//					ResultSet.HOLD_CURSORS_OVER_COMMIT);
-//			//ps.setInt(1, tus.getUsername());
-//			rsUserRol = ps.executeQuery();
-//			while(rsUserRol.next()) {
-//				tur.setUser_id(rsUserRol.getInt("id_user"));
-//			}
-//			this.listUserRol();
-//			rsUserRol.moveToInsertRow();
-//			rsUserRol.updateInt("user_id", tur.getUser_id());
-//			rsUserRol.updateInt("rol_id", 2);
-//			rsUserRol.insertRow();
-//			rsUserRol.moveToCurrentRow();
-//			guardado = true;
-//		}
-//		catch (Exception e) 
-//		{
-//			System.err.println("ERROR guardarUserRolEstudiante(): "+e.getMessage());
-//			e.printStackTrace();
-//		}
-//		return guardado;
-//	}
 	
 	
 ///////////////////////////// METODO PARA OBTENER USUARIOS ROL /////////////////////////////
@@ -183,28 +132,6 @@ public class DT_user_rol {
 		return IDUSERROL;
 	}
 
-//	public int capturarIdUserRolTutor (Tbl_user_rol tur){
-//		int IDUSERROL = 0;
-//		try
-//		{
-//			PreparedStatement ps = c.prepareStatement("SELECT id_user_rol FROM tbl_user_rol where user_id= " + tur.getUser_id() + " and "
-//							+ "rol_id = 2",
-//					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE,
-//					ResultSet.HOLD_CURSORS_OVER_COMMIT);
-//			//ps.setInt(1, tus.getUsername());
-//			rsUserRol = ps.executeQuery();
-//			while(rsUserRol.next()) {
-//				tur.setId_user_rol(rsUserRol.getInt("id_user_rol"));
-//			}
-//			IDUSERROL = tur.getId_user_rol();
-//		}
-//		catch (Exception e)
-//		{
-//			System.err.println("ERROR: capturarIdUser(): "+e.getMessage());
-//			e.printStackTrace();
-//		}
-//		return IDUSERROL;
-//	}
 	
 ///////////////////////////// METODO PARA MODIFICAR USUARIOS ROL /////////////////////////////
 
@@ -215,12 +142,14 @@ public class DT_user_rol {
 		{
 			this.listUserRol();
 			rsUserRol.beforeFirst();
+			System.out.println("entré al método?");
 			while (rsUserRol.next())
 			{
 				if(rsUserRol.getInt(1)==tur.getId_user_rol())
 				{
-					rsUserRol.updateInt("user_id", tur.getId_user());
-					rsUserRol.updateInt("rol_id", tur.getId_rol());
+					System.out.println("entró hasta el modificar?");
+					rsUserRol.updateInt("id_user", tur.getId_user());
+					rsUserRol.updateInt("id_rol", tur.getId_rol());
 					rsUserRol.updateRow();
 					modificado=true;
 					break;
@@ -291,3 +220,4 @@ public class DT_user_rol {
 	}
 
 }
+
