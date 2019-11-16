@@ -124,6 +124,8 @@ public class SL_usuario extends HttpServlet {
 					tus.setApellido2(request.getParameter("apellido2"));
 					tus.setEmail(request.getParameter("email"));
 					
+					System.out.println("Estoy entrando al servlet");
+					
 					if(dtus.guardarUser(tus))
 					{
 						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newUser.jsp?msj=1");

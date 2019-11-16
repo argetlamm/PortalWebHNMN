@@ -9,21 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import datos.DT_user_rol;
-import entidades.Tbl_user;
 import entidades.Tbl_user_rol;
 
 /**
- * Servlet implementation class SL_rol_opcion
+ * Servlet implementation class SL_user_rol
  */
-@WebServlet("/SL_userRol")
+@WebServlet("/SL_user_rol")
 
-public class SL_userRol {
+public class SL_user_rol extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SL_userRol() {
+    public SL_user_rol() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,6 +33,7 @@ public class SL_userRol {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// doGet(request, response);
+		System.out.println("Estoy entrando al servlet");
 		String opc = request.getParameter("opc");
 		int opcion = 0;
 
@@ -48,15 +48,13 @@ public class SL_userRol {
 		switch(opcion) {
 			case 1:{
 				try {
-					tur.setId_user(Integer.parseInt(request.getParameter("id_user")));
-					tur.setId_rol(Integer.parseInt(request.getParameter("id_rol")));
-					//System.out.println("User id: " + tur.getUser_id());
-					//System.out.println("Rol id: " + tur.getRol_id());
-					
+					System.out.println("Estoy entrando al case");
+					tur.setId_user(Integer.parseInt(request.getParameter("user")));
+					tur.setId_rol(Integer.parseInt(request.getParameter("rol")));
 					if(dtur.guardarUserRol(tur)) {
-						response.sendRedirect("./CMS/seguridad/tblOpcion.jsp?msj=1");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/addUserRol.jsp?msj=1");
 					}else {
-						response.sendRedirect("./CMS/seguridad/tblOpcion.jsp?msj=2");
+						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/addUserRol.jsp?msj=2");
 					}
 				}catch(Exception e) {
 					e.printStackTrace();
@@ -81,29 +79,11 @@ public class SL_userRol {
 				break;
 			}
 			default:{
-				response.sendRedirect("../CMS/seguridad/addRolOpcion.jsp?msj=ERROR");
+				response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/editRolOpcion.jsp?msj=ERROR");
 			}
 		}
 		
 	}
-	
-//	protected void postAgregarUserRolEstudiante(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		Tbl_user_rol tur = new Tbl_user_rol();
-//		Tbl_user tus = new Tbl_user();
-//		DT_user_rol dtur = new DT_user_rol();
-//		
-//		tus.setUsername(request.getParameter("username"));
-//		try {
-//			if(dtur.guardarUserRolEstudiante(tus, tur)) {
-//				response.sendRedirect("./pages/seguridad/listarUserRol.jsp?msj=1");
-//			}else {
-//				response.sendRedirect("./pages/seguridad/editarUserRol.jsp?msj=2");
-//			}
-//		}catch(Exception e) {
-//			e.printStackTrace();
-//			System.out.println("Servlet: Error al modificar la relacion de usuario y rol!!!");
-//		}
-//	}
 
 
 }

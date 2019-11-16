@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
-<%@ page import="java.util.ArrayList" %>
 
 <%
 	ArrayList<V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
@@ -72,7 +71,7 @@ mensaje = mensaje==null?"":mensaje;
   	<jsp:include page="../layouts/topbar.jsp"></jsp:include>
   <!-- /.navbar -->
   <!-- SIDEBAR -->
-  	<jsp:include page="../layouts/menu.jsp"></jsp:include>
+  	<jsp:include page="../layouts/menu2.jsp"></jsp:include>
   <!-- SIDEBAR -->
 	
 	  <!-- Content Wrapper. Contains page content -->
@@ -107,7 +106,7 @@ mensaje = mensaje==null?"":mensaje;
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="../../SL_userRol" method="post">
+              <form role="form" action="${pageContext.request.contextPath}/SL_user_rol" method="post">
                 <div class="card-body">
                   <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   
@@ -153,10 +152,11 @@ mensaje = mensaje==null?"":mensaje;
 					        </div>
 	                  	</div>
                 </div>
+                </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Registrar</button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
               </form>

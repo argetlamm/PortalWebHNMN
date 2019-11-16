@@ -80,7 +80,7 @@ public class DT_user_rol {
 
 	public boolean guardarUserRol (Tbl_user_rol tur){
 		boolean guardado = false;
-		
+		System.out.println("Estoy entrando al dt_user_rol");
 		try
 		{
 			this.listUserRol();
