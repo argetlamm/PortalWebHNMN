@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="utf-8">
-  <title>Muestra - Herbario Ncaional de Nicaragua</title>
+  <title>Muestra - Herbario Nacional de Nicaragua</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="" />
   <meta name="author" content="" />
@@ -45,69 +45,117 @@
         <div class="row">
           <div class="span4">
             <div class="inner-heading">
-              <h2>Muestra x</h2>
+              <h2>Datos específicos</h2>
             </div>
           </div>
           <div class="span8">
             <ul class="breadcrumb">
               <li><a href="index.jsp"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
               <li><a href="colecciones.jsp">Colección</a><i class="icon-angle-right"></i></li>
-              <li class="active">Muestra x</li>
+              <li class="active">Datos específicos </li>
             </ul>
           </div>
         </div>
       </div>
     </section>
-    <section id="content">
-      <div class="container">
-        <div class="row">
-          <div class="span8">
-            <article>
-              <div class="top-wrapper">
-                <div class="post-heading">
-                  <h3><a href="#">Información acerca de muestra x</a></h3>
-                </div>
-                <!-- start flexslider -->
-                <div class="flexslider">
-                  <ul class="slides">
-                    <li>
-                      <img src="img/works/full/image-01-full.jpg" alt="" />
-                    </li>
-                    <li>
-                      <img src="img/works/full/image-02-full.jpg" alt="" />
-                    </li>
-                    <li>
-                      <img src="img/works/full/image-03-full.jpg" alt="" />
-                    </li>
-                  </ul>
-                </div>
-                <!-- end flexslider -->
-              </div>
-              <p>
-                Foto tomada por: Joshua Hernández
-              </p>
-            </article>
-          </div>
-          <div class="span4">
-            <aside class="right-sidebar">
-              <div class="widget">
-                <h5 class="widgetheading">Información de la muestra</h5>
-                <ul class="folio-detail">
-                  <li><label>Nombre :</label> Planta tuani</li>
-                  <li><label>Nombre científico :</label>Tuanis plantus</li>
-                </ul>
-              </div>
-              <div class="widget">
-                <h5 class="widgetheading">Ecología</h5>
-                <p>
-                  Esta es una planta recolectada en la universidad centroamericana UCA - Managua, Nicaragua. Gimnosperma, de más de 20 años de antigüedad. Pertenece a la familia x y posee flores aparte de fruto. 
-                </p>
-              </div>
-            </aside>
-          </div>
-        </div>
-      </div>
-    </section>
+    	<%
+    	String idImagen = "";
+    	idImagen = request.getParameter("imagenID");
+    	int id = Integer.parseInt(idImagen);
+    	
+    	DT_publicaciones dtpus = new DT_publicaciones();
+		ArrayList<Tbl_publicaciones> publicacion = new ArrayList<Tbl_publicaciones>();
+		String publicado = "publicado";
+		String url = "";
+		String ecologia = "";
+		String posicion = "";
+		String creditos ="";
+		String nombre ="";
+		String nombreC ="";
+		
+		publicacion = dtpus.informacionColeccion(id);
+		for (Tbl_publicaciones tpublc : publicacion){
+        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+        		posicion=tpublc.getPublic_name();
+        		if(posicion.trim().equals("urlImagen"))
+        		{
+        			url=tpublc.getPublic_titulo();
+        		}
+        		else
+        		{
+        			if(posicion.trim().equals("creditosImagen"))
+        			{
+        				creditos=tpublc.getPublic_titulo();
+        			}
+        			else
+        			{
+        				if(posicion.trim().equals("nombreComun"))
+        				{
+        					nombre=tpublc.getPublic_titulo();
+        				}
+        				else
+        				{
+        					if(posicion.trim().equals("nombreCientifico"))
+        					{
+        						nombreC=tpublc.getPublic_titulo();
+        					}
+        					else
+        					{
+        						if(posicion.trim().equals("ecologia"))
+        						{
+        							ecologia=tpublc.getPublic_titulo();
+        						}
+        					}
+        				}
+        			}
+        		}
+        	}
+		}
+    	%>
+	    <section id="content">
+	      <div class="container">
+	        <div class="row">
+	          <div class="span8">
+	            <article>
+	              <div class="top-wrapper">
+	                <div class="post-heading">
+	                  <h3>Información individual</h3>
+	                </div>
+	                <!-- start flexslider -->
+	                <div class="flexslider">
+	                  <ul class="slides">
+	                    <li>
+	                      <img src="<%=url %>" alt="" />
+	                    </li>
+	                  </ul>
+	                </div>
+	                <!-- end flexslider -->
+	              </div>
+	              <p>
+	                <strong><%=creditos %></strong>
+	              </p>
+	            </article>
+	          </div>
+	          <div class="span4">
+	            <aside class="right-sidebar">
+	              <div class="widget">
+	                <h5 class="widgetheading">Información de la muestra</h5>
+	                <ul class="folio-detail">
+	                  <li><label>Nombre :</label><%=nombre %></li>
+	                  <li><label>Nombre científico :</label><%=nombreC %></li>
+	                </ul>
+	              </div>
+	              <div class="widget">
+	                <h5 class="widgetheading">Ecología</h5>
+	                <p>
+						<%=ecologia %>
+	                </p>
+	              </div>
+	            </aside>
+	          </div>
+	        </div>
+	      </div>
+	    </section>
     <!-- Footer -->
   	<jsp:include page="WEB-INF/layouts/footer.jsp"></jsp:include>
   	<!-- ./Footer -->

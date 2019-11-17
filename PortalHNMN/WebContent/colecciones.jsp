@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -62,8 +62,8 @@
           <div class="span12">
             <ul class="portfolio-categ filter">
               <li class="all active"><a href="#">Todas</a></li>
-              <li class="web"><a href="#" title="">Pacífico</a></li>
-              <li class="icon"><a href="#" title="">Caribe</a></li>
+              <li class="pacifico"><a href="#" title="">Pacífico</a></li>
+              <li class="caribe"><a href="#" title="">Caribe</a></li>
             </ul>
             <div class="clearfix">
             </div>
@@ -71,83 +71,33 @@
               <section id="projects">
                 <ul id="thumbs" class="portfolio">
                   <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
+                  <%
+	        		DT_publicaciones dtpus = new DT_publicaciones();
+	        		ArrayList<Tbl_publicaciones> listaColecciones = new ArrayList<Tbl_publicaciones>();
+	        		listaColecciones = dtpus.imagenesColeccion();
+	            	String publicado = "publicado";
+	            	String url = "";
+	            	String tipo = "";
+	            	int id=0;
+
+	            	for (Tbl_publicaciones tpublc : listaColecciones){
+	            	if(tpublc.getPublic_estado().trim().equals(publicado)){
+	            		url = tpublc.getPublic_titulo();
+	            		tipo = tpublc.getPublic_tipo_img();
+	            		id = tpublc.getMenu_order();
+        			%>                                
+                    <li class="item-thumbs span3 design" data-id="id-0" data-type="<%=tipo.trim()%>">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="muestra-individual.jsp">
-						<span class="overlay-img"></span>
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="${pageContext.request.contextPath}/SL_colecciones?IdUser=<%=id%>">
+						<span class="overlay-img"></span>                                                                                       
 						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-01.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
-                  <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 design" data-id="id-1" data-type="icon">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="muestra-individual.jsp">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-02.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
-                  <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
-                  <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="muestra-individual.jsp">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-04.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
-                  <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-4" data-type="web">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="muestra-individual.jsp">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-05.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
-                  <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 photography" data-id="id-5" data-type="icon">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="muestra-individual.jsp">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-06.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
-                  <!-- End Item Project -->
-                  <li class="item-thumbs span3 design" data-id="id-0" data-type="web">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="muestra-individual.jsp">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-07.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
-                  <!-- End Item Project -->
-                  <!-- Item Project and Filter Name -->
-                  <li class="item-thumbs span3 design" data-id="id-0" data-type="graphic">
-                    <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="muestra-individual.jsp">
-						<span class="overlay-img"></span>
-						<span class="overlay-img-thumb font-icon-plus"></span>
-						</a>
-                    <!-- Thumb Image and Description -->
-                    <img src="img/works/thumbs/image-08.jpg" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis elementum odio. Curabitur pellentesque, dolor vel pharetra mollis.">
-                  </li>
-                  <!-- End Item Project -->
+					</a>
+                    <img src="<%=url %>">               
+                    </li>
+                  	<%
+	            			}
+	            		}
+					%>   
                 </ul>
               </section>
             </div>
@@ -181,6 +131,24 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="js/custom.js"></script>
+  
+  <script>
+  /*
+	function mandarId(id)
+	{
+		var idImagen = id;
+		confirm(function(e,btn)
+	     { 
+	     	e.preventDefault();
+	     	window.location.href="${pageContext.request.contextPath}/SL_colecciones?opc=1&imagenID="+idImagen;
+	     }, 
+	     function(e,btn)
+	     {
+	       e.preventDefault();
+	     });
+	}
+  */
+  </script>
 
 </body>
 
