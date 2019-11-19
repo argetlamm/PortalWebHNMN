@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
-<% 
-    ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
+<%
+	ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
 	//Recuperamos el Arraylist de la sesion creada en sistema.jsp
 	listOpciones = (ArrayList <V_tbl_Rol_Opcion>) session.getAttribute("listOpciones");
 	//Recuperamos la url de la pag actual
@@ -18,12 +18,12 @@
 		System.out.println("opcionActual ="+opcionActual);
 		if(opcionActual.equals(miPagina.trim()))
 		{
-			permiso = true;
-			break;
+	permiso = true;
+	break;
 		}
 		else
 		{
-			permiso = false;
+	permiso = false;
 		}
 		
 	}
@@ -79,11 +79,11 @@ trl = dopc.obtenerOpcion(opc);
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 	<!-- Navbar -->
-	  	<jsp:include page="/CMS/layouts/topbar.jsp"></jsp:include>
+	  	<jsp:include page="../../CMS/layouts/topbar.jsp"></jsp:include>
 	<!-- /.navbar -->
 	
 	<!-- SIDEBAR -->
-	  	<jsp:include page="/CMS/layouts/menu2.jsp"></jsp:include>
+	  	<jsp:include page="../../CMS/layouts/menu3.jsp"></jsp:include>
 	<!-- SIDEBAR -->
 	
 	  <!-- Content Wrapper. Contains page content -->
@@ -148,18 +148,23 @@ trl = dopc.obtenerOpcion(opc);
          </div>       
     </section>
     <!-- /.content -->
-	
-	<!-- Footer -->
-  		<jsp:include page="/CMS/layouts/footer.jsp"></jsp:include>
-  	<!-- ./Footer -->
 
 </div>
-<!-- jQuery -->
+<!-- Footer -->
+  		<jsp:include page="/CMS/layouts/footer.jsp"></jsp:include>
+  	<!-- ./Footer -->
+<<!-- jQuery -->
 <script src="../plugins/jquery/jquery.min.js"></script>
-
-<!-- jAlert js -->
+<!-- Bootstrap 4 -->
+<script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <!-- AdminLTE App -->
+<script src="../dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../dist/js/demo.js"></script>
+ <!-- jAlert js -->
   <script src="../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  <script src="../plugins/select2/js/select2.full.min.js"></script>
   
   <script>
     $(document).ready(function ()
