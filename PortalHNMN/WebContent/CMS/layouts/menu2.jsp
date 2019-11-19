@@ -59,7 +59,18 @@
                   <p>Control Opción</p>
                 </a>
               </li>
-               
+              <li class="nav-item">
+              <a href="././listRolOpcion.jsp" class="nav-link">
+                <i class="fas fa-toolbox nav-icon"></i>
+                <p>Opciones de Roles</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="././listUserRol.jsp" class="nav-link">
+                <i class="fas fa-toolbox nav-icon"></i>
+                <p>Roles de Usuario</p>
+              </a>
+            </li>
             </ul>
           </li>
         </ul>
