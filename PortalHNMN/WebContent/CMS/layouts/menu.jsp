@@ -44,25 +44,25 @@
               <li class="nav-item">
                 <a href="seguridad/tblusuarios.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
-                  <p>Control Usuarios</p>
+                  <p>Control de Usuarios</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="seguridad/tblRol.jsp" class="nav-link">
                   <i class="fas fa-dice nav-icon"></i>
-                  <p>Control Rol</p>
+                  <p>Control de Roles</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="seguridad/tblOpcion.jsp" class="nav-link">
                   <i class="fas fa-filter nav-icon"></i>
-                  <p>Control Opción</p>
+                  <p>Control de Opciones</p>
                 </a>
               </li>
               <li class="nav-item">
               <a href="seguridad/listRolOpcion.jsp" class="nav-link">
                 <i class="fas fa-toolbox nav-icon"></i>
-                <p>Opciones de Roles</p>
+                <p>Opciones de Rol</p>
               </a>
             </li>
             <li class="nav-item">

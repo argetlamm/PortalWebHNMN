@@ -85,7 +85,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Seguridad</a></li>
+              <li class="breadcrumb-item"><a href="listUserRol.jsp">Seguridad</a></li>
               <li class="breadcrumb-item active">Lista Roles de Usuario</li>
             </ol>
           </div>

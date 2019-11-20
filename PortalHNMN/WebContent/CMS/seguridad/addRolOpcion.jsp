@@ -82,7 +82,7 @@ mensaje = mensaje==null?"":mensaje;
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a>Seguridad</a></li>
+	              <li class="breadcrumb-item"><a href="listRolOpcion.jsp">Seguridad</a></li>
 	              <li class="breadcrumb-item active">Asignar Opción a Rol</li>
 	            </ol>
 	          </div>
