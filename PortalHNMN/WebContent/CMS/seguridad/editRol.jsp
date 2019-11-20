@@ -37,7 +37,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Rol</title>
+<title>Editar Rol | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -92,12 +92,12 @@ trl = drol.obtenerRol(rol);
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Registro [Nuevo Rol]</h1>
+	            <h1>Editar [Rol]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
 	              <li class="breadcrumb-item"><a href="tblRol.jsp">Seguridad</a></li>
-	              <li class="breadcrumb-item active">Nuevo Rol</li>
+	              <li class="breadcrumb-item active">Edición de Rol</li>
 	            </ol>
 	          </div>
 	        </div>

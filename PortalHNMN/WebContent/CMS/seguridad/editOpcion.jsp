@@ -37,7 +37,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar opción </title>
+<title>Editar Opción | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -98,7 +98,7 @@ trl = dopc.obtenerOpcion(opc);
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
 	              <li class="breadcrumb-item"><a href="tblOpcion.jsp">Seguridad</a></li>
-	              <li class="breadcrumb-item active">Editar opción</li>
+	              <li class="breadcrumb-item active">Edición de Opción</li>
 	            </ol>
 	          </div>
 	        </div>

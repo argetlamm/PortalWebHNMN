@@ -38,7 +38,7 @@
 <meta charset="ISO-8859-1">
 <link rel="Shortcut Icon" href="${pageContext.request.contextPath}/dist/img/favicon.ico"/>
 
-<title>Editar Rol del Usuario</title>
+<title>Editar Rol de Usuario | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -93,12 +93,12 @@ vtur = dtur.obtenerUserRol(userRol);
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Edición [Rol de Usuario]</h1>
+	            <h1>Editar [Rol de Usuario]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Seguridad</a></li>
-	              <li class="breadcrumb-item active">Edición de Rol de Usuario</li>
+	              <li class="breadcrumb-item"><a href="listUserRol.jsp">Seguridad</a></li>
+	              <li class="breadcrumb-item active">Edición Rol de Usuario</li>
 	            </ol>
 	          </div>
 	        </div>

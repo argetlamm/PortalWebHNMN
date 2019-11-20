@@ -37,7 +37,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Nueva opción </title>
+<title>Nueva Opción | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -80,7 +80,7 @@ mensaje = mensaje==null?"":mensaje;
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Registro [Nueva opcion]</h1>
+	            <h1>Registro [Nueva Opcion]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">

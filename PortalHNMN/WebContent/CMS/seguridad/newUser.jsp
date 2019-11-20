@@ -37,7 +37,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Nuevo Usuario</title>
+<title>Nuevo Usuario | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->

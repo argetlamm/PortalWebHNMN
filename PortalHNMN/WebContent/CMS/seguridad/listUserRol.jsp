@@ -43,21 +43,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-   <!-- DATATABLE NEW -->
-  <link href="../plugins/DataTablesNew/DataTables-1.10.18/css/jquery.dataTables.min.css" rel="stylesheet">
-  <!-- DATATABLE NEW buttons -->
-    <link href="../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
-  
+  <!-- DataTables -->
+  <link href="../plugins/datatables-bs4/css/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- DataTables buttons-->
+  <link href="../plugins/DataTablesNew/Buttons-1.5.6/css/buttons.dataTables.min.css" rel="stylesheet">
   <!-- Theme style -->
   <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-  
- <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  
+  <!-- Google Font: Source Sans Pro -->
+  <link href="../dist/css/source-sans-pro.css" rel="stylesheet">
+  <link href="../plugins/jAlert/dist/jAlert.css" rel="stylesheet">
   <!-- jAlert css  -->
-<link rel="stylesheet" href="../plugins/jAlert/dist/jAlert.css" />
+  <link rel="stylesheet" href="../plugins/jAlert/dist/jAlert.css" />
   
   <%
     	/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
@@ -102,15 +98,13 @@
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-header">
-             <h3 class="card-title">Asignar Roles a Usuarios</h3>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-              <a href="addUserRol.jsp"><i class="fas fa-plus" title="Nuevo Rol a Usuario"></i></a>
+            <div class="card-header" style="text-align:right;">
+             <a href="addUserRol.jsp" class="btn btn-primary">
+          	  <i class="fas fa-plus"></i>     Asignar Rol a Usuario</a>
               </div>            
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example2" class="display">
+              <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
                   <th>ID User-Rol</th>
@@ -187,23 +181,16 @@
 <script src="../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- DATATABLE NEW -->
-  <script src="../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
-
-<!-- DATATABLE NEW buttons -->
-  <script src="../plugins/DataTablesNew/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>
-
-<!-- js DATATABLE NEW buttons print -->
-  <script src="../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.html5.min.js"></script>
-  <script src="../plugins/DataTablesNew/Buttons-1.5.6/js/buttons.print.min.js"></script>
-
-   <!-- js DATATABLE NEW buttons pdf -->
-  <script src="../plugins/DataTablesNew/pdfmake-0.1.36/pdfmake.min.js"></script>
-  <script src="../plugins/DataTablesNew/pdfmake-0.1.36/vfs_fonts.js"></script>
-
-  <!-- js DATATABLE NEW buttons excel -->
-  <script src="../plugins/DataTablesNew/JSZip-2.5.0/jszip.min.js"></script>
-
+<!-- DataTables -->
+<!-- <script src="../plugins/datatables/jquery.dataTables.js"></script> -->
+<script src="../plugins/DataTablesNew/DataTables-1.10.18/js/jquery.dataTables.js"></script>
+<script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+<script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../plugins/pdfmake/vfs_fonts.js"></script>
+<script src="../plugins/jszip/jszip.min.js"></script>
 <!-- AdminLTE App -->
 <script src="../dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->

@@ -37,7 +37,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Usuario</title>
+<title>Editar Usuario | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -93,12 +93,12 @@ tus = dtus.obtenerUser(user);
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Edición [Usuario]</h1>
+	            <h1>Editar [Usuario]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
 	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Seguridad</a></li>
-	              <li class="breadcrumb-item active">Edición Usuario</li>
+	              <li class="breadcrumb-item active">Edición de Usuario</li>
 	            </ol>
 	          </div>
 	        </div>
