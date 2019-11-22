@@ -12,7 +12,8 @@ public class DT_publicaciones {
 	PoolConexion pc = PoolConexion.getInstance(); 
 	Connection c = PoolConexion.getConnection();
 	private ResultSet rsPublicaciones;
-	
+
+	///////////////////////////////////////Menú//////////////////////////////////////////////////////////////////
 	public ArrayList<Tbl_publicaciones> itemMenu()
 	{
 		ArrayList<Tbl_publicaciones> listaTpus = new ArrayList<Tbl_publicaciones>();
@@ -44,6 +45,62 @@ public class DT_publicaciones {
 		
 		return listaTpus;
 	}
+	
+	///////////Obtener los datos para cambiar solo el título del menu//////////
+	public Tbl_user obtenerMenu(int idPublicaciones)
+	{
+		Tbl_user tus  = new Tbl_user();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT id_publicacion, public_titulo FROM tbl_publicaciones WHERE public_tipo = 'nav_menu_item'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idPublicaciones);
+			rsPublicaciones = ps.executeQuery();
+			if(rsPublicaciones.next())
+			{
+				tus.setId_user(rsPublicaciones.getInt("id_publicacion"));
+				tus.setNombre1(rsPublicaciones.getString("public_titulo"));
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerMenu() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return tus;
+	}
+	
+	///////////Guardar los datos para cambiar solo el título del menu//////////
+	public boolean modificarMenu(Tbl_publicaciones tpb)
+	{
+		boolean modificado=false;	
+		try
+		{
+			this.itemMenu();
+			rsPublicaciones.beforeFirst();
+			while (rsPublicaciones.next())
+			{
+				if(rsPublicaciones.getInt(1)==tpb.getId_publicacion())
+				{
+					rsPublicaciones.updateString("public_titulo", tpb.getPublic_titulo());
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarMenu() "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;
+		
+	}
+	
+	//////////////////////////////////////////////Titulos Footer///////////////////////////////////////////////////////
 	
 	public ArrayList<Tbl_publicaciones> titulosFtr()
 	{

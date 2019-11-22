@@ -72,6 +72,74 @@
               </a>
             </li>
             </ul>
+         <!--           ///////////////////////Segunda Sección//////////////////////////////////// -->
+          </li>
+          <li class="nav-item">
+                <a href="menu/editMenu.jsp" class="nav-link">
+                  <i class="fas fa-stream nav-icon"></i>
+                  <p>Edición de Menu</p>
+                </a>
+         </li>
+<!--           ///////////////////////Tercera Sección//////////////////////////////////// -->
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Pagina de Inicio
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                  <i class="fas fa-images nav-icon"></i>
+                  <p>Banners de Inicio</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                  <i class="far fa-newspaper nav-icon"></i>
+                  <p>Navegación del Menu</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+ <!--           ///////////////////////Cuarta Sección//////////////////////////////////// -->
+ 			
+ 		  <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fab fa-black-tie"></i>
+              <p>
+                Quienes Somos
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                  <i class="fab fa-black-tie nav-icon"></i>
+                  <p>¿Quienes Somos?</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                  <i class="fas fa-book nav-icon"></i>
+                  <p>Historia</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                  <i class="fas fa-clipboard-list nav-icon"></i>
+                  <p>Misión</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                  <i class="fas fa-chart-line nav-icon"></i>
+                  <p>Visión</p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>
