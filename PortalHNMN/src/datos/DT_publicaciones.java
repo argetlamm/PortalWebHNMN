@@ -23,7 +23,6 @@ public class DT_publicaciones {
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
-			System.out.println("PASA POR AQUI 1");
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
@@ -148,7 +147,6 @@ public class DT_publicaciones {
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
-			System.out.println("PASA POR AQUI 1");
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
@@ -180,7 +178,6 @@ public class DT_publicaciones {
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
-			System.out.println("PASA POR AQUI 1");
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
@@ -212,7 +209,6 @@ public class DT_publicaciones {
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
-			System.out.println("PASA POR AQUI 1");
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
@@ -244,7 +240,6 @@ public class DT_publicaciones {
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
-			System.out.println("PASA POR AQUI 1");
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
@@ -276,7 +271,6 @@ public class DT_publicaciones {
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
-			System.out.println("PASA POR AQUI 1");
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();

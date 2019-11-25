@@ -766,7 +766,7 @@ ul.breadcrumb li a:hover {
 
 /* --- contact form  ---- */
 
-.contactForm input[type="text"], .contactForm input[type="email"] {
+.contact-form input[type="text"], .contact-form input[type="email"] {
   width: 100%;
   min-height: 40px;
   padding-left: 20px;
@@ -777,7 +777,7 @@ ul.breadcrumb li a:hover {
   box-sizing: border-box;
 }
 
-.contactForm textarea {
+.contact-form textarea {
   width: 100%;
   padding-left: 20px;
   padding-top: 10px;
