@@ -191,7 +191,7 @@ mensaje = mensaje==null?"":mensaje;
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
       nuevo = "<%=mensaje%>";
-
+      
       if(nuevo == "1")
       {
         successAlert('Exito', 'El registro ha sido almacenado!!!');

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.DT_usuario, java.util.*;"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,6 +28,16 @@
   <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72.png" />
   <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-touch-icon-57.png" />
   <link rel="shortcut icon" href="ico/favicon.png" type="image/x-icon" />
+  <!-- jAlert css  -->
+  <link rel="stylesheet" href="js/jAlert/dist/jAlert.css" />
+  
+<%
+/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
+String mensaje = "";
+mensaje = request.getParameter("msj");
+mensaje = mensaje==null?"":mensaje;
+System.out.println("mensaje1="+mensaje);
+%>
 </head>
 
 <body>
@@ -57,32 +67,58 @@
           <div class="span12">
             <h3>Regístrate en el portal llenando el siguiente formulario:</h3>
 
-            <form action="" method="post" role="form" class="contactForm">
-              <div id="sendmessage">Your message has been sent. Thank you!</div>
-              <div id="errormessage"></div>
+                <form role="form" action="${pageContext.request.contextPath}/SL_registro" method="post">
+                <div class="card-body">
+                  <div class="form-group" align="center">
+                    <label for="exampleInputEmail1">Nombre de Usuario:</label>
+                    <input type="text" id="username" name="username" class="form-control" 
+                    placeholder="Username" required>
+                  </div>
+                  <div class="form-group" align="center">
+                    <label for="exampleInputPassword1">Contraseña: </label>
+                    <input type="password" id="password" name="password" class="form-control" 
+                    title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
+                    placeholder="Contraseña" required>
+                  </div>
+                  <div class="form-group" align="center">
+                    <label for="exampleInputPassword1">Confirmar Contraseña: </label>
+                    <input type="password" id="password2" name="password2" class="form-control" 
+                    title="Recuerde usar teclas mayúsculas, minúsculas, números y caracteres especiales..." 
+                    placeholder="Ingrese nuevamente su Contraseña" required>
+                  </div>
+                  <div class="form-group" align="center">
+                    <label for="exampleInputEmail1">Primer Nombre:</label>
+                    <input type="text" id="nombre1" name="nombre1" class="form-control" 
+                    placeholder="Primer Nombre" required>
+                  </div>
+                  <div class="form-group" align="center">
+                    <label for="exampleInputEmail1">Segundo Nombre:</label>
+                    <input type="text" id="nombre2" name="nombre2" class="form-control"  placeholder="Nombre de Usuario">
+                  </div>
+                  <div class="form-group" align="center">
+                    <label for="exampleInputEmail1">Primer Apellido:</label>
+                    <input type="text" id="apellido1" name="apellido1" class="form-control" 
+                    placeholder="Primer Apellido" required>
+                  </div>
+                  <div class="form-group" align="center">
+                    <label for="exampleInputEmail1">Segundo Apellido:</label>
+                    <input type="text" id="apellido2" name="apellido2" class="form-control" 
+                    placeholder="Segundo Apellido">
+                  </div>
+                  <div class="form-group" align="center">
+                    <label for="exampleInputEmail1">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" 
+                    placeholder="Ingrese una cuenta de correo electrónico válida, Ejemplo: ejemplo@ejemplo.com" required>
+                  </div>
 
-              <div class="row">
-                <div class="span4 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                  <div class="validation"></div>
                 </div>
-                <div class="span4 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                  <div class="validation"></div>
+                <!-- /.card-body -->
+
+                <div class="card-footer" align="center">
+                  <button type="submit" class="btn btn-primary">Registrar</button>
+                  <button type="reset" class="btn btn-danger">Cancelar</button>
                 </div>
-                <div class="span4 form-group">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                  <div class="validation"></div>
-                </div>
-                <div class="span12 margintop10 form-group">
-                  <textarea class="form-control" name="message" rows="12" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                  <div class="validation"></div>
-                  <p class="text-center">
-                    <button class="btn btn-large btn-theme margintop10" type="submit">Submit message</button>
-                  </p>
-                </div>
-              </div>
-            </form>
+              </form>
           </div>
         </div>
       </div>
@@ -112,6 +148,30 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="js/custom.js"></script>
+<!-- jQuery -->
+  <script src="../CMS/plugins/jquery/jquery.min.js"></script>
+<!-- jAlert js -->
+  <script src="js/jAlert/dist/jAlert.min.js"></script>
+  <script src="js/jAlert/dist/jAlert-functions.min.js"> </script>
+  
+<script>
+    $(document).ready(function ()
+    {
+     
+      /////////// VARIABLES DE CONTROL MSJ ///////////
+      var nuevo = 0;
+      nuevo = "<%=mensaje%>";
+
+      if(nuevo == "1")
+      {
+        successAlert('Exito', 'Te has registrado satisfactoriamente!!!');
+      }
+      if(nuevo == "2")
+      {
+        errorAlert('Error', 'Revisa tus datos e intenta nuevamente!!!');
+      }
+    });
+    </script>
 
 </body>
 
