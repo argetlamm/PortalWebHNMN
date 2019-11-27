@@ -106,7 +106,7 @@ $().ready(function() {
             for (var i = 0; i < sel.length; i++) {
                 var opt = sel[i];
                 console.log(opt.value);
-                if (opt.value == (asociado.replace(/ /g, "")+"@est.uca.edu.ni")){
+                if (opt.value == (asociado+)){
                     errorAlert('Error', 'El email ingresado ya está en la lista');
                     $("#correosEst").val("");
                     err = 1;
@@ -116,11 +116,11 @@ $().ready(function() {
             if (($(inputs).val()<= 0) && (err != 1)) {
                 $("#correosEst").val("");
             }else if (err != 1){
-                correosConcatenados = $("#destinoInput").val() + asociado.replace(/ /g, "") + "@est.uca.edu.ni/";
+                correosConcatenados = $("#destinoInput").val() + asociado+ "/";
                 $("#destinoInput").val(correosConcatenados);
                 $("#correosEst").val("");
                 $("#totalCorreos").val(totalOptions);
-                return !$('#destino').append('<option value="'+asociado.replace(/ /g, "")+"@est.uca.edu.ni"+'">'+asociado.replace(/ /g, "")+'@est.uca.edu.ni</option>');
+                return !$('#destino').append('<option value="'+asociado+'">'+asociado+'</option>');
             }
         }
     }); 
