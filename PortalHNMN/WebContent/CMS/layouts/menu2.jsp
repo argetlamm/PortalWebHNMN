@@ -83,7 +83,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="././suscripcion/notificacion.jsp" class="nav-link">
+                <a href="././notificacion.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Notificaciones</p>
                 </a>

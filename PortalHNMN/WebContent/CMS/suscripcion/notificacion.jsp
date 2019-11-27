@@ -278,7 +278,7 @@ if(!permiso)
   <script src="../plugins/select2/js/select2.full.min.js"></script>
 
 <!-- Funcionalidad de componentes js -->
-<script src="../dist/js/inscripcion/funcionalidad-componentes.js" charset="UTF-8"></script>  
+<script src="../dist/js/suscripcion/funcionalidad-componentes.js" charset="UTF-8"></script>  
 
 <script>
 $(document).ready(function ()
