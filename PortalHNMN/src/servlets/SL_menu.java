@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,59 +19,60 @@ public class SL_menu {
 	 * @throws ServletException
 	 * @throws IOException
 	 */
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Entró al get");
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		// TODO Auto-generated method stub
-		//		doGet(request, response);
+		System.out.println("Entró al post");
 		
-		String opc = request.getParameter("opc");
-		int opcion = 0;
-
-		opc = opc==null?"0":opc;
-		System.out.println("opc: "+opc);
-		opcion = Integer.parseInt(opc);
-		System.out.println("opcion: "+opcion);
+		Tbl_publicaciones tpus1 = new Tbl_publicaciones();
+		Tbl_publicaciones tpus2 = new Tbl_publicaciones();
+		Tbl_publicaciones tpus3 = new Tbl_publicaciones();
+		Tbl_publicaciones tpus4 = new Tbl_publicaciones();
+		Tbl_publicaciones tpus5 = new Tbl_publicaciones();
+		Tbl_publicaciones tpus6 = new Tbl_publicaciones();
+		Tbl_publicaciones tpus7 = new Tbl_publicaciones();
+		Tbl_publicaciones tpus8 = new Tbl_publicaciones();
+		DT_publicaciones dtpus = new DT_publicaciones();
 		
-		Tbl_publicaciones tpb = new Tbl_publicaciones();
-		DT_publicaciones dtpb = new DT_publicaciones();
+		ArrayList<Tbl_publicaciones> tpus = new ArrayList<Tbl_publicaciones>();
 		
-		switch(opcion)
-		{
-			case 1:
-			{
-				try
-				{
-					
-					tpb.setId_publicacion(Integer.parseInt(request.getParameter("Item1")));
-					tpb.setPublic_titulo(request.getParameter("nombreMenu1"));
-					
-					
-					if(dtpb.modificarMenu(tpb))
-					{
-						response.sendRedirect(request.getContextPath()+ "/CMS/menu/editMenu.jsp?msj=1");
-					}
-					else
-					{
-						response.sendRedirect(request.getContextPath()+ "/CMS/menu/editMenu.jsp?msj=2");
-					}
-				}
-				catch(Exception e)
-				{
-					e.printStackTrace();
-					System.out.println("Servlet: Error al editar el Menu!!!");
-				}
-				break;
-			}
+		try
+		{	
+			tpus1.setPublic_titulo(request.getParameter("item1"));
+			tpus2.setPublic_titulo(request.getParameter("item2"));
+			tpus3.setPublic_titulo(request.getParameter("item3"));
+			tpus4.setPublic_titulo(request.getParameter("item4"));
+			tpus5.setPublic_titulo(request.getParameter("item5"));
+			tpus6.setPublic_titulo(request.getParameter("item6"));
+			tpus7.setPublic_titulo(request.getParameter("item7"));
+			tpus8.setPublic_titulo(request.getParameter("item8"));
 			
-			default:
+			tpus.add(tpus1);
+			tpus.add(tpus2);
+			tpus.add(tpus3);
+			tpus.add(tpus4);
+			tpus.add(tpus5);
+			tpus.add(tpus6);
+			tpus.add(tpus7);
+			tpus.add(tpus8);
+			
+			if(dtpus.modificarMenu(tpus))
+			{											
+				response.sendRedirect(request.getContextPath()+ "/CMS/menu/editMenu.jsp?msj=1");
+			}
+			else
 			{
-				response.sendRedirect(request.getContextPath()+ "/CMS/menu/editMenu.jsp?msj=ERROR");
+				response.sendRedirect(request.getContextPath()+ "/CMS/menu/editMenu.jsp?msj=2");
 			}
 		}
-		
-		
-		
-		
-		
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("Servlet: Error al editar el Menú!!!");
+		}
 	}
 }

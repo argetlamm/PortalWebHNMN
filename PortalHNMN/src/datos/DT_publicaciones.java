@@ -3,7 +3,8 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 import entidades.Tbl_publicaciones;
 import entidades.Tbl_user;
@@ -46,48 +47,31 @@ public class DT_publicaciones {
 		return listaTpus;
 	}
 	
-	///////////Obtener los datos para cambiar solo el título del menu//////////
-	public Tbl_user obtenerMenu(int idPublicaciones)
-	{
-		Tbl_user tus  = new Tbl_user();
-		try
-		{
-			PreparedStatement ps = c.prepareStatement("SELECT id_publicacion, public_titulo FROM tbl_publicaciones WHERE public_tipo = 'nav_menu_item'", 
-					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
-					ResultSet.HOLD_CURSORS_OVER_COMMIT);
-			ps.setInt(1, idPublicaciones);
-			rsPublicaciones = ps.executeQuery();
-			if(rsPublicaciones.next())
-			{
-				tus.setId_user(rsPublicaciones.getInt("id_publicacion"));
-				tus.setNombre1(rsPublicaciones.getString("public_titulo"));
-			}
-		}
-		catch (Exception e)
-		{
-			System.out.println("DATOS: ERROR en obtenerMenu() "+ e.getMessage());
-			e.printStackTrace();
-		}
-		
-		return tus;
-	}
-	
 	///////////Guardar los datos para cambiar solo el título del menu//////////
-	public boolean modificarMenu(Tbl_publicaciones tpb)
+	public boolean modificarMenu(ArrayList<Tbl_publicaciones> tbp)
 	{
-		boolean modificado=false;	
+		boolean modificado=false;
+		int contador = 1;
+		String titulo = "";
+		//Iterator<Tbl_publicaciones> objeto = tbp.iterator();
 		try
 		{
 			this.itemMenu();
 			rsPublicaciones.beforeFirst();
-			while (rsPublicaciones.next())
+			//while(objeto.hasNext())
+			while(rsPublicaciones.next())
 			{
-				if(rsPublicaciones.getInt(1)==tpb.getId_publicacion())
+				for(Tbl_publicaciones tpubl : tbp)
 				{
-					rsPublicaciones.updateString("public_titulo", tpb.getPublic_titulo());
-					rsPublicaciones.updateRow();
-					modificado=true;
-					break;
+					titulo = tpubl.getPublic_titulo();
+					if(rsPublicaciones.getInt(1)==contador)
+					{
+						rsPublicaciones.updateString("public_titulo", titulo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+						contador++;
+						break;
+					}
 				}
 			}
 		}
@@ -98,6 +82,50 @@ public class DT_publicaciones {
 		}
 		return modificado;
 		
+	}
+	
+	public int obtenerMenuOrder()
+	{
+		int menu = 0;
+		String publicado = "publicado";
+		ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
+		listaBanner = this.imagenesBannerOrden();
+		for (Tbl_publicaciones tpublc : listaBanner){
+        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+        		menu = tpublc.getMenu_order();
+        	}
+		}
+		menu =  menu+1;
+		return menu;
+	}
+	
+	public boolean guardarBanner(Tbl_publicaciones tpub)
+	{
+		boolean guardado = false;
+		int menu = obtenerMenuOrder();
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
+		try
+		{
+			this.imagenesBanner();
+			rsPublicaciones.moveToInsertRow();
+			rsPublicaciones.updateInt("menu_order", menu);
+			rsPublicaciones.updateString("public_estado", "publicado");
+			rsPublicaciones.updateDate("public_fecha", sqlDate);
+			rsPublicaciones.updateString("public_name","banner");
+			rsPublicaciones.updateString("public_tipo", "bannerI");
+			rsPublicaciones.updateString("public_titulo", tpub.getPublic_titulo());	
+			rsPublicaciones.insertRow();
+			rsPublicaciones.moveToCurrentRow();
+			guardado = true;
+		}
+		catch (Exception e) 
+		{
+			System.err.println("ERROR guardarUser(): "+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return guardado;
 	}
 	
 	//////////////////////////////////////////////Titulos Footer///////////////////////////////////////////////////////
@@ -183,6 +211,33 @@ public class DT_publicaciones {
 				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
 				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
 				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				listaBanner.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return listaBanner;
+	}
+	
+	public ArrayList<Tbl_publicaciones> imagenesBannerOrden()
+	{
+		ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT menu_order FROM tbl_publicaciones WHERE public_tipo = 'bannerI'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
 				listaBanner.add(tpub);
 			}
 		}
@@ -416,5 +471,18 @@ public class DT_publicaciones {
 		}
 		
 		return informacionColeccion;
+	}
+	
+	public String getFecha(){
+	
+	Calendar fecha = new GregorianCalendar();
+	int año = fecha.get(Calendar.YEAR);
+	int mes = fecha.get(Calendar.MONTH);
+	int dia = fecha.get(Calendar.DAY_OF_MONTH);
+	String anio = Integer.toString(año);
+	String meses = Integer.toString(mes);
+	String dias = Integer.toString(dia);
+	String fechas = anio +"/"+ meses +"/"+dias;
+	return fechas;
 	}
 }

@@ -75,7 +75,7 @@
           <!--           ///////////////////////Segunda Sección//////////////////////////////////// -->
           </li>
           <li class="nav-item">
-                <a href="menu/editMenu.jsp" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-stream nav-icon"></i>
                   <p>Edición de Menu</p>
                 </a>
@@ -83,7 +83,7 @@
           <!--           ///////////////////////Tercera Sección//////////////////////////////////// -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-file-alt"></i>>
+              <i class="nav-icon fas fa-file-alt"></i>
               <p>
                 Pagina de Inicio
                 <i class="fas fa-angle-left right"></i>
@@ -91,7 +91,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                <a href="menu/editBanner.jsp" class="nav-link">
                   <i class="fas fa-images nav-icon"></i>
                   <p>Banners de Inicio</p>
                 </a>

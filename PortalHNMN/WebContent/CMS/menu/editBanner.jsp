@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.DT_publicaciones, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.DT_usuario, java.util.*;"%>
 
 <%
 	ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
@@ -37,7 +37,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Menu | Herbario Nacional de Nicaragua</title>
+<title>Editar Banner | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -58,37 +58,19 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* OBTENEMOS LOS DATOS DEL MENU A SER EDITADOS */
-Tbl_publicaciones tpub = new Tbl_publicaciones();
-DT_publicaciones dtpb = new DT_publicaciones();
-ArrayList<Tbl_publicaciones> listaItems = new ArrayList<Tbl_publicaciones>();
-listaItems = dtpb.itemMenu();
+/* RECUPERAMOS EL VALOR DE LA VARIABLE userID */
+String idUser = "";
+idUser = request.getParameter("userID");
+idUser = idUser==null?"0":idUser;
 
-String publicado = "publicado";
-String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="";
-for (Tbl_publicaciones tpublc : listaItems){
-	if(tpublc.getPublic_estado().trim().equals(publicado)){
-		if(tpublc.getMenu_order() == 1){
-			item1 = tpublc.getPublic_titulo();
-		}else if(tpublc.getMenu_order() == 2){
-			item2 = tpublc.getPublic_titulo();
-		}else if(tpublc.getMenu_order() == 3){
-			item3 = tpublc.getPublic_titulo();
-		}else if(tpublc.getMenu_order() == 4){
-			item4 = tpublc.getPublic_titulo();
-		}else if(tpublc.getMenu_order() == 5){
-			item5 = tpublc.getPublic_titulo();
-		}else if(tpublc.getMenu_order() == 6){
-			item6 = tpublc.getPublic_titulo();
-		}else if(tpublc.getMenu_order() == 7){
-			item7 = tpublc.getPublic_titulo();
-		}else if(tpublc.getMenu_order() == 8){
-			item8 = tpublc.getPublic_titulo();
-		}
-	}
-}
+int user = 0;
+user = Integer.parseInt(idUser); 
 
-//tpub = dtpb.obtenerMenu(item1);
+/* OBTENEMOS LOS DATOS DE USUARIO A SER EDITADOS */
+Tbl_user tus = new Tbl_user();
+DT_usuario dtus = new DT_usuario();
+
+tus = dtus.obtenerUser(user);
 
 %>
 
@@ -111,12 +93,12 @@ for (Tbl_publicaciones tpublc : listaItems){
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Editar [Menu]</h1>
+	            <h1>Editar [Banner]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="editMenu.jsp">Menu</a></li>
-	              <li class="breadcrumb-item active">Edición del Menu</li>
+	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Inicio</a></li>
+	              <li class="breadcrumb-item active">Edición de Banner</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -132,38 +114,21 @@ for (Tbl_publicaciones tpublc : listaItems){
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edición del Menu</h3>
+                <h3 class="card-title">Edición Banner</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="${pageContext.request.contextPath}/SL_menu" method="post">
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre del 1er Item:</label>
-                    <input type="text" id="item1" name="item1" class="form-control" value="<%=item1.trim() %>" required>
-                    <label for="exampleInputEmail1">Nombre del 2do Item:</label>
-                    <input type="text" id="item2" name="item2" class="form-control" value="<%=item2.trim() %>" required>
-                    <label for="exampleInputEmail1">Nombre del 3r Item:</label>
-                    <input type="text" id="item3" name="item3" class="form-control" value="<%=item3.trim() %>" required>
-                    <label for="exampleInputEmail1">Nombre del 4to Item (Menú desplegable):</label>
-                    <input type="text" id="item4" name="item4" class="form-control" value="<%=item4.trim() %>" required>
-                    <label for="exampleInputEmail1">Nombre del 5to Item (Item del menú desplegable):</label>
-                    <input type="text" id="item5" name="item5" class="form-control" value="<%=item5.trim() %>" required>
-                    <label for="exampleInputEmail1">Nombre del 6xto Item (Item del menú desplegable):</label>
-                    <input type="text" id="item6" name="item6" class="form-control" value="<%=item6.trim() %>" required>
-                    <label for="exampleInputEmail1">Nombre del 7mo Item (Item del menú desplegable):</label>
-                    <input type="text" id="item7" name="item7" class="form-control" value="<%=item7.trim() %>" required>
-                  	<label for="exampleInputEmail1">Nombre del 8vo Item:</label>
-                    <input type="text" id="item8" name="item8" class="form-control" value="<%=item8.trim() %>" required>
-                  </div>
-                </div>
+              <br>
+            	<form role = "form" action="${pageContext.request.contextPath}/SL_banner" enctype="multipart/form-data" method="post"> 
+				Subir imágenes para el banner: <input type="file" name="fichero"/></br> 
+				<input type="submit" value="Subir imagen"/>
+				</form> 
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="button" class="btn btn-danger">Cancelar</button>
                 </div>
-             </form>
+              </form>
             </div>
             <!-- /.card -->
            </div>
@@ -189,24 +154,53 @@ for (Tbl_publicaciones tpublc : listaItems){
   <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   <script src="../plugins/select2/js/select2.full.min.js"></script>
   
-    
+  <script>
+  function pwdEquals()
+  {
+	  var pwd1 = "";
+	  var pwd2 = "";
+	  
+	  pwd1 = $("#password").val();
+	  pwd2 = $("#password2").val();
+	  
+	  if(pwd1 != pwd2)
+	  {
+		  errorAlert('Error', 'Revise la contraseña ingresada');
+		  $("#password").css("border-color", "red");
+		  $("#password").val("");
+		  $("#password2").css("border-color", "red");
+		  $("#password2").val("");
+	  }
+	  else
+		{
+		  $("#password").css("border-color", "#ced4da");
+		  $("#password2").css("border-color", "#ced4da");
+		}
+		  
+  }
+  </script>
+  
   <script>
     $(document).ready(function ()
     {
-	/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
 
+    	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
+     
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
       nuevo = "<%=mensaje%>";
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'El menu ha sido modificado!!!');
+        successAlert('Éxito', 'La imagen se ha insetado correctamente en el banner.');
       }
       if(nuevo == "2")
       {
-        errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+        errorAlert('Error', 'Revise la imagen insertada e intente de nuevo.');
       }
+    
+      
+
     });
     </script>
 

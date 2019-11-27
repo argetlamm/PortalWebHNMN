@@ -49,7 +49,7 @@
             
             for (Tbl_publicaciones tpublc : listaBanner){
             	if(tpublc.getPublic_estado().trim().equals(publicado)){
-            		url = tpublc.getPublic_titulo();
+            		url = tpublc.getPublic_titulo().trim();
         	%>
           	<img src=<%=url %> alt="" title="#caption-<%=contador %>"/>
            <% 
