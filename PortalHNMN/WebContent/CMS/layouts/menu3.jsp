@@ -67,10 +67,26 @@
             </li>
             <li class="nav-item">
               <a href="./././listUserRol.jsp" class="nav-link">
-                <i class="fas fa-toolbox nav-icon"></i>
+                <i class="far fa-id-card nav-icon"></i>
                 <p>Roles de Usuario</p>
               </a>
             </li>
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shield-alt"></i>
+              <p>
+                Suscripción
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./././suscripcion/notificacion.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Notificaciones</p>
+                </a>
             </ul>
           </li>
         </ul>
