@@ -39,7 +39,19 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-153329080-1"></script>
 
+<!-- SCRIPT DE GOOGLE ANALITYCS QUE DA SEGUIMIENTO A LA PAGINA -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-153329080-1');
+</script>
+<!-- SCRIPT DE GOOGLE ANALITYCS QUE DA SEGUIMIENTO A LA PAGINA -->
 
 </head>
 <body class="hold-transition login-page">
