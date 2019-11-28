@@ -74,7 +74,7 @@
             </ul>
           </li>
           <li class="nav-item">
-                <a href="editMenu.jsp" class="nav-link">
+                <a href="../menu/editMenu.jsp" class="nav-link">
                   <i class="fas fa-stream nav-icon"></i>
                   <p>Edición de Menu</p>
                 </a>
@@ -89,13 +89,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="editBanner.jsp" class="nav-link">
+                <a href="../menu/editBanner.jsp" class="nav-link">
                   <i class="fas fa-images nav-icon"></i>
                   <p>Banners de Inicio</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="editInicio.jsp" class="nav-link">
+                <a href="../menu/editInicio.jsp" class="nav-link">
                   <i class="far fa-newspaper nav-icon"></i>
                   <p>Navegación del Menu</p>
                 </a>
@@ -112,25 +112,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../quienesSomos/editQuienesSomos.jsp" class="nav-link">
+                <a href="editQuienesSomos.jsp" class="nav-link">
                   <i class="fab fa-black-tie nav-icon"></i>
                   <p>¿Quiénes Somos?</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../quienesSomos/editHistoria.jsp" class="nav-link">
+                <a href="editHistoria.jsp" class="nav-link">
                   <i class="fas fa-book nav-icon"></i>
                   <p>Historia</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../quienesSomos/editMision.jsp" class="nav-link">
+                <a href="editMision.jsp" class="nav-link">
                   <i class="fas fa-clipboard-list nav-icon"></i>
                   <p>Misión</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../quienesSomos/editVision.jsp" class="nav-link">
+                <a href="editVision.jsp" class="nav-link">
                   <i class="fas fa-chart-line nav-icon"></i>
                   <p>Visión</p>
                 </a>

@@ -84,14 +84,14 @@
                 ArrayList<Tbl_publicaciones> listaIQSomos = new ArrayList<Tbl_publicaciones>();
                 listaIQSomos = dtpusdos.itemsQuienesSomos();
                 String parrafo="";
-               
                 for (Tbl_publicaciones tpublc : listaIQSomos){
                 	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		parrafo=tpublc.getPublic_content();
+                			parrafo=tpublc.getPublic_content();
+		
                 %>
                 <p><%=parrafo %></p>
                 <%
-                	}
+               	 	}
                 }
                 %>
           </div>

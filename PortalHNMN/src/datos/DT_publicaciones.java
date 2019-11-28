@@ -49,12 +49,10 @@ public class DT_publicaciones {
 		boolean modificado=false;
 		String titulo = "";
 		int contador = 1;
-		//Iterator<Tbl_publicaciones> objeto = tbp.iterator();
 		try
 		{
 			this.itemMenu();
 			rsPublicaciones.beforeFirst();
-			//while(objeto.hasNext())
 			while(rsPublicaciones.next())
 			{
 				for(Tbl_publicaciones tpubl : tbp)
@@ -74,6 +72,72 @@ public class DT_publicaciones {
 		catch (Exception e)
 		{
 			System.err.println("ERROR modificarMenu() "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;	
+	}
+	
+	public ArrayList<Tbl_publicaciones> itemsInicio()
+	{
+		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsInicio'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				listaBdy.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			e.printStackTrace();
+		}
+		return listaBdy;
+	}
+	
+	public boolean modificarInicio(ArrayList<Tbl_publicaciones> tbp)
+	{
+		boolean modificado=false;
+		String parrafo = "";
+		int contador = 1;
+		int contador2 = 1;
+		try
+		{
+			this.itemsInicio();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					parrafo = tpubl.getPublic_content();
+					if(contador2==contador)
+					{
+						rsPublicaciones.updateString("public_content", parrafo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+					}
+					contador++;
+				}
+				contador2++;
+				contador = 1;
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarQuienesSomos() "+e.getMessage());
 			e.printStackTrace();
 		}
 		return modificado;	
@@ -248,6 +312,41 @@ public class DT_publicaciones {
 		return listaBdy;
 	}
 	
+	public boolean modificarQuienesSomos(ArrayList<Tbl_publicaciones> tbp)
+	{
+		boolean modificado=false;
+		String parrafo = "";
+		int contador = 1;
+		int contador2 = 1;
+		try
+		{
+			this.itemsQuienesSomos();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					parrafo = tpubl.getPublic_content();
+					if(contador2==contador)
+					{
+						rsPublicaciones.updateString("public_content", parrafo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+					}
+					contador++;
+				}
+				contador2++;
+				contador = 1;
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarQuienesSomos() "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;	
+	}
+	
 	public ArrayList<Tbl_publicaciones> itemsHistoria()
 	{
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
@@ -277,6 +376,41 @@ public class DT_publicaciones {
 			e.printStackTrace();
 		}
 		return listaBdy;
+	}
+	
+	public boolean modificarHistoria(ArrayList<Tbl_publicaciones> tbp)
+	{
+		boolean modificado=false;
+		String parrafo = "";
+		int contador = 1;
+		int contador2 = 1;
+		try
+		{
+			this.itemsHistoria();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					parrafo = tpubl.getPublic_content();
+					if(contador2==contador)
+					{
+						rsPublicaciones.updateString("public_content", parrafo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+					}
+					contador++;
+				}
+				contador2++;
+				contador = 1;
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarHistoria() "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;	
 	}
 	
 	public ArrayList<Tbl_publicaciones> itemsMision()
@@ -310,6 +444,41 @@ public class DT_publicaciones {
 		return listaBdy;
 	}
 	
+	public boolean modificarMision(ArrayList<Tbl_publicaciones> tbp)
+	{
+		boolean modificado=false;
+		String parrafo = "";
+		int contador = 1;
+		int contador2 = 1;
+		try
+		{
+			this.itemsMision();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					parrafo = tpubl.getPublic_content();
+					if(contador2==contador)
+					{
+						rsPublicaciones.updateString("public_content", parrafo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+					}
+					contador++;
+				}
+				contador2++;
+				contador = 1;
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarMision() "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;	
+	}
+	
 	public ArrayList<Tbl_publicaciones> itemsVision()
 	{
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
@@ -339,6 +508,41 @@ public class DT_publicaciones {
 			e.printStackTrace();
 		}
 		return listaBdy;
+	}
+	
+	public boolean modificarVision(ArrayList<Tbl_publicaciones> tbp)
+	{
+		boolean modificado=false;
+		String parrafo = "";
+		int contador = 1;
+		int contador2 = 1;
+		try
+		{
+			this.itemsVision();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					parrafo = tpubl.getPublic_content();
+					if(contador2==contador)
+					{
+						rsPublicaciones.updateString("public_content", parrafo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+					}
+					contador++;
+				}
+				contador2++;
+				contador = 1;
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarVision() "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;	
 	}
 	
 	public ArrayList<Tbl_publicaciones> titulosQuienesSomos()

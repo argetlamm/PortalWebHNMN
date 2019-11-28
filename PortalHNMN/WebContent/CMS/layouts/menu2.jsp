@@ -95,7 +95,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="../menu/editInicio.jsp" class="nav-link">
                   <i class="far fa-newspaper nav-icon"></i>
                   <p>Navegación del Menu</p>
                 </a>
@@ -112,25 +112,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="../quienesSomos/editQuienesSomos.jsp" class="nav-link">
                   <i class="fab fa-black-tie nav-icon"></i>
                   <p>¿Quiénes Somos?</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="../quienesSomos/editHistoria.jsp" class="nav-link">
                   <i class="fas fa-book nav-icon"></i>
                   <p>Historia</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="../quienesSomos/editMision.jsp" class="nav-link">
                   <i class="fas fa-clipboard-list nav-icon"></i>
                   <p>Misión</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="../quienesSomos/editVision.jsp" class="nav-link">
                   <i class="fas fa-chart-line nav-icon"></i>
                   <p>Visión</p>
                 </a>

@@ -39,6 +39,27 @@
       <!-- Slider -->
       <div id="nivo-slider">
         <div class="nivo-slider">
+        <%
+          		DT_publicaciones dtpuss = new DT_publicaciones();
+            	ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
+            	listatTblp = dtpuss.itemsInicio();
+            	String publicadoo = "publicado";
+            	String item1="",item2="",item3="", item4="";
+  
+            	for(Tbl_publicaciones tpublc : listatTblp){
+                	if(tpublc.getPublic_estado().trim().equals(publicadoo)){
+                		if(tpublc.getMenu_order() == 1){
+                			item1=tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 2){
+                			item2 = tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 3){
+                			item3 = tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 4){
+                			item4 = tpublc.getPublic_content();
+                		}
+                	}
+                }
+          	%>
         	<%
         		DT_publicaciones dtpus = new DT_publicaciones();
         	ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
@@ -86,7 +107,7 @@
                   </div>
                   <div class="text">
                     <h6>Servicios</h6>
-					<p>El Herbario Nacional de Nicaragua ofrece muchos servicios de reconocimiento de especies, cursos y y toures, ¿quieres saber más? ¡Adéntrate! </p>
+					<p><%=item1 %></p>
                     <a href="servicios.jsp">Infórmate...</a>
                   </div>
                 </div>
@@ -98,7 +119,7 @@
                   </div>
                   <div class="text">
                     <h6>Cursos</h6>
-                    <p> Ofrecemos una gran variedad de cursos a costos accesibles para todo el público, ¿quieres saber qué cursos ofrecemos y a qué costo? ¡Adéntrate! </p>
+                    <p><%=item2 %> </p>
                     <a href="cursos.jsp">Infórmate...</a>
                   </div>
                 </div>
@@ -110,7 +131,7 @@
                   </div>
                   <div class="text">
                     <h6>Noticias</h6>
-                    <p> Nuevos cursos, eventos planeados e información de interés acerca del mundo de la herbología, ¿quieres ver esto y mucho más? ¡Adéntrate! </p>
+                    <p><%=item3 %></p>
                     <a href="noticias.jsp">Infórmate...</a>
                   </div>
                 </div>
@@ -122,7 +143,7 @@
                   </div>
                   <div class="text">
                     <h6>Visitas</h6>
-                    <p> Visitas, capacitaciones, jornadas de recolección y demás, ¿quieres enterarte de hacia dónde iremos próximamente? ¡Adéntrate! </p>
+                    <p><%=item4 %></p>
                     <a href="visitas.jsp">Infórmate...</a>
                   </div>
                 </div>
