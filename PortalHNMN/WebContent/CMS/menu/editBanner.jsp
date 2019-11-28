@@ -119,16 +119,46 @@ tus = dtus.obtenerUser(user);
               <!-- /.card-header -->
               <!-- form start -->
               <br>
-            	<form role = "form" action="${pageContext.request.contextPath}/SL_banner" enctype="multipart/form-data" method="post"> 
-				Subir imágenes para el banner: <input type="file" name="fichero"/></br> 
-				<input type="submit" value="Subir imagen"/>
-				</form> 
-                <!-- /.card-body -->
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Guardar</button>
-                  <button type="button" class="btn btn-danger">Cancelar</button>
-                </div>
-              </form>
+         <div id="foto" class="panel">
+			<form class="form" name="Frm-foto" method="post" action="${pageContext.request.contextPath}/SL_subir_foto_banner" enctype="multipart/form-data">
+				<table class="table table-hover table-heading table-datatable" id="datatable-1">
+					<tbody>
+						<tr>
+							<td>
+								<p>
+								<b>Estimado usuario, por favor atienda las siguientes recomendaciones para subir su foto:</b>
+								</p>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<ul>
+									<p>Foto de orientación horizontal.</p>
+									<p>Formato y dimensiones: el formato debe ser jpg, la foto debe de ser 1900 x 600 px para que se adecúe al tamaño del banner.</p>
+								</ul>
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<div class="cuadro-fotoNima" align="center">
+									<img id="preview" src="../../img/slides/nivo/foto-banner1.jpg" name="preview"  alt="Foto NIMA"
+									style="width: 1000px; height: 350px; border-bottom-color: white; margin: 2px;" />
+								</div> &nbsp;
+							</td>
+						</tr>
+						<tr align="center">
+							<td>
+								<input type="file" id="foto" name="foto"
+								onchange="Test.UpdatePreview(this)" required="required">
+								&nbsp; <input type="hidden" name="idNIMA" value="">
+								&nbsp; <input type="hidden" name="codNIMA" value="">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<input class="action" type="submit" value="Subir imagen"/>
+			</form>
+		</div>
             </div>
             <!-- /.card -->
            </div>
@@ -136,7 +166,6 @@ tus = dtus.obtenerUser(user);
          </div>       
     </section>
     <!-- /.content -->
-
 </div>
 <!-- Footer -->
   		<jsp:include page="/CMS/layouts/footer.jsp"></jsp:include>
@@ -183,6 +212,29 @@ tus = dtus.obtenerUser(user);
   <script>
     $(document).ready(function ()
     {
+    	
+    	Test = {
+    	        UpdatePreview: function(obj)
+    	        {
+    	          // if IE < 10 doesn't support FileReader
+    	          if(!window.FileReader)
+    	          {
+    	             
+    	          } 
+    	          else 
+    	          {
+    	             var reader = new FileReader();
+    	             var target = null;
+    	             
+    	             reader.onload = function(e) 
+    	             {
+    	              target =  e.target || e.srcElement;
+    	               $("#preview").prop("src", target.result);
+    	             };
+    	              reader.readAsDataURL(obj.files[0]);
+    	          }
+    	        }
+    	    };
 
     	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
      
@@ -197,6 +249,10 @@ tus = dtus.obtenerUser(user);
       if(nuevo == "2")
       {
         errorAlert('Error', 'Revise la imagen insertada e intente de nuevo.');
+      }
+      if(nuevo == "3")
+   	  {
+    	errorAlert('Error', 'Revise que la imagen cumpla con el formato requerido.')  
       }
     
       

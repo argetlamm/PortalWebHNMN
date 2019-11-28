@@ -83,10 +83,10 @@
             <div class="widget">
               <h5 class="widgetheading"><%=titulo2 %></h5>
               <ul class="link-list">
-                <li><a href="#"><%=item5 %></a></li>
-                <li><a href="#"><%=item6 %></a></li>
-                <li><a href="#"><%=item7 %></a></li>
-                <li><a href="#"><%=item8 %></a></li>
+                <li><a href="https://www.missouribotanicalgarden.org/"><%=item5 %></a></li>
+                <li><a href="http://herbario.unanleon.edu.ni/HULeMiguelRamirezG.html"><%=item6 %></a></li>
+                <li><a href="https://plants.jstor.org/partner/HNMN"><%=item7 %></a></li>
+                <li><a href="http://www.mobot.org/MOBOT/research/nicaragua/historia.shtml"><%=item8 %></a></li>
               </ul>
             </div>
           </div>

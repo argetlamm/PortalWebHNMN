@@ -44,6 +44,41 @@ public class DT_publicaciones {
 		return listaTpus;
 	}
 	
+	public boolean modificarMenu(ArrayList<Tbl_publicaciones> tbp)
+	{
+		boolean modificado=false;
+		String titulo = "";
+		int contador = 1;
+		//Iterator<Tbl_publicaciones> objeto = tbp.iterator();
+		try
+		{
+			this.itemMenu();
+			rsPublicaciones.beforeFirst();
+			//while(objeto.hasNext())
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					titulo = tpubl.getPublic_titulo();
+					if(rsPublicaciones.getInt(1)==contador)
+					{
+						rsPublicaciones.updateString("public_titulo", titulo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+					}
+					contador++;
+				}
+				contador = 1;
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarMenu() "+e.getMessage());
+			e.printStackTrace();
+		}
+		return modificado;	
+	}
+	
 	public ArrayList<Tbl_publicaciones> titulosFtr()
 	{
 		ArrayList<Tbl_publicaciones> listaFtr = new ArrayList<Tbl_publicaciones>();
@@ -106,6 +141,51 @@ public class DT_publicaciones {
 		return listaItemsF;
 	}
 	
+	public int obtenerMenuOrder()
+	{
+		int menu = 0;
+		int contador = 1;
+		String publicado = "publicado";
+		ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
+		listaBanner = this.imagenesBanner();
+		for (Tbl_publicaciones tpublc : listaBanner){
+        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+        		contador++;
+        	}
+		}
+		menu =  contador;
+		return menu;
+	}
+	
+	public boolean guardarBanner(Tbl_publicaciones tpub)
+	{
+		boolean guardado = false;
+		int menu = obtenerMenuOrder();
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
+		try
+		{
+			this.imagenesBanner();
+			rsPublicaciones.moveToInsertRow();
+			rsPublicaciones.updateInt("menu_order", menu);
+			rsPublicaciones.updateString("public_estado", "publicado");
+			rsPublicaciones.updateDate("public_fecha", sqlDate);
+			rsPublicaciones.updateString("public_name","banner");
+			rsPublicaciones.updateString("public_tipo", "bannerI");
+			rsPublicaciones.updateString("public_titulo", tpub.getPublic_titulo());	
+			rsPublicaciones.insertRow();
+			rsPublicaciones.moveToCurrentRow();
+			guardado = true;
+		}
+		catch (Exception e) 
+		{
+			System.err.println("ERROR guardarUser(): "+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return guardado;
+	}
+	
 	public ArrayList<Tbl_publicaciones> imagenesBanner()
 	{
 		ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
@@ -136,7 +216,7 @@ public class DT_publicaciones {
 		
 		return listaBanner;
 	}
-	
+		
 	public ArrayList<Tbl_publicaciones> itemsQuienesSomos()
 	{
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
@@ -337,6 +417,7 @@ public class DT_publicaciones {
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
 				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
 				tpub.setPublic_name(rsPublicaciones.getString("public_name"));

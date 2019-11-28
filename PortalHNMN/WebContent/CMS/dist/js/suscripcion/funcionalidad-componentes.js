@@ -106,7 +106,7 @@ $().ready(function() {
             for (var i = 0; i < sel.length; i++) {
                 var opt = sel[i];
                 console.log(opt.value);
-                if (opt.value == (asociado+)){
+                if (opt.value == (asociado)){
                     errorAlert('Error', 'El email ingresado ya está en la lista');
                     $("#correosEst").val("");
                     err = 1;

@@ -86,7 +86,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
               <p>
-                Pagina de Inicio
+                Página de Inicio
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -98,7 +98,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="far fa-newspaper nav-icon"></i>
                   <p>Navegación del Menu</p>
                 </a>
@@ -110,31 +110,31 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fab fa-black-tie"></i>
               <p>
-                Quienes Somos?
+                ¿Quiénes Somos?
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fab fa-black-tie nav-icon"></i>
-                  <p>¿Quienes Somos?</p>
+                  <p>¿Quiénes Somos?</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-book nav-icon"></i>
                   <p>Historia</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-clipboard-list nav-icon"></i>
                   <p>Misión</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="seguridad/tblusuarios.jsp" class="nav-link">
+                <a href="#" class="nav-link">
                   <i class="fas fa-chart-line nav-icon"></i>
                   <p>Visión</p>
                 </a>
@@ -156,6 +156,9 @@
                   <i class="fas fa-users nav-icon"></i>
                   <p>Notificaciones</p>
                 </a>
+               </li>
+            </ul>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

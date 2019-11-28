@@ -60,6 +60,8 @@
         </div>
       </div>
     </section>
+    <img alt="" src="img/building.jpeg">
+    <!--
     <section id="content">
       <div class="container">
         <div class="row">
@@ -169,6 +171,7 @@
         </div>
       </div>
     </section>
+    -->
 	<!-- Footer -->
   	<jsp:include page="WEB-INF/layouts/footer.jsp"></jsp:include>
   	<!-- ./Footer -->

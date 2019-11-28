@@ -59,7 +59,105 @@
         </div>
       </div>
     </section>
-    <img alt="" src="img/building.jpeg">
+    <section id="content">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <h4>Lista de <strong>servicios</strong></h4>
+          </div>
+          <div class="span3">
+            <div class="pricing-box-alt">
+              <div class="pricing-heading">
+                <h3>Identificación taxonómica de muestras</h3>
+              </div>
+              <div class="pricing-terms">
+                <h6>Precio por muestra</h6>
+              </div>
+              <div class="pricing-content">
+                <ul>
+                  <li><i class="icon-ok"></i> Zona Pacífico/Central - Instituciones: $5.00</li>
+                  <li><i class="icon-ok"></i> Zona Caribe - Instituciones: $7.00</li>
+                  <li><i class="icon-ok"></i> Zona Pacífico/Central - Tesistas Posgrados: $4.00</li>
+                  <li><i class="icon-ok"></i> Zona Caribe - Tesistas Posgrados: $6.00</li>
+                  <li><i class="icon-ok"></i> Zona Pacífico/Central - Estudiantes grado otras universidades: $4.00</li>
+			      <li><i class="icon-ok"></i> Zona Caribe - Estudiantes grado otras universidades: $5.00</li>
+			      <li><i class="icon-ok"></i> Zona Pacífico/Central - Estudiantes grado UCA*: $4.00</li>  
+			      <li><i class="icon-ok"></i> Zona Caribe - Estudiantes grado UCA*: $5.00</li>
+                </ul>
+              </div>
+              <div class="pricing-action">
+                <div class="btn btn-medium btn-theme">* Si tiene dificultad para realizar el pago, por favor, comunicarse con la responsable del Herbario</div>
+            </div>
+          </div>
+          </div>
+          <div class="span3">
+            <div class="pricing-box-alt">
+              <div class="pricing-heading">
+                <h3>Secuenciación molecular por especie</h3>
+              </div>
+              <div class="pricing-terms">
+                <h6>Precio por muestra</h6>
+              </div>
+              <div class="pricing-content">
+                <ul>
+                  <li><i class="icon-ok"></i> Zona Pacífico/Central - Instituciones: $55.00</li>
+                  <li><i class="icon-ok"></i> Zona Caribe - Instituciones: $57.00</li>
+                  <li><i class="icon-ok"></i> Zona Pacífico/Central - Tesistas Posgrados: $54.00</li>
+                  <li><i class="icon-ok"></i> Zona Caribe - Tesistas Posgrados: $56.00</li>
+                  <li><i class="icon-ok"></i> Zona Pacífico/Central - Estudiantes grado otras universidades: $54.00</li>
+			      <li><i class="icon-ok"></i> Zona Caribe - Estudiantes grado otras universidades: $55.00</li>
+			      <li><i class="icon-ok"></i> Zona Pacífico/Central - Estudiantes grado UCA*: $54.00</li>  
+			      <li><i class="icon-ok"></i> Zona Caribe - Estudiantes grado UCA*: $55.00</li>
+                </ul>
+              </div>
+              <div class="pricing-action">
+                <div class="btn btn-medium btn-theme">* Si tiene dificultad para realizar el pago, por favor, comunicarse con la responsable del Herbario</div>
+            </div>
+          </div>
+          </div>
+          <div class="span3">
+            <div class="pricing-box-alt">
+              <div class="pricing-heading">
+                <h3>Certificación de muestras</h3>
+              </div>
+              <div class="pricing-terms">
+                <h6>Precios</h6>
+              </div>
+              <div class="pricing-content">
+                <ul>
+                  <li><i class="icon-ok"></i> De  0 a 30 muestras: $15.00</li>
+                  <li><i class="icon-ok"></i> De  31 a 60 muestras: $30.00</li>
+                  <li><i class="icon-ok"></i> De  61 a 100 muestras: $50.00</li>
+                  <li><i class="icon-ok"></i> De  101 a 200 muestras: $75.00</li>
+                </ul>
+              </div>
+              <div class="pricing-action">
+                <div class="btn btn-medium btn-theme"> Si desea más información, por favor, comunicarse con la responsable del Herbario </div>
+            </div>
+          </div>
+          </div>
+          <div class="span3">
+            <div class="pricing-box-alt">
+              <div class="pricing-heading">
+                <h3>Descripción botánica</h3>
+              </div>
+              <div class="pricing-terms">
+                <h6>Precio por muestra</h6>
+              </div>
+              <div class="pricing-content">
+                <ul>
+                  <li><i class="icon-ok"></i> Microscópica: $25.00</li>
+                  <li><i class="icon-ok"></i> Macroscópica: $10.00</li>
+                </ul>
+              </div>
+              <div class="pricing-action">
+                <div class="btn btn-medium btn-theme"> Si desea más información, por favor, comunicarse con la responsable del Herbario </div>
+              </div>
+            </div>
+          </div>
+      	</div>
+      </div>
+    </section>
 	<!-- Footer -->
   	<jsp:include page="WEB-INF/layouts/footer.jsp"></jsp:include>
   	<!-- ./Footer -->

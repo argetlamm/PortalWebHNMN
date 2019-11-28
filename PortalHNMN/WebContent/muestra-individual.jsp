@@ -103,7 +103,7 @@
         					{
         						if(posicion.trim().equals("ecologia"))
         						{
-        							ecologia=tpublc.getPublic_titulo();
+        							ecologia=tpublc.getPublic_content();
         						}
         					}
         				}
@@ -141,8 +141,8 @@
 	              <div class="widget">
 	                <h5 class="widgetheading">Información de la muestra</h5>
 	                <ul class="folio-detail">
-	                  <li><label>Nombre :</label><%=nombre %></li>
-	                  <li><label>Nombre científico :</label><%=nombreC %></li>
+	                  <li><label>Nombre: </label><%=nombre %></li>
+	                  <li><label>Nombre científico: </label><%=nombreC %></li>
 	                </ul>
 	              </div>
 	              <div class="widget">

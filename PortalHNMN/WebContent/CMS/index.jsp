@@ -109,13 +109,8 @@
           <!-- /.col -->
         </div>
       </form>
-
-      
-      <p class="mb-1">
-        <a href="#">He olvidado mi contraseña</a>
-      </p>
       <p class="mb-0">
-        <a href="#" class="text-center">Registrar una nueva membresia</a>
+        <a href="../index.jsp" class="text-center">Regresar al sitio web</a>
       </p>
     </div>
     <!-- /.login-card-body -->
