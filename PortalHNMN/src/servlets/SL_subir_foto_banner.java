@@ -108,16 +108,16 @@ public class SL_subir_foto_banner extends HttpServlet {
 					}*/
 					if(formatos.contains(uploaded.getContentType()))
 					{
-						System.out.println("Filetype: "+uploaded.getContentType());
+
 						int contador = dtpub.obtenerMenuOrder();
 						rutaFichero = "foto-banner"+contador+".jpg";
 						path = "C:\\Users\\pc\\git\\PortalWebHNMN\\PortalHNMN\\WebContent\\img\\slides\\nivo\\";
 						String url2 = path.substring(52);
 						url2 = url2.replace("\\", "/");
-						System.out.println(path+rutaFichero);
+						
 						fichero = new File(url2+rutaFichero);
-						fichero2 = new File(path+rutaFichero);
-						System.out.println(fichero);
+						String ficheroTest = path.replace("\\", "/");
+						fichero2 = new File(ficheroTest+rutaFichero);
 						
 						///////// GUARDAR EN EL SERVIDOR //////////////
 						uploaded.write(fichero2);

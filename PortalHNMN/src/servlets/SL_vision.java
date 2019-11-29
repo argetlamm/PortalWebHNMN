@@ -48,6 +48,7 @@ public class SL_vision extends HttpServlet {
 		try
 		{	
 			tpus1.setPublic_content(request.getParameter("item1"));
+			tpus1.setMenu_order(Integer.parseInt(request.getParameter("item11")));
 			tpus.add(tpus1);
 
 			if(dtpus.modificarVision(tpus))

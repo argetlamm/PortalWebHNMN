@@ -7,9 +7,6 @@ import javax.ejb.Stateless;
 import javax.mail.*;
 import javax.mail.internet.*;
 import entidades.EN_Protocol;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64.*;
-import static java.util.Base64.*;
 
 /**
  * Session Bean implementation class EmailSessionBean
@@ -49,7 +46,6 @@ public class DT_EmailSessionBean {
         username = remitente;
         nombreRemitente = nombre;
         
-        //String link = "\nhttp://165.98.12.158:8080/sigra/pages/inscripcion/registroEstudiantePropio.jsp?e="+cifrarBase64(to);
         String cuerpoCorreo = cpCorreo;
 
         Authenticator authenticator = null;
@@ -95,12 +91,6 @@ public class DT_EmailSessionBean {
         	enviado = false;
         }
         return enviado;
-    }
-    
-    public static String cifrarBase64(String a){
-        Encoder encoder = getEncoder();
-        String b = encoder.encodeToString(a.getBytes(StandardCharsets.UTF_8) );        
-        return b;
     }
 
 }

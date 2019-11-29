@@ -66,10 +66,12 @@ listaMision = dtpb.itemsMision();
 
 String publicado = "publicado";
 String item1="";
+int item11=0;
 for (Tbl_publicaciones tpublc : listaMision){
 	if(tpublc.getPublic_estado().trim().equals(publicado)){
 		if(tpublc.getMenu_order() == 1){
 			item1 = tpublc.getPublic_content();
+			item11 = tpublc.getMenu_order();
 		}
 	}
 }
@@ -125,6 +127,7 @@ for (Tbl_publicaciones tpublc : listaMision){
                   <div class="form-group">
                     <label for="exampleInputEmail1">Primer párrafo:</label>
                     <input type="text" id="item1" name="item1" class="form-control" value="<%=item1 %>" required>
+                    <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
                   </div>
                 </div>
                 <!-- /.card-body -->

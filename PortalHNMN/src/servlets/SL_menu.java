@@ -45,13 +45,21 @@ public class SL_menu extends HttpServlet {
 		try
 		{	
 			tpus1.setPublic_titulo(request.getParameter("item1"));
+			tpus1.setMenu_order(Integer.parseInt(request.getParameter("item11")));
 			tpus2.setPublic_titulo(request.getParameter("item2"));
+			tpus2.setMenu_order(Integer.parseInt(request.getParameter("item22")));
 			tpus3.setPublic_titulo(request.getParameter("item3"));
+			tpus3.setMenu_order(Integer.parseInt(request.getParameter("item33")));
 			tpus4.setPublic_titulo(request.getParameter("item4"));
+			tpus4.setMenu_order(Integer.parseInt(request.getParameter("item44")));
 			tpus5.setPublic_titulo(request.getParameter("item5"));
+			tpus5.setMenu_order(Integer.parseInt(request.getParameter("item55")));
 			tpus6.setPublic_titulo(request.getParameter("item6"));
+			tpus6.setMenu_order(Integer.parseInt(request.getParameter("item66")));
 			tpus7.setPublic_titulo(request.getParameter("item7"));
+			tpus7.setMenu_order(Integer.parseInt(request.getParameter("item77")));
 			tpus8.setPublic_titulo(request.getParameter("item8"));
+			tpus8.setMenu_order(Integer.parseInt(request.getParameter("item88")));
 			
 			tpus.add(tpus1);
 			tpus.add(tpus2);

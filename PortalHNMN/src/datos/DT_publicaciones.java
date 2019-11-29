@@ -48,7 +48,6 @@ public class DT_publicaciones {
 	{
 		boolean modificado=false;
 		String titulo = "";
-		int contador = 1;
 		try
 		{
 			this.itemMenu();
@@ -58,16 +57,33 @@ public class DT_publicaciones {
 				for(Tbl_publicaciones tpubl : tbp)
 				{
 					titulo = tpubl.getPublic_titulo();
-					if(rsPublicaciones.getInt(1)==contador)
+					if(rsPublicaciones.getInt(1)==tpubl.getMenu_order())
 					{
 						rsPublicaciones.updateString("public_titulo", titulo);
 						rsPublicaciones.updateRow();
 						modificado=true;
+						break;
 					}
-					contador++;
 				}
-				contador = 1;
 			}
+			/*
+			for (Tbl_publicaciones tpubl : tbp)
+			{
+				titulo = tpubl.getPublic_titulo();
+				System.out.println("titulo: "+titulo);
+				while(rsPublicaciones.next())
+				{
+					System.out.println("orden: "+rsPublicaciones.getInt(1));
+					System.out.println("orden del objeto: "+tpubl.getMenu_order());
+					if(rsPublicaciones.getInt(1)==tpubl.getMenu_order())
+					{
+						rsPublicaciones.updateString("public_titulo", titulo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+						break;
+					}
+				}
+			}*/
 		}
 		catch (Exception e)
 		{
@@ -112,8 +128,6 @@ public class DT_publicaciones {
 	{
 		boolean modificado=false;
 		String parrafo = "";
-		int contador = 1;
-		int contador2 = 1;
 		try
 		{
 			this.itemsInicio();
@@ -123,16 +137,14 @@ public class DT_publicaciones {
 				for(Tbl_publicaciones tpubl : tbp)
 				{
 					parrafo = tpubl.getPublic_content();
-					if(contador2==contador)
+					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
 					{
 						rsPublicaciones.updateString("public_content", parrafo);
 						rsPublicaciones.updateRow();
 						modificado=true;
+						break;
 					}
-					contador++;
 				}
-				contador2++;
-				contador = 1;
 			}
 		}
 		catch (Exception e)
@@ -236,7 +248,7 @@ public class DT_publicaciones {
 			rsPublicaciones.updateDate("public_fecha", sqlDate);
 			rsPublicaciones.updateString("public_name","banner");
 			rsPublicaciones.updateString("public_tipo", "bannerI");
-			rsPublicaciones.updateString("public_titulo", tpub.getPublic_titulo());	
+			rsPublicaciones.updateString("public_titulo", tpub.getPublic_titulo().replace("\\", "/"));	
 			rsPublicaciones.insertRow();
 			rsPublicaciones.moveToCurrentRow();
 			guardado = true;
@@ -316,8 +328,6 @@ public class DT_publicaciones {
 	{
 		boolean modificado=false;
 		String parrafo = "";
-		int contador = 1;
-		int contador2 = 1;
 		try
 		{
 			this.itemsQuienesSomos();
@@ -327,16 +337,14 @@ public class DT_publicaciones {
 				for(Tbl_publicaciones tpubl : tbp)
 				{
 					parrafo = tpubl.getPublic_content();
-					if(contador2==contador)
+					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
 					{
 						rsPublicaciones.updateString("public_content", parrafo);
 						rsPublicaciones.updateRow();
 						modificado=true;
+						break;
 					}
-					contador++;
 				}
-				contador2++;
-				contador = 1;
 			}
 		}
 		catch (Exception e)
@@ -382,8 +390,6 @@ public class DT_publicaciones {
 	{
 		boolean modificado=false;
 		String parrafo = "";
-		int contador = 1;
-		int contador2 = 1;
 		try
 		{
 			this.itemsHistoria();
@@ -393,16 +399,14 @@ public class DT_publicaciones {
 				for(Tbl_publicaciones tpubl : tbp)
 				{
 					parrafo = tpubl.getPublic_content();
-					if(contador2==contador)
+					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
 					{
 						rsPublicaciones.updateString("public_content", parrafo);
 						rsPublicaciones.updateRow();
 						modificado=true;
+						break;
 					}
-					contador++;
 				}
-				contador2++;
-				contador = 1;
 			}
 		}
 		catch (Exception e)
@@ -448,8 +452,6 @@ public class DT_publicaciones {
 	{
 		boolean modificado=false;
 		String parrafo = "";
-		int contador = 1;
-		int contador2 = 1;
 		try
 		{
 			this.itemsMision();
@@ -459,16 +461,14 @@ public class DT_publicaciones {
 				for(Tbl_publicaciones tpubl : tbp)
 				{
 					parrafo = tpubl.getPublic_content();
-					if(contador2==contador)
+					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
 					{
 						rsPublicaciones.updateString("public_content", parrafo);
 						rsPublicaciones.updateRow();
 						modificado=true;
+						break;
 					}
-					contador++;
 				}
-				contador2++;
-				contador = 1;
 			}
 		}
 		catch (Exception e)
@@ -514,8 +514,6 @@ public class DT_publicaciones {
 	{
 		boolean modificado=false;
 		String parrafo = "";
-		int contador = 1;
-		int contador2 = 1;
 		try
 		{
 			this.itemsVision();
@@ -525,16 +523,14 @@ public class DT_publicaciones {
 				for(Tbl_publicaciones tpubl : tbp)
 				{
 					parrafo = tpubl.getPublic_content();
-					if(contador2==contador)
+					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
 					{
 						rsPublicaciones.updateString("public_content", parrafo);
 						rsPublicaciones.updateRow();
 						modificado=true;
+						break;
 					}
-					contador++;
 				}
-				contador2++;
-				contador = 1;
 			}
 		}
 		catch (Exception e)

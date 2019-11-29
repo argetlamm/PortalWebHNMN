@@ -66,16 +66,21 @@ listaInicio = dtpb.itemsInicio();
 
 String publicado = "publicado";
 String item1="", item2="", item3="", item4="";
+int item11=0, item22=0, item33=0, item44=0;
 for (Tbl_publicaciones tpublc : listaInicio){
 	if(tpublc.getPublic_estado().trim().equals(publicado)){
 		if(tpublc.getMenu_order() == 1){
 			item1 = tpublc.getPublic_content();
+			item11 = tpublc.getMenu_order();
 		}else if(tpublc.getMenu_order() == 2){
 			item2 = tpublc.getPublic_content();
+			item22 = tpublc.getMenu_order();
 		}else if(tpublc.getMenu_order() == 3){
 			item3 = tpublc.getPublic_content();
+			item33 = tpublc.getMenu_order();
 		}else if(tpublc.getMenu_order() == 4){
 			item4 = tpublc.getPublic_content();
+			item44 = tpublc.getMenu_order();
 		}
 	}
 }
@@ -131,12 +136,16 @@ for (Tbl_publicaciones tpublc : listaInicio){
                   <div class="form-group">
                     <label for="exampleInputEmail1">Párrafo de Servicios:</label>
                     <input type="text" id="item1" name="item1" class="form-control" value="<%=item1 %>" required>
+                    <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
                     <label for="exampleInputEmail1">Párrafo de Cursos:</label>
                     <input type="text" id="item2" name="item2" class="form-control" value="<%=item2 %>" required>
+                    <input type="hidden" id="item22" name="item22" class="form-control" value="<%=item22 %>" required>
                     <label for="exampleInputEmail1">Párrafo de Noticias:</label>
                     <input type="text" id="item3" name="item3" class="form-control" value="<%=item3 %>" required>
+                    <input type="hidden" id="item33" name="item33" class="form-control" value="<%=item33 %>" required>
                     <label for="exampleInputEmail1">Párrafo de Visitas:</label>
                     <input type="text" id="item4" name="item4" class="form-control" value="<%=item4 %>" required>
+                    <input type="hidden" id="item44" name="item44" class="form-control" value="<%=item44 %>" required>
                   </div>
                 </div>
                 <!-- /.card-body -->

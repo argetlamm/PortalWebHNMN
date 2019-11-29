@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
-    
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*"%>
 <%
 ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
 //Recuperamos el Arraylist de la sesion creada en sistema.jsp
@@ -77,7 +76,7 @@ if(!permiso)
 	<!-- /.navbar -->
 	
 	<!-- SIDEBAR -->
-	  	<jsp:include page="../../CMS/layouts/menu3.jsp"></jsp:include>
+	  	<jsp:include page="../../CMS/layouts/menu5.jsp"></jsp:include>
 	<!-- SIDEBAR -->
 
   <!-- Content Wrapper. Contains page content -->
@@ -138,7 +137,7 @@ if(!permiso)
 				        			System.out.println("valor de value: "+value);
 				        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
 				              %>
-				                <option id="correosUs"><%=tus.getEmail()%></option>
+				                <option><%=tus.getEmail()%></option>
 					          <%
 				        		}   
 					          %>

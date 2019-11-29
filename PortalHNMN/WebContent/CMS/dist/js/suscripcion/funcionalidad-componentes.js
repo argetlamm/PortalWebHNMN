@@ -116,7 +116,7 @@ $().ready(function() {
             if (($(inputs).val()<= 0) && (err != 1)) {
                 $("#correosEst").val("");
             }else if (err != 1){
-                correosConcatenados = $("#destinoInput").val() + asociado+ "/";
+                correosConcatenados = $("#destinoInput").val() + asociado + "@/";
                 $("#destinoInput").val(correosConcatenados);
                 $("#correosEst").val("");
                 $("#totalCorreos").val(totalOptions);

@@ -50,8 +50,11 @@ public class SL_historia extends HttpServlet {
 		try
 		{	
 			tpus1.setPublic_content(request.getParameter("item1"));
+			tpus1.setMenu_order(Integer.parseInt(request.getParameter("item11")));
 			tpus2.setPublic_content(request.getParameter("item2"));
+			tpus2.setMenu_order(Integer.parseInt(request.getParameter("item22")));
 			tpus3.setPublic_content(request.getParameter("item3"));
+			tpus3.setMenu_order(Integer.parseInt(request.getParameter("item33")));
 			
 			tpus.add(tpus1);
 			tpus.add(tpus2);
