@@ -208,8 +208,6 @@ public class DT_usuario
 			{
 				existe=true;
 			}
-		
-		
 		}
 		catch (Exception e)
 		{
@@ -223,7 +221,7 @@ public class DT_usuario
 	
 	public static String getMd5(String input) throws SQLException 
     { 
-		Connection c = PoolConexion.getConnection();
+		//Connection c = PoolConexion.getConnection();
         try { 
             // Static getInstance method is called with hashing MD5 
             MessageDigest md = MessageDigest.getInstance("MD5"); 
@@ -244,8 +242,8 @@ public class DT_usuario
         catch (NoSuchAlgorithmException e) 
         {
             throw new RuntimeException(e); 
-        } finally {
+        } /*finally {
         	c.close();
-        } 
+        } */
     } 
 }
