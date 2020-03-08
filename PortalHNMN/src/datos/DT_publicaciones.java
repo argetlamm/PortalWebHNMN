@@ -3,20 +3,20 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_publicaciones;
-import entidades.Tbl_user;
 
 public class DT_publicaciones {
 	PoolConexion pc = PoolConexion.getInstance(); 
 	Connection c = PoolConexion.getConnection();
 	private ResultSet rsPublicaciones;
 	
-	public ArrayList<Tbl_publicaciones> itemMenu()
+	public ArrayList<Tbl_publicaciones> itemMenu() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaTpus = new ArrayList<Tbl_publicaciones>();
-		
 		try
 		{
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'nav_menu_item'", 
@@ -39,13 +39,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} /*finally {
+			c.close();
+		}*/
 		return listaTpus;
 	}
 	
-	public boolean modificarMenu(ArrayList<Tbl_publicaciones> tbp)
+	public boolean modificarMenu(ArrayList<Tbl_publicaciones> tbp) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
 		String titulo = "";
 		try
@@ -89,12 +91,16 @@ public class DT_publicaciones {
 		{
 			System.err.println("ERROR modificarMenu() "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return modificado;	
 	}
 	
-	public ArrayList<Tbl_publicaciones> itemsInicio()
+	
+	public ArrayList<Tbl_publicaciones> itemsInicio() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
 		
 		try
@@ -120,12 +126,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return listaBdy;
 	}
 	
-	public boolean modificarInicio(ArrayList<Tbl_publicaciones> tbp)
+	public boolean modificarInicio(ArrayList<Tbl_publicaciones> tbp) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
 		String parrafo = "";
 		try
@@ -151,12 +160,15 @@ public class DT_publicaciones {
 		{
 			System.err.println("ERROR modificarQuienesSomos() "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return modificado;	
 	}
 	
-	public ArrayList<Tbl_publicaciones> titulosFtr()
+	public ArrayList<Tbl_publicaciones> titulosFtr() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaFtr = new ArrayList<Tbl_publicaciones>();
 		
 		try
@@ -181,13 +193,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} finally {
+			c.close();
+		}		
 		return listaFtr;
 	}
 	
-	public ArrayList<Tbl_publicaciones> itemsFtr()
+	public ArrayList<Tbl_publicaciones> itemsFtr() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaItemsF = new ArrayList<Tbl_publicaciones>();
 		
 		try
@@ -212,12 +226,13 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} /*finally {
+			c.close();
+		}*/		
 		return listaItemsF;
 	}
 	
-	public int obtenerMenuOrder()
+	public int obtenerMenuOrder() throws SQLException
 	{
 		int menu = 0;
 		int contador = 1;
@@ -233,8 +248,9 @@ public class DT_publicaciones {
 		return menu;
 	}
 	
-	public boolean guardarBanner(Tbl_publicaciones tpub)
+	public boolean guardarBanner(Tbl_publicaciones tpub) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean guardado = false;
 		int menu = obtenerMenuOrder();
 		java.util.Date d1 = new java.util.Date();
@@ -257,13 +273,15 @@ public class DT_publicaciones {
 		{
 			System.err.println("ERROR guardarUser(): "+e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} finally {
+			c.close();
+		}		
 		return guardado;
 	}
 	
-	public ArrayList<Tbl_publicaciones> imagenesBanner()
+	public ArrayList<Tbl_publicaciones> imagenesBanner() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
 		
 		try
@@ -288,13 +306,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} /*finally {
+			c.close();
+		}	*/	
 		return listaBanner;
 	}
 		
-	public ArrayList<Tbl_publicaciones> itemsQuienesSomos()
+	public ArrayList<Tbl_publicaciones> itemsQuienesSomos() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
 		
 		try
@@ -320,12 +340,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
 			e.printStackTrace();
-		}
+		} /*finally {
+			c.close();
+		}*/
 		return listaBdy;
 	}
 	
-	public boolean modificarQuienesSomos(ArrayList<Tbl_publicaciones> tbp)
+	public boolean modificarQuienesSomos(ArrayList<Tbl_publicaciones> tbp) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
 		String parrafo = "";
 		try
@@ -351,12 +374,15 @@ public class DT_publicaciones {
 		{
 			System.err.println("ERROR modificarQuienesSomos() "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return modificado;	
 	}
 	
-	public ArrayList<Tbl_publicaciones> itemsHistoria()
+	public ArrayList<Tbl_publicaciones> itemsHistoria() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
 		
 		try
@@ -382,12 +408,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
 			e.printStackTrace();
-		}
+		} /*finally {
+			c.close();
+		}*/
 		return listaBdy;
 	}
 	
-	public boolean modificarHistoria(ArrayList<Tbl_publicaciones> tbp)
+	public boolean modificarHistoria(ArrayList<Tbl_publicaciones> tbp) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
 		String parrafo = "";
 		try
@@ -413,14 +442,16 @@ public class DT_publicaciones {
 		{
 			System.err.println("ERROR modificarHistoria() "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return modificado;	
 	}
 	
-	public ArrayList<Tbl_publicaciones> itemsMision()
+	public ArrayList<Tbl_publicaciones> itemsMision() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
-		
 		try
 		{
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsMision'", 
@@ -444,12 +475,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
 			e.printStackTrace();
-		}
+		} /*finally {
+			c.close();
+		}*/
 		return listaBdy;
 	}
 	
-	public boolean modificarMision(ArrayList<Tbl_publicaciones> tbp)
+	public boolean modificarMision(ArrayList<Tbl_publicaciones> tbp) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
 		String parrafo = "";
 		try
@@ -475,14 +509,16 @@ public class DT_publicaciones {
 		{
 			System.err.println("ERROR modificarMision() "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return modificado;	
 	}
 	
-	public ArrayList<Tbl_publicaciones> itemsVision()
+	public ArrayList<Tbl_publicaciones> itemsVision() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
-		
 		try
 		{
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsVision'", 
@@ -506,12 +542,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
 			e.printStackTrace();
-		}
+		} /*finally {
+			c.close();
+		}*/
 		return listaBdy;
 	}
 	
-	public boolean modificarVision(ArrayList<Tbl_publicaciones> tbp)
+	public boolean modificarVision(ArrayList<Tbl_publicaciones> tbp) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
 		String parrafo = "";
 		try
@@ -537,12 +576,15 @@ public class DT_publicaciones {
 		{
 			System.err.println("ERROR modificarVision() "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return modificado;	
 	}
 	
-	public ArrayList<Tbl_publicaciones> titulosQuienesSomos()
+	public ArrayList<Tbl_publicaciones> titulosQuienesSomos() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
 		
 		try
@@ -568,14 +610,16 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
 			e.printStackTrace();
-		}
+		} /*finally {
+			c.close();
+		}*/
 		return listaBdy;
 	}
 	
-	public ArrayList<Tbl_publicaciones> imagenesColeccion()
+	public ArrayList<Tbl_publicaciones> imagenesColeccion() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaColeccion = new ArrayList<Tbl_publicaciones>();
-		
 		try
 		{
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'coleccionImagen'", 
@@ -599,13 +643,15 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} /*finally {
+			c.close();
+		}*/		
 		return listaColeccion;
 	}
 	
-	public ArrayList<Tbl_publicaciones> informacionColeccion(int id)
+	public ArrayList<Tbl_publicaciones> informacionColeccion(int id) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> informacionColeccion = new ArrayList<Tbl_publicaciones>();
 		try
 		{
@@ -631,6 +677,8 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		
 		return informacionColeccion;

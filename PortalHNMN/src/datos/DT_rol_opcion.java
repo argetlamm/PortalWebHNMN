@@ -3,6 +3,7 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_rol_opcion;
@@ -16,9 +17,9 @@ public class DT_rol_opcion {
     private static final String SQL_SELECT_ALL_VISTA = "SELECT * FROM public.\"V_tbl_Rol_Opcion\"";
     private static final String SQL_SELECT_ALL = "SELECT * FROM tbl_rol_opcion";
     
-    public ArrayList<V_tbl_Rol_Opcion> listarRolOpcionVista(){
+    public ArrayList<V_tbl_Rol_Opcion> listarRolOpcionVista() throws SQLException{
+    	Connection c = PoolConexion.getConnection();
     	ArrayList<V_tbl_Rol_Opcion> vRolOpc = new ArrayList<V_tbl_Rol_Opcion>();
-    	
     	try {
     		PreparedStatement ps = c.prepareStatement(SQL_SELECT_ALL_VISTA, ResultSet.TYPE_SCROLL_SENSITIVE, 
     				ResultSet.CONCUR_UPDATABLE, ResultSet.HOLD_CURSORS_OVER_COMMIT);
@@ -35,12 +36,14 @@ public class DT_rol_opcion {
     	}catch (Exception e) {
             System.out.println("DATOS: ERROR en listarRolOpcionVista() " + e.getMessage());
             e.printStackTrace();
-        }
-    	
+        } finally {
+        	c.close();
+        }    	
     	return vRolOpc;
     }
     
-    public ArrayList<Tbl_rol_opcion> listarRolOpcion(){
+    public ArrayList<Tbl_rol_opcion> listarRolOpcion() throws SQLException{
+    	Connection c = PoolConexion.getConnection();
     	ArrayList<Tbl_rol_opcion> rolOpc = new ArrayList<Tbl_rol_opcion>();
     	try {
     		PreparedStatement ps = c.prepareStatement(SQL_SELECT_ALL, ResultSet.TYPE_SCROLL_SENSITIVE, 
@@ -56,14 +59,15 @@ public class DT_rol_opcion {
     	}catch (Exception e) {
             System.out.println("DATOS: ERROR en listarRolOpcion() " + e.getMessage());
             e.printStackTrace();
+        } finally {
+        	c.close();
         }
-    	
     	return rolOpc;
     }
     
-    public V_tbl_Rol_Opcion obtenerRolOpcion(int idRolOpc){
+    public V_tbl_Rol_Opcion obtenerRolOpcion(int idRolOpc) throws SQLException{
+    	Connection c = PoolConexion.getConnection();
     	V_tbl_Rol_Opcion vtrop = new V_tbl_Rol_Opcion();
-		
 		try {
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM public.\"V_tbl_Rol_Opcion\" WHERE id_rol_opcion=?", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
@@ -82,8 +86,9 @@ public class DT_rol_opcion {
 		}catch(Exception e) {
 			System.out.println("DATOS: ERROR en obtenerRolOpcion() " + e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} finally {
+			c.close();
+		}		
 		return vtrop;
 	}
     
@@ -92,13 +97,12 @@ public class DT_rol_opcion {
     	return existe;
     }
     
-    public boolean guardarRolOpcion(Tbl_rol_opcion tropc) {
+    public boolean guardarRolOpcion(Tbl_rol_opcion tropc) throws SQLException {
+    	Connection c = PoolConexion.getConnection();
     	boolean guardado = false;
-    	
     	try {
     		this.listarRolOpcion();
     		rsRolOpc.moveToInsertRow();
-    		
     		rsRolOpc.updateInt("id_rol", tropc.getId_rol());
     		rsRolOpc.updateInt("id_opcion", tropc.getId_opc());
     		rsRolOpc.insertRow();
@@ -107,12 +111,14 @@ public class DT_rol_opcion {
     	}catch (Exception e){
             System.err.println("ERROR guardarRolOpcion(): "+e.getMessage());
             e.printStackTrace();
+        } finally {
+        	c.close();
         }
-    	
     	return guardado;
     }
     
-    public boolean editarRolOpcion(Tbl_rol_opcion tropc) {
+    public boolean editarRolOpcion(Tbl_rol_opcion tropc) throws SQLException {
+    	Connection c = PoolConexion.getConnection();
     	boolean editado = false;
     	System.out.println("Estoy entrando al DT editar");  
     	try {
@@ -134,14 +140,15 @@ public class DT_rol_opcion {
     	}catch (Exception e){
             System.err.println("ERROR editarRolOpcion(): "+e.getMessage());
             e.printStackTrace();
+        } finally {
+        	c.close();
         }
-    	
     	return editado;
     }
     
-    public boolean eliminarRolOpcion(Tbl_rol_opcion tropc) {
+    public boolean eliminarRolOpcion(Tbl_rol_opcion tropc) throws SQLException {
+    	Connection c = PoolConexion.getConnection();
     	boolean eliminado = false;
-    	
     	try {
     		PreparedStatement ps = c.prepareStatement("DELETE FROM tbl_rol_opcion WHERE id_rol_opcion=?", 
     				ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
@@ -152,8 +159,9 @@ public class DT_rol_opcion {
     	}catch (Exception e){
             System.err.println("ERROR eliminarRolOpcion(): "+e.getMessage());
             e.printStackTrace();
+        } finally {
+        	c.close();
         }
     	return eliminado;
     }
-    
 }

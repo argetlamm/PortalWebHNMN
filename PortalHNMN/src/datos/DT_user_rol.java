@@ -3,6 +3,7 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_user;
@@ -18,11 +19,10 @@ public class DT_user_rol {
 	private static final String SQL_SELECT_ALL = "SELECT * FROM tbl_user_rol";
 	private ResultSet rsVUserRol;
 ///////////////////////////// METODO PARA LISTAR VISTA DE USUARIOS ROL/////////////////////////////
-	public ArrayList<V_tbl_Usuario_Rol> vlistUserRol()
+	public ArrayList<V_tbl_Usuario_Rol> vlistUserRol() throws SQLException
 	{
-		
+		Connection c = PoolConexion.getConnection();
 		ArrayList<V_tbl_Usuario_Rol> vlistaUserRol = new ArrayList<V_tbl_Usuario_Rol>();
-		
 		try
 		{
 			PreparedStatement ps = c.prepareStatement(SQL_SELECT_ALL_VISTA, ResultSet.TYPE_SCROLL_SENSITIVE, 
@@ -46,8 +46,9 @@ public class DT_user_rol {
 		{
 			System.out.println("DATOS: ERROR en vlistUserRol() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} finally {
+			c.close();
+		}		
 		return vlistaUserRol;
 	}
 	
@@ -56,10 +57,10 @@ public class DT_user_rol {
 	
 ///////////////////////////// METODO PARA LISTAR TABLA USUARIOS ROL /////////////////////////////
 
-	public ArrayList<Tbl_user_rol> listUserRol()
+	public ArrayList<Tbl_user_rol> listUserRol() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_user_rol> userRol = new ArrayList<Tbl_user_rol>();
-		
 		try
 		{
 			PreparedStatement ps = c.prepareStatement(SQL_SELECT_ALL, ResultSet.TYPE_SCROLL_SENSITIVE, 
@@ -78,14 +79,15 @@ public class DT_user_rol {
 		{
 			System.out.println("DATOS: ERROR en listUserRol() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} finally {
+			c.close();
+		}		
 		return userRol;
 	}
 	
-	public V_tbl_Usuario_Rol obtenerUserRol(int idUserRol){
-    	V_tbl_Usuario_Rol vtur = new V_tbl_Usuario_Rol();
-		
+	public V_tbl_Usuario_Rol obtenerUserRol(int idUserRol) throws SQLException{
+		Connection c = PoolConexion.getConnection();
+		V_tbl_Usuario_Rol vtur = new V_tbl_Usuario_Rol();
 		try {
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM public.\"V_tbl_Usuario_Rol\" WHERE id_user_rol=?", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
@@ -107,13 +109,15 @@ public class DT_user_rol {
 		}catch(Exception e) {
 			System.out.println("DATOS: ERROR en obtenerUserRol() " + e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} finally {
+			c.close();
+		}		
 		return vtur;
 	}
 ///////////////////////////// METODO PARA GUARDAR USUARIOS ROL /////////////////////////////
 
-	public boolean guardarUserRol (Tbl_user_rol tur){
+	public boolean guardarUserRol (Tbl_user_rol tur) throws SQLException{
+		Connection c = PoolConexion.getConnection();
 		boolean guardado = false;
 		System.out.println("Estoy entrando al dt_user_rol");
 		try
@@ -130,14 +134,17 @@ public class DT_user_rol {
 		{
 			System.err.println("ERROR guardarUserRol(): "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return guardado;
 	}
 	
 ///////////////////////////// METODO PARA MODIFICAR USUARIOS ROL /////////////////////////////
 	
-	public boolean modificarUserRol(Tbl_user_rol tur)
+	public boolean modificarUserRol(Tbl_user_rol tur) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;	
 		try
 		{
@@ -163,14 +170,17 @@ public class DT_user_rol {
 		{
 			System.err.println("ERROR modificarUserRol() "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return modificado;
 	}
 	
 ///////////////////////////// METODO PARA ELIMINAR USUARIOS ROL /////////////////////////////
 
-public boolean eliminarUserRol(Tbl_user_rol tur)
+public boolean eliminarUserRol(Tbl_user_rol tur) throws SQLException
 {
+	Connection c = PoolConexion.getConnection();
 	boolean eliminado=false;	
 	try
 	{
@@ -190,6 +200,8 @@ public boolean eliminarUserRol(Tbl_user_rol tur)
 	{
 	System.err.println("ERROR eliminarUserRol() "+e.getMessage());
 	e.printStackTrace();
+	} finally {
+		c.close();
 	}
 	return eliminado;
 }

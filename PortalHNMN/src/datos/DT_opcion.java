@@ -3,10 +3,10 @@ package datos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_opcion;
-import entidades.Tbl_rol;
 
 public class DT_opcion {
 	PoolConexion pc = PoolConexion.getInstance(); 
@@ -14,10 +14,10 @@ public class DT_opcion {
 	private ResultSet rsOpcion;
 	
 	//Método para listar opciones
-	public ArrayList<Tbl_opcion> listOpc()
+	public ArrayList<Tbl_opcion> listOpc() throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_opcion> listaOpc = new ArrayList<Tbl_opcion>();
-		
 		try
 		{
 			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_opcion where estado<>3", 
@@ -38,17 +38,17 @@ public class DT_opcion {
 		{
 			System.out.println("DATOS: ERROR en listOpc() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} /*finally {
+			c.close();
+		}*/
 		return listaOpc;
 	}
 	
-	
 	//Método para guardar opciones
-	public boolean guardarOpcion(Tbl_opcion top)
+	public boolean guardarOpcion(Tbl_opcion top) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean guardado = false;
-		
 		try
 		{
 			this.listOpc();
@@ -65,13 +65,15 @@ public class DT_opcion {
 		{
 			System.err.println("ERROR guardarOpcion(): "+e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} finally {
+			c.close();
+		}		
 		return guardado;
 	}
 	
-	public Tbl_opcion obtenerOpcion(int idOpc)
+	public Tbl_opcion obtenerOpcion(int idOpc) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		Tbl_opcion trl  = new Tbl_opcion();
 		try
 		{
@@ -92,13 +94,15 @@ public class DT_opcion {
 		{
 			System.out.println("DATOS: ERROR en obtenerOpcion() "+ e.getMessage());
 			e.printStackTrace();
-		}
-		
+		} finally {
+			c.close();
+		}		
 		return trl;
 	}
 	
-	public boolean modificarOpcion(Tbl_opcion topc)
+	public boolean modificarOpcion(Tbl_opcion topc) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;	
 		try
 		{
@@ -122,13 +126,15 @@ public class DT_opcion {
 		{
 			System.err.println("ERROR modificarOpcion(): "+e.getMessage());
 			e.printStackTrace();
-		}
-			
+		} finally {
+			c.close();
+		}			
 		return modificado;
 	}
 	
-	public boolean eliminarOpcion(Tbl_opcion topc)
+	public boolean eliminarOpcion(Tbl_opcion topc) throws SQLException
 	{
+		Connection c = PoolConexion.getConnection();
 		boolean eliminado=false;	
 		try
 		{
@@ -149,6 +155,8 @@ public class DT_opcion {
 		{
 			System.err.println("ERROR eliminarOpcion() "+e.getMessage());
 			e.printStackTrace();
+		} finally {
+			c.close();
 		}
 		return eliminado;
 	}

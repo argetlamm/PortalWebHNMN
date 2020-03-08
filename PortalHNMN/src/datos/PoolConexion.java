@@ -49,7 +49,10 @@ public class PoolConexion
         basicDataSource.setUsername(user); // SE ASIGNA EL USUARIO
         basicDataSource.setPassword(pass); // SE ASIGNA LA CONTRASEÑA
         basicDataSource.setUrl(url); // SE ASIGNA LA URL DE CONEXION A LA BD
-        basicDataSource.setMaxActive(50); // SE ESPECIFICAN HASTA UN MAXIMO DE 50 HILOS DE CONEXION ACTIVOS A LA BD
+        basicDataSource.setMaxActive(1); // SE ESPECIFICAN HASTA UN MAXIMO DE 50 HILOS DE CONEXION ACTIVOS A LA BD              
+        basicDataSource.setMaxIdle(1);                  
+        basicDataSource.setMaxWait(1);                  
+        basicDataSource.setValidationQuery("select 1");
         dataSource = basicDataSource; // AL OBJETO DE TIPO DATASOURCE PREVIAMENTE INSTANCIADO SE LE ASIGNA LA FABRICA DEL POOL DE CONEXIONES
 	 }
 	
