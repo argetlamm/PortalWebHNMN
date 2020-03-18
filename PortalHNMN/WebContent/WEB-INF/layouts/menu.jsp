@@ -9,6 +9,8 @@
               <ul>
                 <li><a href="registro.jsp"><i class="icon-user"></i> Regístrate</a></li>
                 <li><a href="././CMS/index.jsp">Iniciar Sesión</a></li>
+               
+                
               </ul>
             </div>
           </div>
@@ -29,7 +31,7 @@
                 ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
                 listatTblp = dtpus.itemMenu();
                 String publicado = "publicado";
-                String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="";
+                String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="", item69="";
                 for (Tbl_publicaciones tpublc : listatTblp){
                 	if(tpublc.getPublic_estado().trim().equals(publicado)){
                 		if(tpublc.getMenu_order() == 1){
@@ -48,6 +50,8 @@
                 			item7 = tpublc.getPublic_titulo();
                 		}else if(tpublc.getMenu_order() == 8){
                 			item8 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 69){
+                			item69 = tpublc.getPublic_titulo();
                 		}
                 	}
                 }
@@ -76,6 +80,9 @@
                     </li>
                     <li>
                       <a href="contacto.jsp"><%=item8 %> </a>
+                    </li>
+                     <li class="dropdown">
+                      <a href="donaciones.jsp"><%=item69 %></a>
                     </li>
                   </ul>
                 </nav>

@@ -37,7 +37,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Menu | Herbario Nacional de Nicaragua</title>
+<title>Editar Donaciones | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -61,41 +61,18 @@ mensaje = mensaje==null?"":mensaje;
 /* OBTENEMOS LOS DATOS DEL MENU A SER EDITADOS */
 Tbl_publicaciones tpub = new Tbl_publicaciones();
 DT_publicaciones dtpb = new DT_publicaciones();
-ArrayList<Tbl_publicaciones> listaItems = new ArrayList<Tbl_publicaciones>();
-listaItems = dtpb.itemMenu();
+ArrayList<Tbl_publicaciones> listaDonaciones = new ArrayList<Tbl_publicaciones>();
+listaDonaciones = dtpb.itemsDonaciones();
 
 String publicado = "publicado";
-String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="", item69="";
-int item11=0, item22=0, item33=0, item44=0, item55=0, item66=0, item77=0, item88=0, item6969=0;
-for (Tbl_publicaciones tpublc : listaItems){
+String item1="";
+int item11=0;
+for (Tbl_publicaciones tpublc : listaDonaciones){
 	if(tpublc.getPublic_estado().trim().equals(publicado)){
 		if(tpublc.getMenu_order() == 1){
-			item1 = tpublc.getPublic_titulo();
+			item1 = tpublc.getPublic_content();
 			item11 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 2){
-			item2 = tpublc.getPublic_titulo();
-			item22 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 3){
-			item3 = tpublc.getPublic_titulo();
-			item33 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 4){
-			item4 = tpublc.getPublic_titulo();
-			item44 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 5){
-			item5 = tpublc.getPublic_titulo();
-			item55 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 6){
-			item6 = tpublc.getPublic_titulo();
-			item66 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 7){
-			item7 = tpublc.getPublic_titulo();
-			item77 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 8){
-			item8 = tpublc.getPublic_titulo();
-			item88 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 69){
-			item69 = tpublc.getPublic_titulo();
-			item6969 = tpublc.getMenu_order();
+		
 		}
 	}
 }
@@ -113,7 +90,7 @@ for (Tbl_publicaciones tpublc : listaItems){
 	<!-- /.navbar -->
 	
 	<!-- SIDEBAR -->
-	  	<jsp:include page="../../CMS/layouts/menu3.jsp"></jsp:include>
+	  	<jsp:include page="../../CMS/layouts/menu6.jsp"></jsp:include>
 	<!-- SIDEBAR -->
 	
 	  <!-- Content Wrapper. Contains page content -->
@@ -123,12 +100,12 @@ for (Tbl_publicaciones tpublc : listaItems){
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Editar [Menu]</h1>
+	            <h1>Editar Donaciones</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="editMenu.jsp">Menu</a></li>
-	              <li class="breadcrumb-item active">Edición del Menu</li>
+	              <li class="breadcrumb-item"><a href="editDonacion.jsp">Donaciones</a></li>
+	              <li class="breadcrumb-item active">Edición de Donaciones</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -148,37 +125,13 @@ for (Tbl_publicaciones tpublc : listaItems){
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="${pageContext.request.contextPath}/SL_menu" method="post">
+              <form role="form" action="${pageContext.request.contextPath}/SL_donaciones" method="post">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre del 1er Item:</label>
-                    <input type="text" id="item1" name="item1" class="form-control" value="<%=item1.trim() %>" required>
+                    <label for="exampleInputEmail1">Primer párrafo:</label>
+                    <input type="text" id="item1" name="item1" class="form-control" value="<%=item1 %>" required>
                     <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 2do Item:</label>
-                    <input type="text" id="item2" name="item2" class="form-control" value="<%=item2.trim() %>" required>
-                    <input type="hidden" id="item22" name="item22" class="form-control" value="<%=item22 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 3r Item:</label>
-                    <input type="text" id="item3" name="item3" class="form-control" value="<%=item3.trim() %>" required>
-                    <input type="hidden" id="item33" name="item33" class="form-control" value="<%=item33 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 4to Item (Menú desplegable):</label>
-                    <input type="text" id="item4" name="item4" class="form-control" value="<%=item4.trim() %>" required>
-                    <input type="hidden" id="item44" name="item44" class="form-control" value="<%=item44 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 5to Item (Item del menú desplegable):</label>
-                    <input type="text" id="item5" name="item5" class="form-control" value="<%=item5.trim() %>" required>
-                    <input type="hidden" id="item55" name="item55" class="form-control" value="<%=item55 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 6xto Item (Item del menú desplegable):</label>
-                    <input type="text" id="item6" name="item6" class="form-control" value="<%=item6.trim() %>" required>
-                    <input type="hidden" id="item66" name="item66" class="form-control" value="<%=item66 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 7mo Item (Item del menú desplegable):</label>
-                    <input type="text" id="item7" name="item7" class="form-control" value="<%=item7.trim() %>" required>
-                    <input type="hidden" id="item77" name="item77" class="form-control" value="<%=item77 %>" required>
-                  	<label for="exampleInputEmail1">Nombre del 8vo Item:</label>
-                    <input type="text" id="item8" name="item8" class="form-control" value="<%=item8.trim() %>" required>
-                    <input type="hidden" id="item88" name="item88" class="form-control" value="<%=item88 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 9no Item:</label>
-                    <input type="text" id="item69" name="item69" class="form-control" value="<%=item69.trim() %>" required>
-                    <input type="hidden" id="item6969" name="item6969" class="form-control" value="<%=item6969 %>" required>
-                  </div>
+                    </div>
                 </div>
                 <!-- /.card-body -->
 
@@ -224,11 +177,11 @@ for (Tbl_publicaciones tpublc : listaItems){
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'El menú ha sido modificado exitosamente.');
+        successAlert('Éxito', 'Donaciones se ha editado exitosamente.');
       }
       if(nuevo == "2")
       {
-        errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+        errorAlert('Error', 'Revise los datos e intente nuevamente.');
       }
     });
     </script>

@@ -346,6 +346,40 @@ public class DT_publicaciones {
 		return listaBdy;
 	}
 	
+	public ArrayList<Tbl_publicaciones> itemsDonaciones() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsDonaciones'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				listaBdy.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaBdy;
+	}
+	
 	public boolean modificarQuienesSomos(ArrayList<Tbl_publicaciones> tbp) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
@@ -373,6 +407,40 @@ public class DT_publicaciones {
 		catch (Exception e)
 		{
 			System.err.println("ERROR modificarQuienesSomos() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
+	}
+	
+	public boolean modificarDonaciones(ArrayList<Tbl_publicaciones> tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String parrafo = "";
+		try
+		{
+			this.itemsDonaciones();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					parrafo = tpubl.getPublic_content();
+					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
+					{
+						rsPublicaciones.updateString("public_content", parrafo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+						break;
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarDonaciones() "+e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();
@@ -590,6 +658,40 @@ public class DT_publicaciones {
 		try
 		{
 			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'tituloQuienesSomos'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				listaBdy.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaBdy;
+	}
+	
+	public ArrayList<Tbl_publicaciones> tituloDonacion() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'tituloDonaciones'", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
