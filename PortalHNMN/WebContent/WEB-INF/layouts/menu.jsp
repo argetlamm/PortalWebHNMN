@@ -29,7 +29,8 @@
                 ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
                 listatTblp = dtpus.itemMenu();
                 String publicado = "publicado";
-                String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="";
+                String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="",
+                		item9="", item10="", item11="", item12="";
                 for (Tbl_publicaciones tpublc : listatTblp){
                 	if(tpublc.getPublic_estado().trim().equals(publicado)){
                 		if(tpublc.getMenu_order() == 1){
@@ -48,6 +49,14 @@
                 			item7 = tpublc.getPublic_titulo();
                 		}else if(tpublc.getMenu_order() == 8){
                 			item8 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 9){
+                			item9 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 10){
+                			item10 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 11){
+                			item11 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 12){
+                			item12 = tpublc.getPublic_titulo();
                 		}
                 	}
                 }
@@ -76,6 +85,17 @@
                     </li>
                     <li>
                       <a href="contacto.jsp"><%=item8 %> </a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="mas-del-herbario.jsp"><%=item9%>
+                      <i class="icon-angle-down">
+                      </i>
+                      </a>
+                      <ul class="dropdown-menu">
+                      	<li><a href="donaciones.jsp"><%=item10 %></a></li>
+                      	<li><a href="colaboraciones.jsp"><%=item11 %></a></li>
+                      	<li><a href="productos.jsp"><%=item12 %></a></li>
+                      </ul>
                     </li>
                   </ul>
                 </nav>

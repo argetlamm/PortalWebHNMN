@@ -150,6 +150,7 @@ if(!permiso)
 			                    <input type="text" id="correosEst" name="correosEst" class="agregar form-control" placeholder="Email">
 			                  </div>
 	                        <button type="button" class="pasar btn btn-block btn-info">Agregar</button>
+	                        <button type="button" class="pasartodos btn btn-block btn-info">Agregar todos</button>
 	                        <!-- /input-group -->
 	                      </div>
 	                      <!-- /.card-body -->

@@ -29,6 +29,21 @@ $().ready(function() {
             return !$('#destino').append('<option value="'+asociado+'">'+asociado+'</option>');
         }
     });
+	
+	$('.pasartodos').click(function() {
+		$('#origen option').each(function() {
+            $(this).remove().appendTo('#destino');
+        });
+		var totalOptions = $('#destino option').length + 1;
+		var correo = "";
+		var correos = "";
+		for(var i=0; i<totalOptions; i++){
+			correo = $("#destino option:eq(" + i + ")").text() + "/";
+            correos = correos + correo;
+        }
+		$("#totalCorreos").val(totalOptions);
+		$("#destinoInput").val(correos);
+    });
 
     $('.quitar').click(function() {
         var opcSel = $('#destino option:selected').index();

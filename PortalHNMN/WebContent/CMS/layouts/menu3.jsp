@@ -154,6 +154,24 @@
                 </li>
             </ul>
           </li>
+            <!--           ///////////////////////Sexta Sección//////////////////////////////////// -->                             
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shield-alt"></i>
+              <p>
+                Donación
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../donacion/editDonacion.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Modificar Donaciones</p>
+                </a>
+               </li>
+            </ul>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
