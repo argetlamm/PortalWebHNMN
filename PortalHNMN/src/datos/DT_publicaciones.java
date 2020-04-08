@@ -26,6 +26,7 @@ public class DT_publicaciones {
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
 				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
@@ -59,7 +60,7 @@ public class DT_publicaciones {
 				for(Tbl_publicaciones tpubl : tbp)
 				{
 					titulo = tpubl.getPublic_titulo();
-					if(rsPublicaciones.getInt(1)==tpubl.getMenu_order())
+					if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
 					{
 						rsPublicaciones.updateString("public_titulo", titulo);
 						rsPublicaciones.updateRow();

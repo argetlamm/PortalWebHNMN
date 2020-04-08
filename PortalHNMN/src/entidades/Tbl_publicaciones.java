@@ -1,6 +1,6 @@
 package entidades;
 
-public class Tbl_publicaciones {
+public class Tbl_publicaciones implements Comparable<Tbl_publicaciones>{
 	
 	//ATRIBUTOS
 	private int id_publicacion;
@@ -86,5 +86,25 @@ public class Tbl_publicaciones {
 	
 	//METODOS
 	
+	@Override
+	public int compareTo(Tbl_publicaciones tbl)
+	{
+		if(tbl.getMenu_order() > menu_order)
+		{
+			return -1;
+		}
+		else
+		{
+			if(tbl.getMenu_order() < menu_order )
+			{
+				return 0;
+			}
+			else
+			{
+				return 1;
+			}
+		}
+
+	}
 
 }

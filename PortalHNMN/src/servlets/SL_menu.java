@@ -30,47 +30,22 @@ public class SL_menu extends HttpServlet {
 	{
 		System.out.println("Entró al post");
 		
-		Tbl_publicaciones tpus1 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus2 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus3 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus4 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus5 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus6 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus7 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus8 = new Tbl_publicaciones();
+		int contador = Integer.parseInt(request.getParameter("contador"));
+		System.out.println("Llegaron "+contador+ " objetos");
+		ArrayList<Tbl_publicaciones> atpus = new ArrayList<Tbl_publicaciones>();
 		DT_publicaciones dtpus = new DT_publicaciones();
 		
-		ArrayList<Tbl_publicaciones> tpus = new ArrayList<Tbl_publicaciones>();
-		
-		try
-		{	
-			tpus1.setPublic_titulo(request.getParameter("item1"));
-			tpus1.setMenu_order(Integer.parseInt(request.getParameter("item11")));
-			tpus2.setPublic_titulo(request.getParameter("item2"));
-			tpus2.setMenu_order(Integer.parseInt(request.getParameter("item22")));
-			tpus3.setPublic_titulo(request.getParameter("item3"));
-			tpus3.setMenu_order(Integer.parseInt(request.getParameter("item33")));
-			tpus4.setPublic_titulo(request.getParameter("item4"));
-			tpus4.setMenu_order(Integer.parseInt(request.getParameter("item44")));
-			tpus5.setPublic_titulo(request.getParameter("item5"));
-			tpus5.setMenu_order(Integer.parseInt(request.getParameter("item55")));
-			tpus6.setPublic_titulo(request.getParameter("item6"));
-			tpus6.setMenu_order(Integer.parseInt(request.getParameter("item66")));
-			tpus7.setPublic_titulo(request.getParameter("item7"));
-			tpus7.setMenu_order(Integer.parseInt(request.getParameter("item77")));
-			tpus8.setPublic_titulo(request.getParameter("item8"));
-			tpus8.setMenu_order(Integer.parseInt(request.getParameter("item88")));
+		try {
 			
-			tpus.add(tpus1);
-			tpus.add(tpus2);
-			tpus.add(tpus3);
-			tpus.add(tpus4);
-			tpus.add(tpus5);
-			tpus.add(tpus6);
-			tpus.add(tpus7);
-			tpus.add(tpus8);
-			
-			if(dtpus.modificarMenu(tpus))
+			for(int i = 1; i<contador+1; i++)
+			{
+				Tbl_publicaciones tpus = new Tbl_publicaciones();
+				tpus.setPublic_titulo(request.getParameter("texto"+i));
+				tpus.setMenu_order(Integer.parseInt(request.getParameter("id"+i)));
+				tpus.setGuid(request.getParameter("guid"+i));
+				atpus.add(tpus);
+			}
+			if(dtpus.modificarMenu(atpus))
 			{											
 				response.sendRedirect(request.getContextPath()+ "/CMS/menu/editMenu.jsp?msj=1");
 			}
@@ -78,11 +53,10 @@ public class SL_menu extends HttpServlet {
 			{
 				response.sendRedirect(request.getContextPath()+ "/CMS/menu/editMenu.jsp?msj=2");
 			}
-		}
-		catch(Exception e)
+		}catch(Exception e)
 		{
 			e.printStackTrace();
-			System.out.println("Servlet: Error al editar el Menú!!!");
+			System.out.println("Servlet: Error al editar el Menú");
 		}
 	}
 }

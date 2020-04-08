@@ -58,47 +58,6 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* OBTENEMOS LOS DATOS DEL MENU A SER EDITADOS */
-Tbl_publicaciones tpub = new Tbl_publicaciones();
-DT_publicaciones dtpb = new DT_publicaciones();
-ArrayList<Tbl_publicaciones> listaItems = new ArrayList<Tbl_publicaciones>();
-listaItems = dtpb.itemMenu();
-
-String publicado = "publicado";
-String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="";
-int item11=0, item22=0, item33=0, item44=0, item55=0, item66=0, item77=0, item88=0;
-for (Tbl_publicaciones tpublc : listaItems){
-	if(tpublc.getPublic_estado().trim().equals(publicado)){
-		if(tpublc.getMenu_order() == 1){
-			item1 = tpublc.getPublic_titulo();
-			item11 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 2){
-			item2 = tpublc.getPublic_titulo();
-			item22 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 3){
-			item3 = tpublc.getPublic_titulo();
-			item33 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 4){
-			item4 = tpublc.getPublic_titulo();
-			item44 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 5){
-			item5 = tpublc.getPublic_titulo();
-			item55 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 6){
-			item6 = tpublc.getPublic_titulo();
-			item66 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 7){
-			item7 = tpublc.getPublic_titulo();
-			item77 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 8){
-			item8 = tpublc.getPublic_titulo();
-			item88 = tpublc.getMenu_order();
-		}
-	}
-}
-
-//tpub = dtpb.obtenerMenu(item1);
-
 %>
 
 
@@ -148,34 +107,71 @@ for (Tbl_publicaciones tpublc : listaItems){
               <form role="form" action="${pageContext.request.contextPath}/SL_menu" method="post">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Nombre del 1er Item:</label>
-                    <input type="text" id="item1" name="item1" class="form-control" value="<%=item1.trim() %>" required>
-                    <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 2do Item:</label>
-                    <input type="text" id="item2" name="item2" class="form-control" value="<%=item2.trim() %>" required>
-                    <input type="hidden" id="item22" name="item22" class="form-control" value="<%=item22 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 3r Item:</label>
-                    <input type="text" id="item3" name="item3" class="form-control" value="<%=item3.trim() %>" required>
-                    <input type="hidden" id="item33" name="item33" class="form-control" value="<%=item33 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 4to Item (Menú desplegable):</label>
-                    <input type="text" id="item4" name="item4" class="form-control" value="<%=item4.trim() %>" required>
-                    <input type="hidden" id="item44" name="item44" class="form-control" value="<%=item44 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 5to Item (Item del menú desplegable):</label>
-                    <input type="text" id="item5" name="item5" class="form-control" value="<%=item5.trim() %>" required>
-                    <input type="hidden" id="item55" name="item55" class="form-control" value="<%=item55 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 6xto Item (Item del menú desplegable):</label>
-                    <input type="text" id="item6" name="item6" class="form-control" value="<%=item6.trim() %>" required>
-                    <input type="hidden" id="item66" name="item66" class="form-control" value="<%=item66 %>" required>
-                    <label for="exampleInputEmail1">Nombre del 7mo Item (Item del menú desplegable):</label>
-                    <input type="text" id="item7" name="item7" class="form-control" value="<%=item7.trim() %>" required>
-                    <input type="hidden" id="item77" name="item77" class="form-control" value="<%=item77 %>" required>
-                  	<label for="exampleInputEmail1">Nombre del 8vo Item:</label>
-                    <input type="text" id="item8" name="item8" class="form-control" value="<%=item8.trim() %>" required>
-                    <input type="hidden" id="item88" name="item88" class="form-control" value="<%=item88 %>" required>
+                   <% 
+				    DT_publicaciones dtpb = new DT_publicaciones();
+					ArrayList<Tbl_publicaciones> listaItems = new ArrayList<Tbl_publicaciones>();
+					listaItems = dtpb.itemMenu();
+					
+					Collections.sort(listaItems);
+					
+					String publicado = "publicado";
+					String estatico = "estatico";
+					String menu = "menu";
+					String guid = "";
+					String texto = "";
+					int id = 0;
+					int contador = 0;
+					try{
+					for (Tbl_publicaciones tpublc: listaItems)
+					{
+						if(tpublc.getPublic_estado().trim().equals(publicado))
+						{
+							texto = tpublc.getPublic_titulo();
+							guid = tpublc.getGuid();
+							id = tpublc.getMenu_order();
+							contador++;
+	                  		if(guid.trim().equals(estatico))
+	                  		{
+                  %>
+              		<label for="exampleInputEmail1">Item #<%=contador %></label>
+                    <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
+                    <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=id %>" required>
+                    <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guid %>" required>
+                  <%
+	                  		}
+	                  		else
+	                  		{
+	                  			if(guid.trim().equals(menu))
+	                  			{
+                  %>
+                  	<label for="exampleInputEmail1">Item #<%=contador %> (Menú desplegable)</label>
+                    <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
+                    <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=id %>" required>
+                    <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guid %>" required>
+                  <% 
+	                  			}
+	                  			else
+	                  			{
+                  %>
+                  	<label for="exampleInputEmail1">Item #<%=contador %> (Item del menú desplegable)</label>
+                    <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
+                    <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=id %>" required>
+                    <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guid %>" required>
+                   <% 
+		                  			}
+		                  		}
+							}
+						}
+					}catch(NullPointerException e)
+					{
+						e.printStackTrace();
+						System.out.println("Error en la creación del formulario del Editar menú");
+					}
+                   %>
+                   <input type="hidden" id="contador" name="contador" class="form-control" value="<%=id %>" required>
                   </div>
                 </div>
-                <!-- /.card-body -->
-
+                <!-- /.card-body -->	
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="button" class="btn btn-danger">Cancelar</button>
