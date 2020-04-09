@@ -33,11 +33,19 @@
 		response.sendRedirect("../Error.jsp");
 	}
 %>
+
+<%
+	String loginUser = "";
+	int rolId = 0;
+
+	loginUser = (String) session.getAttribute("login");
+	loginUser = loginUser==null?"":loginUser;
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Historia | Herbario Nacional de Nicaragua</title>
+<title>Nuevo artículo | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -58,30 +66,6 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* OBTENEMOS LOS DATOS DEL MENU A SER EDITADOS */
-Tbl_publicaciones tpub = new Tbl_publicaciones();
-DT_publicaciones dtpb = new DT_publicaciones();
-ArrayList<Tbl_publicaciones> listaHistoria = new ArrayList<Tbl_publicaciones>();
-listaHistoria = dtpb.itemsHistoria();
-
-String publicado = "publicado";
-String item1="", item2="", item3="";
-int item11=0, item22=0, item33=0;
-for (Tbl_publicaciones tpublc : listaHistoria){
-	if(tpublc.getPublic_estado().trim().equals(publicado)){
-		if(tpublc.getMenu_order() == 1){
-			item1 = tpublc.getPublic_content();
-			item11 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 2){
-			item2 = tpublc.getPublic_content();
-			item22 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 3){
-			item3 = tpublc.getPublic_content();
-			item33 = tpublc.getMenu_order();
-		}
-	}
-}
-
 %>
 
 
@@ -93,7 +77,7 @@ for (Tbl_publicaciones tpublc : listaHistoria){
 	<!-- /.navbar -->
 	
 	<!-- SIDEBAR -->
-	  	<jsp:include page="../../CMS/layouts/menu4.jsp"></jsp:include>
+	  	<jsp:include page="../../CMS/layouts/menu7.jsp"></jsp:include>
 	<!-- SIDEBAR -->
 	
 	  <!-- Content Wrapper. Contains page content -->
@@ -103,12 +87,12 @@ for (Tbl_publicaciones tpublc : listaHistoria){
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Editar [Historia]</h1>
+	            <h1>Nuevo [Artículo]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="editHistoria.jsp">Historia</a></li>
-	              <li class="breadcrumb-item active">Edición de la Historia</li>
+	              <li class="breadcrumb-item"><a href="editMenu.jsp">Publicaciones</a></li>
+	              <li class="breadcrumb-item active">Nuevo artículo</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -124,26 +108,24 @@ for (Tbl_publicaciones tpublc : listaHistoria){
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edición de la Historia</h3>
+                <h3 class="card-title">Nuevo artículo</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="${pageContext.request.contextPath}/SL_historia" method="post">
+              <form role="form" action="${pageContext.request.contextPath}/SL_nuevoArticulo" method="post">
                 <div class="card-body">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Primer párrafo:</label>
-                    <textarea id="item1" name="item1" class="form-control" rows="4" maxlength="500" required><%=item1 %></textarea>
-                    <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
-                    <label for="exampleInputEmail1">Segundo párrafo:</label>
-                    <textarea id="item2" name="item2" class="form-control" rows="4" maxlength="500" required><%=item2 %> </textarea>
-                    <input type="hidden" id="item22" name="item22" class="form-control" value="<%=item22 %>" required>
-                    <label for="exampleInputEmail1">Tercer párrafo:</label>
-                    <textarea id="item3" name="item3" class="form-control" rows="4" maxlength="500" required><%=item3 %> </textarea>
-                    <input type="hidden" id="item33" name="item33" class="form-control" value="<%=item33 %>" required>
+                  	<label for="exampleInputEmail1">Título del artículo: </label>
+                    <input type="titulo" id="titulo" name="titulo" class="form-control" value="" required>
+                    <label for="exampleInputEmail1">Contenido del artículo: </label>
+                    <textarea id="contenido" name="contenido" class="form-control" rows="5" maxlength="500" required></textarea>
+					<label for="exampleInputEmail1">Categoría del artículo: </label>
+					<input type="categoria" id="categoria" name="categoria" class="form-control" value="" required>
+                    <label for="exampleInputEmail1">Artículo creado por: <%=loginUser %></label>
+                    <input type="hidden" id="redactor" name="redactor" class="form-control" value="<%=loginUser %>" required>
                   </div>
                 </div>
-                <!-- /.card-body -->
-
+                <!-- /.card-body -->	
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="button" class="btn btn-danger">Cancelar</button>
@@ -186,11 +168,11 @@ for (Tbl_publicaciones tpublc : listaHistoria){
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', '"Historia" se ha editado exitosamente.');
+        successAlert('Éxito', 'El menú ha sido modificado exitosamente.');
       }
       if(nuevo == "2")
       {
-        errorAlert('Error', 'Revise los datos e intente nuevamente.');
+        errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
       }
     });
     </script>

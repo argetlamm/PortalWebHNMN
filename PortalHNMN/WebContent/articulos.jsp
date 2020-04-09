@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*, java.util.Map.Entry;"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,12 +29,6 @@
   <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-touch-icon-57.png" />
   <link rel="shortcut icon" href="ico/favicon.png" type="image/x-icon" />
 
-  <!-- =======================================================
-    Theme Name: Flattern
-    Theme URL: https://bootstrapmade.com/flattern-multipurpose-bootstrap-template/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
 </head>
 
 <body>
@@ -42,6 +36,7 @@
   	<!-- MENU -->
   	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
     <!-- MENU -->
+    
     <section id="inner-headline">
       <div class="container">
         <div class="row">
@@ -60,107 +55,105 @@
         </div>
       </div>
     </section>
-    <img alt="" src="img/building.jpeg">
-    <!--
     <section id="content">
       <div class="container">
         <div class="row">
           <div class="span4">
             <aside class="left-sidebar">
-              <div class="widget">
-                <form class="form-search">
-                  <input placeholder="Escribe algo" type="text" class="input-medium search-query">
-                  <button type="submit" class="btn btn-square btn-theme">Buscar</button>
-                </form>
-              </div>
+            <%
+            	DT_publicaciones dtpus = new DT_publicaciones();
+            	ArrayList<Tbl_publicaciones> listaCategorias = new ArrayList<Tbl_publicaciones>();
+            	listaCategorias = dtpus.listarCategorias();
+            	String categoria = "";
+            	int cantidad = 0;
+            	ArrayList<Tbl_publicaciones> categoriasSinRepetidos = new ArrayList<Tbl_publicaciones>();
+            	Map<String, Tbl_publicaciones> mapPublicacion = new HashMap<String, Tbl_publicaciones>(listaCategorias.size());
+            	
+            	for(Tbl_publicaciones tpub : listaCategorias)
+            	{
+            		mapPublicacion.put(tpub.getPublic_tipo(), tpub);
+            	}
+            	
+            	for(Entry<String, Tbl_publicaciones> tpub : mapPublicacion.entrySet())
+            	{
+            		categoriasSinRepetidos.add(tpub.getValue());
+            	}
+            %>
+            	
               <div class="widget">
                 <h5 class="widgetheading">Categorías</h5>
                 <ul class="cat">
-                  <li><i class="icon-angle-right"></i><a href="articulos.jsp">Científicos</a><span> (2)</span></li>
-                  <li><i class="icon-angle-right"></i><a href="articulos.jsp">Culturales</a><span> (0)</span></li>
-                  <li><i class="icon-angle-right"></i><a href="articulos.jsp">Curiosidades</a><span> (0)</span></li>
-                </ul>
-              </div>
-              <div class="widget">
-                <h5 class="widgetheading">Últimos artículos</h5>
-                <ul class="recent">
-                  <li>
-                    <img src="img/dummies/blog/65x65/thumb1.jpg" class="pull-left" alt="" />
-                    <h6><a href="articulo-individual.jsp">Artículo 1</a></h6>
-                    <p>
-                      El cuido de plantas es importante...
-                    </p>
-                  </li>
-                  <li>
-                    <a href="#"><img src="img/dummies/blog/65x65/thumb2.jpg" class="pull-left" alt="" /></a>
-                    <h6><a href="articulo-individual.jsp">Artículo 2</a></h6>
-                    <p>
-                      Inicio en el campo de herbología...
-                    </p>
-                  </li>
-                </ul>
-              </div>
-              <div class="widget">
-                <h5 class="widgetheading">Etiquetas populares</h5>
-                <ul class="tags">
-                  <li><a href="cursos.jsp">Cursos</a></li>
-                  <li><a href="colecciones.jsp">Coleccion</a></li>
-                  <li><a href="eventos.jsp">Eventos</a></li>
-                  <li><a href="contacto.jsp">Contacto</a></li>
-                  <li><a href="muestra-individual.jsp">Palo</a></li>
+                <%
+	                for(Tbl_publicaciones tpub : categoriasSinRepetidos)
+	            	{
+		            	categoria = tpub.getPublic_tipo();
+		            	cantidad = dtpus.cantidadCategoria(categoria);
+	            %>
+                  <li><i class="icon-angle-right"></i><a href="#"><%=categoria %></a><span> (<%=cantidad %>)</span></li>
+                <%
+	            	}
+	            %>
                 </ul>
               </div>
             </aside>
           </div>
           <div class="span8">
+          <%
+	          	DT_publicaciones dpus = new DT_publicaciones();
+	      		ArrayList<Tbl_publicaciones> listaArticulos = new ArrayList<Tbl_publicaciones>();
+	      		listaArticulos = dpus.articulosExistentes();
+	      		
+	      		Collections.sort(listaArticulos);
+	      		Collections.reverse(listaArticulos);
+	      		
+	      		String titulo = "";
+	      		String previa = "";
+	      		String fecha = "";
+	      		String redactor = "";
+	      		String categoriaArt = "";
+	      		int id = 0;
+	      		int contador = 0;
+	      		
+	      		for(Tbl_publicaciones tpub : listaArticulos)
+	      		{
+	      			titulo = tpub.getPublic_titulo();
+	      			previa = tpub.getPublic_previa();
+	      			fecha = tpub.getPublic_fecha();
+	      			redactor = tpub.getGuid();
+	      			id = tpub.getMenu_order();
+	      			categoriaArt = tpub.getPublic_tipo();
+	      	%>
             <article>
               <div class="row">
                 <div class="span8">
                   <div class="post-quote">
                     <div class="post-heading">
-                      <h3><a href="#">Artículo 1</a></h3>
+                      <h3><a href="#"><%=titulo %></a></h3>
                     </div>
                     <blockquote>
-                      <i class="icon-quote-left"></i> Todo en exceso es malo, por eso, no ahoge sus plantas, acá te enseñaremos como... 
+                      <i class="icon-quote-left"></i> <%=previa%>...
                     </blockquote>
                   </div>
                   <div class="bottom-article">
                     <ul class="meta-post">
-                      <li><i class="icon-calendar"></i><a href="#"> 7 de Noviembre de 2019</a></li>
-                      <li><i class="icon-user"></i><a href="#"> Administrador</a></li>
-                      <li><i class="icon-folder-open"></i><a href="#"> Curso</a></li>
+                      <li><i class="icon-calendar"></i><a href="#"><%=fecha %></a></li>
+                      <li><i class="icon-user"></i><a href="#"><%=redactor %></a></li>
+                      <li><i class="icon-folder-open"></i><a href="#"><%=categoriaArt %></a></li>
                     </ul>
                     <a href="articulo-individual.jsp" class="pull-right">Continua leyendo... <i class="icon-angle-right"></i></a>
                   </div>
                 </div>
               </div>
             </article>
-            <article>
-              <div class="row">
-                <div class="span8">
-                  <div class="post-video">
-                    <div class="post-heading">
-                      <h3><a href="#">Artículo 2</a></h3>
-                    </div>
-                    <div class="video-container">
-                      <iframe src="http://player.vimeo.com/video/30585464?title=0&amp;byline=0">
-								</iframe>
-                    </div>
-                  </div>
-                  <p>
-                    ¿Te interesa saber cómo iniciar en el campo de la herbología? Este video te ayudará mucho, contiene información acerca de...
-                  </p>
-                  <div class="bottom-article">
-                    <ul class="meta-post">
-                      <li><i class="icon-calendar"></i><a href="#"> 7 de Noviembre de 2019</a></li>
-                      <li><i class="icon-user"></i><a href="#"> Administrador</a></li>
-                      <li><i class="icon-folder-open"></i><a href="#"> Curso</a></li>
-                    </ul>
-                    <a href="articulo-individual.jsp" class="pull-right">Continua leyendo... <i class="icon-angle-right"></i></a>
-                  </div>
-                </div>
-              </div>
-            </article>
+            <%
+            		contador++;
+            
+	            	if(contador == 5)
+	            	{
+	            		break;
+	            	}
+            	}
+            %>
             <div id="pagination">
               <span class="all">Página 1 de 3</span>
               <span class="current">1</span>
@@ -171,7 +164,6 @@
         </div>
       </div>
     </section>
-    -->
 	<!-- Footer -->
   	<jsp:include page="WEB-INF/layouts/footer.jsp"></jsp:include>
   	<!-- ./Footer -->
@@ -204,3 +196,4 @@
 </body>
 
 </html>
+

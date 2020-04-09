@@ -42,6 +42,7 @@ public class SL_menu extends HttpServlet {
 				Tbl_publicaciones tpus = new Tbl_publicaciones();
 				tpus.setPublic_titulo(request.getParameter("texto"+i));
 				tpus.setMenu_order(Integer.parseInt(request.getParameter("id"+i)));
+				tpus.setPublic_enlace(request.getParameter("enlace"+i));
 				tpus.setGuid(request.getParameter("guid"+i));
 				atpus.add(tpus);
 			}

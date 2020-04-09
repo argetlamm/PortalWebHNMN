@@ -106,6 +106,15 @@ mensaje = mensaje==null?"":mensaje;
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_menu" method="post">
                 <div class="card-body">
+                <h3 class="card-title"> Recomendaciones antes de cambiar los enlaces de cada inciso del menú: </h3>
+                <br>
+                <p>Por favor, no ingrese ningún enlace nuevo, copie y pegue los ya existentes. Aclarar que, al cambiar
+                el nombre de algún inciso del menú, su enlace seguirá siendo el mismo, ejemplo: Inicio = index.jsp, también
+                note que cada enlace termina en .jsp, por favor, evitar borrar esta extensión, y también tener en cuenta qué
+                al cambiar un inciso (cambiarle la posición, no el nombre), su enlace no cambiará automáticamente con él,
+                esta acción es manual. La estructura se tiene que mantener de la manera ya existente. 
+                O sea, tres incisos estáticos, luego un menú desplegable con tres sub incisos, luego otro inciso estático, 
+                y por último, otro menú desplegable con tres sub incisos igual. </p>
                   <div class="form-group">
                    <% 
 				    DT_publicaciones dtpb = new DT_publicaciones();
@@ -119,6 +128,7 @@ mensaje = mensaje==null?"":mensaje;
 					String menu = "menu";
 					String guid = "";
 					String texto = "";
+					String enlace = "";
 					int id = 0;
 					int contador = 0;
 					try{
@@ -127,6 +137,7 @@ mensaje = mensaje==null?"":mensaje;
 						if(tpublc.getPublic_estado().trim().equals(publicado))
 						{
 							texto = tpublc.getPublic_titulo();
+							enlace = tpublc.getPublic_enlace();
 							guid = tpublc.getGuid();
 							id = tpublc.getMenu_order();
 							contador++;
@@ -135,8 +146,11 @@ mensaje = mensaje==null?"":mensaje;
                   %>
               		<label for="exampleInputEmail1">Item #<%=contador %></label>
                     <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
+                    <label for="exampleInputEmail1">Enlace: </label>
+                    <input type="text" id="enlace<%=contador%>" name="enlace<%=contador%>" class="form-control" value="<%=enlace.trim() %>" required>
                     <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=id %>" required>
                     <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guid %>" required>
+                    <hr style="border-width:2px;">
                   <%
 	                  		}
 	                  		else
@@ -146,8 +160,11 @@ mensaje = mensaje==null?"":mensaje;
                   %>
                   	<label for="exampleInputEmail1">Item #<%=contador %> (Menú desplegable)</label>
                     <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
+                    <label for="exampleInputEmail1">Enlace: </label>
+                    <input type="text" id="enlace<%=contador%>" name="enlace<%=contador%>" class="form-control" value="<%=enlace.trim() %>" required>
                     <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=id %>" required>
                     <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guid %>" required>
+                  	<hr style="border-width:2px;">
                   <% 
 	                  			}
 	                  			else
@@ -155,8 +172,11 @@ mensaje = mensaje==null?"":mensaje;
                   %>
                   	<label for="exampleInputEmail1">Item #<%=contador %> (Item del menú desplegable)</label>
                     <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
+                    <label for="exampleInputEmail1">Enlace: </label>
+                    <input type="text" id="enlace<%=contador%>" name="enlace<%=contador%>" class="form-control" value="<%=enlace.trim() %>" required>
                     <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=id %>" required>
                     <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guid %>" required>
+                   	<hr style="border-width:2px;">
                    <% 
 		                  			}
 		                  		}

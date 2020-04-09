@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import entidades.Tbl_publicaciones;
+import entidades.Tbl_user;
 
 public class DT_publicaciones {
 	PoolConexion pc = PoolConexion.getInstance(); 
@@ -33,6 +34,7 @@ public class DT_publicaciones {
 				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
 				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
 				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
 				listaTpus.add(tpub);
 			}
 		}
@@ -51,6 +53,7 @@ public class DT_publicaciones {
 		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
 		String titulo = "";
+		String enlace = "";
 		try
 		{
 			this.itemMenu();
@@ -60,33 +63,17 @@ public class DT_publicaciones {
 				for(Tbl_publicaciones tpubl : tbp)
 				{
 					titulo = tpubl.getPublic_titulo();
+					enlace = tpubl.getPublic_enlace();
 					if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
 					{
 						rsPublicaciones.updateString("public_titulo", titulo);
+						rsPublicaciones.updateString("public_enlace", enlace);
 						rsPublicaciones.updateRow();
 						modificado=true;
 						break;
 					}
 				}
 			}
-			/*
-			for (Tbl_publicaciones tpubl : tbp)
-			{
-				titulo = tpubl.getPublic_titulo();
-				System.out.println("titulo: "+titulo);
-				while(rsPublicaciones.next())
-				{
-					System.out.println("orden: "+rsPublicaciones.getInt(1));
-					System.out.println("orden del objeto: "+tpubl.getMenu_order());
-					if(rsPublicaciones.getInt(1)==tpubl.getMenu_order())
-					{
-						rsPublicaciones.updateString("public_titulo", titulo);
-						rsPublicaciones.updateRow();
-						modificado=true;
-						break;
-					}
-				}
-			}*/
 		}
 		catch (Exception e)
 		{
@@ -785,5 +772,142 @@ public class DT_publicaciones {
 		}
 		
 		return informacionColeccion;
+	}
+	
+	public ArrayList<Tbl_publicaciones> articulosExistentes() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaArt = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				listaArt.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en articulosExistentes "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaArt;
+	}
+	
+	public ArrayList<Tbl_publicaciones> listarCategorias() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaCat = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				listaCat.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listarCategoriías "+ e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return listaCat;
+	}
+		
+	public int obtenerMenuOrderArt() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		int menu = 0;
+		int contador = 1;
+		String publicado = "publicado";
+		ArrayList<Tbl_publicaciones> listaArticulos = new ArrayList<Tbl_publicaciones>();
+		listaArticulos = this.articulosExistentes();
+		for (Tbl_publicaciones tpublc : listaArticulos){
+        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+        		contador++;
+        	}
+		}
+		menu =  contador;
+		return menu;
+	}
+	
+	public boolean guardarArticuloTexto(Tbl_publicaciones tbpub) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean guardado = false;
+		int menu = obtenerMenuOrderArt();
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
+		
+		try
+		{
+			this.articulosExistentes();
+			rsPublicaciones.moveToInsertRow();
+			
+			rsPublicaciones.updateInt("menu_order", menu);
+			rsPublicaciones.updateString("guid", tbpub.getGuid());
+			rsPublicaciones.updateString("public_content", tbpub.getPublic_content());
+			rsPublicaciones.updateString("public_estado", "publicado");
+			rsPublicaciones.updateDate("public_fecha", sqlDate);
+			rsPublicaciones.updateString("public_name","articulo");
+			rsPublicaciones.updateString("public_previa", tbpub.getPublic_previa());
+			rsPublicaciones.updateString("public_tipo", tbpub.getPublic_tipo());
+			rsPublicaciones.updateString("public_titulo", tbpub.getPublic_titulo());
+			rsPublicaciones.insertRow();
+			rsPublicaciones.moveToCurrentRow();
+			guardado = true;
+		}
+		catch (Exception e) 
+		{
+			System.err.println("ERROR crearArtículo(): "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}		
+		return guardado;
+	}
+	
+	public int cantidadCategoria(String categoria) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		int cantidad = 0;
+		
+		ArrayList<Tbl_publicaciones> listaCategorias = new ArrayList<Tbl_publicaciones>();
+		listaCategorias = this.listarCategorias();
+		
+		for(Tbl_publicaciones tpub : listaCategorias)
+		{
+			if(categoria.equals(tpub.getPublic_tipo()))
+			{
+				cantidad++;
+			}
+		}
+		
+		return cantidad;
 	}
 }
