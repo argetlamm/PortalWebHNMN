@@ -244,7 +244,7 @@ tus = dtus.obtenerUser(user);
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'La imagen se ha insetado correctamente en el banner.');
+        successAlert('Éxito', 'La imagen se ha insertado correctamente en el banner.');
       }
       if(nuevo == "2")
       {

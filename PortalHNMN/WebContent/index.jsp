@@ -40,6 +40,8 @@
       <div id="nivo-slider">
         <div class="nivo-slider">
         <%
+        		response.setIntHeader("Refresh", 5);
+        	
           		DT_publicaciones dtpuss = new DT_publicaciones();
             	ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
             	listatTblp = dtpuss.itemsInicio();

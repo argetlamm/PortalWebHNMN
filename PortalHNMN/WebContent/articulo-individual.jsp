@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*, java.util.Map.Entry;"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,18 +21,12 @@
   <!-- Theme skin -->
   <link href="skins/default.css" rel="stylesheet" />
   <!-- Fav and touch icons -->
-  <link rel="apple-touch-icon" sizes="144x144" href="ico/apple-touch-icon-144.png" />
-  <link rel="apple-touch-icon" sizes="114x114" href="ico/apple-touch-icon-114.png" />
-  <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72.png" />
-  <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-touch-icon-57.png" />
-  <link rel="shortcut icon" href="ico/favicon.png" type="image/x-icon" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png" />
+  <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png" />
+  <link rel="shortcut icon" href="ico/favicon.png" />
 
-  <!-- =======================================================
-    Theme Name: Flattern
-    Theme URL: https://bootstrapmade.com/flattern-multipurpose-bootstrap-template/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
 </head>
 
 <body>
@@ -40,20 +34,21 @@
     <!-- MENU -->
   	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
     <!-- MENU -->
+  	
     <section id="inner-headline">
       <div class="container">
         <div class="row">
           <div class="span4">
             <div class="inner-heading">
-              <h2>Nuevo artículo</h2>
+              <h2>Artículo individual</h2>
             </div>
           </div>
           <div class="span8">
             <ul class="breadcrumb">
               <li><a href="index.jsp"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
               <li><a href="noticias.jsp">Noticias</a><i class="icon-angle-right"></i></li>
-              <li><a href="articulos.jsp">Artículos</a><i class="icon-angle-right"></i></li>
-              <li class="active">Nuevo artículo</li>
+              <li><a href="articulos.jsp">Publicaciones</a><i class="icon-angle-right"></i></li>
+              <li class="active">Artículo</li>
             </ul>
           </div>
         </div>
@@ -64,75 +59,83 @@
         <div class="row">
           <div class="span4">
             <aside class="left-sidebar">
+              <%
+            	DT_publicaciones dtpus = new DT_publicaciones();
+            	ArrayList<Tbl_publicaciones> listaCategorias = new ArrayList<Tbl_publicaciones>();
+            	listaCategorias = dtpus.listarCategorias();
+            	String categoria = "";
+            	int cantidad = 0;
+            	ArrayList<Tbl_publicaciones> categoriasSinRepetidos = new ArrayList<Tbl_publicaciones>();
+            	Map<String, Tbl_publicaciones> mapPublicacion = new HashMap<String, Tbl_publicaciones>(listaCategorias.size());
+            	
+            	for(Tbl_publicaciones tpub : listaCategorias)
+            	{
+            		mapPublicacion.put(tpub.getPublic_tipo(), tpub);
+            	}
+            	
+            	for(Entry<String, Tbl_publicaciones> tpub : mapPublicacion.entrySet())
+            	{
+            		categoriasSinRepetidos.add(tpub.getValue());
+            	}
+            %>
+            	
               <div class="widget">
-                <form class="form-search">
-                  <input placeholder="Type something" type="text" class="input-medium search-query">
-                  <button type="submit" class="btn btn-square btn-theme">Search</button>
-                </form>
-              </div>
-              <div class="widget">
-                <h5 class="widgetheading">Categorias</h5>
+                <h5 class="widgetheading">Categorías</h5>
                 <ul class="cat">
-                  <li><i class="icon-angle-right"></i><a href="articulos.jsp">Científicos</a><span> (2)</span></li>
-                  <li><i class="icon-angle-right"></i><a href="articulos.jsp">Culturales</a><span> (0)</span></li>
-                  <li><i class="icon-angle-right"></i><a href="articulos.jsp">Curiosidades</a><span> (0)</span></li>
-                </ul>
-              </div>
-              <div class="widget">
-                <h5 class="widgetheading">Últimos artículos</h5>
-                <ul class="recent">
-                  <li>
-                    <img src="img/dummies/blog/65x65/thumb1.jpg" class="pull-left" alt="" />
-                    <h6><a href="articulo-individual.jsp">Artículo 1</a></h6>
-                    <p>
-                      El cuido de plantas es importante...
-                    </p>
-                  </li>
-                  <li>
-                    <a href="#"><img src="img/dummies/blog/65x65/thumb2.jpg" class="pull-left" alt="" /></a>
-                    <h6><a href="articulo-individual.jsp">Artículo 2</a></h6>
-                    <p>
-                      Inicio en el campo de herbología...
-                    </p>
-                  </li>
-                </ul>
-              </div>
-              <div class="widget">
-                <h5 class="widgetheading">Etiquetas populares</h5>
-                <ul class="tags">
-                  <li><a href="cursos.jsp">Cursos</a></li>
-                  <li><a href="colecciones.jsp">Coleccion</a></li>
-                  <li><a href="eventos.jsp">Eventos</a></li>
-                  <li><a href="contacto.jsp">Contacto</a></li>
-                  <li><a href="muestra-individual.jsp">Palo</a></li>
+                <%
+	                for(Tbl_publicaciones tpub : categoriasSinRepetidos)
+	            	{
+		            	categoria = tpub.getPublic_tipo();
+		            	cantidad = dtpus.cantidadCategoria(categoria);
+	            %>
+                  <li><i class="icon-angle-right"></i><a href="#"><%=categoria %></a><span> (<%=cantidad %>)</span></li>
+                <%
+	            	}
+	            %>
                 </ul>
               </div>
             </aside>
           </div>
           <div class="span8">
+          <%
+          	String idArticulo = "";
+          	idArticulo = request.getParameter("ArticuloID");
+	      	int id = Integer.parseInt(idArticulo);
+	      	
+	      	DT_publicaciones dpus = new DT_publicaciones();
+	  		ArrayList<Tbl_publicaciones> articulo = new ArrayList<Tbl_publicaciones>();
+	  		String publicado = "publicado";
+	  		String titulo = "";
+	  		String contenido = "";
+	  		String fecha = "";
+	  		String autor = "";
+	  		String categoriaArt = "";
+	  		
+	  		articulo = dpus.detallesArt(id);
+	  		for (Tbl_publicaciones tpublc : articulo){
+	          	if(tpublc.getPublic_estado().trim().equals(publicado)){
+	          		titulo = tpublc.getPublic_titulo();
+	          		contenido = tpublc.getPublic_content();
+	          		fecha = tpublc.getPublic_fecha();
+	          		autor = tpublc.getGuid();
+	          		categoriaArt = tpublc.getPublic_tipo();
+	          	}
+	  		}
+          %>
             <article>
               <div class="row">
                 <div class="span8">
                   <div class="post-image">
                     <div class="post-heading">
-                      <h3><a href="articulo-individual.jsp">Artículo 1</a></h3>
+                      <h3><a href="#"><%=titulo %></a></h3>
                     </div>
-                    <img src="img/dummies/blog/img1.jpg" alt="" />
                   </div>
-                  <p>
-                    No ahoge sus plantas, se cree que está bien echarles agua en cantidades excesivas, pero esto tiene que controlarse.
-                  </p>
-                  <blockquote>
-                    <i class="icon-quote-left"></i> Todo en exceso es malo...
-                  </blockquote>
-                  <p>
-	                Hay que tener un límite de agua que echarle a las plantas
-                  </p>
+                  <p> <%=contenido %> </p>
                   <div class="bottom-article">
                     <ul class="meta-post">
-                      <li><i class="icon-calendar"></i><a href="#"> 7 de Noviembre de 2019</a></li>
-                      <li><i class="icon-user"></i><a href="#"> Administrador</a></li>
-                      <li><i class="icon-folder-open"></i><a href="articulos.jsp"> Articulos</a></li>
+                      <li><i class="icon-calendar"></i><a href="#"><%=fecha %></a></li>
+                      <li><i class="icon-user"></i><a href="#"><%=autor %></a></li>
+                      <li><i class="icon-folder-open"></i><a href="#"><%=categoriaArt %></a></li>
                     </ul>
                   </div>
                 </div>
@@ -168,8 +171,6 @@
 
   <!-- Template Custom JavaScript File -->
   <script src="js/custom.js"></script>
-
-<script async type="text/javascript" src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/54537da60973928bf0460f49379de0b7757d7a01cff914af08b8b9cf87bc6502.js"></script>
 
 </body>
 

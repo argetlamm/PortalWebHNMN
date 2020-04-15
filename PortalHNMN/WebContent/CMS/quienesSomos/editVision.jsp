@@ -58,20 +58,26 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* OBTENEMOS LOS DATOS DEL MENU A SER EDITADOS */
+/* OBTENEMOS LOS DATOS DE LA HISTORIA A SER EDITADOS */
 Tbl_publicaciones tpub = new Tbl_publicaciones();
 DT_publicaciones dtpb = new DT_publicaciones();
 ArrayList<Tbl_publicaciones> listaVision = new ArrayList<Tbl_publicaciones>();
-listaVision = dtpb.itemsVision();
+listaVision = dtpb.quienesSomos();
 
 String publicado = "publicado";
-String item1="";
-int item11=0;
-for (Tbl_publicaciones tpublc : listaVision){
-	if(tpublc.getPublic_estado().trim().equals(publicado)){
-		if(tpublc.getMenu_order() == 1){
-			item1 = tpublc.getPublic_content();
-			item11 = tpublc.getMenu_order();
+String vision = "vision";
+String contenido = "";
+int caracteresIniciales = 0;
+
+for(Tbl_publicaciones tbpub : listaVision)
+{
+	if(tbpub.getPublic_estado().trim().equals(publicado))
+	{
+		if(tbpub.getGuid().trim().equals(vision))
+		{
+			contenido = tbpub.getPublic_content();
+			contenido = contenido.replace("<br>","\n");
+			caracteresIniciales = contenido.trim().length();
 		}
 	}
 }
@@ -124,10 +130,29 @@ for (Tbl_publicaciones tpublc : listaVision){
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_vision" method="post">
                 <div class="card-body">
+                <h3 class="card-title"> Recomendaciones antes de la edición de la Visión: </h3>
+                <br>
+                <p>
+                Se recomienda, por cuestión de estilo del sitio web, que la cantidad de caracteres no rebase los 1000, luego de los 1000
+                hay un pequeño margen, pero el orden del contenido tiende a deformarse. Por favor, evitar propasarse. 
+                </p>
+                <p>
+                Si por casualidad parece ser que la caja de texto no permite escribir más, presionar la tecla "Supr" repetidas veces 
+                estando posicionado al final de todo el texto; suele pasar que el área de texto detecta una cantidad increíble de 
+                espacios luego del último punto y esto hace que se bloquee, para resolverlo es simplemente borrar ese espacio, y 
+                la tecla "Supr" borra todo lo que esté hacia la derecha, o sea, el espacio.
+                </p>
+                <p>
+                La caja de texto se puede agrandar, sólo tiene que posicionar el cursor en la parte inferior derecha del espacio de texto
+             	clickearlo y posteriormente jalarlo hacia abajo.
+                </p>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Primer párrafo:</label>
-                    <input type="text" id="item1" name="item1" class="form-control" value="<%=item1 %>" required>
-                    <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
+                    <label for="exampleInputEmail1">Historia:</label>
+                    <textarea id="contenido" name="contenido" class="form-control" rows="4" maxlength="5000" required 
+                    onkeyup="contar()" onkeydown="contar()"><%=contenido %></textarea>
+                    <br>
+                 	<label style="float:right">Caracteres actuales: <input disabled size="3" value=<%=caracteresIniciales %> id="contador"> </label>
+                 	<input type="hidden" id="vision" name="vision" class="form-control" value="vision" required>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -182,6 +207,15 @@ for (Tbl_publicaciones tpublc : listaVision){
       }
     });
     </script>
+    
+    <script>
+    function contar() {
+        var cadena = document.getElementById("contenido").value;
+        var longitud = cadena.trim().length;
+        
+        document.getElementById("contador").value = longitud;
+   	}
+	</script>
 
 </body>
 </html>

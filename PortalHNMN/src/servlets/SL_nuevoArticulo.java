@@ -31,6 +31,7 @@ public class SL_nuevoArticulo extends HttpServlet {
 		
 		String titulo = request.getParameter("titulo");
 		String contenido = request.getParameter("contenido");
+		contenido = contenido.replace("\n","<br>");
 		String redactor = request.getParameter("redactor");
 		String previa ="";
 		if(contenido.length()>200)

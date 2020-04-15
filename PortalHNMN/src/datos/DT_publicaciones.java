@@ -112,7 +112,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en itemsInicio() "+ e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();
@@ -146,7 +146,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.err.println("ERROR modificarQuienesSomos() "+e.getMessage());
+			System.err.println("ERROR modificarInicio() "+e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();
@@ -212,7 +212,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en itemsFtr() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
@@ -246,7 +246,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en itemsDonaciones() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
@@ -293,7 +293,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e) 
 		{
-			System.err.println("ERROR guardarUser(): "+e.getMessage());
+			System.err.println("ERROR guardarBanner(): "+e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();
@@ -326,7 +326,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en imagenesBanner() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
@@ -360,7 +360,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en itemsQuienesSomos() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
@@ -428,7 +428,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en tituloDonacion() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
@@ -436,27 +436,24 @@ public class DT_publicaciones {
 		return listaBdy;
 	}
 	
-	public boolean modificarQuienesSomos(ArrayList<Tbl_publicaciones> tbp) throws SQLException
+	public boolean modificarQuienesSomos(Tbl_publicaciones tbp) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
-		String parrafo = "";
+		String contenido = "";
 		try
 		{
-			this.itemsQuienesSomos();
+			this.quienesSomos();
 			rsPublicaciones.beforeFirst();
 			while(rsPublicaciones.next())
 			{
-				for(Tbl_publicaciones tpubl : tbp)
+				if(rsPublicaciones.getString("guid").trim().equals(tbp.getGuid().trim()))
 				{
-					parrafo = tpubl.getPublic_content();
-					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
-					{
-						rsPublicaciones.updateString("public_content", parrafo);
-						rsPublicaciones.updateRow();
-						modificado=true;
-						break;
-					}
+					contenido = tbp.getPublic_content();
+					rsPublicaciones.updateString("public_content", contenido);
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
 				}
 			}
 		}
@@ -470,20 +467,21 @@ public class DT_publicaciones {
 		return modificado;	
 	}
 	
-	public ArrayList<Tbl_publicaciones> itemsHistoria() throws SQLException
+	public ArrayList<Tbl_publicaciones> quienesSomos() throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
 		
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsHistoria'", 
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'quienesSomos'", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
@@ -496,7 +494,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en quienesSomos() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
@@ -504,201 +502,32 @@ public class DT_publicaciones {
 		return listaBdy;
 	}
 	
-	public boolean modificarHistoria(ArrayList<Tbl_publicaciones> tbp) throws SQLException
-	{
-		Connection c = PoolConexion.getConnection();
-		boolean modificado=false;
-		String parrafo = "";
-		try
-		{
-			this.itemsHistoria();
-			rsPublicaciones.beforeFirst();
-			while(rsPublicaciones.next())
-			{
-				for(Tbl_publicaciones tpubl : tbp)
-				{
-					parrafo = tpubl.getPublic_content();
-					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
-					{
-						rsPublicaciones.updateString("public_content", parrafo);
-						rsPublicaciones.updateRow();
-						modificado=true;
-						break;
-					}
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			System.err.println("ERROR modificarHistoria() "+e.getMessage());
-			e.printStackTrace();
-		} finally {
-			c.close();
-		}
-		return modificado;	
-	}
-	
-	public ArrayList<Tbl_publicaciones> itemsMision() throws SQLException
-	{
-		Connection c = PoolConexion.getConnection();
-		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
-		try
-		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsMision'", 
-					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
-					ResultSet.HOLD_CURSORS_OVER_COMMIT);
-			rsPublicaciones = ps.executeQuery();
-			while(rsPublicaciones.next())
-			{
-				Tbl_publicaciones tpub = new Tbl_publicaciones();
-				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
-				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
-				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
-				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
-				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
-				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
-				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
-				listaBdy.add(tpub);
-			}
-		}
-		catch (Exception e)
-		{
-			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
-			e.printStackTrace();
-		} /*finally {
-			c.close();
-		}*/
-		return listaBdy;
-	}
-	
-	public boolean modificarMision(ArrayList<Tbl_publicaciones> tbp) throws SQLException
-	{
-		Connection c = PoolConexion.getConnection();
-		boolean modificado=false;
-		String parrafo = "";
-		try
-		{
-			this.itemsMision();
-			rsPublicaciones.beforeFirst();
-			while(rsPublicaciones.next())
-			{
-				for(Tbl_publicaciones tpubl : tbp)
-				{
-					parrafo = tpubl.getPublic_content();
-					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
-					{
-						rsPublicaciones.updateString("public_content", parrafo);
-						rsPublicaciones.updateRow();
-						modificado=true;
-						break;
-					}
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			System.err.println("ERROR modificarMision() "+e.getMessage());
-			e.printStackTrace();
-		} finally {
-			c.close();
-		}
-		return modificado;	
-	}
-	
-	public ArrayList<Tbl_publicaciones> itemsVision() throws SQLException
-	{
-		Connection c = PoolConexion.getConnection();
-		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
-		try
-		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsVision'", 
-					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
-					ResultSet.HOLD_CURSORS_OVER_COMMIT);
-			rsPublicaciones = ps.executeQuery();
-			while(rsPublicaciones.next())
-			{
-				Tbl_publicaciones tpub = new Tbl_publicaciones();
-				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
-				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
-				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
-				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
-				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
-				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
-				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
-				listaBdy.add(tpub);
-			}
-		}
-		catch (Exception e)
-		{
-			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
-			e.printStackTrace();
-		} /*finally {
-			c.close();
-		}*/
-		return listaBdy;
-	}
-	
-	public boolean modificarVision(ArrayList<Tbl_publicaciones> tbp) throws SQLException
-	{
-		Connection c = PoolConexion.getConnection();
-		boolean modificado=false;
-		String parrafo = "";
-		try
-		{
-			this.itemsVision();
-			rsPublicaciones.beforeFirst();
-			while(rsPublicaciones.next())
-			{
-				for(Tbl_publicaciones tpubl : tbp)
-				{
-					parrafo = tpubl.getPublic_content();
-					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
-					{
-						rsPublicaciones.updateString("public_content", parrafo);
-						rsPublicaciones.updateRow();
-						modificado=true;
-						break;
-					}
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			System.err.println("ERROR modificarVision() "+e.getMessage());
-			e.printStackTrace();
-		} finally {
-			c.close();
-		}
-		return modificado;	
-	}
-	
-	public ArrayList<Tbl_publicaciones> titulosQuienesSomos() throws SQLException
+	public ArrayList<Tbl_publicaciones> imagenesQuienesSomos() throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
 		
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'tituloQuienesSomos'", 
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'imagenesQuienesSomos'", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
-				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
 				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
-				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
 				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
-				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
 				listaBdy.add(tpub);
 			}
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en itemMenu() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en ImagenesQuienesSomos() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
@@ -731,7 +560,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en imagenesColeccion() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
@@ -765,7 +594,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en informacionColeccion() "+ e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();
@@ -831,7 +660,7 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en listarCategoriías "+ e.getMessage());
+			System.out.println("DATOS: ERROR en listarCategorías "+ e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();
@@ -861,6 +690,7 @@ public class DT_publicaciones {
 		Connection c = PoolConexion.getConnection();
 		boolean guardado = false;
 		int menu = obtenerMenuOrderArt();
+		String enlace = "http://localhost:8080/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
 		java.util.Date d1 = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
 		
@@ -878,13 +708,14 @@ public class DT_publicaciones {
 			rsPublicaciones.updateString("public_previa", tbpub.getPublic_previa());
 			rsPublicaciones.updateString("public_tipo", tbpub.getPublic_tipo());
 			rsPublicaciones.updateString("public_titulo", tbpub.getPublic_titulo());
+			rsPublicaciones.updateString("public_enlace", enlace);
 			rsPublicaciones.insertRow();
 			rsPublicaciones.moveToCurrentRow();
 			guardado = true;
 		}
 		catch (Exception e) 
 		{
-			System.err.println("ERROR crearArtículo(): "+e.getMessage());
+			System.err.println("ERROR crearArtículoSóloTexto(): "+e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();
@@ -909,5 +740,38 @@ public class DT_publicaciones {
 		}
 		
 		return cantidad;
+	}
+	
+	public ArrayList<Tbl_publicaciones> detallesArt(int id) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> detallesArticulos = new ArrayList<Tbl_publicaciones>();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' and menu_order="+id, 
+			ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+			ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				detallesArticulos.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en detallesArt() "+ e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return detallesArticulos;
 	}
 }

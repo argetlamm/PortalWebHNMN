@@ -118,7 +118,7 @@ mensaje = mensaje==null?"":mensaje;
                   	<label for="exampleInputEmail1">Título del artículo: </label>
                     <input type="titulo" id="titulo" name="titulo" class="form-control" value="" required>
                     <label for="exampleInputEmail1">Contenido del artículo: </label>
-                    <textarea id="contenido" name="contenido" class="form-control" rows="5" maxlength="500" required></textarea>
+                    <textarea id="contenido" name="contenido" class="form-control" rows="5" maxlength="5000" required></textarea>
 					<label for="exampleInputEmail1">Categoría del artículo: </label>
 					<input type="categoria" id="categoria" name="categoria" class="form-control" value="" required>
                     <label for="exampleInputEmail1">Artículo creado por: <%=loginUser %></label>
@@ -155,8 +155,7 @@ mensaje = mensaje==null?"":mensaje;
   <script src="../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   <script src="../plugins/select2/js/select2.full.min.js"></script>
-  
-    
+     
   <script>
     $(document).ready(function ()
     {

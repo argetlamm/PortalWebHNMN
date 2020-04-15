@@ -49,7 +49,6 @@ public class SL_subir_foto_banner extends HttpServlet {
 		// TODO Auto-generated method stub
 		try
 		{
-			System.out.println("Entro al post");
 			DT_publicaciones dtpub = new DT_publicaciones();
 			Tbl_publicaciones tpub = new Tbl_publicaciones();
 			FileItemFactory factory = new DiskFileItemFactory();
@@ -58,28 +57,9 @@ public class SL_subir_foto_banner extends HttpServlet {
 			List<FileItem> items = upload.parseRequest(request);
 			File fichero = null;
 			File fichero2 = null;
-			
-			//String codnima = null;
-			//String idnima = null;
+		
 			String rutaFichero = null;
-			/*
-			for(FileItem item: items)
-			{
-				FileItem uploaded = item;
-				if(uploaded.isFormField())
-				{
-					String key = uploaded.getFieldName();
-					String valor = uploaded.getString();
-					if(key.equals("idNIMA"))
-					{
-						idnima = valor;
-					}
-					if(key.equals("codNIMA"))
-					{
-						codnima = valor;
-					}
-				}
-			}*/
+			
 			for(FileItem item : items)
 			{
 				FileItem uploaded = item;
@@ -87,25 +67,11 @@ public class SL_subir_foto_banner extends HttpServlet {
 				{
 					/////////TAMAÑO DEL ARCHIVO ////////
 					long size = uploaded.getSize();
-					System.out.println("size: "+size);
 					
 					/////// GUARDAMOS EN UN ARREGLO LOS FORMATOS QUE SE DESEAN PERMITIR
 					List<String> formatos = Arrays.asList("image/jpeg");
 					
 					////// COMPROBAR SI EL TAMAÑO Y FORMATO SON PERMITIDOS //////////
-//					if(formatos.contains(uploaded.getContentType()) && size <= 102400)
-					/*if(codnima.length()<4)
-					{
-						codnima="0"+codnima;
-					}
-					if(codnima.length()<3)
-					{
-						codnima="00"+codnima;
-					}
-					if(codnima.length()<2)
-					{
-						codnima="000"+codnima;
-					}*/
 					if(formatos.contains(uploaded.getContentType()))
 					{
 
@@ -115,22 +81,19 @@ public class SL_subir_foto_banner extends HttpServlet {
 						String url2 = path.substring(52);
 						url2 = url2.replace("\\", "/");
 						
-						fichero = new File(url2+rutaFichero);
-						String ficheroTest = path.replace("\\", "/");
-						fichero2 = new File(ficheroTest+rutaFichero);
+						fichero = new File(path+rutaFichero);
 						
 						///////// GUARDAR EN EL SERVIDOR //////////////
-						uploaded.write(fichero2);
-						
-						System.out.println("SERVIDOR: FOTO GUARDADA CON EXITO!!!");
+						uploaded.write(fichero);
+
 						/////// ACTUALIZAMOS EL CAMPO URLFOTO EN LA BASE DE DATOS
-						String url = fichero.toString();
+						String url = url2+rutaFichero;
 						tpub.setPublic_titulo(url);
 						if(dtpub.guardarBanner(tpub))
 						{
 							response.sendRedirect(request.getContextPath()+ "/CMS/menu/editBanner.jsp?msj=1");
 						}
-						else
+						else 
 						{
 							response.sendRedirect(request.getContextPath()+ "/CMS/menu/editBanner.jsp?msj=2");
 						}

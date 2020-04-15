@@ -55,200 +55,70 @@
     </section>
     <section id="content">
       <div class="container">
+      	  <%
+          	DT_publicaciones dtpus = new DT_publicaciones();
+            ArrayList<Tbl_publicaciones> listaQuienesSomos = new ArrayList<Tbl_publicaciones>();
+           	ArrayList<Tbl_publicaciones> listaImagenes = new ArrayList<Tbl_publicaciones>();
+           	listaQuienesSomos = dtpus.quienesSomos();
+           	Collections.sort(listaQuienesSomos);
+           	listaImagenes = dtpus.imagenesQuienesSomos();
+           	String publicado = "publicado";
+           	String titulo = "";
+           	String parrafo = "";
+           	String imagen = "";
+           	String guid = "";
+           			         	
+            for(Tbl_publicaciones tbpub : listaQuienesSomos)
+           	{
+           		if(tbpub.getPublic_estado().trim().equals(publicado))
+           		{
+           			titulo = tbpub.getPublic_titulo();
+           			parrafo = tbpub.getPublic_content();
+           			guid = tbpub.getGuid().trim();
+          %>
          <div class="row">
           <div class="span6">
-          	<%
-          		DT_publicaciones dtpus = new DT_publicaciones();
-            	ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
-            	listatTblp = dtpus.titulosQuienesSomos();
-            	String publicado = "publicado";
-            	String titulo1="",titulo2="",titulo3="", titulo4="";
-  
-            	for(Tbl_publicaciones tpublc : listatTblp){
-                	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		if(tpublc.getMenu_order() == 1){
-                			titulo1=tpublc.getPublic_titulo();
-                		}else if(tpublc.getMenu_order() == 2){
-                			titulo2 = tpublc.getPublic_titulo();
-                		}else if(tpublc.getMenu_order() == 3){
-                			titulo3 = tpublc.getPublic_titulo();
-                		}else if(tpublc.getMenu_order() == 4){
-                			titulo4 = tpublc.getPublic_titulo();
-                		}
-                	}
-                }
-          	%>
-          	<h2><b><%=titulo1 %></b></h2>
-            <%
-                	DT_publicaciones dtpusdos = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listaIQSomos = new ArrayList<Tbl_publicaciones>();
-                listaIQSomos = dtpusdos.itemsQuienesSomos();
-                String parrafo="";
-                for (Tbl_publicaciones tpublc : listaIQSomos){
-                	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                			parrafo=tpublc.getPublic_content();
-		
-                %>
+          	<h2><b><%=titulo %></b></h2>
+          	
                 <p><%=parrafo %></p>
-                <%
-               	 	}
-                }
-                %>
           </div>
           <div class="span6">
             <!-- start flexslider -->
             <div class="flexslider">
               <ul class="slides">
+	       <% 
+	              	for(Tbl_publicaciones tblpub : listaImagenes)
+	              	{
+	             		if(tblpub.getPublic_estado().trim().equals(publicado))
+	              		{
+	              			if(tblpub.getGuid().trim().equals(guid))
+	              			{
+	              				imagen = tblpub.getPublic_enlace();
+	       %>	
                 <li>
-                  <img src="img/works/full/image-01-full.jpg" alt="" />
+                  <img src="<%=imagen %>" alt="" />
                 </li>
-                <li>
-                  <img src="img/works/full/image-02-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-03-full.jpg" alt="" />
-                </li>
+	       <%
+	              			}
+	              		}
+	              	}
+            	}
+           	%>	
               </ul>
             </div>
             <!-- end flexslider -->
           </div>
         </div>
+        <div class="row">
+	   		<div class="span12">
+	       		<div class="solidline">
+	         	</div>
+	       	</div>
+	   	</div>
+          <% 
+           }
+          %>
          <!-- divider -->
-        <div class="row">
-          <div class="span12">
-            <div class="solidline">
-            </div>
-          </div>
-        </div>
-        <!-- end divider -->
-        <div class="row">
-          <div class="span6">
-          	<h2><b><%=titulo2 %></b></h2>
-          <%
-                	DT_publicaciones dtpusTres = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listaIHistoria = new ArrayList<Tbl_publicaciones>();
-                listaIHistoria = dtpusdos.itemsHistoria();
-                String parrafoH="";
-               
-                for (Tbl_publicaciones tpublc : listaIHistoria){
-                	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		parrafoH=tpublc.getPublic_content();
-                %>
-                <p><%=parrafoH %></p>
-                <%
-                	}
-                }
-                %>
-          </div>
-          <div class="span6">
-            <!-- start flexslider -->
-            <div class="flexslider">
-              <ul class="slides">
-                <li>
-                  <img src="img/works/full/image-01-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-02-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-03-full.jpg" alt="" />
-                </li>
-              </ul>
-            </div>
-            <!-- end flexslider -->
-          </div>
-        </div>
-        <!-- divider -->
-        <div class="row">
-          <div class="span12">
-            <div class="solidline">
-            </div>
-          </div>
-        </div>
-        <!-- end divider -->
-        <div class="row">
-          <div class="span6">
-				<h2><b><%=titulo3 %></b></h2>
-          <%
-                	DT_publicaciones dtpusCuatro = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listaIVision = new ArrayList<Tbl_publicaciones>();
-                listaIVision = dtpusdos.itemsVision();
-                String parrafoV="";
-               
-                for (Tbl_publicaciones tpublc : listaIVision){
-                	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		parrafoV=tpublc.getPublic_content();
-                %>
-                <p><%=parrafoV %></p>
-                <%
-                	}
-                }
-                %>
-          </div>
-          <div class="span6">
-            <!-- start flexslider -->
-            <div class="flexslider">
-              <ul class="slides">
-                <li>
-                  <img src="img/works/full/image-01-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-02-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-03-full.jpg" alt="" />
-                </li>
-              </ul>
-            </div>
-            <!-- end flexslider -->
-          </div>
-        </div>
-        <div class="row">
-          <div class="span6">
-				<h2><b><%=titulo4 %></b></h2>
-          <%
-                	DT_publicaciones dtpusCinco = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listaIMision = new ArrayList<Tbl_publicaciones>();
-                listaIMision = dtpusdos.itemsMision();
-                String parrafoM="";
-               
-                for (Tbl_publicaciones tpublc : listaIMision){
-                	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		parrafoM=tpublc.getPublic_content();
-                %>
-                <p><%=parrafoM %></p>
-                <%
-                	}
-                }
-                %>
-          </div>
-          <div class="span6">
-            <!-- start flexslider -->
-            <div class="flexslider">
-              <ul class="slides">
-                <li>
-                  <img src="img/works/full/image-01-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-02-full.jpg" alt="" />
-                </li>
-                <li>
-                  <img src="img/works/full/image-03-full.jpg" alt="" />
-                </li>
-              </ul>
-            </div>
-            <!-- end flexslider -->
-          </div>
-        </div>
-        <!-- divider -->
-        <div class="row">
-          <div class="span12">
-            <div class="solidline">
-            </div>
-          </div>
-        </div>
-        <!-- end divider -->
-      </div>
     </section>
   <!-- Footer -->
   	<jsp:include page="WEB-INF/layouts/footer.jsp"></jsp:include>

@@ -40,28 +40,21 @@ public class SL_historia extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Tbl_publicaciones tpus1 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus2 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus3 = new Tbl_publicaciones();
-		DT_publicaciones dtpus = new DT_publicaciones();
+	
+		Tbl_publicaciones tpub = new Tbl_publicaciones();
+		DT_publicaciones dpub = new DT_publicaciones();
 		
-		ArrayList<Tbl_publicaciones> tpus = new ArrayList<Tbl_publicaciones>();
+		String contenido = request.getParameter("contenido");
+		contenido = contenido.replace("\n","<br>");
+		String guid = request.getParameter("historia");
 		
 		try
-		{	
-			tpus1.setPublic_content(request.getParameter("item1"));
-			tpus1.setMenu_order(Integer.parseInt(request.getParameter("item11")));
-			tpus2.setPublic_content(request.getParameter("item2"));
-			tpus2.setMenu_order(Integer.parseInt(request.getParameter("item22")));
-			tpus3.setPublic_content(request.getParameter("item3"));
-			tpus3.setMenu_order(Integer.parseInt(request.getParameter("item33")));
+		{
+			tpub.setPublic_content(contenido);
+			tpub.setGuid(guid);
 			
-			tpus.add(tpus1);
-			tpus.add(tpus2);
-			tpus.add(tpus3);
-
-			if(dtpus.modificarHistoria(tpus))
-			{											
+			if(dpub.modificarQuienesSomos(tpub))
+			{
 				response.sendRedirect(request.getContextPath()+ "/CMS/quienesSomos/editHistoria.jsp?msj=1");
 			}
 			else
@@ -72,7 +65,7 @@ public class SL_historia extends HttpServlet {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			System.out.println("Servlet: Error al editar la historia");
+			System.out.println("Servlet: Error al modificar la historia");
 		}
 	}
 

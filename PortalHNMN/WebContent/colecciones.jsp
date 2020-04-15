@@ -88,7 +88,7 @@
         			%>                                
                     <li class="item-thumbs span3 design" data-id="id-0" data-type="<%=tipo.trim()%>">
                     <!-- Fancybox - Gallery Enabled - Title - Full Image -->
-                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Portfolio name" href="${pageContext.request.contextPath}/SL_colecciones?IdUser=<%=id%>">
+                    <a class="hover-wrap fancybox" data-fancybox-group="gallery" title="Imagen" href="${pageContext.request.contextPath}/SL_colecciones?IdUser=<%=id%>">
 						<span class="overlay-img"></span>                                                                                       
 						<span class="overlay-img-thumb font-icon-plus"></span>
 					</a>

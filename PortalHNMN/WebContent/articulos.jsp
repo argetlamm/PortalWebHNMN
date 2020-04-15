@@ -49,7 +49,7 @@
             <ul class="breadcrumb">
               <li><a href="index.jsp"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
               <li><a href="noticias.jsp">Noticias</a><i class="icon-angle-right"></i></li>
-              <li class="active">Artículos</li>
+              <li class="active">Publicaciones</li>
             </ul>
           </div>
         </div>
@@ -140,7 +140,7 @@
                       <li><i class="icon-user"></i><a href="#"><%=redactor %></a></li>
                       <li><i class="icon-folder-open"></i><a href="#"><%=categoriaArt %></a></li>
                     </ul>
-                    <a href="articulo-individual.jsp" class="pull-right">Continua leyendo... <i class="icon-angle-right"></i></a>
+                    <a href="${pageContext.request.contextPath}/SL_articuloIndividual?IdArt=<%=id%>" class="pull-right">Continua leyendo... <i class="icon-angle-right"></i></a>
                   </div>
                 </div>
               </div>

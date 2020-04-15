@@ -58,31 +58,30 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* OBTENEMOS LOS DATOS DEL MENU A SER EDITADOS */
+/* OBTENEMOS LOS DATOS DEL QUIENES SOMOS A SER EDITADOS */
 Tbl_publicaciones tpub = new Tbl_publicaciones();
 DT_publicaciones dtpb = new DT_publicaciones();
 ArrayList<Tbl_publicaciones> listaQuienesSomos = new ArrayList<Tbl_publicaciones>();
-listaQuienesSomos = dtpb.itemsQuienesSomos();
+listaQuienesSomos = dtpb.quienesSomos();
 
 String publicado = "publicado";
-String item1="", item2="", item3="";
-int item11=0, item22=0, item33=0;
-for (Tbl_publicaciones tpublc : listaQuienesSomos){
-	if(tpublc.getPublic_estado().trim().equals(publicado)){
-		if(tpublc.getMenu_order() == 1){
-			item1 = tpublc.getPublic_content();
-			item11 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 2){
-			item2 = tpublc.getPublic_content();
-			item22 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 3){
-			item3 = tpublc.getPublic_content();
-			item33 = tpublc.getMenu_order();
+String quienesSomos = "quienesSomos";
+String contenido = "";
+int caracteresIniciales = 0;
+
+for(Tbl_publicaciones tbpub : listaQuienesSomos)
+{
+	if(tbpub.getPublic_estado().trim().equals(publicado))
+	{
+		if(tbpub.getGuid().trim().equals(quienesSomos))
+		{
+			contenido = tbpub.getPublic_content();
+			contenido = contenido.replace("<br>","\n");
+			caracteresIniciales = contenido.trim().length();
 		}
 	}
 }
 
-//tpub = dtpb.obtenerMenu(item1);
 
 %>
 
@@ -132,16 +131,29 @@ for (Tbl_publicaciones tpublc : listaQuienesSomos){
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_quienesSomos" method="post">
                 <div class="card-body">
+                <h3 class="card-title"> Recomendaciones antes de la edición del Quiénes Somos: </h3>
+                <br>
+                <p>
+                Se recomienda, por cuestión de estilo del sitio web, que la cantidad de caracteres no rebase los 1000, luego de los 1000
+                hay un pequeño margen, pero el orden del contenido tiende a deformarse. Por favor, evitar propasarse. 
+                </p>
+                <p>
+                Si por casualidad parece ser que la caja de texto no permite escribir más, presionar la tecla "Supr" repetidas veces 
+                estando posicionado al final de todo el texto; suele pasar que el área de texto detecta una cantidad increíble de 
+                espacios luego del último punto y esto hace que se bloquee, para resolverlo es simplemente borrar ese espacio, y 
+                la tecla "Supr" borra todo lo que esté hacia la derecha, o sea, el espacio.
+                </p>
+                <p>
+                La caja de texto se puede agrandar, sólo tiene que posicionar el cursor en la parte inferior derecha del espacio de texto
+             	clickearlo y posteriormente jalarlo hacia abajo.
+                </p>
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Primer párrafo:</label>
-                    <input type="text" id="item1" name="item1" class="form-control" value="<%=item1 %>" required>
-                    <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
-                    <label for="exampleInputEmail1">Segundo párrafo:</label>
-                    <input type="text" id="item2" name="item2" class="form-control" value="<%=item2 %>" required>
-                    <input type="hidden" id="item22" name="item22" class="form-control" value="<%=item22 %>" required>
-                    <label for="exampleInputEmail1">Tercer párrafo:</label>
-                    <input type="text" id="item3" name="item3" class="form-control" value="<%=item3 %>" required>
-                    <input type="hidden" id="item33" name="item33" class="form-control" value="<%=item33 %>" required>
+                    <label for="exampleInputEmail1">¿Quiénes Somos?:</label>
+                    <textarea id="contenido" name="contenido" class="form-control" rows="4" maxlength="5000" required 
+                    onkeyup="contar()" onkeydown="contar()"><%=contenido %></textarea>
+                    <br>
+                 	<label style="float:right">Caracteres actuales: <input disabled size="3" value=<%=caracteresIniciales %> id="contador"> </label>
+                 	<input type="hidden" id="quienesSomos" name="quienesSomos" class="form-control" value="quienesSomos" required>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -196,6 +208,15 @@ for (Tbl_publicaciones tpublc : listaQuienesSomos){
       }
     });
     </script>
+    
+    <script>
+    function contar() {
+        var cadena = document.getElementById("contenido").value;
+        var longitud = cadena.trim().length;
+        
+        document.getElementById("contador").value = longitud;
+   	}
+	</script>
 
 </body>
 </html>
