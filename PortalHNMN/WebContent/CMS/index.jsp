@@ -81,23 +81,23 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-           <select class="form-control select2" name="rol" style="width: 100%;" required="required">
-             <option value="0">Seleccione un Rol...</option>
-            	<%
-            		DT_rol dtr = new DT_rol();
-            	    ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>();
-            	    listRol = dtr.listRol();
+<!--         <div class="input-group mb-3"> -->
+<!--            <select class="form-control select2" name="rol" style="width: 100%;" required="required"> -->
+<!--              <option value="0">Seleccione un Rol...</option> -->
+<%--             	<% --%>
+<!-- //             		DT_rol dtr = new DT_rol(); -->
+<!-- //             	    ArrayList<Tbl_rol> listRol = new ArrayList<Tbl_rol>(); -->
+<!-- //             	    listRol = dtr.listRol(); -->
             	    
-            	    for(Tbl_rol tr : listRol)
-            	    {
-            	%>
-            		 <option value="<%=tr.getId_rol()%>"><%=tr.getRol_name() %></option>
-            	<%	
-            		} 
-            	%>
-           </select>
-        </div>
+<!-- //             	    for(Tbl_rol tr : listRol) -->
+<!-- //             	    { -->
+<%--             	%> --%>
+<%--             		 <option value="<%=tr.getId_rol()%>"><%=tr.getRol_name() %></option> --%>
+<%--             	<%	 --%>
+<!-- //             		}  -->
+<%--             	%> --%>
+<!--            </select> -->
+<!--         </div> -->
         <div class="row">
           <!-- /.col -->
           <div class="col-6">

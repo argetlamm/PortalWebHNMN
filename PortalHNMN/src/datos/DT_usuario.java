@@ -189,18 +189,19 @@ public class DT_usuario
 	}
 	
 	///////////////////////////// METODO PARA VERIFICAR USER, ROL & PWD /////////////////////////////
-	public boolean dtverificarLogin(String user, String pwd, int idRol) throws SQLException
+	//public boolean dtverificarLogin(String user, String pwd, int idRol) throws SQLException
+	public boolean dtverificarLogin(String user, String pwd) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
 		boolean existe=false;
-		String SQL = ("SELECT * FROM public.\"V_tbl_Usuario_Rol\" where username=? and password=? and id_rol=?");
+		String SQL = ("SELECT * FROM public.\"V_tbl_Usuario_Rol\" where username=? and password=? and id_rol=1");
 		try
 		{
 			PreparedStatement ps = c.prepareStatement(SQL);
 			ps.setString(1, user);
 			ps.setString(2, pwd);
 			ps.setString(2, getMd5(pwd).trim());
-			ps.setInt(3, idRol);
+			//ps.setInt(3, idRol);
 			ResultSet rs = null;
 			rs = ps.executeQuery();
 		
