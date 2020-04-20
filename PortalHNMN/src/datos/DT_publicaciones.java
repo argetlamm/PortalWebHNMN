@@ -785,4 +785,71 @@ public class DT_publicaciones {
 		
 		return informacionColeccion;
 	}
+	
+		public ArrayList<Tbl_publicaciones> detalle() throws SQLException
+	    {
+	        Connection c= PoolConexion.getConnection();
+	        ArrayList<Tbl_publicaciones> lista=new ArrayList<Tbl_publicaciones>();
+	        try{
+	            PreparedStatement ps=c.prepareStatement("select *from tbl_publicaciones where public_tipo='itemColeccion'",
+	            ResultSet.CONCUR_UPDATABLE,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.HOLD_CURSORS_OVER_COMMIT);
+	            rsPublicaciones = ps.executeQuery();
+	            while(rsPublicaciones.next()){
+	                Tbl_publicaciones pub=new Tbl_publicaciones();
+	                pub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+	                pub.setPublic_content(rsPublicaciones.getString("public_content"));
+	                pub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+	                pub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+	                pub.setPublic_name(rsPublicaciones.getString("public_name"));
+	                pub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+	                pub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+	                lista.add(pub);
+	            
+	            }
+	        
+	        }catch(Exception e){
+	            System.out.println("DATOS: ERROR en introcolec() "+ e.getMessage());
+		e.printStackTrace(); 
+	        }
+	        finally{
+	            c.close();
+	        }
+	        
+	        return lista;
+	    }
+
+	public boolean modInfo(ArrayList<Tbl_publicaciones> tbls)throws SQLException{
+	        Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String parrafo = "";
+		try
+		{
+			this.detalle();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbls)
+				{
+					parrafo = tpubl.getPublic_content();
+					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
+					{
+						rsPublicaciones.updateString("public_content", parrafo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+						break;
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarintroduccion() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;
+	    
+	    }
+
 }

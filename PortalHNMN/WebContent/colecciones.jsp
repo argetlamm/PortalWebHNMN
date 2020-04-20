@@ -56,6 +56,28 @@
         </div>
       </div>
     </section>
+    
+     <section id="content">
+        <div class="container">
+            <%
+                DT_publicaciones dtpusdos = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> lista = new ArrayList<Tbl_publicaciones>();
+                lista = dtpusdos.detalle();
+                String parrafo="";
+                for (Tbl_publicaciones tpublc : lista){
+                	if(tpublc.getPublic_estado().trim().equals("publicado")){
+                			parrafo=tpublc.getPublic_content();
+		
+                %>
+                <p><%=parrafo %></p>
+                <%
+               	 	}
+                }
+                %>
+        </div>
+    </section>
+    
+  
     <section id="content">
       <div class="container">
         <div class="row">
