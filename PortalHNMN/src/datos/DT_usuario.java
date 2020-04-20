@@ -53,8 +53,44 @@ public class DT_usuario
 		return listaUsuario;
 	}
 	
+	public Tbl_user obtenerUserLogin(String login) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		Tbl_user tus  = new Tbl_user();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_user where username = ? and estado<>3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setString(1, login);
+			rsUsuario = ps.executeQuery();
+			if(rsUsuario.next())
+			{
+				tus.setId_user(rsUsuario.getInt("id_user"));
+				tus.setNombre1(rsUsuario.getString("nombre1"));
+				tus.setNombre2(rsUsuario.getString("nombre2"));
+				tus.setApellido1(rsUsuario.getString("apellido1"));
+				tus.setApellido2(rsUsuario.getString("apellido2"));
+				tus.setUsername(rsUsuario.getString("username"));
+				tus.setPassword(rsUsuario.getString("password"));
+				tus.setEmail(rsUsuario.getString("email"));
+				tus.setPwd_tmp(rsUsuario.getString("pwd_tmp"));
+				tus.setEstado(rsUsuario.getInt("estado"));
+				tus.setAyuda(rsUsuario.getInt("ayuda"));
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerUser() "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/	
+		return tus;
+	}
+	
 	///////////////////////////// METODO PARA OBTENER USER /////////////////////////////
-	public Tbl_user obtenerUser(int idUser) throws SQLException
+	public Tbl_user obtenerUserId(int idUser) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
 		Tbl_user tus  = new Tbl_user();
@@ -77,6 +113,7 @@ public class DT_usuario
 				tus.setEmail(rsUsuario.getString("email"));
 				tus.setPwd_tmp(rsUsuario.getString("pwd_tmp"));
 				tus.setEstado(rsUsuario.getInt("estado"));
+				tus.setAyuda(rsUsuario.getInt("ayuda"));
 			}
 		}
 		catch (Exception e)
@@ -217,6 +254,47 @@ public class DT_usuario
 			c.close();
 		}	
 		return existe;
+	}
+	
+	public boolean modificarAyuda(Tbl_user tus) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;	
+		try
+		{
+			//Preferí, en este método, el hacer la consulta acá en vez de mandar a llamar el método de listar Usuarios
+			//Por alguna razón me lanzaba error de que el ResultSet volvía cerrado
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_user where estado<>3", 
+					//Seleccionamos todos los datos de la tabla usuario que no tengan estado 3 (Eliminados)
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsUsuario = ps.executeQuery();
+			rsUsuario.beforeFirst();
+			//Posicionamos el ResultSet al inicio y vamos a recorrerlo vía while mientras tenga un objeto siguiente disponible
+			while (rsUsuario.next())
+			{
+				//Si el String en la posición 9 del ResultSet (Usernamme) es igual al Username del objeto enviado al método
+				//Entrará al if (usamos el .trim() debido a que a veces, recupera espacios de más)
+				if(rsUsuario.getString(9).trim().equals(tus.getUsername().trim()))
+				{
+					//Simplemente se actualiza el campo ayuda con la Ayuda delobjeto enviada
+					rsUsuario.updateInt("ayuda", tus.getAyuda());
+					//Se actualiza la fila y cambiamos el boolean a devolver en true, o sea, operación exitosa
+					rsUsuario.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR cambiarAyuda() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			//Cerramos la conexión abierta para la modificación
+			c.close();
+		}
+		return modificado;
 	}
 	
 	public static String getMd5(String input) throws SQLException 

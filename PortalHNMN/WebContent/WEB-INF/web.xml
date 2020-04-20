@@ -7,4 +7,8 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <context-param>
+  	<param-name>upload.location</param-name>
+  	<param-value>/path/to/uploads/</param-value>
+  </context-param>
 </web-app>

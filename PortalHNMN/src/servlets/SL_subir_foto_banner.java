@@ -77,17 +77,21 @@ public class SL_subir_foto_banner extends HttpServlet {
 
 						int contador = dtpub.obtenerMenuOrder();
 						rutaFichero = "foto-banner"+contador+".jpg";
-						path = "C:\\Users\\pc\\git\\PortalWebHNMN\\PortalHNMN\\WebContent\\img\\slides\\nivo\\";
-						String url2 = path.substring(52);
-						url2 = url2.replace("\\", "/");
+						path = "/path/to/images/";
+						//String url2 = "path/to/images/";
+						//String url2 = path.substring(52);
+						//url2 = url2.replace("\\", "/");
 						
-						fichero = new File(path+rutaFichero);
+						File image = new File(getServletContext().getInitParameter("upload.location")+rutaFichero);
+						
+						//fichero = new File(path+rutaFichero);
 						
 						///////// GUARDAR EN EL SERVIDOR //////////////
-						uploaded.write(fichero);
+						uploaded.write(image);
 
 						/////// ACTUALIZAMOS EL CAMPO URLFOTO EN LA BASE DE DATOS
-						String url = url2+rutaFichero;
+						String url = getServletContext().getInitParameter("upload.location")+rutaFichero;
+						url = url.replace("\\", "/");
 						tpub.setPublic_titulo(url);
 						if(dtpub.guardarBanner(tpub))
 						{

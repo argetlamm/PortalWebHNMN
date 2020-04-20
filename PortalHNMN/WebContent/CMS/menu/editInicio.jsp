@@ -32,6 +32,14 @@
 	{
 		response.sendRedirect("../Error.jsp");
 	}
+	
+	String ayudaS = "";
+	int ayuda = 0;
+	int rolId = 0;
+
+	ayudaS = (String) session.getAttribute("ayuda");
+	ayudaS = ayudaS==null?"":ayudaS;
+	ayuda = Integer.parseInt(ayudaS);
 %>
 <!DOCTYPE html>
 <html>
@@ -58,33 +66,22 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* OBTENEMOS LOS DATOS DEL MENU A SER EDITADOS */
-Tbl_publicaciones tpub = new Tbl_publicaciones();
-DT_publicaciones dtpb = new DT_publicaciones();
-ArrayList<Tbl_publicaciones> listaInicio = new ArrayList<Tbl_publicaciones>();
-listaInicio = dtpb.itemsInicio();
+DT_publicaciones dtpub = new DT_publicaciones();
+ArrayList<Tbl_publicaciones> listaAyudas = new ArrayList<Tbl_publicaciones>();
+listaAyudas = dtpub.recuperarAyudas();
 
-String publicado = "publicado";
-String item1="", item2="", item3="", item4="";
-int item11=0, item22=0, item33=0, item44=0;
-for (Tbl_publicaciones tpublc : listaInicio){
-	if(tpublc.getPublic_estado().trim().equals(publicado)){
-		if(tpublc.getMenu_order() == 1){
-			item1 = tpublc.getPublic_content();
-			item11 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 2){
-			item2 = tpublc.getPublic_content();
-			item22 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 3){
-			item3 = tpublc.getPublic_content();
-			item33 = tpublc.getMenu_order();
-		}else if(tpublc.getMenu_order() == 4){
-			item4 = tpublc.getPublic_content();
-			item44 = tpublc.getMenu_order();
-		}
+String ayudaT = "";
+String ayudaC = "";
+String inicio = "inicio";
+
+for(Tbl_publicaciones tbpub : listaAyudas)
+{
+	if(tbpub.getGuid().trim().equals(inicio))
+	{
+		ayudaT = tbpub.getPublic_titulo();
+		ayudaC = tbpub.getPublic_content();
 	}
 }
-
 %>
 
 
@@ -133,23 +130,70 @@ for (Tbl_publicaciones tpublc : listaInicio){
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_inicio" method="post">
                 <div class="card-body">
+                <div class="card-body">
+                <%
+               		if(ayuda==1)
+               		{
+               			%>
+			            <h3 class="card-title"><%=ayudaT %></h3>
+			            <br>
+			            <p><%=ayudaC %></p>
+               			<% 
+               		}
+               	%>     
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Párrafo de Servicios:</label>
-                    <input type="text" id="item1" name="item1" class="form-control" value="<%=item1 %>" required>
-                    <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
-                    <label for="exampleInputEmail1">Párrafo de Cursos:</label>
-                    <input type="text" id="item2" name="item2" class="form-control" value="<%=item2 %>" required>
-                    <input type="hidden" id="item22" name="item22" class="form-control" value="<%=item22 %>" required>
-                    <label for="exampleInputEmail1">Párrafo de Noticias:</label>
-                    <input type="text" id="item3" name="item3" class="form-control" value="<%=item3 %>" required>
-                    <input type="hidden" id="item33" name="item33" class="form-control" value="<%=item33 %>" required>
-                    <label for="exampleInputEmail1">Párrafo de Visitas:</label>
-                    <input type="text" id="item4" name="item4" class="form-control" value="<%=item4 %>" required>
-                    <input type="hidden" id="item44" name="item44" class="form-control" value="<%=item44 %>" required>
+                  <% 
+                  	DT_publicaciones dtpb = new DT_publicaciones();
+					ArrayList<Tbl_publicaciones> listaInicio = new ArrayList<Tbl_publicaciones>();
+					listaInicio = dtpb.itemsInicio();
+					
+					Collections.sort(listaInicio);
+					
+					String publicado = "publicado";
+					String titulo = "";
+					String contenido = "";
+					String enlace = "";
+					String icono = "";
+					int id = 0;
+					int contador = 0;
+					try
+					{
+						for(Tbl_publicaciones tbpub : listaInicio)
+						{
+							if(tbpub.getPublic_estado().trim().equals(publicado))
+							{
+								titulo = tbpub.getPublic_titulo();
+								contenido = tbpub.getPublic_content();
+								enlace = tbpub.getPublic_enlace();
+								icono = tbpub.getPublic_tipo_img();
+								id = tbpub.getMenu_order();
+								contador++;
+								
+					%>
+					<label for="exampleInputEmail1">Espacio #<%=contador %></label>
+					<input type="text" id="titulo<%=contador%>" name="titulo<%=contador%>" class="form-control" value="<%=titulo.trim() %>" required>
+					<br>
+					<textarea id="contenido<%=contador%>" name="contenido<%=contador%>" class="form-control" rows="4" maxlength="5000" 
+					required><%=contenido %></textarea> 
+					<label for="exampleInputEmail1">Enlace: </label>
+					<input type="text" id="url<%=contador%>" name="url<%=contador%>" class="form-control" value="<%=enlace.trim() %>" required>
+					<label for="exampleInputEmail1">Ícono: </label>
+					<input type="text" id="icon<%=contador%>" name="icon<%=contador%>" class="form-control" value="<%=icono.trim() %>" required>
+					<input type="hidden" id="orden<%=contador %>" name="orden<%=contador %>" class="form-control" value="<%=id %>" required>
+					<hr style="border-width:2px;">
+					<%
+							}
+						}
+					}
+					catch(Exception e)
+					{
+						System.out.println("Error en la carga del fomulario de editInicio - " +e.getMessage());
+					}
+                  %>
+                  <input type="hidden" id="contador" name="contador" class="form-control" value="<%=contador %>" required>
                   </div>
                 </div>
                 <!-- /.card-body -->
-
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Guardar</button>
                   <button type="button" class="btn btn-danger">Cancelar</button>

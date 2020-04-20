@@ -31,7 +31,6 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-header">Menú</li>
-          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-shield-alt"></i>
@@ -77,6 +76,13 @@
                 <a href="../menu/editMenu.jsp" class="nav-link">
                   <i class="fas fa-stream nav-icon"></i>
                   <p>Edición de Menu</p>
+                </a>
+         </li>
+         </li>
+          <li class="nav-item">
+                <a href="../footer/editFooter.jsp" class="nav-link">
+                  <i class="fas fa-stream nav-icon"></i>
+                  <p>Edición de Footer</p>
                 </a>
          </li>
          <li class="nav-item has-treeview">

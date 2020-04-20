@@ -2677,14 +2677,4 @@ article img.pull-right, article .align-right {
   outline: 0;
 }
 
-/* =============================
-22. textAreas control
-============================= */
-
-.borderojo {
-    outline: none;
-    border: 1px solid #f00;
-}
-.bordegris { border: 1px solid #d4d4d; }
-
 /* Theme Styler :: End */

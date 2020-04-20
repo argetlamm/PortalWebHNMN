@@ -26,31 +26,44 @@
   <link rel="apple-touch-icon" sizes="72x72" href="ico/apple-touch-icon-72.png" />
   <link rel="apple-touch-icon" sizes="57x57" href="ico/apple-touch-icon-57.png" />
   <link rel="shortcut icon" href="ico/favicon.png" type="image/x-icon" />
-  <!-- jAlert css  -->
-  <link rel="stylesheet" href="CMS/plugins/jAlert/dist/jAlert.css" />
-
-	<%
-/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
-String mensaje = "";
-mensaje = request.getParameter("msj");
-mensaje = mensaje==null?"":mensaje;
-
-%>
 
 </head>
 
 <body>
   <div id="wrapper">
     <!-- MENU -->
-  	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
+  	<jsp:include page="WEB-INF/layouts/menu2.jsp"></jsp:include>
     <!-- MENU -->
     <section id="featured">
       <!-- start slider -->
       <!-- Slider -->
       <div id="nivo-slider">
         <div class="nivo-slider">
+        <%
+        		response.setIntHeader("Refresh", 5);
+        	
+          		DT_publicaciones dtpuss = new DT_publicaciones();
+            	ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
+            	listatTblp = dtpuss.itemsInicio();
+            	String publicadoo = "publicado";
+            	String item1="",item2="",item3="", item4="";
+  
+            	for(Tbl_publicaciones tpublc : listatTblp){
+                	if(tpublc.getPublic_estado().trim().equals(publicadoo)){
+                		if(tpublc.getMenu_order() == 1){
+                			item1=tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 2){
+                			item2 = tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 3){
+                			item3 = tpublc.getPublic_content();
+                		}else if(tpublc.getMenu_order() == 4){
+                			item4 = tpublc.getPublic_content();
+                		}
+                	}
+                }
+          	%>
         	<%
-        	DT_publicaciones dtpus = new DT_publicaciones();
+        		DT_publicaciones dtpus = new DT_publicaciones();
         	ArrayList<Tbl_publicaciones> listaBanner = new ArrayList<Tbl_publicaciones>();
             listaBanner = dtpus.imagenesBanner();
             String publicado = "publicado";
@@ -89,40 +102,54 @@ mensaje = mensaje==null?"":mensaje;
         <div class="row">
           <div class="span12">
             <div class="row">
-            <%
-            DT_publicaciones dtpuss = new DT_publicaciones();
-            ArrayList<Tbl_publicaciones> listaInicio = new ArrayList<Tbl_publicaciones>();
-            listaInicio = dtpuss.itemsInicio();
-            String titulo = "";
-            String contenido = "";
-            String enlace = "";
-            String icon = "";
-            
-            for(Tbl_publicaciones tbpub : listaInicio)
-            {
-            	if(tbpub.getPublic_estado().trim().equals(publicado))
-            	{
-            		titulo = tbpub.getPublic_titulo();
-            		contenido = tbpub.getPublic_content();
-            		enlace = tbpub.getPublic_enlace();
-            		icon = tbpub.getPublic_tipo_img();
-            %>
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <a href=<%=enlace %>><i class="<%=icon.trim() %> icon-circled icon-64 active"></i></a>
+                    <a href="servicios.jsp"><i class="icon-briefcase icon-circled icon-64 active"></i></a>
                   </div>
                   <div class="text">
-                    <h6><%=titulo %></h6>
-					<p><%=contenido %></p>
-                    <a href=<%=enlace %>>Infórmate...</a>
+                    <h6>Servicios</h6>
+					<p><%=item1 %></p>
+                    <a href="servicios.jsp">Infórmate...</a>
                   </div>
                 </div>
               </div>
-            <%
-            	}
-            }
-            %>
+              <div class="span3">
+                <div class="box aligncenter">
+                  <div class="aligncenter icon">
+                    <a href= "cursos.jsp"><i class="icon-book icon-circled icon-64 active"></i></a>
+                  </div>
+                  <div class="text">
+                    <h6>Cursos</h6>
+                    <p><%=item2 %> </p>
+                    <a href="cursos.jsp">Infórmate...</a>
+                  </div>
+                </div>
+              </div>
+              <div class="span3">
+                <div class="box aligncenter">
+                  <div class="aligncenter icon">
+                    <a href = "noticias.jsp"><i class="icon-bullhorn icon-circled icon-64 active"></i></a>
+                  </div>
+                  <div class="text">
+                    <h6>Noticias</h6>
+                    <p><%=item3 %></p>
+                    <a href="noticias.jsp">Infórmate...</a>
+                  </div>
+                </div>
+              </div>
+              <div class="span3">
+                <div class="box aligncenter">
+                  <div class="aligncenter icon">
+                    <a href = "visitas.jsp"><i class="icon-plane icon-circled icon-64 active"></i></a>
+                  </div>
+                  <div class="text">
+                    <h6>Visitas</h6>
+                    <p><%=item4 %></p>
+                    <a href="visitas.jsp">Infórmate...</a>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -168,11 +195,6 @@ mensaje = mensaje==null?"":mensaje;
 
   <!-- Template Custom JavaScript File -->
   <script src="js/custom.js"></script>
-  
-  <!-- jAlert js -->
-  <script src="CMS/plugins/jAlert/dist/jAlert.min.js"></script>
-  <script src="CMS/plugins/jAlert/dist/jAlert-functions.min.js"> </script>
-  <script src="CMS/plugins/select2/js/select2.full.min.js"></script>
 
 <script async type="text/javascript" src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/54537da60973928bf0460f49379de0b7757d7a01cff914af08b8b9cf87bc6502.js"></script>
 </body>

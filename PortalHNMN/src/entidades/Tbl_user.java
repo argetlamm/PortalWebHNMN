@@ -13,6 +13,7 @@ public class Tbl_user
 	private String pwd_tmp;
 	private String email;
 	private int estado;
+	private int ayuda;
 
 	//METODOS
 	public int getId_user() {
@@ -74,6 +75,12 @@ public class Tbl_user
 	}
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+	public int getAyuda() {
+		return ayuda;
+	}
+	public void setAyuda(int ayuda) {
+		this.ayuda = ayuda;
 	}
 	
 	

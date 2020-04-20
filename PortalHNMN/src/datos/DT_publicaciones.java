@@ -106,7 +106,9 @@ public class DT_publicaciones {
 				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
 				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
 				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_tipo_img(rsPublicaciones.getString("public_tipo_img"));
 				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
 				listaBdy.add(tpub);
 			}
 		}
@@ -124,19 +126,24 @@ public class DT_publicaciones {
 	{
 		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
-		String parrafo = "";
 		try
 		{
-			this.itemsInicio();
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsInicio'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
 			rsPublicaciones.beforeFirst();
 			while(rsPublicaciones.next())
 			{
 				for(Tbl_publicaciones tpubl : tbp)
 				{
-					parrafo = tpubl.getPublic_content();
-					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
+					
+					if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
 					{
-						rsPublicaciones.updateString("public_content", parrafo);
+						rsPublicaciones.updateString("public_content", tpubl.getPublic_content());
+						rsPublicaciones.updateString("public_tipo_img", tpubl.getPublic_tipo_img());
+						rsPublicaciones.updateString("public_titulo", tpubl.getPublic_titulo());
+						rsPublicaciones.updateString("public_enlace", tpubl.getPublic_enlace());
 						rsPublicaciones.updateRow();
 						modificado=true;
 						break;
@@ -168,6 +175,7 @@ public class DT_publicaciones {
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
 				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
@@ -181,10 +189,45 @@ public class DT_publicaciones {
 		{
 			System.out.println("DATOS: ERROR en titulosFtr() "+ e.getMessage());
 			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}	*/	
+		return listaFtr;
+	}
+	
+	public boolean modificarTitulosFooter(ArrayList<Tbl_publicaciones> tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String titulo = "";
+		try
+		{
+			this.titulosFtr();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					titulo = tpubl.getPublic_titulo();
+					System.out.println("Titulo enviado: "+titulo);
+					if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
+					{
+						rsPublicaciones.updateString("public_titulo", titulo);
+						rsPublicaciones.updateRow();
+						modificado=true;
+						break;
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarTitulosFooter() "+e.getMessage());
+			e.printStackTrace();
 		} finally {
 			c.close();
-		}		
-		return listaFtr;
+		}
+		return modificado;	
 	}
 	
 	public ArrayList<Tbl_publicaciones> itemsFtr() throws SQLException
@@ -201,12 +244,15 @@ public class DT_publicaciones {
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
 				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
 				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
 				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
 				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
 				listaItemsF.add(tpub);
 			}
 		}
@@ -218,6 +264,74 @@ public class DT_publicaciones {
 			c.close();
 		}*/		
 		return listaItemsF;
+	}
+	
+	public boolean modificarItemsFooter(ArrayList<Tbl_publicaciones> tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String titulo = "";
+		String contenido = "";
+		String enlace = "";
+		String guid = "";
+		try
+		{
+			this.itemsFtr();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					guid = tpubl.getGuid();
+					if(guid.trim().equals("parrafo"))
+					{
+						contenido = tpubl.getPublic_content();
+						if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
+						{
+							rsPublicaciones.updateString("public_content", contenido);
+							rsPublicaciones.updateRow();
+							modificado=true;
+							break;
+						}
+					}
+					else
+					{
+						if(guid.trim().equals("enlace"))
+						{
+							titulo = tpubl.getPublic_titulo();
+							enlace = tpubl.getPublic_enlace();
+							if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
+							{
+								rsPublicaciones.updateString("public_titulo", titulo);
+								rsPublicaciones.updateString("public_enlace", enlace);
+								rsPublicaciones.updateRow();
+								modificado=true;
+								break;
+							}
+						}
+						else
+						{
+							titulo = tpubl.getPublic_titulo();
+							if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
+							{
+								rsPublicaciones.updateString("public_titulo", titulo);
+								rsPublicaciones.updateRow();
+								modificado=true;
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarItemFooter() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
 	}
 	
 	public ArrayList<Tbl_publicaciones> itemsDonaciones() throws SQLException
@@ -774,4 +888,41 @@ public class DT_publicaciones {
 		}
 		return detallesArticulos;
 	}
+	
+	public ArrayList<Tbl_publicaciones> recuperarAyudas() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> ayudas = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'ayudacms'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				ayudas.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en recuperarAyudas() "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/		
+		return ayudas;
+	}
+	
 }

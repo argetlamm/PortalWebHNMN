@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import datos.DT_usuario;
+import entidades.Tbl_user;
 
 /**
  * Servlet implementation class SL_login_usuarios
@@ -53,16 +54,31 @@ public class SL_login_usuarios extends HttpServlet {
 		{
 			if(dtus.dtverificarLogin(login, pwd, rolId))
 			{
+				System.out.println("Login enviado: "+login);
+				Tbl_user user = dtus.obtenerUserLogin(login);
+				int ayuda = user.getAyuda();
+				String ayudaString = Integer.toString(ayuda);
+				String nombre = user.getNombre1();
+				String apellido = user.getApellido1();
 				HttpSession hts = request.getSession(true);
 				hts.setAttribute("login", login);
 				hts.setAttribute("idRol", rolId);
+				hts.setAttribute("ayuda", ayudaString);
+				hts.setAttribute("nombre", nombre);
+				hts.setAttribute("appelido", apellido);
 				System.out.println("hts.getAttribute(\"idRol\") = " + hts.getAttribute("idRol"));
-				response.sendRedirect("CMS/sistema.jsp");
-				
+				if(rolId==3 || rolId==2)
+				{
+					response.sendRedirect("index2.jsp");
+				}
+				else
+				{
+					response.sendRedirect("CMS/sistema.jsp");
+				}
 			}
 			else
 			{
-				response.sendRedirect("index.jsp?msg=ERROR");
+				response.sendRedirect("index.jsp?ERROR");
 			}
 		}
 		catch(Exception e)

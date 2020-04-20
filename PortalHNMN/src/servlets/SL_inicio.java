@@ -39,32 +39,25 @@ public class SL_inicio extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Tbl_publicaciones tpus1 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus2 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus3 = new Tbl_publicaciones();
-		Tbl_publicaciones tpus4 = new Tbl_publicaciones();
+		
+		int contador = Integer.parseInt(request.getParameter("contador"));
+		ArrayList<Tbl_publicaciones> listaInicio = new ArrayList<Tbl_publicaciones>();
 		DT_publicaciones dtpus = new DT_publicaciones();
-				
-		ArrayList<Tbl_publicaciones> tpus = new ArrayList<Tbl_publicaciones>();
-				
+		
 		try
-		{	
-			tpus1.setPublic_content(request.getParameter("item1"));
-			tpus1.setMenu_order(Integer.parseInt(request.getParameter("item11")));
-			tpus2.setPublic_content(request.getParameter("item2"));
-			tpus2.setMenu_order(Integer.parseInt(request.getParameter("item22")));
-			tpus3.setPublic_content(request.getParameter("item3"));
-			tpus3.setMenu_order(Integer.parseInt(request.getParameter("item33")));
-			tpus4.setPublic_content(request.getParameter("item4"));
-			tpus4.setMenu_order(Integer.parseInt(request.getParameter("item44")));
-			tpus.add(tpus1);
-			tpus.add(tpus2);
-			tpus.add(tpus3);
-			tpus.add(tpus4);
-
-			if(dtpus.modificarInicio(tpus))
-			{											
+		{
+			for(int i=1; i<contador+1; i++)
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setPublic_titulo(request.getParameter("titulo"+i));
+				tpub.setPublic_content(request.getParameter("contenido"+i));
+				tpub.setPublic_enlace(request.getParameter("url"+i));
+				tpub.setPublic_tipo_img(request.getParameter("icon"+i));
+				tpub.setMenu_order(Integer.parseInt(request.getParameter("orden"+i)));
+				listaInicio.add(tpub);
+			}
+			if(dtpus.modificarInicio(listaInicio))
+			{							
 				response.sendRedirect(request.getContextPath()+ "/CMS/menu/editInicio.jsp?msj=1");
 			}
 			else
@@ -74,9 +67,9 @@ public class SL_inicio extends HttpServlet {
 		}
 		catch(Exception e)
 		{
-			e.printStackTrace();
-			System.out.println("Servlet: Error al editar el inicio");
+			System.out.println("Servlet: Error en la edición del inicio- "+ e.getMessage());
 		}
+		
 	}
 
 }

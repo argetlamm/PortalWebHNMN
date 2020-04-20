@@ -32,6 +32,13 @@
 	{
 		response.sendRedirect("../Error.jsp");
 	}
+	String ayudaS = "";
+	int ayuda = 0;
+	int rolId = 0;
+
+	ayudaS = (String) session.getAttribute("ayuda");
+	ayudaS = ayudaS==null?"":ayudaS;
+	ayuda = Integer.parseInt(ayudaS);
 %>
 <!DOCTYPE html>
 <html>
@@ -57,6 +64,23 @@
 String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
+
+DT_publicaciones dtpub = new DT_publicaciones();
+ArrayList<Tbl_publicaciones> listaAyudas = new ArrayList<Tbl_publicaciones>();
+listaAyudas = dtpub.recuperarAyudas();
+
+String ayudaT = "";
+String ayudaC = "";
+String menuN = "menu";
+
+for(Tbl_publicaciones tbpub : listaAyudas)
+{
+	if(tbpub.getGuid().trim().equals(menuN))
+	{
+		ayudaT = tbpub.getPublic_titulo();
+		ayudaC = tbpub.getPublic_content();
+	}
+}
 
 %>
 
@@ -106,21 +130,32 @@ mensaje = mensaje==null?"":mensaje;
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_menu" method="post">
                 <div class="card-body">
-                <h3 class="card-title"> Recomendaciones antes de cambiar los enlaces de cada inciso del menú: </h3>
-                <br>
-                <p>Por favor, no ingrese ningún enlace nuevo, copie y pegue los ya existentes. Aclarar que, al cambiar
-                el nombre de algún inciso del menú, su enlace seguirá siendo el mismo, ejemplo: Inicio = index.jsp, también
-                note que cada enlace termina en .jsp, por favor, evitar borrar esta extensión, y también tener en cuenta qué
-                al cambiar un inciso (cambiarle la posición, no el nombre), su enlace no cambiará automáticamente con él,
-                esta acción es manual. La estructura se tiene que mantener de la manera ya existente. 
-                O sea, tres incisos estáticos, luego un menú desplegable con tres sub incisos, luego otro inciso estático, 
-                y por último, otro menú desplegable con tres sub incisos igual. </p>
+                <%
+               		if(ayuda==1)
+               		{
+               			%>
+			            <h3 class="card-title"><%=ayudaT %></h3>
+			            <br>
+			            <p><%=ayudaC %></p>
+               			<% 
+               		}
+               	%>      
                   <div class="form-group">
                    <% 
+                   	//Para el caso de menú, y footer, donde se recupera una lista de objetos, y no un objeto sólo
+                   	//(En la base de datos, todos el apartado de Quienes somos[acercade] funciona con un objeto por entrada, 
+                   	//donde, Quienes Somos, Historia, Misión y Visión sólo utilizan una entrada en la base de datos
+                   	//Pero todo el menú utiliza una por texto, o sea, una por "Inicio", otra por "Colecciones", otra por
+                   	//"Quienes Somos", otra por "Más del hebario", otra por "Colaboraciones" y así sucesivamente
+                   	//Debido a que se utiliza la variable menu_order para ordenarlos en el menú, no el id, así que este menu_order
+                   	//no se puede repetir entre cada texto, solución = una entrada por texto.
 				    DT_publicaciones dtpb = new DT_publicaciones();
 					ArrayList<Tbl_publicaciones> listaItems = new ArrayList<Tbl_publicaciones>();
 					listaItems = dtpb.itemMenu();
-					
+					//Listamos todos los items y los almacenamos en un arrayList que posteriormente lo ordenamos
+					//Con el método de Colecctions, sort(), el cuál fue modificado (override) en Tbl_publicaciones, 
+					//para que orden, tomando en cuenta el menú_order, debido a que si lo mostramos a como lo recibimos
+					//desde la bdd, se imprimirá en desorden
 					Collections.sort(listaItems);
 					
 					String publicado = "publicado";
@@ -136,6 +171,12 @@ mensaje = mensaje==null?"":mensaje;
 					{
 						if(tpublc.getPublic_estado().trim().equals(publicado))
 						{
+							//Con un for recorremos toda la lista, si el item está publicado, se tomarán sus datos
+							//Y se asignarán a variables, texto siendo el título, o sea, la palabra mostrada,
+							//enlace, el url dentro del proyecto; guid se utiliza para saber si el item es simplemente
+							//un espacio estático, si es un menú desplegable, o si es un item del menú desplegable
+							//Esto para poder especificarlo al mostrarlo en el formulario 
+							//Y el id toma el valor de menu_order para mostrarlo en el orden en el que se encuentra en el menú
 							texto = tpublc.getPublic_titulo();
 							enlace = tpublc.getPublic_enlace();
 							guid = tpublc.getGuid();
@@ -143,6 +184,10 @@ mensaje = mensaje==null?"":mensaje;
 							contador++;
 	                  		if(guid.trim().equals(estatico))
 	                  		{
+	                  			//Si el guid es "estatico", se creará el espacio adecuado 
+	                  			//Se utiliza un contador para controlar cada espacio según el número de items mostrado
+	                  			//Para recuperar desde el servlet cada parámetro de manera efectiva, o sea
+	                  			//texto1, texto2, etc., enlace1, enlace2, etc., id1, i2, etc., y guid1, guid2, etc.
                   %>
               		<label for="exampleInputEmail1">Item #<%=contador %></label>
                     <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
@@ -157,6 +202,8 @@ mensaje = mensaje==null?"":mensaje;
 	                  		{
 	                  			if(guid.trim().equals(menu))
 	                  			{
+	                  				//Luego, si el guid es "menu", se creará el mismo espacio anterior, con la diferencia de la
+	                  				//primer etiqueta, que dirá, aparte del número de item que es, (Menú desplegable)
                   %>
                   	<label for="exampleInputEmail1">Item #<%=contador %> (Menú desplegable)</label>
                     <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
@@ -169,6 +216,9 @@ mensaje = mensaje==null?"":mensaje;
 	                  			}
 	                  			else
 	                  			{
+	                  				//La última opción es "desplegable", pero ya no se valida debido a que sólo existen tres
+	                  				//opciones, de nuevo, la diferencia es la etiqueta, que ahora mostrará 
+	                  				//(Item del menú desplegable)
                   %>
                   	<label for="exampleInputEmail1">Item #<%=contador %> (Item del menú desplegable)</label>
                     <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
@@ -188,6 +238,10 @@ mensaje = mensaje==null?"":mensaje;
 						System.out.println("Error en la creación del formulario del Editar menú");
 					}
                    %>
+                   <!-- Creamos al final de todo el formulario, un item escondido que mantendrá la cantidad de items ingresados
+                   o sea, el último menu_order (también se podía utilizar la variable contador, pero la verdad no se me ocurrió
+                   hasta ahorita que hago los comentarios [también me pude haber ahorrado una de las dos variables, pero de nuevo
+                   lo noto hasta ahorita xd]) -->
                    <input type="hidden" id="contador" name="contador" class="form-control" value="<%=id %>" required>
                   </div>
                 </div>

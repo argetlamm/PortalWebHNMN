@@ -81,7 +81,15 @@
                   <p>Edición de Menu</p>
                 </a>
          </li>
-<!--           ///////////////////////Tercera Sección//////////////////////////////////// -->
+           <!--  ///////////////////////Tercera Sección//////////////////////////////////// -->
+         </li>
+          <li class="nav-item">
+                <a href="footer/editFooter.jsp" class="nav-link">
+                  <i class="fas fa-stream nav-icon"></i>
+                  <p>Edición de Footer</p>
+                </a>
+         </li>
+<!--           ///////////////////////Cuarta Sección//////////////////////////////////// -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -105,7 +113,7 @@
               </li>
             </ul>
           </li>
-<!--           ///////////////////////Cuarta Sección//////////////////////////////////// --> 			
+<!--           ///////////////////////Quinta Sección//////////////////////////////////// --> 			
  		  <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fab fa-black-tie"></i>
@@ -141,7 +149,7 @@
               </li>
             </ul>
           </li>
-<!--           ///////////////////////Quinta Sección//////////////////////////////////// -->                             
+<!--           ///////////////////////Sexta Sección//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shield-alt"></i>
@@ -159,7 +167,7 @@
                </li>
             </ul>
             </li>
-            <!--           ///////////////////////Sexta Sección//////////////////////////////////// -->                             
+            <!--           ///////////////////////Séptima Sección//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shield-alt"></i>
@@ -177,6 +185,7 @@
                </li>
             </ul>
             </li>
+             <!--           ///////////////////////Octava Sección//////////////////////////////////// -->   
             <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
              <i class="nav-icon fas fa-shield-alt"></i>

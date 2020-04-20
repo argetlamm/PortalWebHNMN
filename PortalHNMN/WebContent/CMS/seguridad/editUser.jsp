@@ -70,7 +70,7 @@ user = Integer.parseInt(idUser);
 Tbl_user tus = new Tbl_user();
 DT_usuario dtus = new DT_usuario();
 
-tus = dtus.obtenerUser(user);
+tus = dtus.obtenerUserId(user);
 
 %>
 

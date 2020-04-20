@@ -33,6 +33,16 @@
 		response.sendRedirect("../Error.jsp");
 	}
 %>
+<%
+	String ayudaS = "";
+	int ayuda = 0;
+	int rolId = 0;
+
+	ayudaS = (String) session.getAttribute("ayuda");
+	ayudaS = ayudaS==null?"":ayudaS;
+	ayuda = Integer.parseInt(ayudaS);
+	%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,28 +72,62 @@ mensaje = mensaje==null?"":mensaje;
 Tbl_publicaciones tpub = new Tbl_publicaciones();
 DT_publicaciones dtpb = new DT_publicaciones();
 ArrayList<Tbl_publicaciones> listaQuienesSomos = new ArrayList<Tbl_publicaciones>();
+ArrayList<Tbl_publicaciones> listaAyudas = new ArrayList<Tbl_publicaciones>();
+//El método recuperarAyudas() devuelve todos las ayudas del CMS
+listaAyudas = dtpb.recuperarAyudas();
+//El método quienesSomos() devuelve todos los datos del apartado Quienes Somos (acerca de)
+//O sea, quiénes somos, historia, visión y misión
 listaQuienesSomos = dtpb.quienesSomos();
 
 String publicado = "publicado";
 String quienesSomos = "quienesSomos";
 String contenido = "";
+String ayudaT = "";
+String ayudaC = "";
 int caracteresIniciales = 0;
 
+//Recorremos la lista
 for(Tbl_publicaciones tbpub : listaQuienesSomos)
 {
+	//Vemos, antes de comparar, que estén como "publicados", o sea, que tengan permitido aparecer
 	if(tbpub.getPublic_estado().trim().equals(publicado))
 	{
+		//Si la variable Guid del objeto a comparar es "quienesSomos", encontramos los datos de este apartado
 		if(tbpub.getGuid().trim().equals(quienesSomos))
 		{
+			//Y asignamos a una variable el contenido (Los párrafos) del objeto
 			contenido = tbpub.getPublic_content();
-			contenido = contenido.replace("<br>","\n");
+			//Para tener en un inicio la cantidad de caracteres, se hace un .length() a esa variable y el valor 
+			//Resultante se le asigna a una variable (usamos el .trim() debido a que, en la base de datos, los
+			//saltos de línea se guardan como <br>, entonces, no afecta en el largo de la cadena el quitarlos)
 			caracteresIniciales = contenido.trim().length();
+			//Luego, en el contenido, reemplazamos los <br>, o sea, los saltos de línea de html, por los saltos de línea
+			//de programación, o sea \n
+			contenido = contenido.replace("<br>","\n");
 		}
 	}
 }
 
+//Recorremos la lista de ayudas
+for(Tbl_publicaciones tbpub : listaAyudas)
+{
+	//Si la variable Guid del objeto a comparar es "quienesSomos", encontramos la ayuda de este apartado
+	//Todas las ayudas tienen el mismo public_tipo, o sea, "ayudacms", cada una se diferencia si, por el guid
+	if(tbpub.getGuid().trim().equals(quienesSomos))
+	{
+		//Si encontramos la solicitud, asignamos el título a una variable (que irá entre <h3>)
+		ayudaT = tbpub.getPublic_titulo();
+		//Y el contenido a otra, acá no es necesario reemplazar los <br> debido a que esto lo imprimimos propiamente
+		//en el formulario html
+		ayudaC = tbpub.getPublic_content();
+	}
+}
+
+
+
 
 %>
+
 
 
 </head>
@@ -131,27 +175,30 @@ for(Tbl_publicaciones tbpub : listaQuienesSomos)
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_quienesSomos" method="post">
                 <div class="card-body">
-                <h3 class="card-title"> Recomendaciones antes de la edición del Quiénes Somos: </h3>
-                <br>
-                <p>
-                Se recomienda, por cuestión de estilo del sitio web, que la cantidad de caracteres no rebase los 1000, luego de los 1000
-                hay un pequeño margen, pero el orden del contenido tiende a deformarse. Por favor, evitar propasarse. 
-                </p>
-                <p>
-                Si por casualidad parece ser que la caja de texto no permite escribir más, presionar la tecla "Supr" repetidas veces 
-                estando posicionado al final de todo el texto; suele pasar que el área de texto detecta una cantidad increíble de 
-                espacios luego del último punto y esto hace que se bloquee, para resolverlo es simplemente borrar ese espacio, y 
-                la tecla "Supr" borra todo lo que esté hacia la derecha, o sea, el espacio.
-                </p>
-                <p>
-                La caja de texto se puede agrandar, sólo tiene que posicionar el cursor en la parte inferior derecha del espacio de texto
-             	clickearlo y posteriormente jalarlo hacia abajo.
-                </p>
+               <%
+               //Si el valor recuperado de ayuda es 1, o sea, que si desea ayuda, se imprimirá los datos recuperados
+               		if(ayuda==1)
+               		{
+               			%>
+			            <h3 class="card-title"><%=ayudaT %></h3>
+			            <br>
+			            <p><%=ayudaC %></p>
+               			<% 
+               		}
+               	%>             
                   <div class="form-group">
                     <label for="exampleInputEmail1">¿Quiénes Somos?:</label>
                     <textarea id="contenido" name="contenido" class="form-control" rows="4" maxlength="5000" required 
-                    onkeyup="contar()" onkeydown="contar()"><%=contenido %></textarea>
+                    onkeyup="contar()" onkeydown="contar()"><%=contenido %></textarea> 
+                    
+                    <!-- Uso el atributo onkeyup y onkeydown para controlar cada vez que se presiona una tecla en el textarea,
+                    o sea, cada vez que se borra o agrega algo. Cada vez que esto pasa, llamo a una función de javascript
+                    escrita abajo que cuenta los caracteres -->
+                    
                     <br>
+                    
+                    <!-- Este label comienza con el valor inicial del conteo hecho en la creación del formulario -->
+                    
                  	<label style="float:right">Caracteres actuales: <input disabled size="3" value=<%=caracteresIniciales %> id="contador"> </label>
                  	<input type="hidden" id="quienesSomos" name="quienesSomos" class="form-control" value="quienesSomos" required>
                   </div>
@@ -192,8 +239,6 @@ for(Tbl_publicaciones tbpub : listaQuienesSomos)
   <script>
     $(document).ready(function ()
     {
-	/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
-
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
       nuevo = "<%=mensaje%>";
@@ -208,15 +253,20 @@ for(Tbl_publicaciones tbpub : listaQuienesSomos)
       }
     });
     </script>
-    
+        
     <script>
+    //Acá es la función que se manda a llamar cada vez que se presiona una tecla en el textarea
     function contar() {
+    	//Simplemente asigna a una variable el contenido del textarea, con id "contenido"
         var cadena = document.getElementById("contenido").value;
+    	//Y luego a otra variable se le asigna el valor devuelvo de la función .length
         var longitud = cadena.trim().length;
         
+    	//Y se actualiza el input con el id contador con el nuevo valor de longitud
         document.getElementById("contador").value = longitud;
    	}
 	</script>
+
 
 </body>
 </html>

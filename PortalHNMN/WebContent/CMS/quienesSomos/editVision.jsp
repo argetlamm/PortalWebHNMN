@@ -32,6 +32,13 @@
 	{
 		response.sendRedirect("../Error.jsp");
 	}
+	String ayudaS = "";
+	int ayuda = 0;
+	int rolId = 0;
+
+	ayudaS = (String) session.getAttribute("ayuda");
+	ayudaS = ayudaS==null?"":ayudaS;
+	ayuda = Integer.parseInt(ayudaS);
 %>
 <!DOCTYPE html>
 <html>
@@ -62,11 +69,15 @@ mensaje = mensaje==null?"":mensaje;
 Tbl_publicaciones tpub = new Tbl_publicaciones();
 DT_publicaciones dtpb = new DT_publicaciones();
 ArrayList<Tbl_publicaciones> listaVision = new ArrayList<Tbl_publicaciones>();
+ArrayList<Tbl_publicaciones> listaAyudas = new ArrayList<Tbl_publicaciones>();
+listaAyudas = dtpb.recuperarAyudas();
 listaVision = dtpb.quienesSomos();
 
 String publicado = "publicado";
 String vision = "vision";
 String contenido = "";
+String ayudaT = "";
+String ayudaC = "";
 int caracteresIniciales = 0;
 
 for(Tbl_publicaciones tbpub : listaVision)
@@ -76,9 +87,18 @@ for(Tbl_publicaciones tbpub : listaVision)
 		if(tbpub.getGuid().trim().equals(vision))
 		{
 			contenido = tbpub.getPublic_content();
-			contenido = contenido.replace("<br>","\n");
 			caracteresIniciales = contenido.trim().length();
+			contenido = contenido.replace("<br>","\n");
 		}
+	}
+}
+
+for(Tbl_publicaciones tbpub : listaAyudas)
+{
+	if(tbpub.getGuid().trim().equals(vision))
+	{
+		ayudaT = tbpub.getPublic_titulo();
+		ayudaC = tbpub.getPublic_content();
 	}
 }
 
@@ -130,22 +150,16 @@ for(Tbl_publicaciones tbpub : listaVision)
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_vision" method="post">
                 <div class="card-body">
-                <h3 class="card-title"> Recomendaciones antes de la edición de la Visión: </h3>
-                <br>
-                <p>
-                Se recomienda, por cuestión de estilo del sitio web, que la cantidad de caracteres no rebase los 1000, luego de los 1000
-                hay un pequeño margen, pero el orden del contenido tiende a deformarse. Por favor, evitar propasarse. 
-                </p>
-                <p>
-                Si por casualidad parece ser que la caja de texto no permite escribir más, presionar la tecla "Supr" repetidas veces 
-                estando posicionado al final de todo el texto; suele pasar que el área de texto detecta una cantidad increíble de 
-                espacios luego del último punto y esto hace que se bloquee, para resolverlo es simplemente borrar ese espacio, y 
-                la tecla "Supr" borra todo lo que esté hacia la derecha, o sea, el espacio.
-                </p>
-                <p>
-                La caja de texto se puede agrandar, sólo tiene que posicionar el cursor en la parte inferior derecha del espacio de texto
-             	clickearlo y posteriormente jalarlo hacia abajo.
-                </p>
+                <%
+               		if(ayuda==1)
+               		{
+               			%>
+			            <h3 class="card-title"><%=ayudaT %></h3>
+			            <br>
+			            <p><%=ayudaC %></p>
+               			<% 
+               		}
+               	%>      
                   <div class="form-group">
                     <label for="exampleInputEmail1">Historia:</label>
                     <textarea id="contenido" name="contenido" class="form-control" rows="4" maxlength="5000" required 

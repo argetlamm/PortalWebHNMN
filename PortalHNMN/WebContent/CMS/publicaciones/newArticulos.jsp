@@ -35,11 +35,15 @@
 %>
 
 <%
-	String loginUser = "";
+	String nombre = "";
+	String apellido = "";
 	int rolId = 0;
 
-	loginUser = (String) session.getAttribute("login");
-	loginUser = loginUser==null?"":loginUser;
+	nombre = (String) session.getAttribute("nombre");
+	nombre = nombre==null?"":nombre;
+	apellido = (String) session.getAttribute("apellido");
+	apellido = apellido==null?"":apellido;
+	String nombreCompleto = nombre+apellido;
 %>
 <!DOCTYPE html>
 <html>
@@ -116,13 +120,13 @@ mensaje = mensaje==null?"":mensaje;
                 <div class="card-body">
                   <div class="form-group">
                   	<label for="exampleInputEmail1">Título del artículo: </label>
-                    <input type="titulo" id="titulo" name="titulo" class="form-control" value="" required>
+                    <input type="text" id="titulo" name="titulo" class="form-control" value="" required>
                     <label for="exampleInputEmail1">Contenido del artículo: </label>
                     <textarea id="contenido" name="contenido" class="form-control" rows="5" maxlength="5000" required></textarea>
 					<label for="exampleInputEmail1">Categoría del artículo: </label>
-					<input type="categoria" id="categoria" name="categoria" class="form-control" value="" required>
-                    <label for="exampleInputEmail1">Artículo creado por: <%=loginUser %></label>
-                    <input type="hidden" id="redactor" name="redactor" class="form-control" value="<%=loginUser %>" required>
+					<input type="text" id="categoria" name="categoria" class="form-control" value="" required>
+                    <label for="exampleInputEmail1">Artículo creado por: <%=nombreCompleto%></label>
+                    <input type="hidden" id="redactor" name="redactor" class="form-control" value="<%=nombreCompleto%>" required>
                   </div>
                 </div>
                 <!-- /.card-body -->	
@@ -167,11 +171,11 @@ mensaje = mensaje==null?"":mensaje;
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'El menú ha sido modificado exitosamente.');
+        successAlert('Éxito', 'El artículo ha sido agregado exitosamente');
       }
       if(nuevo == "2")
       {
-        errorAlert('Error', 'Revise los datos e intente nuevamente!!!');
+        errorAlert('Error', 'No se pudo crear el artículo.');
       }
     });
     </script>
