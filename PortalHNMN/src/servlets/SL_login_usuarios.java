@@ -44,15 +44,13 @@ public class SL_login_usuarios extends HttpServlet {
 		DT_usuario dtus = new DT_usuario();
 		String login = "";
 		String pwd = "";
-		int rolId = 0;
 		
 		login = request.getParameter("login");
 		pwd = request.getParameter("pwd");
-		rolId = Integer.parseInt(request.getParameter("rol"));
 		
 		try
 		{
-			if(dtus.dtverificarLogin(login, pwd, rolId))
+			if(dtus.dtverificarLogin(login, pwd))
 			{
 				System.out.println("Login enviado: "+login);
 				Tbl_user user = dtus.obtenerUserLogin(login);
@@ -62,19 +60,11 @@ public class SL_login_usuarios extends HttpServlet {
 				String apellido = user.getApellido1();
 				HttpSession hts = request.getSession(true);
 				hts.setAttribute("login", login);
-				hts.setAttribute("idRol", rolId);
+				hts.setAttribute("idRol", 1);
 				hts.setAttribute("ayuda", ayudaString);
 				hts.setAttribute("nombre", nombre);
 				hts.setAttribute("appelido", apellido);
-				System.out.println("hts.getAttribute(\"idRol\") = " + hts.getAttribute("idRol"));
-				if(rolId==3 || rolId==2)
-				{
-					response.sendRedirect("index2.jsp");
-				}
-				else
-				{
-					response.sendRedirect("CMS/sistema.jsp");
-				}
+				response.sendRedirect("CMS/sistema.jsp");
 			}
 			else
 			{
