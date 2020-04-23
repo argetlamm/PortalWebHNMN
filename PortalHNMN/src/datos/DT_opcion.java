@@ -44,6 +44,24 @@ public class DT_opcion {
 		return listaOpc;
 	}
 	
+	/////////////////Se facilita la busqueda de las opciones que están disponible en los demás metodos/////////////
+	public void getRS(Connection c) {
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_opcion where estado<>3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			
+			rsOpcion = ps.executeQuery();
+			
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listOpc() "+ e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	//Método para guardar opciones
 	public boolean guardarOpcion(Tbl_opcion top) throws SQLException
 	{
@@ -51,7 +69,7 @@ public class DT_opcion {
 		boolean guardado = false;
 		try
 		{
-			this.listOpc();
+			this.getRS(c);
 			rsOpcion.moveToInsertRow();
 			
 			rsOpcion.updateString("opcion", top.getOpcion());
@@ -106,11 +124,11 @@ public class DT_opcion {
 		boolean modificado=false;	
 		try
 		{
-			this.listOpc();
+			this.getRS(c);
 			rsOpcion.beforeFirst();
 			while (rsOpcion.next())
 			{
-				if(rsOpcion.getInt(1)==topc.getId_opcion())
+				if(rsOpcion.getInt(1)==topc.getId_opcion()) //Saber cual es la variable id, para cambiar el 1
 				{
 					rsOpcion.updateString("opcion", topc.getOpcion());
 					rsOpcion.updateString("opcion_desc", topc.getOpcion_desc());
@@ -132,17 +150,17 @@ public class DT_opcion {
 		return modificado;
 	}
 	
-	public boolean eliminarOpcion(Tbl_opcion topc) throws SQLException
+	public boolean eliminarOpcion(Tbl_opcion topc) throws SQLException //Variable que recibe el Vicli es un int id
 	{
 		Connection c = PoolConexion.getConnection();
 		boolean eliminado=false;	
 		try
 		{
-			this.listOpc();
+			this.getRS(c);
 			rsOpcion.beforeFirst();
 			while (rsOpcion.next())
 			{
-				if(rsOpcion.getInt(1)==topc.getId_opcion())
+				if(rsOpcion.getInt(1)==topc.getId_opcion()) //Verificar de donde sale la variable id, para sustituir el 1
 				{
 					rsOpcion.updateInt("estado",3);
 					rsOpcion.updateRow();

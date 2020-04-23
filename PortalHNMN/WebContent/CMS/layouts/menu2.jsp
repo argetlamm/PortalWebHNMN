@@ -59,7 +59,7 @@
                 </a>
               </li>
               <li class="nav-item">
-              <a href="././listRolOpcion.jsp" class="nav-link">
+              <a href="././addRolOpcion.jsp" class="nav-link">
                 <i class="fas fa-toolbox nav-icon"></i>
                 <p>Opciones de Rol</p>
               </a>
