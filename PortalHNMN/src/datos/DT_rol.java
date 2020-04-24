@@ -47,6 +47,23 @@ public class DT_rol
 		return listaRol;
 	}
 	
+	
+	/////////////////Se facilita la busqueda de los roles que están disponible en los demás metodos/////////////
+	public void getRS(Connection c) {
+		try
+		{			
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_rol where estado<>3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsRol = ps.executeQuery();
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listRol() "+ e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
 	public Tbl_rol obtenerRol(int idRol) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
@@ -83,7 +100,7 @@ public class DT_rol
 		boolean guardado = false;
 		try
 		{
-			this.listRol();
+			this.getRS(c);
 			rsRol.moveToInsertRow();
 			rsRol.updateString("rol_name", trl.getRol_name());
 			rsRol.updateString("rol_desc", trl.getRol_desc());
@@ -108,7 +125,7 @@ public class DT_rol
 		boolean modificado=false;	
 		try
 		{
-			this.listRol();
+			this.getRS(c);
 			rsRol.beforeFirst();
 			while (rsRol.next())
 			{
@@ -140,7 +157,7 @@ public class DT_rol
 		boolean eliminado=false;	
 		try
 		{
-			this.listRol();
+			this.getRS(c);
 			rsRol.beforeFirst();
 			while (rsRol.next())
 			{
@@ -194,4 +211,5 @@ public class DT_rol
 		}		*/
 		return listRolOpc;
 	}
+
 }
