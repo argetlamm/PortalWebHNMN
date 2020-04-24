@@ -141,7 +141,7 @@ tus = dtus.obtenerUserId(user);
 						<tr align="center">
 							<td>
 								<div class="cuadro-fotoNima" align="center">
-									<img id="preview" src="../../img/slides/nivo/foto-banner1.jpg" name="preview"  alt="Foto NIMA"
+									<img id="preview" src="../../imagenesBanner/foto-banner1.jpg" name="preview"  alt="Foto NIMA"
 									style="width: 1000px; height: 350px; border-bottom-color: white; margin: 2px;" />
 								</div> &nbsp;
 							</td>
