@@ -59,6 +59,22 @@
     <section id="content">
       <div class="container">
         <div class="row">
+        <%
+            	String publicado = "publicado";
+		        DT_publicaciones dtpusdos = new DT_publicaciones();
+		        ArrayList<Tbl_publicaciones> listaParrafProd = new ArrayList<Tbl_publicaciones>();
+		        listaParrafProd = dtpusdos.itemsParrafoColecciones();
+		        String parrafo="";
+		        for (Tbl_publicaciones tpublc : listaParrafProd){
+		        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+		        			parrafo=tpublc.getPublic_content();
+		
+		        %>
+		        <p><%=parrafo %></p>
+		        <%
+		       	 	}
+		        }
+        %>
           <div class="span12">
             <ul class="portfolio-categ filter">
               <li class="all active"><a href="#">Todas</a></li>
@@ -75,7 +91,6 @@
 	        		DT_publicaciones dtpus = new DT_publicaciones();
 	        		ArrayList<Tbl_publicaciones> listaColecciones = new ArrayList<Tbl_publicaciones>();
 	        		listaColecciones = dtpus.imagenesColeccion();
-	            	String publicado = "publicado";
 	            	String url = "";
 	            	String tipo = "";
 	            	int id=0;
