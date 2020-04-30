@@ -55,7 +55,8 @@
     <section id="content">
       <div class="container">
         <div class="row">
-		<img alt="mapadesitio" src="img/sitemap.png">
+		<img alt="mapadesitio" src="img/main.png">
+		<img alt="mapadesitio" src="img/cms.png">
         </div>
       </div>
     </section>
