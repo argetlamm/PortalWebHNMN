@@ -112,7 +112,7 @@
       <img alt="" src="dist/img/const.jpg">
       </div>
       <div class="card-header" style="text-aling:right;">
-      	<a target="_blank" href="https://analytics.google.com/analytics/web/?authuser=1#/report-home/a153329080w216581644p206913185" 
+      	<a target="_blank" href="https://analytics.google.com/analytics/web/#/report-home/a153329080w216581644p206913185"
       	class="btn btn-primary"><i class="fas fa-chart-line"></i> Google Analytics</a>
       </div>
       <!-- /.container-fluid -->
