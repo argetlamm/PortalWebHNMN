@@ -78,7 +78,7 @@ public class SL_subir_foto_banner extends HttpServlet {
 						int contador = dtpub.obtenerMenuOrder();
 						rutaFichero = "foto-banner"+contador+".jpg";
 						//path = "C:\\Users\\pc\\git\\PortalWebHNMN\\PortalHNMN\\WebContent\\img\\slides\\nivo\\";
-						path = "C:\\imagenesBanner\\";
+						path = "C:\\Users\\pc\\Desktop\\Programas\\glassfish-5.1.0\\glassfish5\\glassfish\\domains\\domain1\\imagenesBanner\\";
 						String url2 = "imagenesBanner/";
 						//String url2 = path.substring(52);
 						//url2 = url2.replace("\\", "/");

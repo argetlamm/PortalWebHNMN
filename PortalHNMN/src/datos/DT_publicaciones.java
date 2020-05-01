@@ -1027,4 +1027,74 @@ public class DT_publicaciones {
 		return listaParrafColec;
 	}
 	
+	public ArrayList<Tbl_publicaciones> titulosServicios() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaTpus = new ArrayList<Tbl_publicaciones>();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'servicios' AND guid = 'muestreoIndividualTitulo'"
+					+ "OR guid = 'muestreoColectivoTitulo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				listaTpus.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en titulosServicios() "+ e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return listaTpus;
+	}
+	
+	public ArrayList<Tbl_publicaciones> itemsServicios() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaTpus = new ArrayList<Tbl_publicaciones>();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'servicios' AND guid = 'muestreoIndividual'"
+					+ "OR guid = 'muestreoColectivo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				listaTpus.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en itemsServicios() "+ e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return listaTpus;
+	}
+	
 }
