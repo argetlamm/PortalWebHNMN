@@ -189,7 +189,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../servicios/editServicios.jsp" class="nav-link">
+                <a href="editServicios.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Editar servicios</p>
                 </a>
@@ -206,7 +206,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="newArticulos.jsp" class="nav-link">
+                <a href="../publicaciones/newArticulos.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Agregar artículos</p>
                 </a>

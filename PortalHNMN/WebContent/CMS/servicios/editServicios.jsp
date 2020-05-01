@@ -71,11 +71,11 @@ listaAyudas = dtpub.recuperarAyudas();
 
 String ayudaT = "";
 String ayudaC = "";
-String footerT = "footer";
+String serviciosT = "servicios";
 
 for(Tbl_publicaciones tbpub : listaAyudas)
 {
-	if(tbpub.getGuid().trim().equals(footerT))
+	if(tbpub.getGuid().trim().equals(serviciosT))
 	{
 		ayudaT = tbpub.getPublic_titulo();
 		ayudaC = tbpub.getPublic_content();
@@ -92,7 +92,7 @@ for(Tbl_publicaciones tbpub : listaAyudas)
 	<!-- /.navbar -->
 	
 	<!-- SIDEBAR -->
-	  	<jsp:include page="../../CMS/layouts/menu8.jsp"></jsp:include>
+	  	<jsp:include page="../../CMS/layouts/menu9.jsp"></jsp:include>
 	<!-- SIDEBAR -->
 	
 	  <!-- Content Wrapper. Contains page content -->
@@ -102,12 +102,12 @@ for(Tbl_publicaciones tbpub : listaAyudas)
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Editar [Footer]</h1>
+	            <h1>Editar [Servicios]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="editFooter.jsp">Footer</a></li>
-	              <li class="breadcrumb-item active">Edición del Footer</li>
+	              <li class="breadcrumb-item"><a href="editFooter.jsp">Servicios</a></li>
+	              <li class="breadcrumb-item active">Edición de los Servicios</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -123,11 +123,11 @@ for(Tbl_publicaciones tbpub : listaAyudas)
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edición del Footer</h3>
+                <h3 class="card-title">Edición de los Servicios</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="${pageContext.request.contextPath}/SL_footer" method="post">
+              <form role="form" action="${pageContext.request.contextPath}/SL_servicios" method="post">
                 <div class="card-body">
                 <%
                		if(ayuda==1)
@@ -144,9 +144,9 @@ for(Tbl_publicaciones tbpub : listaAyudas)
 				    DT_publicaciones dtpb = new DT_publicaciones();
 					ArrayList<Tbl_publicaciones> listaItems = new ArrayList<Tbl_publicaciones>();
 					ArrayList<Tbl_publicaciones> listaTitulos = new ArrayList<Tbl_publicaciones>();
-					listaItems = dtpb.itemsFtr();
-					listaTitulos = dtpb.titulosFtr();
-					//Acá trabajamos con dos listas, la de los items de cada "espacio" del footer
+					listaItems = dtpb.itemsServicios();
+					listaTitulos = dtpb.titulosServicios();
+					//Acá trabajamos con dos listas, la de los items de cada "espacio" del Servicio
 					//Y la de los títulos 
 					//Acá sólo está explicado las diferencias con el editMenu, para mejor explicación,
 					//lean los comentarios del editMenu.jsp
@@ -154,12 +154,10 @@ for(Tbl_publicaciones tbpub : listaAyudas)
 					Collections.sort(listaTitulos);
 					
 					String publicado = "publicado";
-					String parrafo = "parrafo";
-					String enlace = "enlace";
 					//Utilizo dos variables debido a que, por cada título hay uno o más items, entonces
-					//Las variables  a comparar del título deben de ser constantes hasta pasar al siguiente apartado
-					//Del footer, o sea, hacia otro título, mientras que la de los items deberían de ir variando.
-					//En teoría, con el .sort de la listaItems, tendría que tenerlos en el orden del footer, pero
+					//las variables  a comparar del título deben de ser constantes hasta pasar al siguiente servicio
+					//o sea, hacia otro título, mientras que la de los items deberían de ir variando.
+					//En teoría, con el .sort de la listaItems, tendría que tenerlos en el orden de los servicios, pero
 					//Para no arriesgar, hago las comparaciones adecuadas.
 					String guidT = "", guidI = "";
 					String nameT = "", nameI ="";
@@ -179,55 +177,61 @@ for(Tbl_publicaciones tbpub : listaAyudas)
 							guidT = tpublc.getGuid();
 							idT = tpublc.getMenu_order();
 							nameT = tpublc.getPublic_name();
-							tipo = tpublc.getPublic_tipo();
 							contadorT++;
-	                  		if(guidT.trim().equals(parrafo))
+	                  		if(guidT.trim().equals("muestreoIndividualTitulo"))
 	                  		{
 	                  			//El contador sólo aumenta hasta crear el espacio adecuado 
-	                  			//según el guid, o sea, si lo que posee debajo es un párrafo simple
-	                  			//si posee una lista de enlaces debajo o si posee una lista simple)
+	                  			//según el guid, o sea, si los items se muestran según precio individual
+	                  			//o precio colectivo (esto en función del sitio web, donde se mostrará
+	                  			//ó, "Precio por muestra", o "Precios")
 								//Notarlo en el título
 	                  			contador++;
+	                  			if(contador==1)
+	                  			{
+	                  				
+	                  			}
+	                  			else
+	                  			{	
 	                  		%>
-					<label for="exampleInputEmail1">Título #<%=contadorT %> (Con párrafo debajo)</label>
+	                  		<hr style="border-width:2px;">
+	                  		<%
+	                  			}
+	                  		%> 		
+					<label for="exampleInputEmail1">Título #<%=contadorT %> (Con precios de manera individual)</label>
                     <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
                     <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=idT %>" required>
                     <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guidT %>" required>
-					<input type="hidden" id="tipo<%=contador%>" name="tipo<%=contador%>" class="form-control" value="<%=tipo %>" required>
+					<input type="hidden" id="name<%=contador%>" name="name<%=contador%>" class="form-control" value="<%=nameT %>" required>
 	                  			<%
 	                  			for(Tbl_publicaciones tbpublc: listaItems)
 	                  			{
-	                  				//Luego, al crear el espacio para el título que posea párrafo debajo
-	                  				//Procedemos a recorrer la lista de los items para encontrar él 
-	                  				//párrafo que está debajo
+	                  				//Luego, al crear el espacio para el título que posea muestras individuales
+	                  				//Procedemos a recorrer la lista de los items para encontrar los items
 	                  				if(tbpublc.getPublic_estado().trim().equals(publicado))
 	                  				{
-	                  					texto = tbpublc.getPublic_content();
+	                  					texto = tbpublc.getPublic_titulo();
 	                  					guidI = tbpublc.getGuid();
 	          							idI = tbpublc.getMenu_order();
 	          							nameI = tbpublc.getPublic_name();
-	          							tipo = tbpublc.getPublic_tipo();
-	                  					if(guidI.trim().equals(guidT.trim()))
+	                  					if(guidI.trim().equals("muestreoIndividual"))
 	                  					{
 	                  						//Donde, si guid del item es igual al guid del título
 	                  						if(nameT.trim().equals(nameI.trim()))
 	                  						{
-	                  							//E igual si su nombre es igual 
-	                  							//(Uso dos variables para comparar debido a que hay dos tipos
-	                  							//de listas con enlaces, enlaces externos al sitio web y enlaces del sitio)
-	                  							texto = texto.replace("<br>","\n");
+	                  							//E igual si su nombre es igual, ya que el guid es si es item
+	                  							//de muestra individual o colectiva, y el name para diferenciar
+	                  							//entre los distintos servicios de muestra individual o colectiva.
 	                  							//Utilizo un nuevo contador para ver la cantidad de items por título
 	                  							//Pero siempre aumento el contador normal para ver cuándo items estoy
 	                  							//mandado a editar al servlet
 	                  							contadorM++;
 	                  							contador++;
 	                  							%>
-	                <label for="exampleInputEmail1">Item #<%=contadorM %> (Párrafo)</label>
-                    <textarea id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" rows="5" maxlength="5000" 
-                    required><%=texto.trim() %> </textarea>
+	                <label for="exampleInputEmail1">Item #<%=contadorM %> (Precio individual)</label>
+					<input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
                     <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=idI %>" required>
                     <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guidI %>" required>
-	               	<input type="hidden" id="tipo<%=contador%>" name="tipo<%=contador%>" class="form-control" value="<%=tipo %>" required>
+	               	<input type="hidden" id="name<%=contador%>" name="name<%=contador%>" class="form-control" value="<%=nameI %>" required>
 	                  							<% 
 	                  						}
 	                  					}
@@ -236,17 +240,17 @@ for(Tbl_publicaciones tbpub : listaAyudas)
 	                  		}
 	                  		else
 	                  		{
-	                  			if(guidT.trim().equals(enlace))
+	                  			if(guidT.trim().equals("muestreoColectivoTitulo"))
 	                  			{
-	                  				//Ahora, si el título posee enlaces debajo
+	                  				//Ahora, si el título es de precios de manera colectiva
 	                  				contador++;
                   %>
                   	<hr style="border-width:2px;">
-                  	<label for="exampleInputEmail1">Título #<%=contadorT %> (Con enlaces debajo)</label>
+                  	<label for="exampleInputEmail1">Título #<%=contadorT %> (Con precios de manera colectiva)</label>
                     <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
                     <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=idT %>" required>
                     <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guidT %>" required>
-             		<input type="hidden" id="tipo<%=contador%>" name="tipo<%=contador%>" class="form-control" value="<%=tipo %>" required>
+             		<input type="hidden" id="name<%=contador%>" name="name<%=contador%>" class="form-control" value="<%=nameT %>" required>
                   <% 
 				                  	for(Tbl_publicaciones tbpublc: listaItems)
 				        			{
@@ -256,80 +260,33 @@ for(Tbl_publicaciones tbpub : listaAyudas)
 				        					guidI = tbpublc.getGuid();
 											idI = tbpublc.getMenu_order();
 											nameI = tbpublc.getPublic_name();
-											tipo = tbpublc.getPublic_tipo();
-				        					if(guidI.trim().equals(guidT.trim()))
+				        					if(guidI.trim().equals("muestreoColectivo"))
 				        					{
-				        						//Al saber que es un item con enlace, se asigna su valor a la variable url
-				        						url = tbpublc.getPublic_enlace();
+				        						//Donde si el item es igual al título de precios Colectivos
 				        						if(nameT.trim().equals(nameI.trim()))
 				        						{
-				        							//Y luego comparamos si es un enlace externo o uno del propio sitio
+				        							//Y luego si el item colectivo pertenecer al título colectivo
 				        							contadorM++;
 				        							contador++;
 				        							%>
-				 	<label for="exampleInputEmail1">Item #<%=contadorM %> (Item con enlace)</label>
+				 	<label for="exampleInputEmail1">Item #<%=contadorM %> (Precio colectivo)</label>
 				    <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
-				    <label for="exampleInputEmail1">Enlace: </label>
-                    <input type="text" id="enlace<%=contador%>" name="enlace<%=contador%>" class="form-control" value="<%=url.trim() %>" required>
-			        <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=idI %>" required>
+				    <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=idI %>" required>
 			        <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guidI %>" required>
-				    <input type="hidden" id="tipo<%=contador%>" name="tipo<%=contador%>" class="form-control" value="<%=tipo %>" required>
+				    <input type="hidden" id="name<%=contador%>" name="name<%=contador%>" class="form-control" value="<%=nameI %>" required>
 				        							<% 
 				        						}
 				        					}
 				        				}
 				        			}
 	                  			}
-	                  			else
-	                  			{
-	                  				//Se aumenta el contador debido a que sólo hay tres opciones, párrafo, lista de
-	                  				//enlaces, y esta última, lista "simple"
-	                  				contador++;
-                  %>
-                  	<hr style="border-width:2px;">
-                  	<label for="exampleInputEmail1">Título #<%=contadorT %> (Con una lista debajo)</label>
-                    <input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
-                    <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=idT %>" required>
-                    <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guidT %>" required>
-                   	<input type="hidden" id="tipo<%=contador%>" name="tipo<%=contador%>" class="form-control" value="<%=tipo %>" required>
-                   <% 
-                   					for(Tbl_publicaciones tbpublc: listaItems)
-                   					{
-                   						texto = tbpublc.getPublic_titulo();
-			        					guidI = tbpublc.getGuid();
-										idI = tbpublc.getMenu_order();
-										nameI = tbpublc.getPublic_name();
-										tipo = tbpublc.getPublic_tipo();
-										if(tbpublc.getPublic_estado().trim().equals(publicado))
-										{
-											if(guidI.trim().equals(guidT.trim()))
-				        					{ 
-				        						if(nameT.trim().equals(nameI.trim()))
-				        						{
-				        							//Hacemos la última comprobación debido a que la lista siempre
-				        							//se recorre de 0, así que acá es necesario igualmente especificar
-				        							//qué items pertenecen a este título
-				        							contadorM++;
-				        							contador++;
-			     %>
-			 		<label for="exampleInputEmail1">Item #<%=contadorM %> (Item sin enlace)</label>
-					<input type="text" id="texto<%=contador%>" name="texto<%=contador%>" class="form-control" value="<%=texto.trim() %>" required>
-				    <input type="hidden" id="id<%=contador%>" name="id<%=contador%>" class="form-control" value="<%=idI %>" required>
-			        <input type="hidden" id="guid<%=contador%>" name="guid<%=contador%>" class="form-control" value="<%=guidI %>" required>
-			    	<input type="hidden" id="tipo<%=contador%>" name="tipo<%=contador%>" class="form-control" value="<%=tipo %>" required>
-			    <% 
-				        						}
-				        					}
-										}
-                   					}
-		                  		}
 		                  	}
 						}
 					}
 				}catch(NullPointerException e)
 				{
 					e.printStackTrace();
-					System.out.println("Error en la creación del formulario del Editar footer");
+					System.out.println("Error en la creación del formulario del Editar Servicios");
 				}
                    %>
                    <input type="hidden" id="contador" name="contador" class="form-control" value="<%=contador %>" required>
@@ -378,7 +335,7 @@ for(Tbl_publicaciones tbpub : listaAyudas)
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'El footer ha sido modificado exitosamente.');
+        successAlert('Éxito', 'Los servicios han sido modificados exitosamente.');
       }
       if(nuevo == "2")
       {

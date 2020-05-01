@@ -52,7 +52,6 @@ public class SL_login_usuarios extends HttpServlet {
 		{
 			if(dtus.dtverificarLogin(login, pwd))
 			{
-				System.out.println("Login enviado: "+login);
 				Tbl_user user = dtus.obtenerUserLogin(login);
 				int ayuda = user.getAyuda();
 				String ayudaString = Integer.toString(ayuda);
@@ -68,7 +67,16 @@ public class SL_login_usuarios extends HttpServlet {
 			}
 			else
 			{
-				response.sendRedirect("index.jsp?ERROR");
+				if(dtus.dtverificarLogin2(login, pwd))
+				{
+					HttpSession hts = request.getSession(true);
+					hts.setAttribute("login", login);
+					response.sendRedirect("index2.jsp");
+				}
+				else
+				{
+					response.sendRedirect("index.jsp?ERROR");
+				}
 			}
 		}
 		catch(Exception e)

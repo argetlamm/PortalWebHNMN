@@ -190,6 +190,24 @@
             <a href="#" class="nav-link">
              <i class="nav-icon fas fa-shield-alt"></i>
               <p>
+               	Servicios
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="servicios/editServicios.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Editar servicios</p>
+                </a>
+               </li>
+            </ul>
+           </li>
+           <!--           ///////////////////////Novena Sección//////////////////////////////////// -->   
+            <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+             <i class="nav-icon fas fa-shield-alt"></i>
+              <p>
                	Publicaciones
                 <i class="fas fa-angle-left right"></i>
               </p>

@@ -1062,6 +1062,50 @@ public class DT_publicaciones {
 		return listaTpus;
 	}
 	
+	public boolean modificarTitulosServicios(ArrayList<Tbl_publicaciones> tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String titulo = "";
+		String name = "";
+		String guid = "";
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'servicios' AND guid = 'muestreoIndividualTitulo'"
+					+ "OR guid = 'muestreoColectivoTitulo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					titulo = tpubl.getPublic_titulo();
+					name = tpubl.getPublic_name();
+					guid = tpubl.getGuid();
+					if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
+					{
+						rsPublicaciones.updateString("public_titulo", titulo);
+						rsPublicaciones.updateString("public_name", name);
+						rsPublicaciones.updateString("guid", guid);
+						rsPublicaciones.updateRow();
+						modificado=true;
+						break;
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarTitulosServicios() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
+	}
+	
 	public ArrayList<Tbl_publicaciones> itemsServicios() throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
@@ -1095,6 +1139,54 @@ public class DT_publicaciones {
 			c.close();
 		}
 		return listaTpus;
+	}
+	
+	public boolean modificarItemsServicios(ArrayList<Tbl_publicaciones> tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String titulo = "";
+		String name = "";
+		String guid = "";
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'servicios' AND guid = 'muestreoIndividual'"
+					+ "OR guid = 'muestreoColectivo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				for(Tbl_publicaciones tpubl : tbp)
+				{
+					titulo = tpubl.getPublic_titulo();
+					name = tpubl.getPublic_name();
+					guid = tpubl.getGuid();
+					
+					if(rsPublicaciones.getString(7).trim().equals(name.trim()))
+					{
+						if(rsPublicaciones.getInt(3)==tpubl.getMenu_order())
+						{
+							rsPublicaciones.updateString("public_titulo", titulo);
+							rsPublicaciones.updateString("public_name", name);
+							rsPublicaciones.updateString("guid", guid);
+							rsPublicaciones.updateRow();
+							modificado=true;
+							break;
+						}
+					}
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarItemServicios() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
 	}
 	
 }
