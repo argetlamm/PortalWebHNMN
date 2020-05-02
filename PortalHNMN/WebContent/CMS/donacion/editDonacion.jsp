@@ -33,11 +33,21 @@
 		response.sendRedirect("../Error.jsp");
 	}
 %>
+<%
+	String ayudaS = "";
+	int ayuda = 0;
+	int rolId = 0;
+
+	ayudaS = (String) session.getAttribute("ayuda");
+	ayudaS = ayudaS==null?"":ayudaS;
+	ayuda = Integer.parseInt(ayudaS);
+	%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Donaciones | Herbario Nacional de Nicaragua</title>
+<title>Editar "Donaciones" | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -58,28 +68,78 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* OBTENEMOS LOS DATOS DEL MENU A SER EDITADOS */
+/* OBTENEMOS LOS DATOS DEL QUIENES SOMOS A SER EDITADOS */
 Tbl_publicaciones tpub = new Tbl_publicaciones();
 DT_publicaciones dtpb = new DT_publicaciones();
 ArrayList<Tbl_publicaciones> listaDonaciones = new ArrayList<Tbl_publicaciones>();
-listaDonaciones = dtpb.itemsDonaciones();
+ArrayList<Tbl_publicaciones> listaAyudas = new ArrayList<Tbl_publicaciones>();
+//El método recuperarAyudas() devuelve todos las ayudas del CMS
+listaAyudas = dtpb.recuperarAyudas();
+//El método donaciones() devuelve todos los datos del apartado Donaciones
+listaDonaciones = dtpb.donaciones();
 
 String publicado = "publicado";
-String item1="";
-int item11=0;
-for (Tbl_publicaciones tpublc : listaDonaciones){
-	if(tpublc.getPublic_estado().trim().equals(publicado)){
-		if(tpublc.getMenu_order() == 1){
-			item1 = tpublc.getPublic_content();
-			item11 = tpublc.getMenu_order();
-		
+String donaciones = "donaciones";
+String contenido = "";
+String ayudaT = "";
+String ayudaC = "";
+int caracteresIniciales = 0;
+
+//Recorremos la lista
+for(Tbl_publicaciones tbpub : listaDonaciones)
+{
+	//Vemos, antes de comparar, que estén como "publicados", o sea, que tengan permitido aparecer
+	if(tbpub.getPublic_estado().trim().equals(publicado))
+	{
+		//Si la variable Guid del objeto a comparar es "donaciones", encontramos los datos de este apartado
+		if(tbpub.getGuid().trim().equals(donaciones))
+		{
+			//Y asignamos a una variable el contenido (Los párrafos) del objeto
+			contenido = tbpub.getPublic_content();
+			//Para tener en un inicio la cantidad de caracteres, se hace un .length() a esa variable y el valor 
+			//Resultante se le asigna a una variable (usamos el .trim() debido a que, en la base de datos, los
+			//saltos de línea se guardan como <br>, entonces, no afecta en el largo de la cadena el quitarlos)
+			caracteresIniciales = contenido.trim().length();
+			//Luego, en el contenido, reemplazamos los <br>, o sea, los saltos de línea de html, por los saltos de línea
+			//de programación, o sea \n
+			contenido = contenido.replace("<br>","\n");
 		}
 	}
 }
 
-//tpub = dtpb.obtenerMenu(item1);
+//Recorremos la lista de ayudas
+for(Tbl_publicaciones tbpub : listaAyudas)
+{
+	//Si la variable Guid del objeto a comparar es "donaciones", encontramos la ayuda de este apartado
+	//Todas las ayudas tienen el mismo public_tipo, o sea, "ayudacms", cada una se diferencia si, por el guid
+	if(tbpub.getGuid().trim().equals(donaciones))
+	{
+		//Si encontramos la solicitud, asignamos el título a una variable (que irá entre <h3>)
+		ayudaT = tbpub.getPublic_titulo();
+		//Y el contenido a otra, acá no es necesario reemplazar los <br> debido a que esto lo imprimimos propiamente
+		//en el formulario html
+		ayudaC = tbpub.getPublic_content();
+	}
+}
+
+for(Tbl_publicaciones tbpub : listaAyudas)
+{
+	//Si la variable Guid del objeto a comparar es "donaciones", encontramos la ayuda de este apartado
+	//Todas las ayudas tienen el mismo public_tipo, o sea, "ayudacms", cada una se diferencia si, por el guid
+	if(tbpub.getGuid().trim().equals(donaciones))
+	{
+		//Si encontramos la solicitud, asignamos el título a una variable (que irá entre <h3>)
+		ayudaT = tbpub.getPublic_titulo();
+		//Y el contenido a otra, acá no es necesario reemplazar los <br> debido a que esto lo imprimimos propiamente
+		//en el formulario html
+		ayudaC = tbpub.getPublic_content();
+	}
+}
+
+
 
 %>
+
 
 
 </head>
@@ -100,12 +160,12 @@ for (Tbl_publicaciones tpublc : listaDonaciones){
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Editar Donaciones</h1>
+	            <h1>Editar [Donaciones]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
 	              <li class="breadcrumb-item"><a href="editDonacion.jsp">Donaciones</a></li>
-	              <li class="breadcrumb-item active">Edición de Donaciones</li>
+	              <li class="breadcrumb-item active">Edición de "Donaciones"</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -121,17 +181,39 @@ for (Tbl_publicaciones tpublc : listaDonaciones){
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Edición del Menu</h3>
+                <h3 class="card-title">Edición de Donaciones</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_donaciones" method="post">
                 <div class="card-body">
+               <%
+               //Si el valor recuperado de ayuda es 1, o sea, que si desea ayuda, se imprimirá los datos recuperados
+               		if(ayuda==1)
+               		{
+               			%>
+			            <h3 class="card-title"><%=ayudaT %></h3>
+			            <br>
+			            <p><%=ayudaC %></p>
+               			<% 
+               		}
+               	%>             
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Primer párrafo:</label>
-                    <input type="text" id="item1" name="item1" class="form-control" value="<%=item1 %>" required>
-                    <input type="hidden" id="item11" name="item11" class="form-control" value="<%=item11 %>" required>
-                    </div>
+                    <label for="exampleInputEmail1">Donaciones:</label>
+                    <textarea id="contenido" name="contenido" class="form-control" rows="4" maxlength="5000" required 
+                    onkeyup="contar()" onkeydown="contar()"><%=contenido %></textarea> 
+                    
+                    <!-- Uso el atributo onkeyup y onkeydown para controlar cada vez que se presiona una tecla en el textarea,
+                    o sea, cada vez que se borra o agrega algo. Cada vez que esto pasa, llamo a una función de javascript
+                    escrita abajo que cuenta los caracteres -->
+                    
+                    <br>
+                    
+                    <!-- Este label comienza con el valor inicial del conteo hecho en la creación del formulario -->
+                    
+                 	<label style="float:right">Caracteres actuales: <input disabled size="3" value=<%=caracteresIniciales %> id="contador"> </label>
+                 	<input type="hidden" id="donaciones" name="donaciones" class="form-control" value="donaciones" required>
+                  </div>
                 </div>
                 <!-- /.card-body -->
 
@@ -169,8 +251,6 @@ for (Tbl_publicaciones tpublc : listaDonaciones){
   <script>
     $(document).ready(function ()
     {
-	/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
-
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
       nuevo = "<%=mensaje%>";
@@ -185,6 +265,20 @@ for (Tbl_publicaciones tpublc : listaDonaciones){
       }
     });
     </script>
+        
+    <script>
+    //Acá es la función que se manda a llamar cada vez que se presiona una tecla en el textarea
+    function contar() {
+    	//Simplemente asigna a una variable el contenido del textarea, con id "contenido"
+        var cadena = document.getElementById("contenido").value;
+    	//Y luego a otra variable se le asigna el valor devuelvo de la función .length
+        var longitud = cadena.trim().length;
+        
+    	//Y se actualiza el input con el id contador con el nuevo valor de longitud
+        document.getElementById("contador").value = longitud;
+   	}
+	</script>
+
 
 </body>
 </html>
