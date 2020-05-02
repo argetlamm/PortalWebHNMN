@@ -43,17 +43,17 @@ public class SL_donaciones extends HttpServlet {
 		Tbl_publicaciones tpus1 = new Tbl_publicaciones();
 		DT_publicaciones dtpus = new DT_publicaciones();
 		
-		ArrayList<Tbl_publicaciones> tpus = new ArrayList<Tbl_publicaciones>();
+		String contenido = request.getParameter("contenido");
+		contenido = contenido.replace("\n","<br>");
+		String guid = request.getParameter("donaciones");
 		
 		try
 		{	
-			tpus1.setPublic_content(request.getParameter("item1"));
-			tpus1.setMenu_order(Integer.parseInt(request.getParameter("item11")));
-			
-			tpus.add(tpus1);
+			tpus1.setPublic_content(contenido);
+			tpus1.setGuid(guid);
 			
 
-			if(dtpus.modificarDonaciones(tpus))
+			if(dtpus.modificarDonaciones(tpus1))
 			{											
 				response.sendRedirect(request.getContextPath()+ "/CMS/donacion/editDonacion.jsp?msj=1");
 			}
@@ -65,7 +65,7 @@ public class SL_donaciones extends HttpServlet {
 		catch(Exception e)
 		{
 			e.printStackTrace();
-			System.out.println("Servlet: Error al editar el Menú!");
+			System.out.println("Servlet: Error al editar Donaciones!");
 		}
 	}
 

@@ -52,40 +52,44 @@
     </section>
     <section id="content">
       <div class="container">
+      	  <%
+          	DT_publicaciones dtpus = new DT_publicaciones();
+            ArrayList<Tbl_publicaciones> listaDonaciones = new ArrayList<Tbl_publicaciones>();
+           	listaDonaciones = dtpus.donaciones();
+           	Collections.sort(listaDonaciones);
+           	String publicado = "publicado";
+           	String titulo = "";
+           	String parrafo = "";
+           	String guid = "";
+           			         	
+            for(Tbl_publicaciones tbpub : listaDonaciones)
+           	{
+           		if(tbpub.getPublic_estado().trim().equals(publicado))
+           		{
+           			titulo = tbpub.getPublic_titulo();
+           			parrafo = tbpub.getPublic_content();
+           			guid = tbpub.getGuid().trim();
+           	
+          %>
          <div class="row">
           <div class="span6">
-          	<%
-          		DT_publicaciones dtpus = new DT_publicaciones();
-            	ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
-            	listatTblp = dtpus.tituloDonacion();
-            	String publicado = "publicado";
-            	String titulo1="";
-  
-            	for(Tbl_publicaciones tpublc : listatTblp){
-                	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                		if(tpublc.getMenu_order() == 1){
-                			titulo1=tpublc.getPublic_titulo();
-                		}
-                	}
-                }
-          	%>
-          	<h2><b><%=titulo1 %></b></h2>
-            <%
-                	DT_publicaciones dtpusdos = new DT_publicaciones();
-                ArrayList<Tbl_publicaciones> listaDonaciones = new ArrayList<Tbl_publicaciones>();
-                listaDonaciones = dtpusdos.itemsDonaciones();
-                String parrafo="";
-                for (Tbl_publicaciones tpublc : listaDonaciones){
-                	if(tpublc.getPublic_estado().trim().equals(publicado)){
-                			parrafo=tpublc.getPublic_content();
-		
-                %>
+          	<h2><b><%=titulo %></b></h2>
+          	
                 <p><%=parrafo %></p>
-                <%
-               	 	}
-                }
-                %>
+                
           </div>
+          <div class="span6">
+          <% 
+           }
+          %>
+                    	  
+      		
+        </div>
+         <% 
+           }
+          %>
+           </div>
+	   	
            <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="JZFZEGQ7V4PQY">

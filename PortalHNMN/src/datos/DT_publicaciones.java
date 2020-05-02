@@ -334,20 +334,21 @@ public class DT_publicaciones {
 		return modificado;	
 	}
 	
-	public ArrayList<Tbl_publicaciones> itemsDonaciones() throws SQLException
+	public ArrayList<Tbl_publicaciones> donaciones() throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaBdy = new ArrayList<Tbl_publicaciones>();
 		
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsDonaciones'", 
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'donaciones'", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
@@ -360,13 +361,15 @@ public class DT_publicaciones {
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR en itemsDonaciones() "+ e.getMessage());
+			System.out.println("DATOS: ERROR en donaciones() "+ e.getMessage());
 			e.printStackTrace();
 		} /*finally {
 			c.close();
 		}*/
 		return listaBdy;
 	}
+	
+	
 	
 	public int obtenerMenuOrder() throws SQLException
 	{
@@ -482,27 +485,24 @@ public class DT_publicaciones {
 		return listaBdy;
 	}
 	
-	public boolean modificarDonaciones(ArrayList<Tbl_publicaciones> tbp) throws SQLException
+	public boolean modificarDonaciones(Tbl_publicaciones tbp) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
 		boolean modificado=false;
-		String parrafo = "";
+		String contenido = "";
 		try
 		{
-			this.itemsDonaciones();
+			this.donaciones();
 			rsPublicaciones.beforeFirst();
 			while(rsPublicaciones.next())
 			{
-				for(Tbl_publicaciones tpubl : tbp)
+				if(rsPublicaciones.getString("guid").trim().equals(tbp.getGuid().trim()))
 				{
-					parrafo = tpubl.getPublic_content();
-					if(rsPublicaciones.getInt("menu_order")==tpubl.getMenu_order())
-					{
-						rsPublicaciones.updateString("public_content", parrafo);
-						rsPublicaciones.updateRow();
-						modificado=true;
-						break;
-					}
+					contenido = tbp.getPublic_content();
+					rsPublicaciones.updateString("public_content", contenido);
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
 				}
 			}
 		}
