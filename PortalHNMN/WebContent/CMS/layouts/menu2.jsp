@@ -207,7 +207,13 @@
               <li class="nav-item">
                 <a href="../publicaciones/newArticulos.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
-                  <p>Agregar artículos</p>
+                  <p>Agregar artículos sólo texto</p>
+                </a>
+               </li>
+               <li class="nav-item">
+                <a href="../publicaciones/newArticulosImagen.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Agregar artículos con imagen</p>
                 </a>
                </li>
             </ul>

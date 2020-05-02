@@ -110,6 +110,7 @@
 	  		String fecha = "";
 	  		String autor = "";
 	  		String categoriaArt = "";
+	  		String url = "";
 	  		
 	  		articulo = dpus.detallesArt(id);
 	  		for (Tbl_publicaciones tpublc : articulo){
@@ -119,6 +120,7 @@
 	          		fecha = tpublc.getPublic_fecha();
 	          		autor = tpublc.getGuid();
 	          		categoriaArt = tpublc.getPublic_tipo();
+	          		url = tpublc.getPublic_imagen_art();
 	          	}
 	  		}
           %>
@@ -129,6 +131,18 @@
                     <div class="post-heading">
                       <h3><a href="#"><%=titulo %></a></h3>
                     </div>
+                    <% 
+                    if(url.equals(""))
+                    {
+                    	
+                    }
+                    else
+                    {
+                    	%>
+                    	<img src=<%=url %> alt="" />
+                    	<%
+                    }
+                    %>
                   </div>
                   <p> <%=contenido %> </p>
                   <div class="bottom-article">

@@ -741,6 +741,7 @@ public class DT_publicaciones {
 				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
 				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
 				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
 				listaArt.add(tpub);
 			}
 		}
@@ -823,6 +824,7 @@ public class DT_publicaciones {
 			rsPublicaciones.updateString("public_tipo", tbpub.getPublic_tipo());
 			rsPublicaciones.updateString("public_titulo", tbpub.getPublic_titulo());
 			rsPublicaciones.updateString("public_enlace", enlace);
+			rsPublicaciones.updateString("public_imagen_art", "sin-imagen");
 			rsPublicaciones.insertRow();
 			rsPublicaciones.moveToCurrentRow();
 			guardado = true;
@@ -835,6 +837,75 @@ public class DT_publicaciones {
 			c.close();
 		}		
 		return guardado;
+	}
+	
+	public boolean guardarArticuloImagen(Tbl_publicaciones tpub) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean guardado = false;
+		int menu = obtenerMenuOrderArt();
+		String enlace = "http://localhost:8080/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
+		try
+		{
+			this.articulosExistentes();
+			rsPublicaciones.moveToInsertRow();
+			System.out.println("Menu order recuperado: "+menu);
+			System.out.println("Guid recuperado: "+tpub.getGuid());
+			System.out.println("Public content recuperado: "+tpub.getPublic_content());
+			System.out.println("Previa recuperada: "+tpub.getPublic_previa());
+			System.out.println("Public tipo recuperada: "+tpub.getPublic_tipo());
+			System.out.println("Public título recuperado: "+tpub.getPublic_titulo());
+			System.out.println("Enlace recuperado: "+enlace);
+			System.out.println("Imagen artículo recuperado"+tpub.getPublic_imagen_art().replace("\\", "/"));
+			rsPublicaciones.updateInt("menu_order", menu);
+			rsPublicaciones.updateString("guid", tpub.getGuid());
+			rsPublicaciones.updateString("public_content", tpub.getPublic_content());
+			rsPublicaciones.updateString("public_estado", "publicado");
+			rsPublicaciones.updateDate("public_fecha", sqlDate);
+			rsPublicaciones.updateString("public_name","articulo");
+			rsPublicaciones.updateString("public_previa", tpub.getPublic_previa());
+			rsPublicaciones.updateString("public_tipo", tpub.getPublic_tipo());
+			rsPublicaciones.updateString("public_titulo", tpub.getPublic_titulo());
+			rsPublicaciones.updateString("public_enlace", enlace);
+			rsPublicaciones.updateString("public_imagen_art", tpub.getPublic_imagen_art().replace("\\", "/"));
+			rsPublicaciones.insertRow();
+			rsPublicaciones.moveToCurrentRow();
+			guardado = true;
+		}
+		catch (Exception e) 
+		{
+			System.err.println("ERROR guardarArticuloImagen(): "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}		
+		return guardado;
+	}
+	
+	public int obtenerMenuOrderImgArt() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		int menu = 0;
+		int contador = 1;
+		String publicado = "publicado";
+		ArrayList<Tbl_publicaciones> listaArticulos = new ArrayList<Tbl_publicaciones>();
+		listaArticulos = this.articulosExistentes();
+		for (Tbl_publicaciones tpublc : listaArticulos){
+        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+        		if(tpublc.getPublic_imagen_art().trim().equals("sin-imagen"))
+        		{
+        			
+        		}
+        		else
+        		{
+        			contador++;
+        		}
+        	}
+		}
+		menu =  contador;
+		return menu;
 	}
 	
 	public int cantidadCategoria(String categoria) throws SQLException
@@ -876,6 +947,7 @@ public class DT_publicaciones {
 				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
 				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
 				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
 				detallesArticulos.add(tpub);
 			}
 		}

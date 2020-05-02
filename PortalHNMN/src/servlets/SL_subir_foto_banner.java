@@ -53,7 +53,8 @@ public class SL_subir_foto_banner extends HttpServlet {
 			Tbl_publicaciones tpub = new Tbl_publicaciones();
 			FileItemFactory factory = new DiskFileItemFactory();
 			ServletFileUpload upload = new ServletFileUpload(factory);
-			String path = getServletContext().getRealPath("/");
+			String path = "";
+			String rutaDinamica = "\\img\\slides\\nivo\\";
 			List<FileItem> items = upload.parseRequest(request);
 			File fichero = null;
 			File fichero2 = null;
@@ -73,27 +74,21 @@ public class SL_subir_foto_banner extends HttpServlet {
 					
 					////// COMPROBAR SI EL TAMAÑO Y FORMATO SON PERMITIDOS //////////
 					if(formatos.contains(uploaded.getContentType()))
-					{
-
+					{						
 						int contador = dtpub.obtenerMenuOrder();
 						rutaFichero = "foto-banner"+contador+".jpg";
-						//path = "C:\\Users\\pc\\git\\PortalWebHNMN\\PortalHNMN\\WebContent\\img\\slides\\nivo\\";
-						path = "C:\\Users\\pc\\Desktop\\Programas\\glassfish-5.1.0\\glassfish5\\glassfish\\domains\\domain1\\imagenesBanner\\";
-						String url2 = "imagenesBanner/";
-						//String url2 = path.substring(52);
-						//url2 = url2.replace("\\", "/");
+						path = getServletContext().getRealPath("/")+rutaDinamica;
+						String url = "img/slides/nivo/";
 						
-						//File image = new File(getServletContext().getInitParameter("upload.location")+rutaFichero);
-						
-						fichero = new File(url2+rutaFichero);
+						fichero = new File(url+rutaFichero);
 						fichero2 = new File(path+rutaFichero);
 						
 						///////// GUARDAR EN EL SERVIDOR //////////////
 						uploaded.write(fichero2);
 
 						/////// ACTUALIZAMOS EL CAMPO URLFOTO EN LA BASE DE DATOS
-						String url = fichero.toString();
-						tpub.setPublic_titulo(url);
+						String url2 = fichero.toString();
+						tpub.setPublic_titulo(url2);
 						if(dtpub.guardarBanner(tpub))
 						{
 							response.sendRedirect(request.getContextPath()+ "/CMS/menu/editBanner.jsp?msj=1");

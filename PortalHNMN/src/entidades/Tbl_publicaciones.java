@@ -15,7 +15,7 @@ public class Tbl_publicaciones implements Comparable<Tbl_publicaciones>{
 	private String public_tipo_img;
 	private String public_titulo;
 	private String public_enlace;
-	
+	private String public_imagen_art;
 	//METODOS
 	public int getId_publicacion() {
 		return id_publicacion;
@@ -88,6 +88,12 @@ public class Tbl_publicaciones implements Comparable<Tbl_publicaciones>{
 	}
 	public void setPublic_enlace(String public_enlace) {
 		this.public_enlace = public_enlace;
+	}
+	public String getPublic_imagen_art() {
+		return public_imagen_art;
+	}
+	public void setPublic_imagen_art(String public_imagen_art) {
+		this.public_imagen_art = public_imagen_art;
 	}
 	
 	//METODOS
