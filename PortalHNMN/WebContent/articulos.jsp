@@ -78,7 +78,7 @@
             	{
             		categoriasSinRepetidos.add(tpub.getValue());
             	}
-            %>
+            %> 
             	
               <div class="widget">
                 <h5 class="widgetheading">Categorías</h5>
@@ -89,7 +89,7 @@
 		            	categoria = tpub.getPublic_tipo();
 		            	cantidad = dtpus.cantidadCategoria(categoria);
 	            %>
-                  <li><i class="icon-angle-right"></i><a href="#"><%=categoria %></a><span> (<%=cantidad %>)</span></li>
+                  <li><i class="icon-angle-right"></i><a href="${pageContext.request.contextPath}/SL_articulos?category=<%=categoria%>&page=1"><%=categoria %></a><span> (<%=cantidad %>)</span></li>
                 <%
 	            	}
 	            %>
@@ -99,13 +99,140 @@
           </div>
           <div class="span8">
           <%
+          		//Solicitamos el valor de category, y de page, ambos provienen del URL.
+       			String categoriaActual = request.getParameter("category");
+          		String paginaCadena = request.getParameter("page");
+          		int paginaActual = Integer.parseInt(paginaCadena);
+          		System.out.println("Categoría recuperada: "+categoriaActual);
+          		//Declaramos nuestras variables a usar
+				int cantidadArt = 0;
+				int cantidadPaginas = 0;
+				int articulosARestar = 0;
+				
+          		//Creamos nuestro objeto de Datos y un ArrayList de los artículos a mostrar en pantalla.
 	          	DT_publicaciones dpus = new DT_publicaciones();
 	      		ArrayList<Tbl_publicaciones> listaArticulos = new ArrayList<Tbl_publicaciones>();
-	      		listaArticulos = dpus.articulosExistentes();
 	      		
-	      		Collections.sort(listaArticulos);
-	      		Collections.reverse(listaArticulos);
-	      		
+	      		//Si la categoría actual es "all", que es el valor por defecto, entrará al if.
+	      		if(categoriaActual.equals("all"))
+	      		{
+					//Primero, le damos valor a la cantidad de artículos, que la usaremos para saber cuántas páginas hay.
+					cantidadArt = dpus.cantidadArticulos();
+					
+					//Si existen más de 5 artículos, entrará al if para calcular cuántas páginas hay y comprobar en cuál se está
+					if(cantidadArt>5)
+					{
+						//Si sobra residuo, significa que la división NO se hace entre un múltilplo de 5
+						if((cantidadArt%5)!=0)
+						{
+							//Por ende, haremos la división normal, que sólo nos devolverá la parte entera y le sumaremos 1
+							//que sería la página extra por esos artículos que no se podrán mostrar en las páginas "cerradas"
+							//o sea, con 5 artículos completos. Ej:
+							//Si tenemos 14 artículos, el resultado será 2, y sobrará 4, entonces nuestras páginas serán 3
+							//ya que posicionaremos los primeros 5 artículos en la primera página, los siguientes 5
+							//en la segunda página, y los últimos cuatro en la tercera página, o sea, la que sumamos al final.
+							cantidadPaginas = (cantidadArt/5)+1;
+							//Y acá comprobamos en qué página estamos.
+							if(paginaActual>1)
+			          		{
+								//Si estamos en cualquiera que no es la primera, se calculará cuántos artículos se obviarán
+								//o sea, cuántos artículos están en las páginas anteriores y no tenemos que mostrar
+								//Ej: Si la página es la 5, significa que tendré que comenzar por el artículo 21
+								//Y sería 5-1 = 4.
+								//4 * 5 = 20 (Ver el método que se usará para entender por qué mandaré 20 en vez de 21.)
+								articulosARestar = (paginaActual-1)*5;
+				      			//Y listaremos los 5 artículos que nos interesan según el parámetro
+				      			listaArticulos = dpus.listarArticulosPorPagina(articulosARestar);
+			          		}
+							else
+							{
+								//Se hace el else porque, a pesar de que hayan más de 5 artículos, aún se puede redireccionar
+								//a la primera página
+								articulosARestar = 0;
+								listaArticulos = dpus.listarArticulosPorPagina(articulosARestar);
+							}
+						}
+						else
+						{
+							//Si es un múltiplo de 5, significa que todas las páginas tendrán cinco artículos
+							cantidadPaginas = cantidadArt/5;
+							if(paginaActual>1)
+			          		{
+								articulosARestar = (paginaActual-1)*5;
+								listaArticulos = dpus.listarArticulosPorPagina(articulosARestar);
+			          		}
+							else
+							{
+								articulosARestar = 0;
+								listaArticulos = dpus.listarArticulosPorPagina(articulosARestar);
+							}
+						}
+					}
+					else
+					{
+						//Sino hay más de cinco artículos, sólo puede haber una página
+						cantidadPaginas = 1;
+						articulosARestar = 0;
+					}
+	      		}
+	      		else
+	      		{
+	      			//Si la categoría es cualquier otra, o sea, es un filtro, estaremos acá en el else.
+	      			//Donde comenzaremos a listar, de nuevo, la lista de las categorias existentes sin repetición
+	      			for(Tbl_publicaciones tpub : categoriasSinRepetidos)
+	          		{
+	      				//Por cada objeto, asignaremos a una variable llamada categoría, la categoría del objeto
+	          			categoria = tpub.getPublic_tipo();
+	          			//Si la categoría "de turno" del for, es igual a la categoría actual, entraremos al if.
+	          			if(categoria.trim().equals(categoriaActual.trim()))
+	          			{
+	          				//Veremos cuántos artículos hay según la categoría
+	          				cantidadArt = dtpus.cantidadCategoria(categoria);
+	          				//Si hay más de 5 artículos, entrará al if
+	          				if(cantidadArt>5)
+	        				{
+	          					//Y hacemos las mismas comprobaciones del primer caso.
+	        					if((cantidadArt%5)!=0)
+	        					{
+	        						cantidadPaginas = (cantidadArt/5)+1;
+	        						if(paginaActual>1)
+	    			          		{
+	    								articulosARestar = (paginaActual-1)*5;
+	    								//Como en este caso también nos interesa filtrar por categoría
+	    								//Usaremos otro método que filtra por categoría y por artículos a obviar
+	    								listaArticulos = dpus.listarArticulosPorPaginaCategoria(categoriaActual.trim(), articulosARestar);
+	    			          		}
+	    							else
+	    							{
+	    								articulosARestar = 0;
+	    								listaArticulos = dpus.listarArticulosPorPaginaCategoria(categoriaActual.trim(), articulosARestar);
+	    							}	
+	        					}
+	        					else
+	        					{
+	        						cantidadPaginas = cantidadArt/5;
+	        						if(paginaActual>1)
+	        						{
+	        							articulosARestar = (cantidadPaginas-1)*5;
+	        							listaArticulos = dpus.listarArticulosPorPaginaCategoria(categoriaActual, articulosARestar);
+	        						}
+	        						else
+	    							{
+	    								articulosARestar = 0;
+	    								listaArticulos = dpus.listarArticulosPorPaginaCategoria(categoriaActual, articulosARestar);
+	    							}
+	        					}
+	        				}
+	          				else
+	    					{
+	    						cantidadPaginas = 1;
+	    						articulosARestar = 0;
+	    						listaArticulos = dpus.listarArticulosPorPaginaCategoria(categoriaActual, articulosARestar);
+	    					}
+	          			}
+	          		}
+	      		}
+
 	      		String titulo = "";
 	      		String previa = "";
 	      		String fecha = "";
@@ -150,7 +277,6 @@
               </div>
             </article>
             <%
-	            		contador++;
 		      		}
 	      			else
 	      			{
@@ -179,19 +305,49 @@
               </div>
             </article>
 	      	<%
-	      				contador++;
 	      			}
-	            	if(contador == 5)
-	            	{
-	            		break;
-	            	}
             	}
             %>
             <div id="pagination">
-              <span class="all">Página 1 de 3</span>
-              <span class="current">1</span>
-              <a href="#" class="inactive">2</a>
-              <a href="#" class="inactive">3</a>
+              <span class="all">Página <%=paginaActual %> de <%=cantidadPaginas %></span>
+              <%
+              //Si la página en la que estamos NO es la 1.
+              if(paginaActual>1)
+              {
+                  for(int i=1; i<=cantidadPaginas; i++)
+                  {
+                	  //Comprobamos cuando la página en la que estamos sea igual a la I del for
+                	  if(i==paginaActual)
+                	  {
+                		  //Y le crearemos un span específico para el resaltado
+                		  %>
+                		  <span class="current"><%=i %></span>
+                		  <%
+                	  }
+                	  else
+                	  {
+                		  //En los otros casos, crearemos un enlace para el cambio de página y que se mantenga la categoría
+                	  %>
+                	  <a href="${pageContext.request.contextPath}/SL_articulos?category=<%=categoriaActual%>&page=<%=i%>" class="inactive"><%=i %></a>
+                	  <%
+                	  }
+                  }
+              }
+              else
+              {
+            	  //Si la página es la uno, creamos ya por defecto el span con el 1 resaltado y sin enlace
+            	  %>
+            	  <span class="current">1</span>
+            	  <%
+            	  //Y el for empezará por la página 2
+            	  for(int i=2; i<=cantidadPaginas; i++)
+                  {
+                	  %>
+                	  <a href="${pageContext.request.contextPath}/SL_articulos?category=<%=categoriaActual%>&page=<%=i%>" class="inactive"><%=i %></a>
+                	  <%
+                  }
+              }
+              %>
             </div>
           </div>
         </div>

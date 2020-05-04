@@ -11,4 +11,12 @@
   	<param-name>upload.location</param-name>
   	<param-value>/path/to/uploads/</param-value>
   </context-param>
+  <servlet>
+	  <servlet-name>SL_paginacionArticulos</servlet-name>
+	  <servlet-class>SL_paginacionArticulos</servlet-class>
+  </servlet>
+  <servlet-mapping>
+	  <servlet-name>SL_paginacionArticulos</servlet-name>
+	  <url-pattern>/servlets/*</url-pattern>
+  </servlet-mapping>
 </web-app>

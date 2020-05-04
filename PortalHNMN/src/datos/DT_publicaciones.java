@@ -755,6 +755,112 @@ public class DT_publicaciones {
 		return listaArt;
 	}
 	
+	public int cantidadArticulos() throws SQLException
+	{
+		
+		int cantidad = 0;
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				cantidad++;
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Datos: Error en el cálculo de la cantidad de artículos."+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return cantidad;
+	}
+	
+	public ArrayList<Tbl_publicaciones> listarArticulosPorPagina(int num) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaArt = new ArrayList<Tbl_publicaciones>();
+
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' ORDER BY menu_order DESC LIMIT 5 OFFSET ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, num);
+			rsPublicaciones = ps.executeQuery();
+
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+				listaArt.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en articulosExistentes "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaArt;
+	}
+	
+	public ArrayList<Tbl_publicaciones> listarArticulosPorPaginaCategoria(String cat, int num) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaArt = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' AND public_tipo = ? ORDER BY menu_order DESC LIMIT 5 OFFSET ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setString(1, cat);
+			ps.setInt(2, num);
+			rsPublicaciones = ps.executeQuery();
+			
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+				listaArt.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en articulosExistentes "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaArt;
+	}
+	
 	public ArrayList<Tbl_publicaciones> listarCategorias() throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
