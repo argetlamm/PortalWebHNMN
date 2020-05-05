@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.DT_usuario, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.DT_publicaciones, java.util.*;"%>
 
 <%
 	ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
@@ -33,11 +33,23 @@
 		response.sendRedirect("../Error.jsp");
 	}
 %>
+
+<%
+	String nombre = "";
+	String apellido = "";
+	int rolId = 0;
+
+	nombre = (String) session.getAttribute("nombre");
+	nombre = nombre==null?"":nombre;
+	apellido = (String) session.getAttribute("apellido");
+	apellido = apellido==null?"":apellido;
+	String nombreCompleto = nombre+apellido;
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Editar Banner | Herbario Nacional de Nicaragua</title>
+<title>Nuevo evento | Herbario Nacional de Nicaragua</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -58,20 +70,6 @@ String mensaje = "";
 mensaje = request.getParameter("msj");
 mensaje = mensaje==null?"":mensaje;
 
-/* RECUPERAMOS EL VALOR DE LA VARIABLE userID */
-String idUser = "";
-idUser = request.getParameter("userID");
-idUser = idUser==null?"0":idUser;
-
-int user = 0;
-user = Integer.parseInt(idUser); 
-
-/* OBTENEMOS LOS DATOS DE USUARIO A SER EDITADOS */
-Tbl_user tus = new Tbl_user();
-DT_usuario dtus = new DT_usuario();
-
-tus = dtus.obtenerUserId(user);
-
 %>
 
 
@@ -83,7 +81,7 @@ tus = dtus.obtenerUserId(user);
 	<!-- /.navbar -->
 	
 	<!-- SIDEBAR -->
-	  	<jsp:include page="../../CMS/layouts/menu3.jsp"></jsp:include>
+	  	<jsp:include page="../../CMS/layouts/menu10.jsp"></jsp:include>
 	<!-- SIDEBAR -->
 	
 	  <!-- Content Wrapper. Contains page content -->
@@ -93,12 +91,12 @@ tus = dtus.obtenerUserId(user);
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
-	            <h1>Nuevo [Banner]</h1>
+	            <h1>Nuevo [Evento - Sólo texto]</h1>
 	          </div>
 	          <div class="col-sm-6">
 	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="tblusuarios.jsp">Inicio</a></li>
-	              <li class="breadcrumb-item active">Nueva imagen del banner</li>
+	              <li class="breadcrumb-item"><a href="editMenu.jsp">Eventos</a></li>
+	              <li class="breadcrumb-item active">Nuevo Evento - Sólo texto</li>
 	            </ol>
 	          </div>
 	        </div>
@@ -114,51 +112,30 @@ tus = dtus.obtenerUserId(user);
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
-                <h3 class="card-title">Nueva imagen del Banner</h3>
+                <h3 class="card-title">Nuevo Evento (Sólo texto)</h3>
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <br>
-         <div id="foto" class="panel">
-			<form class="form" name="Frm-foto" method="post" action="${pageContext.request.contextPath}/SL_subir_foto_banner" enctype="multipart/form-data">
-				<table class="table table-hover table-heading table-datatable" id="datatable-1">
-					<tbody>
-						<tr>
-							<td>
-								<p>
-								<b>Estimado usuario, por favor atienda las siguientes recomendaciones para subir su foto:</b>
-								</p>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<ul>
-									<p>Foto de orientación horizontal.</p>
-									<p>Formato y dimensiones: el formato debe ser jpg, la foto debe de ser 1900 x 600 px para que se adecúe al tamaño del banner.</p>
-								</ul>
-							</td>
-						</tr>
-						<tr align="center">
-							<td>
-								<div class="cuadro-fotoNima" align="center">
-									<img id="preview" src="../../img/slides/nivo/foto-banner1.jpg" name="preview"  alt="Foto NIMA"
-									style="width: 1000px; height: 350px; border-bottom-color: white; margin: 2px;" />
-								</div> &nbsp;
-							</td>
-						</tr>
-						<tr align="center">
-							<td>
-								<input type="file" id="foto" name="foto"
-								onchange="Test.UpdatePreview(this)" required="required">
-								&nbsp; <input type="hidden" name="idNIMA" value="">
-								&nbsp; <input type="hidden" name="codNIMA" value="">
-							</td>
-						</tr>
-					</tbody>
-				</table>
-				<input class="action" type="submit" value="Subir imagen"/>
-			</form>
-		</div>
+              <form role="form" action="${pageContext.request.contextPath}/SL_nuevoEvento" method="post">
+                <div class="card-body">
+                  <div class="form-group">
+                  	<label for="exampleInputEmail1">Título del Evento: </label>
+                    <input type="text" id="titulo" name="titulo" class="form-control" value="" required>
+                    <label for="exampleInputEmail1">Contenido del Evento: </label>
+                    <textarea id="contenido" name="contenido" class="form-control" rows="5" maxlength="5000" required></textarea>
+					<label for="exampleInputEmail1">Categoría: Eventos </label>
+					<input type="hidden" id="categoria" name="categoria" class="form-control" value="Eventos" required>
+					<br>
+                    <label for="exampleInputEmail1">Evento creado por: <%=nombreCompleto%></label>
+                    <input type="hidden" id="redactor" name="redactor" class="form-control" value="<%=nombreCompleto%>" required>
+                  </div>
+                </div>
+                <!-- /.card-body -->	
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                  <button type="button" class="btn btn-danger">Cancelar</button>
+                </div>
+             </form>
             </div>
             <!-- /.card -->
            </div>
@@ -166,6 +143,7 @@ tus = dtus.obtenerUserId(user);
          </div>       
     </section>
     <!-- /.content -->
+
 </div>
 <!-- Footer -->
   		<jsp:include page="/CMS/layouts/footer.jsp"></jsp:include>
@@ -182,81 +160,24 @@ tus = dtus.obtenerUserId(user);
   <script src="../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   <script src="../plugins/select2/js/select2.full.min.js"></script>
-  
-  <script>
-  function pwdEquals()
-  {
-	  var pwd1 = "";
-	  var pwd2 = "";
-	  
-	  pwd1 = $("#password").val();
-	  pwd2 = $("#password2").val();
-	  
-	  if(pwd1 != pwd2)
-	  {
-		  errorAlert('Error', 'Revise la contraseña ingresada');
-		  $("#password").css("border-color", "red");
-		  $("#password").val("");
-		  $("#password2").css("border-color", "red");
-		  $("#password2").val("");
-	  }
-	  else
-		{
-		  $("#password").css("border-color", "#ced4da");
-		  $("#password2").css("border-color", "#ced4da");
-		}
-		  
-  }
-  </script>
-  
+     
   <script>
     $(document).ready(function ()
     {
-    	
-    	Test = {
-    	        UpdatePreview: function(obj)
-    	        {
-    	          // if IE < 10 doesn't support FileReader
-    	          if(!window.FileReader)
-    	          {
-    	             
-    	          } 
-    	          else 
-    	          {
-    	             var reader = new FileReader();
-    	             var target = null;
-    	             
-    	             reader.onload = function(e) 
-    	             {
-    	              target =  e.target || e.srcElement;
-    	               $("#preview").prop("src", target.result);
-    	             };
-    	              reader.readAsDataURL(obj.files[0]);
-    	          }
-    	        }
-    	    };
+	/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
 
-    	///////////// VALIDAR QUE LAS CONTRASEÑAS SON LAS MISMAS ///////////////
-     
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
       nuevo = "<%=mensaje%>";
 
       if(nuevo == "1")
       {
-        successAlert('Éxito', 'La imagen se ha insertado correctamente en el banner.');
+        successAlert('Éxito', 'El evento ha sido agregado exitosamente');
       }
       if(nuevo == "2")
       {
-        errorAlert('Error', 'Revise la imagen insertada e intente de nuevo.');
+        errorAlert('Error', 'No se pudo crear el artículo.');
       }
-      if(nuevo == "3")
-   	  {
-    	errorAlert('Error', 'Revise que la imagen cumpla con el formato requerido.')  
-      }
-    
-      
-
     });
     </script>
 

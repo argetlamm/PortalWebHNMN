@@ -717,14 +717,15 @@ public class DT_publicaciones {
 		return informacionColeccion;
 	}
 	
-	public ArrayList<Tbl_publicaciones> articulosExistentes() throws SQLException
+	public ArrayList<Tbl_publicaciones> eventosExistentes() throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
 		ArrayList<Tbl_publicaciones> listaArt = new ArrayList<Tbl_publicaciones>();
 		
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'", 
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' and public_tipo = 'Eventos' "
+					+ "ORDER BY menu_order DESC", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
@@ -755,6 +756,230 @@ public class DT_publicaciones {
 		return listaArt;
 	}
 	
+	public Tbl_publicaciones encontrarEvento(int idEve) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		Tbl_publicaciones evento = new Tbl_publicaciones();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_publicaciones where public_name = 'articulo' and public_tipo = 'Eventos'"
+					+ " and menu_order = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idEve);
+			rsPublicaciones = ps.executeQuery();
+			if(rsPublicaciones.next())
+			{
+				evento.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				evento.setGuid(rsPublicaciones.getString("guid"));
+				evento.setPublic_content(rsPublicaciones.getString("public_content"));
+				evento.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				evento.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				evento.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				evento.setPublic_name(rsPublicaciones.getString("public_name"));
+				evento.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				evento.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				evento.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				evento.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Datos: Error en la obtención de un evento "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally
+		{
+			c.close();
+		}
+		
+		return evento;
+	}
+	
+	public int cantidadEventos() throws SQLException
+	{
+		
+		int cantidad = 0;
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' and public_tipo = 'Eventos'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				cantidad++;
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Datos: Error en el cálculo de la cantidad de eventos."+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return cantidad;
+	}
+	
+	public ArrayList<Tbl_publicaciones> listarEventosPorPagina(int num) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaEventos = new ArrayList<Tbl_publicaciones>();
+
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' and public_tipo = 'Eventos' "
+					+ "ORDER BY menu_order DESC LIMIT 5 OFFSET ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, num);
+			rsPublicaciones = ps.executeQuery();
+
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+				listaEventos.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en eventos por página "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaEventos;
+	}
+	
+	public boolean editarEvento(Tbl_publicaciones tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String contenido = "";
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
+		try
+		{
+			this.eventosExistentes();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				if(rsPublicaciones.getInt("menu_order")==tbp.getMenu_order())
+				{
+					rsPublicaciones.updateString("public_titulo", tbp.getPublic_titulo());
+					rsPublicaciones.updateString("public_content", tbp.getPublic_content());
+					rsPublicaciones.updateDate("public_fecha", sqlDate);
+					rsPublicaciones.updateString("public_previa", tbp.getPublic_previa());
+					rsPublicaciones.updateString("public_tipo", tbp.getPublic_tipo());
+					rsPublicaciones.updateString("guid", tbp.getGuid());
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarEvento() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
+	}
+	
+	public ArrayList<Tbl_publicaciones> articulosExistentes() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaArt = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' and public_tipo != 'Eventos' "
+					+ "ORDER BY menu_order DESC", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+				listaArt.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en articulosExistentes "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaArt;
+	}
+	
+	public Tbl_publicaciones encontrarArticulo(int idArt) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		Tbl_publicaciones articulo = new Tbl_publicaciones();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_publicaciones where public_name = 'articulo'"
+					+ " and menu_order = ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idArt);
+			rsPublicaciones = ps.executeQuery();
+			if(rsPublicaciones.next())
+			{
+				articulo.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				articulo.setGuid(rsPublicaciones.getString("guid"));
+				articulo.setPublic_content(rsPublicaciones.getString("public_content"));
+				articulo.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				articulo.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				articulo.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				articulo.setPublic_name(rsPublicaciones.getString("public_name"));
+				articulo.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				articulo.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				articulo.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				articulo.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Datos: Error en la obtención de un artículo "+ e.getMessage());
+			e.printStackTrace();
+		}
+		finally
+		{
+			c.close();
+		}
+		
+		return articulo;
+	}
+	
 	public int cantidadArticulos() throws SQLException
 	{
 		
@@ -762,7 +987,7 @@ public class DT_publicaciones {
 		
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'", 
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' and public_tipo != 'Eventos'", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
@@ -780,6 +1005,127 @@ public class DT_publicaciones {
 		return cantidad;
 	}
 	
+	public ArrayList<Tbl_publicaciones> listarNoticiasPorPagina(int num) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaArt = new ArrayList<Tbl_publicaciones>();
+
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'"
+					+ "ORDER BY menu_order DESC LIMIT 5 OFFSET ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, num);
+			rsPublicaciones = ps.executeQuery();
+
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+				listaArt.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listarNoticiasPorPagina "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaArt;
+	}
+	
+	public ArrayList<Tbl_publicaciones> listarNoticiasPorPaginaCategoria(String cat, int num) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaArt = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' AND public_tipo = ? ORDER BY menu_order DESC LIMIT 5 OFFSET ?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setString(1, cat);
+			ps.setInt(2, num);
+			rsPublicaciones = ps.executeQuery();
+			
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+				listaArt.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listarNoticiasPorPaginaCategoria "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaArt;
+	}
+	
+	public ArrayList<Tbl_publicaciones> noticiasExistentes() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaArt = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' "
+					+ "ORDER BY menu_order DESC", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_previa(rsPublicaciones.getString("public_previa"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+				tpub.setPublic_imagen_art(rsPublicaciones.getString("public_imagen_art"));
+				listaArt.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en articulosExistentes "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaArt;
+	}
+	
 	public ArrayList<Tbl_publicaciones> listarArticulosPorPagina(int num) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
@@ -787,7 +1133,8 @@ public class DT_publicaciones {
 
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' ORDER BY menu_order DESC LIMIT 5 OFFSET ?", 
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' and public_tipo != 'Eventos' "
+					+ "ORDER BY menu_order DESC LIMIT 5 OFFSET ?", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			ps.setInt(1, num);
@@ -868,7 +1215,8 @@ public class DT_publicaciones {
 		
 		try
 		{
-			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'", 
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo' "
+					+ "and public_tipo != 'Eventos'", 
 					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
 					ResultSet.HOLD_CURSORS_OVER_COMMIT);
 			rsPublicaciones = ps.executeQuery();
@@ -882,6 +1230,34 @@ public class DT_publicaciones {
 		catch (Exception e)
 		{
 			System.out.println("DATOS: ERROR en listarCategorías "+ e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return listaCat;
+	}
+	
+	public ArrayList<Tbl_publicaciones> listarCategoriasCompletas() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaCat = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				listaCat.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en listarCategoríasCompletas "+ e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();
@@ -904,6 +1280,44 @@ public class DT_publicaciones {
 		}
 		menu =  contador;
 		return menu;
+	}
+	
+	public boolean editarArticulo(Tbl_publicaciones tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String contenido = "";
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
+		
+		try
+		{
+			this.articulosExistentes();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				if(rsPublicaciones.getInt("menu_order")==tbp.getMenu_order())
+				{
+					rsPublicaciones.updateString("public_titulo", tbp.getPublic_titulo());
+					rsPublicaciones.updateString("public_content", tbp.getPublic_content());
+					rsPublicaciones.updateDate("public_fecha", sqlDate);
+					rsPublicaciones.updateString("public_previa", tbp.getPublic_previa());
+					rsPublicaciones.updateString("public_tipo", tbp.getPublic_tipo());
+					rsPublicaciones.updateString("guid", tbp.getGuid());
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarArticulo() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
 	}
 	
 	public boolean guardarArticuloTexto(Tbl_publicaciones tbpub) throws SQLException
@@ -957,14 +1371,6 @@ public class DT_publicaciones {
 		{
 			this.articulosExistentes();
 			rsPublicaciones.moveToInsertRow();
-			System.out.println("Menu order recuperado: "+menu);
-			System.out.println("Guid recuperado: "+tpub.getGuid());
-			System.out.println("Public content recuperado: "+tpub.getPublic_content());
-			System.out.println("Previa recuperada: "+tpub.getPublic_previa());
-			System.out.println("Public tipo recuperada: "+tpub.getPublic_tipo());
-			System.out.println("Public título recuperado: "+tpub.getPublic_titulo());
-			System.out.println("Enlace recuperado: "+enlace);
-			System.out.println("Imagen artículo recuperado"+tpub.getPublic_imagen_art().replace("\\", "/"));
 			rsPublicaciones.updateInt("menu_order", menu);
 			rsPublicaciones.updateString("guid", tpub.getGuid());
 			rsPublicaciones.updateString("public_content", tpub.getPublic_content());
@@ -973,6 +1379,81 @@ public class DT_publicaciones {
 			rsPublicaciones.updateString("public_name","articulo");
 			rsPublicaciones.updateString("public_previa", tpub.getPublic_previa());
 			rsPublicaciones.updateString("public_tipo", tpub.getPublic_tipo());
+			rsPublicaciones.updateString("public_titulo", tpub.getPublic_titulo());
+			rsPublicaciones.updateString("public_enlace", enlace);
+			rsPublicaciones.updateString("public_imagen_art", tpub.getPublic_imagen_art().replace("\\", "/"));
+			rsPublicaciones.insertRow();
+			rsPublicaciones.moveToCurrentRow();
+			guardado = true;
+		}
+		catch (Exception e) 
+		{
+			System.err.println("ERROR guardarArticuloImagen(): "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}		
+		return guardado;
+	}
+	
+	public boolean guardarEventoTexto(Tbl_publicaciones tbpub) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean guardado = false;
+		int menu = obtenerMenuOrderArt();
+		String enlace = "http://localhost:8080/PortalHNMN/eventos.jsp";
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
+		
+		try
+		{
+			this.noticiasExistentes();
+			rsPublicaciones.moveToInsertRow();
+			rsPublicaciones.updateInt("menu_order", menu);
+			rsPublicaciones.updateString("guid", tbpub.getGuid());
+			rsPublicaciones.updateString("public_content", tbpub.getPublic_content());
+			rsPublicaciones.updateString("public_estado", "publicado");
+			rsPublicaciones.updateDate("public_fecha", sqlDate);
+			rsPublicaciones.updateString("public_name","articulo");
+			rsPublicaciones.updateString("public_previa", tbpub.getPublic_previa());
+			rsPublicaciones.updateString("public_tipo", "Eventos");
+			rsPublicaciones.updateString("public_titulo", tbpub.getPublic_titulo());
+			rsPublicaciones.updateString("public_enlace", enlace);
+			rsPublicaciones.updateString("public_imagen_art", "sin-imagen");
+			rsPublicaciones.insertRow();
+			rsPublicaciones.moveToCurrentRow();
+			guardado = true;
+		}
+		catch (Exception e) 
+		{
+			System.err.println("ERROR crearArtículoSóloTexto(): "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}		
+		return guardado;
+	}
+	
+	public boolean guardarEventoImagen(Tbl_publicaciones tpub) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean guardado = false;
+		int menu = obtenerMenuOrderArt();
+		String enlace = "http://localhost:8080/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
+		java.util.Date d1 = new java.util.Date();
+		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
+		try
+		{
+			this.articulosExistentes();
+			rsPublicaciones.moveToInsertRow();
+			rsPublicaciones.updateInt("menu_order", menu);
+			rsPublicaciones.updateString("guid", tpub.getGuid());
+			rsPublicaciones.updateString("public_content", tpub.getPublic_content());
+			rsPublicaciones.updateString("public_estado", "publicado");
+			rsPublicaciones.updateDate("public_fecha", sqlDate);
+			rsPublicaciones.updateString("public_name","articulo");
+			rsPublicaciones.updateString("public_previa", tpub.getPublic_previa());
+			rsPublicaciones.updateString("public_tipo", "Eventos");
 			rsPublicaciones.updateString("public_titulo", tpub.getPublic_titulo());
 			rsPublicaciones.updateString("public_enlace", enlace);
 			rsPublicaciones.updateString("public_imagen_art", tpub.getPublic_imagen_art().replace("\\", "/"));
@@ -1014,6 +1495,80 @@ public class DT_publicaciones {
 		return menu;
 	}
 	
+	public String obtenerEnlaceImgArtEdit(int id) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		String enlace = "";
+		String publicado = "publicado";
+		ArrayList<Tbl_publicaciones> listaArticulos = new ArrayList<Tbl_publicaciones>();
+		listaArticulos = this.articulosExistentes();
+		for (Tbl_publicaciones tpublc : listaArticulos){
+        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+        		if(tpublc.getPublic_imagen_art().trim().equals("sin-imagen"))
+        		{
+        			
+        		}
+        		else
+        		{
+        			if(tpublc.getMenu_order()==id)
+        			{
+        				enlace = tpublc.getPublic_imagen_art();
+        			}
+        		}
+        	}
+		}
+		return enlace;
+	}
+	
+	public int obtenerMenuOrderImgEventos() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		int menu = 0;
+		int contador = 1;
+		String publicado = "publicado";
+		ArrayList<Tbl_publicaciones> listaArticulos = new ArrayList<Tbl_publicaciones>();
+		listaArticulos = this.eventosExistentes();
+		for (Tbl_publicaciones tpublc : listaArticulos){
+        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+        		if(tpublc.getPublic_imagen_art().trim().equals("sin-imagen"))
+        		{
+        			
+        		}
+        		else
+        		{
+        			contador++;
+        		}
+        	}
+		}
+		menu =  contador;
+		return menu;
+	}
+	
+	public String obtenerEnlaceImgEveEdit(int id) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		String enlace = "";
+		String publicado = "publicado";
+		ArrayList<Tbl_publicaciones> listaArticulos = new ArrayList<Tbl_publicaciones>();
+		listaArticulos = this.eventosExistentes();
+		for (Tbl_publicaciones tpublc : listaArticulos){
+        	if(tpublc.getPublic_estado().trim().equals(publicado)){
+        		if(tpublc.getPublic_imagen_art().trim().equals("sin-imagen"))
+        		{
+        			
+        		}
+        		else
+        		{
+        			if(tpublc.getMenu_order()==id)
+        			{
+        				enlace = tpublc.getPublic_imagen_art();
+        			}
+        		}
+        	}
+		}
+		return enlace;
+	}
+	
 	public int cantidadCategoria(String categoria) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
@@ -1021,6 +1576,25 @@ public class DT_publicaciones {
 		
 		ArrayList<Tbl_publicaciones> listaCategorias = new ArrayList<Tbl_publicaciones>();
 		listaCategorias = this.listarCategorias();
+		
+		for(Tbl_publicaciones tpub : listaCategorias)
+		{
+			if(categoria.equals(tpub.getPublic_tipo()))
+			{
+				cantidad++;
+			}
+		}
+		
+		return cantidad;
+	}
+	
+	public int cantidadCategoriaCompletas(String categoria) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		int cantidad = 0;
+		
+		ArrayList<Tbl_publicaciones> listaCategorias = new ArrayList<Tbl_publicaciones>();
+		listaCategorias = this.listarCategoriasCompletas();
 		
 		for(Tbl_publicaciones tpub : listaCategorias)
 		{

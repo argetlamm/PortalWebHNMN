@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Artículo - Herbario Nacional de Nicaragua</title>
+  <title>Noticia - Herbario Nacional de Nicaragua</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="" />
   <meta name="author" content="" />
@@ -40,15 +40,14 @@
         <div class="row">
           <div class="span4">
             <div class="inner-heading">
-              <h2>Artículo individual</h2>
+              <h2>Noticia individual</h2>
             </div>
           </div>
           <div class="span8">
             <ul class="breadcrumb">
               <li><a href="index.jsp"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
               <li><a href="noticias.jsp?category=all&page=1">Noticias</a><i class="icon-angle-right"></i></li>
-              <li><a href="articulos.jsp?category=all&page=1">Publicaciones</a><i class="icon-angle-right"></i></li>
-              <li class="active">Artículo</li>
+              <li class="active">Noticia</li>
             </ul>
           </div>
         </div>
@@ -62,7 +61,7 @@
               <%
             	DT_publicaciones dtpus = new DT_publicaciones();
             	ArrayList<Tbl_publicaciones> listaCategorias = new ArrayList<Tbl_publicaciones>();
-            	listaCategorias = dtpus.listarCategorias();
+            	listaCategorias = dtpus.listarCategoriasCompletas();
             	String categoria = "";
             	int cantidad = 0;
             	ArrayList<Tbl_publicaciones> categoriasSinRepetidos = new ArrayList<Tbl_publicaciones>();
@@ -86,9 +85,9 @@
 	                for(Tbl_publicaciones tpub : categoriasSinRepetidos)
 	            	{
 		            	categoria = tpub.getPublic_tipo();
-		            	cantidad = dtpus.cantidadCategoria(categoria);
+		            	cantidad = dtpus.cantidadCategoriaCompletas(categoria);
 	            %>
-                  <li><i class="icon-angle-right"></i><a href="${pageContext.request.contextPath}/SL_articulos?category=<%=categoria%>&page=1"><%=categoria %></a><span> (<%=cantidad %>)</span></li>
+                  <li><i class="icon-angle-right"></i><a href="${pageContext.request.contextPath}/SL_noticias?category=<%=categoria%>&page=1"><%=categoria %></a><span> (<%=cantidad %>)</span></li>
                 <%
 	            	}
 	            %>
@@ -98,12 +97,12 @@
           </div>
           <div class="span8">
           <%
-          	String idArticulo = "";
-          	idArticulo = request.getParameter("ArticuloID");
-	      	int id = Integer.parseInt(idArticulo);
+          	String idNoticia = "";
+          	idNoticia = request.getParameter("IdNot");
+	      	int id = Integer.parseInt(idNoticia);
 	      	
 	      	DT_publicaciones dpus = new DT_publicaciones();
-	  		ArrayList<Tbl_publicaciones> articulo = new ArrayList<Tbl_publicaciones>();
+	  		ArrayList<Tbl_publicaciones> noticia = new ArrayList<Tbl_publicaciones>();
 	  		String publicado = "publicado";
 	  		String titulo = "";
 	  		String contenido = "";
@@ -112,8 +111,8 @@
 	  		String categoriaArt = "";
 	  		String url = "";
 	  		
-	  		articulo = dpus.detallesArt(id);
-	  		for (Tbl_publicaciones tpublc : articulo){
+	  		noticia = dpus.detallesArt(id);
+	  		for (Tbl_publicaciones tpublc : noticia){
 	          	if(tpublc.getPublic_estado().trim().equals(publicado)){
 	          		titulo = tpublc.getPublic_titulo();
 	          		contenido = tpublc.getPublic_content();

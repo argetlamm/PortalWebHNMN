@@ -103,7 +103,6 @@
        			String categoriaActual = request.getParameter("category");
           		String paginaCadena = request.getParameter("page");
           		int paginaActual = Integer.parseInt(paginaCadena);
-          		System.out.println("Categoría recuperada: "+categoriaActual);
           		//Declaramos nuestras variables a usar
 				int cantidadArt = 0;
 				int cantidadPaginas = 0;
@@ -173,6 +172,7 @@
 						//Sino hay más de cinco artículos, sólo puede haber una página
 						cantidadPaginas = 1;
 						articulosARestar = 0;
+						listaArticulos = dpus.listarArticulosPorPagina(articulosARestar);
 					}
 	      		}
 	      		else

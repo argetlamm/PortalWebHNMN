@@ -225,6 +225,42 @@
                   <p>Agregar artículos con imagen</p>
                 </a>
                </li>
+               <li class="nav-item">
+                <a href="publicaciones/editArticulos.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Editar artículos</p>
+                </a>
+               </li>
+            </ul>
+           </li>
+           <!--           ///////////////////////Décima Sección//////////////////////////////////// -->   
+           <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+             <i class="nav-icon fas fa-shield-alt"></i>
+              <p>
+               	Eventos
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="eventos/newEvento.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Agregar eventos sólo texto</p>
+                </a>
+               </li>
+               <li class="nav-item">
+                <a href="eventos/newEventoImagen.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Agregar eventos con imagen</p>
+                </a>
+               </li>
+               <li class="nav-item">
+                <a href="eventos/editEventos.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Editar eventos</p>
+                </a>
+               </li>
             </ul>
            </li>
         </ul>

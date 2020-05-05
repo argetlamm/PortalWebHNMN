@@ -7,16 +7,12 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <context-param>
-  	<param-name>upload.location</param-name>
-  	<param-value>/path/to/uploads/</param-value>
-  </context-param>
   <servlet>
-	  <servlet-name>SL_paginacionArticulos</servlet-name>
-	  <servlet-class>SL_paginacionArticulos</servlet-class>
+	  <servlet-name>SL_subir_foto_banner</servlet-name>
+	  <servlet-class>SL_subir_foto_banner</servlet-class>
   </servlet>
   <servlet-mapping>
-	  <servlet-name>SL_paginacionArticulos</servlet-name>
+	  <servlet-name>SL_subir_foto_banner</servlet-name>
 	  <url-pattern>/servlets/*</url-pattern>
   </servlet-mapping>
 </web-app>

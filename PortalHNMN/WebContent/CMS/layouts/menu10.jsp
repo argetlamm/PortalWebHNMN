@@ -206,19 +206,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="newArticulos.jsp" class="nav-link">
+                <a href="../publicaciones/newArticulos.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Agregar artículos sólo texto</p>
                 </a>
                </li>
                <li class="nav-item">
-                <a href="newArticulosImagen.jsp" class="nav-link">
+                <a href="../publicaciones/newArticulosImagen.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Agregar artículos con imagen</p>
                 </a>
                </li>
                <li class="nav-item">
-                <a href="editArticulos.jsp" class="nav-link">
+                <a href="../publicaciones/editArticulos.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Editar artículos</p>
                 </a>
@@ -235,19 +235,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../eventos/newEvento.jsp" class="nav-link">
+                <a href="newEvento.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Agregar eventos sólo texto</p>
                 </a>
                </li>
                <li class="nav-item">
-                <a href="../eventos/newEventoImagen.jsp" class="nav-link">
+                <a href="newEventoImagen.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Agregar eventos con imagen</p>
                 </a>
                </li>
                <li class="nav-item">
-                <a href="../eventos/editEventos.jsp" class="nav-link">
+                <a href="editEventos.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Editar eventos</p>
                 </a>
