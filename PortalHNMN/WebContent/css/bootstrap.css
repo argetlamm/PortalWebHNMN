@@ -312,6 +312,12 @@ a:focus {
   width: 620px;
 }
 
+.span888 {
+  width: fit-content;
+  padding-left: 18%;
+  text-align: center;
+}
+
 .span7 {
   width: 540px;
 }

@@ -58,7 +58,7 @@
     <section id="content">
       <div class="container">
         <div class="row">
-          <div class="span8">
+          <div class="span888">
           <%
           		//Solicitamos el valor de page proveniente de la URL.
           		String paginaCadena = request.getParameter("page");
