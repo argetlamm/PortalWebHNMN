@@ -60,7 +60,7 @@
                 </a>
               </li>
               <li class="nav-item">
-              <a href="../seguridad/addRolOpcion.jsp" class="nav-link">
+              <a href="../seguridad/listRolOpcion.jsp" class="nav-link">
                 <i class="fas fa-toolbox nav-icon"></i>
                 <p>Opciones de Rol</p>
               </a>
@@ -154,7 +154,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="notificacion.jsp" class="nav-link">
+                <a href="../suscripcion/notificacion.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Notificaciones</p>
                 </a>
@@ -178,8 +178,8 @@
                 </a>
                </li>
             </ul>
-            </li>
-            <li class="nav-item has-treeview">
+          </li>
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
              <i class="nav-icon fas fa-shield-alt"></i>
               <p>
@@ -196,7 +196,7 @@
                </li>
             </ul>
            </li>
-            <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
              <i class="nav-icon fas fa-shield-alt"></i>
               <p>
@@ -264,7 +264,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../productos/editProductos.jsp" class="nav-link">
+                <a href="editProductos.jsp" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
                   <p>Modificar Productos</p>
                 </a>

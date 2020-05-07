@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,19 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import datos.DT_publicaciones;
 import entidades.Tbl_publicaciones;
-import java.util.*;
 
 /**
- * Servlet implementation class SL_colecciones
+ * Servlet implementation class SL_productos
  */
-@WebServlet("/SL_colecciones")
-public class SL_colecciones extends HttpServlet {
+@WebServlet("/SL_productos")
+public class SL_productos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SL_colecciones() {
+    public SL_productos() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +31,7 @@ public class SL_colecciones extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Estoy entrando al servlet GET");
-		int id=0;
-		id = (Integer.parseInt(request.getParameter("IdUser")));
-		System.out.println("id en sevlet: "+id);
-		response.sendRedirect(request.getContextPath()+ "/muestra-individual.jsp?imagenID="+id);
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -48,7 +44,7 @@ public class SL_colecciones extends HttpServlet {
 		
 		String contenido = request.getParameter("contenido");
 		contenido = contenido.replace("\n","<br>");
-		String guid = request.getParameter("colecciones");
+		String guid = request.getParameter("productos");
 		
 		try
 		{	
@@ -56,13 +52,13 @@ public class SL_colecciones extends HttpServlet {
 			tpus1.setGuid(guid);
 			
 
-			if(dtpus.modificarColeccionesParr(tpus1))
+			if(dtpus.modificarProductos(tpus1))
 			{											
-				response.sendRedirect(request.getContextPath()+ "/CMS/colecciones/editColecciones.jsp?msj=1");
+				response.sendRedirect(request.getContextPath()+ "/CMS/productos/editProductos.jsp?msj=1");
 			}
 			else
 			{
-				response.sendRedirect(request.getContextPath()+ "/CMS/colecciones/editColecciones.jsp?msj=2");
+				response.sendRedirect(request.getContextPath()+ "/CMS/productos/editProductos.jsp?msj=2");
 			}
 		}
 		catch(Exception e)

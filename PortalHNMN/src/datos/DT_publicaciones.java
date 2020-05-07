@@ -516,6 +516,68 @@ public class DT_publicaciones {
 		return modificado;	
 	}
 	
+	public boolean modificarProductos(Tbl_publicaciones tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String contenido = "";
+		try
+		{
+			this.itemsProductos();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				if(rsPublicaciones.getString("guid").trim().equals(tbp.getGuid().trim()))
+				{
+					contenido = tbp.getPublic_content();
+					rsPublicaciones.updateString("public_content", contenido);
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarProductos() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
+	}
+	
+	public boolean modificarColeccionesParr(Tbl_publicaciones tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String contenido = "";
+		try
+		{
+			this.itemsParrafoColecciones();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				if(rsPublicaciones.getString("guid").trim().equals(tbp.getGuid().trim()))
+				{
+					contenido = tbp.getPublic_content();
+					rsPublicaciones.updateString("public_content", contenido);
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarColecciones() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
+	}
+	
 	public ArrayList<Tbl_publicaciones> tituloDonacion() throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
@@ -1691,6 +1753,7 @@ public class DT_publicaciones {
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
@@ -1759,6 +1822,7 @@ public class DT_publicaciones {
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
