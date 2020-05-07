@@ -497,6 +497,37 @@ public class DT_publicaciones {
 			rsPublicaciones = ps.executeQuery();
 			if(rsPublicaciones.next())
 			{
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerUsername() "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/	
+		return tpub;
+	}
+	
+	public Tbl_publicaciones obtenerEnlacePublicoEventos() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		Tbl_publicaciones tpub  = new Tbl_publicaciones();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name='articulo' AND public_tipo = 'Eventos' ORDER BY menu_order DESC;", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			if(rsPublicaciones.next())
+			{
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));

@@ -2,19 +2,20 @@ package servlets;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
-
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import datos.DT_EmailSessionBean;
 import datos.DT_publicaciones;
 import entidades.Tbl_publicaciones;
-
+import datos.DT_usuario;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -37,7 +38,8 @@ public class SL_subirEventoImagen extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    @EJB
+    private DT_EmailSessionBean emailBean;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -72,6 +74,13 @@ public class SL_subirEventoImagen extends HttpServlet {
 			String previa = "";
 			String categoria = "";
 			String redactor = "";
+			//Variables necesarias para obtener la información para el envío de correos
+			String to = "";
+	        String nombre = "";
+	        String cpCorreo = "";
+	        String asunto= "";
+	        String remitente = "";
+	        String pass = "";
 			
 			//Debido a que no se está en servlet 3.0 o más, el .getParameter() no funciona
 			//con el multipart/form-data (requerido para subir archivos, en este caso, imágenes)
@@ -121,6 +130,19 @@ public class SL_subirEventoImagen extends HttpServlet {
 	                		}
 	                	}
 	                }
+	                if(fieldName.trim().equals("destinoInput")) {
+	                	to = fieldValue;
+	                } else if(fieldName.trim().equals("nombreCompleto")) {
+                		nombre = fieldValue;
+                	} else if(fieldName.trim().equals("cuerpoDelCorreo")) {
+            			cpCorreo = fieldValue;
+            		}else if(fieldName.trim().equals("asunto")) {
+            			asunto = fieldValue;
+            		} else if(fieldName.trim().equals("correo")) {
+    					remitente = fieldValue;
+    				}else if(fieldName.trim().equals("password")) {
+						pass = fieldValue;
+					}
 				}
 			}		
 			
@@ -165,7 +187,27 @@ public class SL_subirEventoImagen extends HttpServlet {
 						
 						if(dtpub.guardarEventoImagen(tpub))
 						{
-							response.sendRedirect(request.getContextPath()+ "/CMS/eventos/newEventoImagen.jsp?msj=1");
+							boolean enviado = false;
+					        String[] correos = to.split("/");
+					        DT_usuario dtus = new DT_usuario();
+					        for (String remit : correos ) {
+					        	if(dtus.obtenerUsername(remit).getNotificacion()==1) {					        		
+					        		try {
+						        		enviado = emailBean.sendEmail(remit, asunto,"Estimado "+dtus.obtenerUsername(remit).getUsername()+cpCorreo+dtpub.obtenerEnlacePublicoEventos().getPublic_enlace(), nombre, remitente, pass);
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+					        	}else {
+					        		enviado = true;
+					        	}
+					        }				
+							if(enviado) {
+								response.sendRedirect(request.getContextPath()+ "/CMS/eventos/newEventoImagen.jsp?msj=1");
+							} else
+							{
+								response.sendRedirect(request.getContextPath()+ "/CMS/eventos/newEventoImagen.jsp?msj=2");
+							}							
 						}
 						else 
 						{

@@ -192,13 +192,10 @@ public class SL_subirArticuloImagen extends HttpServlet {
 						
 						if(dtpub.guardarArticuloImagen(tpub))
 						{
-							System.out.println("Se guardo el articulo, entramos al proceso de notis");
 					        boolean enviado = false;
-
 					        String[] correos = to.split("/");
 					        DT_usuario dtus = new DT_usuario();
 					        for (String remit : correos ) {
-					        	System.out.println("Correo dentro del FOR: "+remit);
 					        	if(dtus.obtenerUsername(remit).getNotificacion()==1) {					        		
 					        		try {
 						        		enviado = emailBean.sendEmail(remit, asunto,"Estimado "+dtus.obtenerUsername(remit).getUsername()+cpCorreo+dtpub.obtenerEnlacePublico().getPublic_enlace(), nombre, remitente, pass);

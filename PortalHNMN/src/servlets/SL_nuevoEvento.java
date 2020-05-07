@@ -1,13 +1,17 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.ejb.EJB;
+import datos.DT_EmailSessionBean;
 import datos.DT_publicaciones;
+import datos.DT_usuario;
 import entidades.Tbl_publicaciones;
 
 @WebServlet("/SL_nuevoEvento")
@@ -21,14 +25,14 @@ public class SL_nuevoEvento extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-    
+    @EJB
+    private DT_EmailSessionBean emailBean;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String titulo = request.getParameter("titulo");
 		String contenido = request.getParameter("contenido");
 		contenido = contenido.replace("\n","<br>");
@@ -56,7 +60,35 @@ public class SL_nuevoEvento extends HttpServlet {
 			
 			if(dpub.guardarEventoTexto(tpub))
 			{
-				response.sendRedirect(request.getContextPath()+ "/CMS/eventos/newEvento.jsp?msj=1");
+				String to = request.getParameter("destinoInput");
+		        String nombre = request.getParameter("nombreCompleto");
+		        String cpCorreo = request.getParameter("cuerpoDelCorreo");
+		        String asunto= request.getParameter("asunto");
+		        String remitente = request.getParameter("correo");
+		        String pass = request.getParameter("password");
+		        //String totalCorreos = request.getParameter("totalCorreos");
+		        boolean enviado = false;
+
+		        String[] correos = to.split("/");
+		        DT_usuario dtus = new DT_usuario();
+		        for (String remit : correos ) {
+		        	if(dtus.obtenerUsername(remit).getNotificacion()==1) {
+		        		try {
+			        		enviado = emailBean.sendEmail(remit, asunto,"Estimado "+dtus.obtenerUsername(remit).getUsername()+cpCorreo+dpub.obtenerEnlacePublicoEventos().getPublic_enlace(), nombre, remitente, pass);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		        	}else {
+		        		enviado = true;
+		        	}
+		        }				
+				if(enviado) {
+					response.sendRedirect(request.getContextPath()+ "/CMS/eventos/newEvento.jsp?msj=1");
+				} else
+				{
+					response.sendRedirect(request.getContextPath()+ "/CMS/eventos/newEvento.jsp?msj=2");
+				}				
 			}
 			else
 			{
