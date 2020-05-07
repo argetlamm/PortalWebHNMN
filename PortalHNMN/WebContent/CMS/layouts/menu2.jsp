@@ -145,7 +145,7 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-shield-alt"></i>
+              <i class="fas fa-check-square nav-icon"></i>
               <p>
                 Suscripción
                 <i class="fas fa-angle-left right"></i>
@@ -154,7 +154,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../suscripcion/notificacion.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-envelope-open-text nav-icon"></i>
                   <p>Notificaciones</p>
                 </a>
                 </li>
@@ -163,7 +163,7 @@
             <!--           ///////////////////////Sexta Sección//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-shield-alt"></i>
+              <i class="fas fa-hand-holding-usd nav-icon"></i>
               <p>
                 Donación
                 <i class="fas fa-angle-left right"></i>
@@ -172,7 +172,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../donacion/editDonacion.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-money-bill-wave nav-icon"></i>
                   <p>Modificar Donaciones</p>
                 </a>
                </li>
@@ -180,7 +180,7 @@
            </li>
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-             <i class="nav-icon fas fa-shield-alt"></i>
+             <i class="fas fa-list-alt nav-icon"></i>
               <p>
                	Servicios
                 <i class="fas fa-angle-left right"></i>
@@ -189,7 +189,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../servicios/editServicios.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-clipboard nav-icon"></i>
                   <p>Editar servicios</p>
                 </a>
                </li>
@@ -197,7 +197,7 @@
            </li>
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-             <i class="nav-icon fas fa-shield-alt"></i>
+             <i class="fas fa-paste nav-icon"></i>
               <p>
                	Publicaciones
                 <i class="fas fa-angle-left right"></i>
@@ -206,19 +206,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../publicaciones/newArticulos.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-vote-yea nav-icon"></i>
                   <p>Agregar artículos sólo texto</p>
                 </a>
                </li>
                <li class="nav-item">
                 <a href="../publicaciones/newArticulosImagen.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-images nav-icon"></i>
                   <p>Agregar artículos con imagen</p>
                 </a>
                </li>
                <li class="nav-item">
                 <a href="../publicaciones/editArticulos.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-pen nav-icon"></i>
                   <p>Editar artículos</p>
                 </a>
                </li>
@@ -226,7 +226,7 @@
            </li>
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-             <i class="nav-icon fas fa-shield-alt"></i>
+              <i class="far fa-calendar-alt nav-icon"></i>
               <p>
                	Eventos
                 <i class="fas fa-angle-left right"></i>
@@ -235,19 +235,19 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../eventos/newEvento.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-calendar-plus nav-icon"></i>
                   <p>Agregar eventos sólo texto</p>
                 </a>
                </li>
                <li class="nav-item">
                 <a href="../eventos/newEventoImagen.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-calendar-day nav-icon"></i>
                   <p>Agregar eventos con imagen</p>
                 </a>
                </li>
                <li class="nav-item">
                 <a href="../eventos/editEventos.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="far fa-calendar-check nav-icon"></i>
                   <p>Editar eventos</p>
                 </a>
                </li>
@@ -255,7 +255,7 @@
            </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-shield-alt"></i>
+              <i class="fas fa-shopping-cart nav-icon"></i>
               <p>
                 Productos
                 <i class="fas fa-angle-left right"></i>
@@ -264,7 +264,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../productos/editProductos.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-cart-plus nav-icon"></i>
                   <p>Modificar Productos</p>
                 </a>
                </li>
@@ -273,7 +273,7 @@
             </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-shield-alt"></i>
+              <i class="fab fa-pagelines nav-icon"></i>
               <p>
                 Colecciones
                 <i class="fas fa-angle-left right"></i>
@@ -282,7 +282,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../colecciones/editColecciones.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-highlighter nav-icon"></i>
                   <p>Modificar Colecciones</p>
                 </a>
                </li>
@@ -291,7 +291,7 @@
             </li>
             <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-shield-alt"></i>
+              <i class="fas fa-hands-helping nav-icon"></i>
               <p>
                 Colaboraciones
                 <i class="fas fa-angle-left right"></i>
@@ -300,7 +300,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../colaboraciones/editColaboraciones.jsp" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i>
+                  <i class="fas fa-handshake nav-icon"></i>
                   <p>Modificar Colaboraciones</p>
                 </a>
                </li>
