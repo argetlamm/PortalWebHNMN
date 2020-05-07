@@ -2,9 +2,10 @@ package servlets;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
-
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import datos.DT_EmailSessionBean;
 import datos.DT_publicaciones;
+import datos.DT_usuario;
 import entidades.Tbl_publicaciones;
 
 import org.apache.commons.fileupload.FileItem;
@@ -37,12 +40,14 @@ public class SL_subirArticuloImagen extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    @EJB
+    private DT_EmailSessionBean emailBean;
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -72,6 +77,13 @@ public class SL_subirArticuloImagen extends HttpServlet {
 			String previa = "";
 			String categoria = "";
 			String redactor = "";
+			//Variables necesarias para obtener la información para el envío de correos
+			String to = "";
+	        String nombre = "";
+	        String cpCorreo = "";
+	        String asunto= "";
+	        String remitente = "";
+	        String pass = "";
 			
 			//Debido a que no se está en servlet 3.0 o más, el .getParameter() no funciona
 			//con el multipart/form-data (requerido para subir archivos, en este caso, imágenes)
@@ -117,10 +129,23 @@ public class SL_subirArticuloImagen extends HttpServlet {
 	                			if(fieldName.trim().equals("redactor"))
 		                		{
 		                			redactor = fieldValue;
-		                		}
+		                		} 
 	                		}
 	                	}
 	                }
+	                if(fieldName.trim().equals("destinoInput")) {
+	                	to = fieldValue;
+	                } else if(fieldName.trim().equals("nombreCompleto")) {
+                		nombre = fieldValue;
+                	} else if(fieldName.trim().equals("cuerpoDelCorreo")) {
+            			cpCorreo = fieldValue;
+            		}else if(fieldName.trim().equals("asunto")) {
+            			asunto = fieldValue;
+            		} else if(fieldName.trim().equals("correo")) {
+    					remitente = fieldValue;
+    				}else if(fieldName.trim().equals("password")) {
+						pass = fieldValue;
+					}
 				}
 			}		
 			
@@ -167,7 +192,30 @@ public class SL_subirArticuloImagen extends HttpServlet {
 						
 						if(dtpub.guardarArticuloImagen(tpub))
 						{
-							response.sendRedirect(request.getContextPath()+ "/CMS/publicaciones/newArticulosImagen.jsp?msj=1");
+							System.out.println("Se guardo el articulo, entramos al proceso de notis");
+					        boolean enviado = false;
+
+					        String[] correos = to.split("/");
+					        DT_usuario dtus = new DT_usuario();
+					        for (String remit : correos ) {
+					        	System.out.println("Correo dentro del FOR: "+remit);
+					        	if(dtus.obtenerUsername(remit).getNotificacion()==1) {					        		
+					        		try {
+						        		enviado = emailBean.sendEmail(remit, asunto,"Estimado "+dtus.obtenerUsername(remit).getUsername()+cpCorreo+dtpub.obtenerEnlacePublico().getPublic_enlace(), nombre, remitente, pass);
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+					        	}else {
+					        		enviado = true;
+					        	}
+					        }				
+							if(enviado) {
+								response.sendRedirect(request.getContextPath()+ "/CMS/publicaciones/newArticulosImagen.jsp?msj=1");
+							} else
+							{
+								response.sendRedirect(request.getContextPath()+ "/CMS/publicaciones/newArticulosImagen.jsp?msj=2");
+							}	
 						}
 						else 
 						{

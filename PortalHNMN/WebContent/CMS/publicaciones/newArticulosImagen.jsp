@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.DT_publicaciones, java.util.*;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 
 <%
 	ArrayList <V_tbl_Rol_Opcion> listOpciones = new ArrayList <V_tbl_Rol_Opcion>();
@@ -142,7 +142,7 @@ mensaje = mensaje==null?"":mensaje;
                   	</table>
                   	<br>
                   	<label for="exampleInputEmail1">Título del artículo: </label>
-                    <input type="text" id="titulo" name="titulo" class="form-control" value="" required>
+                    <input type="text" id="titulo" name="titulo" class="cargaAutom form-control" value="" required>
                     <label for="exampleInputEmail1">Contenido del artículo: </label>
                     <textarea id="contenido" name="contenido" class="form-control" rows="5" maxlength="5000" required></textarea>
 					<label for="exampleInputEmail1">Categoría del artículo: </label>
@@ -151,6 +151,84 @@ mensaje = mensaje==null?"":mensaje;
                     <input type="hidden" id="redactor" name="redactor" class="form-control" value="<%=nombreCompleto%>" required>
                   </div>
                 </div>
+                <div class="card-body" style="display: none;">
+	                <div class="row">
+	                  <div class="col-lg-6">
+	                    <div class="card card-info">
+	                      <div class="card-body">
+	                        <div class="form-group row">
+	                          <select name="origen" id="origen"  multiple="multiple" class="form-control" size="8">
+	                          <%
+			                    DT_usuario dtus = new DT_usuario();
+				        		ArrayList<Tbl_user> listEmail = new ArrayList<Tbl_user>();
+				        		listEmail = dtus.listUser();
+				        		int value = 0; 
+				        		String estado = "";
+				        		for(Tbl_user tus : listEmail)
+				        		{
+				        			value = value+1;
+				        			System.out.println("valor de value: "+value);
+				        			estado = tus.getEstado()==1||tus.getEstado()==2?"ACTIVO":"";
+				              %>
+				                <option><%=tus.getEmail()%></option>
+					          <%
+				        		}   
+					          %>
+	                          </select>
+	                        </div>
+	                      </div>
+	                    </div>
+	                  </div>
+	                  <div class="col-lg-6">
+	                    <div class="card card-info">
+	                      <div class="card-body">
+	                        <div class="form-group row">
+	                          <input name="destinoInput" id="destinoInput" required>
+	                        </div>
+	                        <div class="form-group row">
+		                	  <label for="inputName" class="col-sm-4 col-form-label">Total de Correos:</label> 
+		                      <div class="col-sm-2">
+		                        <input type="text" id="totalCorreos" name="totalCorreos" class="form-control" value="0"  readonly="readonly">
+		                      </div>
+		               		</div> 
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	                <!-- Main content -->
+	                <section class="content">
+	                  <div class="row">
+	                    <div class="col-md-12">
+	                      <div class="card card-primary">
+	                        <div class="card-body">
+	                          <div class="form-group">
+	                            <label for="inputName">Nombre del remitente</label>
+	                            <input type="text" id="nombreCompleto" name="nombreCompleto" class="form-control" value="Herbario Nacional - UCA" required>
+	                          </div>
+	                          <div class="form-group">
+	                            <label for="inputName">Correo</label>
+	                            <input type="email" id="correo" name="correo" class="form-control" value="temporalherbariouca@gmail.com" required>
+	                          </div>
+	                          <div class="form-group">	
+	                            <label for="inputName">Contraseña de correo</label>
+	                            <input type="text" id="password" name="password" class="form-control" value="Usuario123#." required>
+	                          </div>
+	                          <div class="form-group">
+	                            <label for="inputName">Asunto</label>
+	                            <input type="text" id="asunto"  name="asunto" class="form-control" required>
+	                          </div>
+	                          <div class="form-group">
+	                            <label for="inputDescription">Cuerpo del Correo </label>
+	                            <textarea type="text" name="cuerpoDelCorreo" id="cuerpoDelCorreo" class="form-control" rows="4"
+	                            >, tenemos una publicación nueva en el sitio, puedes acceder a ella a través del siguiente enlace: </textarea>
+	                          </div>
+	                        </div>
+	                      </div>
+	                    </div>
+	                  </div>
+	            </section>
+	            <!-- End Main content -->
+	          </div>
                 <!-- /.card-body -->	
                 <div class="card-footer">
                   <button type="submit" class="btn btn-primary">Guardar</button>
@@ -182,6 +260,9 @@ mensaje = mensaje==null?"":mensaje;
   <script src="../plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="../plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   <script src="../plugins/select2/js/select2.full.min.js"></script>
+
+<!-- Funcionalidad de componentes js -->
+<script src="../dist/js/suscripcion/funcionalidad-componentes.js" charset="UTF-8"></script> 
      
   <script>    
     $(document).ready(function ()
