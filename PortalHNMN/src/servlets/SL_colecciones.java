@@ -43,8 +43,33 @@ public class SL_colecciones extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// doGet(request, response);
+		Tbl_publicaciones tpus1 = new Tbl_publicaciones();
+		DT_publicaciones dtpus = new DT_publicaciones();
 		
+		String contenido = request.getParameter("contenido");
+		contenido = contenido.replace("\n","<br>");
+		String guid = request.getParameter("colecciones");
+		
+		try
+		{	
+			tpus1.setPublic_content(contenido);
+			tpus1.setGuid(guid);
+			
+
+			if(dtpus.modificarColeccionesParr(tpus1))
+			{											
+				response.sendRedirect(request.getContextPath()+ "/CMS/colecciones/editColecciones.jsp?msj=1");
+			}
+			else
+			{
+				response.sendRedirect(request.getContextPath()+ "/CMS/colecciones/editColecciones.jsp?msj=2");
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("Servlet: Error al editar Productos!");
+		}
 	}
 
 }

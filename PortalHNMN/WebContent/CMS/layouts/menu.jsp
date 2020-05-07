@@ -172,7 +172,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shield-alt"></i>
               <p>
-                Donación
+                Donaciones
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -183,6 +183,7 @@
                   <p>Modificar Donaciones</p>
                 </a>
                </li>
+               
             </ul>
             </li>
              <!--           ///////////////////////Octava Sección//////////////////////////////////// -->   
@@ -263,6 +264,63 @@
                </li>
             </ul>
            </li>
+           <!--           ///////////////////////Undecima Sección//////////////////////////////////// -->                             
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shield-alt"></i>
+              <p>
+                Productos
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="productos/editProductos.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Modificar Productos</p>
+                </a>
+               </li>
+               
+            </ul>
+            </li>
+            <!--           ///////////////////////Duodecima Sección//////////////////////////////////// -->                             
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shield-alt"></i>
+              <p>
+                Colecciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="colecciones/editColecciones.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Modificar Colecciones</p>
+                </a>
+               </li>
+               
+            </ul>
+            </li>
+             <!--           ///////////////////////Decimotercera Sección//////////////////////////////////// -->                             
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-shield-alt"></i>
+              <p>
+                Colaboraciones
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="colaboraciones/editColaboraciones.jsp" class="nav-link">
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Modificar Colaboraciones</p>
+                </a>
+               </li>
+               
+            </ul>
+            </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

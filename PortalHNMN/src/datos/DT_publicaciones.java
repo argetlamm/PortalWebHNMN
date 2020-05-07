@@ -516,6 +516,99 @@ public class DT_publicaciones {
 		return modificado;	
 	}
 	
+	public boolean modificarColaboraciones(Tbl_publicaciones tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String contenido = "";
+		try
+		{
+			this.itemsParrafoColab();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				if(rsPublicaciones.getString("guid").trim().equals(tbp.getGuid().trim()))
+				{
+					contenido = tbp.getPublic_content();
+					rsPublicaciones.updateString("public_content", contenido);
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarDonaciones() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
+	}
+	
+	public boolean modificarProductos(Tbl_publicaciones tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String contenido = "";
+		try
+		{
+			this.itemsProductos();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				if(rsPublicaciones.getString("guid").trim().equals(tbp.getGuid().trim()))
+				{
+					contenido = tbp.getPublic_content();
+					rsPublicaciones.updateString("public_content", contenido);
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarProductos() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
+	}
+	
+	public boolean modificarColeccionesParr(Tbl_publicaciones tbp) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		boolean modificado=false;
+		String contenido = "";
+		try
+		{
+			this.itemsParrafoColecciones();
+			rsPublicaciones.beforeFirst();
+			while(rsPublicaciones.next())
+			{
+				if(rsPublicaciones.getString("guid").trim().equals(tbp.getGuid().trim()))
+				{
+					contenido = tbp.getPublic_content();
+					rsPublicaciones.updateString("public_content", contenido);
+					rsPublicaciones.updateRow();
+					modificado=true;
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			System.err.println("ERROR modificarColecciones() "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}
+		return modificado;	
+	}
+	
 	public ArrayList<Tbl_publicaciones> tituloDonacion() throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
@@ -1691,6 +1784,7 @@ public class DT_publicaciones {
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
@@ -1710,6 +1804,76 @@ public class DT_publicaciones {
 		}*/
 		return listaProd;
 	}
+	
+	public ArrayList<Tbl_publicaciones> itemsParrafoColab() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaPColab = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'itemsColaboraciones'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				listaPColab.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en itemsProductos() "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaPColab;
+	}
+	
+	public ArrayList<Tbl_publicaciones> tituloColaboraciones() throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		ArrayList<Tbl_publicaciones> listaTitColb = new ArrayList<Tbl_publicaciones>();
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_tipo = 'tituloColaboraciones'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
+				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
+				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
+				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
+				tpub.setPublic_fecha(rsPublicaciones.getString("public_fecha"));
+				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
+				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
+				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				listaTitColb.add(tpub);
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en tituloProductos() "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/
+		return listaTitColb;
+	}
 
 	public ArrayList<Tbl_publicaciones> tituloProductos() throws SQLException
 	{
@@ -1725,6 +1889,7 @@ public class DT_publicaciones {
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
@@ -1759,6 +1924,7 @@ public class DT_publicaciones {
 			while(rsPublicaciones.next())
 			{
 				Tbl_publicaciones tpub = new Tbl_publicaciones();
+				tpub.setGuid(rsPublicaciones.getString("guid"));
 				tpub.setMenu_order(rsPublicaciones.getInt("menu_order"));
 				tpub.setPublic_content(rsPublicaciones.getString("public_content"));
 				tpub.setPublic_estado(rsPublicaciones.getString("public_estado"));
