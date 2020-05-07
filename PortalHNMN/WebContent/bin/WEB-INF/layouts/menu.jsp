@@ -1,0 +1,109 @@
+ <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
+ <!-- start header -->
+    <header>
+      <div class="container ">
+        <div class="row nomargin">
+          <div class="span12">
+            <div class="headnav">
+              <ul>
+                <li><a href="registro.jsp"><i class="icon-user"></i> Regístrate</a></li>
+                <li><a href="././CMS/index.jsp">Iniciar Sesión</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4">
+            <div class="logo">
+              <a href="index.jsp"><img src="img/logohn.png" alt="" class="logo" /></a>
+              <h1>Herbario Nacional de Nicaragua</h1>
+            </div>
+          </div>
+          <div class="span8">
+            <div class="navbar navbar-static-top">
+              <div class="navigation"> 
+                <nav> 
+                <%
+                	DT_publicaciones dtpus = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listatTblp = new ArrayList<Tbl_publicaciones>();
+                listatTblp = dtpus.itemMenu();
+                String publicado = "publicado";
+                String item1="", item2="", item3="", item4="", item5="", item6="", item7="", item8="",
+                		item9="", item10="", item11="", item12="";
+                for (Tbl_publicaciones tpublc : listatTblp){
+                	if(tpublc.getPublic_estado().trim().equals(publicado)){
+                		if(tpublc.getMenu_order() == 1){
+                			item1 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 2){
+                			item2 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 3){
+                			item3 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 4){
+                			item4 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 5){
+                			item5 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 6){
+                			item6 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 7){
+                			item7 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 8){
+                			item8 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 9){
+                			item9 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 10){
+                			item10 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 11){
+                			item11 = tpublc.getPublic_titulo();
+                		}else if(tpublc.getMenu_order() == 12){
+                			item12 = tpublc.getPublic_titulo();
+                		}
+                	}
+                }
+                	//System.out.println("LETRAAAAS:  ="+tblp.getPublic_titulo());
+                %>
+                  <ul class="nav topnav">
+                    <li class="dropdown active">
+                      <a href="index.jsp"><%=item1 %></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="acercade.jsp"><%=item2 %></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="colecciones.jsp"><%=item3 %></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="noticias.jsp"><%=item4 %>
+                      <i class="icon-angle-down">
+                      </i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li><a href="articulos.jsp"><%=item5 %></a></li>
+                        <li><a href="eventos.jsp"><%=item6 %></a></li>
+                        <li><a href="cursos.jsp"><%=item7 %></a></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <a href="contacto.jsp"><%=item8 %> </a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="mas-del-herbario.jsp"><%=item9%>
+                      <i class="icon-angle-down">
+                      </i>
+                      </a>
+                      <ul class="dropdown-menu">
+                      	<li><a href="donaciones.jsp"><%=item10 %></a></li>
+                      	<li><a href="colaboraciones.jsp"><%=item11 %></a></li>
+                      	<li><a href="productos.jsp"><%=item12 %></a></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <!-- end navigation -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- end header -->

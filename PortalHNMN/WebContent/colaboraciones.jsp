@@ -38,13 +38,13 @@
         <div class="row">
           <div class="span4">
             <div class="inner-heading">
-              <h2>Colaboraciones</h2>
+              <h2>Productos</h2>
             </div>
           </div>
           <div class="span8">
             <ul class="breadcrumb">
               <li><a href="index.jsp"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-              <li class="active">Colaboraciones</li>
+              <li class="active">Productos</li>
             </ul>
           </div>
         </div>
@@ -53,37 +53,42 @@
     <section id="content">
       <div class="container">
          <div class="row">
+                   	<%
+          		DT_publicaciones dtpus = new DT_publicaciones();
+            	ArrayList<Tbl_publicaciones> listatTitColab = new ArrayList<Tbl_publicaciones>();
+            	listatTitColab = dtpus.tituloColaboraciones();
+            	String publicado = "publicado";
+            	String titulo1="";
+  
+            	for(Tbl_publicaciones tpublc : listatTitColab){
+                	if(tpublc.getPublic_estado().trim().equals(publicado)){
+                		if(tpublc.getMenu_order() == 1){
+                			titulo1=tpublc.getPublic_titulo();
+                		}
+                	}
+                }
+          	%>
+          	<h2><b><%=titulo1 %></b></h2>
+            <%
+                	DT_publicaciones dtpusdos = new DT_publicaciones();
+                ArrayList<Tbl_publicaciones> listaParrafColab = new ArrayList<Tbl_publicaciones>();
+                listaParrafColab = dtpusdos.itemsParrafoColab();
+                String parrafo="";
+                for (Tbl_publicaciones tpublc : listaParrafColab){
+                	if(tpublc.getPublic_estado().trim().equals(publicado)){
+                			parrafo=tpublc.getPublic_content();
+		
+                %>
+                <p><%=parrafo %></p>
+                <%
+               	 	}
+                }
+                %>
          
-         <h2><strong>Formas de contribución:</strong></h2>
-         <h4>Económica:  Cuenta Banpro Universidad Centroamericana 10031913893768</h4>
-         <h4>Materiales que pueden donar:</h4>
-         <ul>
-         <li>Papel especial para montaje de plantas, sin ácidos dimensiones 28 x 40</li>
-         <li>Resistol de 800</li>
-         <li>Alcohol de 80°</li>
-         <li>Papel periódico</li>
-         <li>Cartón corugado</li>
-         <li>Tijeras podadoras</li>
-         <li>Lámparas para la cabeza</li>
-         <li>Cartulinas dúplex</li>
-         <li>Binoculares</li>
-         <li>Lupas 25x</li>
-         <li>Cámara fotográfica</li>
-         <li>GPS</li>
-         <li>Cintas diamétricas</li>
-         <li>Libretas de Campo impermeables</li>
-         <li>Bolsas plásticas de un quintal</li>
-         <li>Masking tape</li>
-         <li>Libros de claves de identificación de especies</li>
-         </ul>
-         
-         <p>Agradecemos mucho su contribución, con ella podemos garantizar se realice investigación científica que fomente la conservación de los bosques nicaragüenses y el aprovechamiento sostenible de los recursos.</p>
-         
-         
-         </div>
-         </div>
-</section>
-    
+		</div>
+        </div>
+</section>         
+          
     
     
   <!-- Footer -->
