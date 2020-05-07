@@ -89,6 +89,43 @@ public class DT_usuario
 		return tus;
 	}
 	
+	public Tbl_user obtenerUsername(String email) throws SQLException
+	{
+		Connection c = PoolConexion.getConnection();
+		Tbl_user tus  = new Tbl_user();
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * from tbl_user where email = ? and estado<>3", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setString(1, email);
+			rsUsuario = ps.executeQuery();
+			if(rsUsuario.next())
+			{
+				tus.setId_user(rsUsuario.getInt("id_user"));
+				tus.setNombre1(rsUsuario.getString("nombre1"));
+				tus.setNombre2(rsUsuario.getString("nombre2"));
+				tus.setApellido1(rsUsuario.getString("apellido1"));
+				tus.setApellido2(rsUsuario.getString("apellido2"));
+				tus.setUsername(rsUsuario.getString("username"));
+				tus.setPassword(rsUsuario.getString("password"));
+				tus.setEmail(rsUsuario.getString("email"));
+				tus.setPwd_tmp(rsUsuario.getString("pwd_tmp"));
+				tus.setEstado(rsUsuario.getInt("estado"));
+				tus.setAyuda(rsUsuario.getInt("ayuda"));
+				tus.setNotificacion(rsUsuario.getInt("notificacion"));
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.println("DATOS: ERROR en obtenerUsername() "+ e.getMessage());
+			e.printStackTrace();
+		} /*finally {
+			c.close();
+		}*/	
+		return tus;
+	}
+	
 	///////////////////////////// METODO PARA OBTENER USER /////////////////////////////
 	public Tbl_user obtenerUserId(int idUser) throws SQLException
 	{
@@ -145,6 +182,7 @@ public class DT_usuario
 			rsUsuario.updateString("password", getMd5(tus.getPassword()));
 			rsUsuario.updateString("email", tus.getEmail());
 			rsUsuario.updateInt("estado", 1);
+			rsUsuario.updateInt("notificacion", tus.getNotificacion());
 			rsUsuario.insertRow();
 			rsUsuario.moveToCurrentRow();
 			guardado = true;

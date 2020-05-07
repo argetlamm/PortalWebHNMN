@@ -42,22 +42,45 @@ public class SL_registro extends HttpServlet {
 		
 		try
 		{
-			tus.setUsername(request.getParameter("username"));
-			tus.setPassword(request.getParameter("password"));
-			tus.setNombre1(request.getParameter("nombre1"));
-			tus.setNombre2(request.getParameter("nombre2"));
-			tus.setApellido1(request.getParameter("apellido1"));
-			tus.setApellido2(request.getParameter("apellido2"));
-			tus.setEmail(request.getParameter("email"));
-			
-			if(dtus.guardarUser(tus))
-			{
-				response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=1");
-			}
-			else
-			{
-				response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=2");
-			}
+			int opcionA = 0;
+			String opcion = request.getParameter("notificacion");
+			if("a".trim().equals(opcion.trim())) {
+				opcionA = 1;
+				tus.setUsername(request.getParameter("username"));
+				tus.setPassword(request.getParameter("password"));
+				tus.setNombre1(request.getParameter("nombre1"));
+				tus.setNombre2(request.getParameter("nombre2"));
+				tus.setApellido1(request.getParameter("apellido1"));
+				tus.setApellido2(request.getParameter("apellido2"));
+				tus.setEmail(request.getParameter("email"));
+				tus.setNotificacion(opcionA);
+				if(dtus.guardarUser(tus))
+				{
+					response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=1");
+				}
+				else
+				{
+					response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=2");
+				}
+			} else {
+				opcionA = 2;
+				tus.setUsername(request.getParameter("username"));
+				tus.setPassword(request.getParameter("password"));
+				tus.setNombre1(request.getParameter("nombre1"));
+				tus.setNombre2(request.getParameter("nombre2"));
+				tus.setApellido1(request.getParameter("apellido1"));
+				tus.setApellido2(request.getParameter("apellido2"));
+				tus.setEmail(request.getParameter("email"));
+				tus.setNotificacion(opcionA);
+				if(dtus.guardarUser(tus))
+				{
+					response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=1");
+				}
+				else
+				{
+					response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=2");
+				}
+			}			
 		}
 		catch(Exception e)
 		{

@@ -14,6 +14,7 @@ public class Tbl_user
 	private String email;
 	private int estado;
 	private int ayuda;
+	private int notificacion;
 
 	//METODOS
 	public int getId_user() {
@@ -81,6 +82,12 @@ public class Tbl_user
 	}
 	public void setAyuda(int ayuda) {
 		this.ayuda = ayuda;
+	}
+	public int getNotificacion() {
+		return notificacion;
+	}
+	public void setNotificacion(int notificacion) {
+		this.notificacion = notificacion;
 	}
 	
 	

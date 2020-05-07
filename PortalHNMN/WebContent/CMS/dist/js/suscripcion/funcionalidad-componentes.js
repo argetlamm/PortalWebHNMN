@@ -44,6 +44,23 @@ $().ready(function() {
 		$("#totalCorreos").val(totalOptions);
 		$("#destinoInput").val(correos);
     });
+	
+	$('.cargaAutom').click(function() {
+		var totalOptions = $('#origen option').length;
+		var correo = "";
+		var correos = "";
+		for(var i=0; i<totalOptions; i++){
+			correo = $("#origen option:eq(" + i + ")").text() + "/";
+            correos = correos + correo;
+        }
+		$("#totalCorreos").val(totalOptions);
+		$("#destinoInput").val(correos);
+    });
+	
+	$("#titulo").keyup(function () {
+        var value = $(this).val();
+        $("#asunto").val("¡Tenemos una nueva publicación disponible! - "+value);
+    });
 
     $('.quitar').click(function() {
         var opcSel = $('#destino option:selected').index();
