@@ -110,7 +110,11 @@ System.out.println("mensaje1="+mensaje);
                     <input type="email" id="email" name="email" class="form-control" 
                     placeholder="Ingrese una cuenta de correo electrónico válida, Ejemplo: ejemplo@ejemplo.com" required>
                   </div>
-
+                  <div class="form-group" align="center">
+                    <label for="exampleInputEmail1">¿Desea recibir notificaciones de publicaciones del Herbario?:</label>
+                    <input type="radio" id="notificacion" name="notificacion" value="a"> Si
+                    <input type="radio" id="notificacion" name="notificacion" value="b"> No<br><br>
+                  </div>
                 </div>
                 <!-- /.card-body -->
 
