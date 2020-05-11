@@ -32,7 +32,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-header">Menú</li>
           
-          
+<!--           ///////////////////////Primer Sección - SEGURIDAD//////////////////////////////////// -->          
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shield-alt"></i>
@@ -75,21 +75,21 @@
             </ul>
 <!--           ///////////////////////Segunda Sección//////////////////////////////////// -->
           </li>
+<!--           ///////////////////////Segunda Sección - EDICION MENU//////////////////////////////////// -->          
           <li class="nav-item">
                 <a href="menu/editMenu.jsp" class="nav-link">
                   <i class="fas fa-stream nav-icon"></i>
                   <p>Edición de Menu</p>
                 </a>
          </li>
-           <!--  ///////////////////////Tercera Sección//////////////////////////////////// -->
-         </li>
+<!--           ///////////////////////Tercera Sección - EDICION FOOTER//////////////////////////////////// -->
           <li class="nav-item">
                 <a href="footer/editFooter.jsp" class="nav-link">
                   <i class="fas fa-stream nav-icon"></i>
                   <p>Edición de Footer</p>
                 </a>
          </li>
-<!--           ///////////////////////Cuarta Sección//////////////////////////////////// -->
+<!--           ///////////////////////Cuarta Sección - PAGINA DE INICIO//////////////////////////////////// -->
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -113,7 +113,7 @@
               </li>
             </ul>
           </li>
-<!--           ///////////////////////Quinta Sección//////////////////////////////////// --> 			
+<!--           ///////////////////////Quinta Sección - QUIENES SOMOS//////////////////////////////////// --> 			
  		  <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fab fa-black-tie"></i>
@@ -149,7 +149,7 @@
               </li>
             </ul>
           </li>
-<!--           ///////////////////////Sexta Sección//////////////////////////////////// -->                             
+<!--           ///////////////////////Sexta Sección - SUSCRIPCION//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-check-square nav-icon"></i>
@@ -167,7 +167,7 @@
                </li>
             </ul>
             </li>
-            <!--           ///////////////////////Séptima Sección//////////////////////////////////// -->                             
+<!--           ///////////////////////Séptima Sección - DONACIONES//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-hand-holding-usd nav-icon"></i>
@@ -186,8 +186,8 @@
                
             </ul>
             </li>
-             <!--           ///////////////////////Octava Sección//////////////////////////////////// -->   
-            <li class="nav-item has-treeview">
+<!--           ///////////////////////Octava Sección - SERVICIOS//////////////////////////////////// -->   
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
              <i class="fas fa-list-alt nav-icon"></i>
               <p>
@@ -204,8 +204,8 @@
                </li>
             </ul>
            </li>
-           <!--           ///////////////////////Novena Sección//////////////////////////////////// -->   
-            <li class="nav-item has-treeview">
+<!--           ///////////////////////Novena Sección - PUBLICACIONES//////////////////////////////////// -->   
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
              <i class="fas fa-paste nav-icon"></i>
               <p>
@@ -234,8 +234,8 @@
                </li>
             </ul>
            </li>
-           <!--           ///////////////////////Décima Sección//////////////////////////////////// -->   
-           <li class="nav-item has-treeview">
+<!--           ///////////////////////Décima Sección - EVENTOS//////////////////////////////////// -->   
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
              <i class="far fa-calendar-alt nav-icon"></i>
               <p>
@@ -264,7 +264,7 @@
                </li>
             </ul>
            </li>
-           <!--           ///////////////////////Undecima Sección//////////////////////////////////// -->                             
+<!--           ///////////////////////Undecima Sección - PRODUCTOS//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-shopping-cart nav-icon"></i>
@@ -283,7 +283,7 @@
                
             </ul>
             </li>
-            <!--           ///////////////////////Duodecima Sección//////////////////////////////////// -->                             
+<!--           ///////////////////////Duodecima Sección - COLECCIONES//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fab fa-pagelines nav-icon"></i>
@@ -302,7 +302,7 @@
                
             </ul>
             </li>
-             <!--           ///////////////////////Decimotercera Sección//////////////////////////////////// -->                             
+<!--           ///////////////////////Decimotercera Sección - COLABORACIONES//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-hands-helping nav-icon"></i>

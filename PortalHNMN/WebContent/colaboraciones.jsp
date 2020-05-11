@@ -31,20 +31,20 @@
 <body>
   <div id="wrapper">
     <!-- MENU -->
-  	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
+  	<jsp:include page="WEB-INF/layouts/menu6.jsp"></jsp:include>
     <!-- MENU -->
     <section id="inner-headline">
       <div class="container">
         <div class="row">
           <div class="span4">
             <div class="inner-heading">
-              <h2>Productos</h2>
+              <h2>Colaboraciones</h2>
             </div>
           </div>
           <div class="span8">
             <ul class="breadcrumb">
               <li><a href="index.jsp"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-              <li class="active">Productos</li>
+              <li class="active">Colaboraciones</li>
             </ul>
           </div>
         </div>

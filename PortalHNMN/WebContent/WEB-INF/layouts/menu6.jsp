@@ -79,7 +79,7 @@
                     <li class="dropdown">
                       <a href=<%=item1_1.trim() %>><%=item1 %></a>
                     </li>
-                    <li class="dropdown active">
+                    <li class="dropdown">
                       <a href=<%=item22.trim() %>><%=item2 %></a>
                     </li>
                     <li class="dropdown">
@@ -96,10 +96,10 @@
                         <li><a href=<%=item77.trim() %>><%=item7 %></a></li>
                       </ul>
                     </li>
-                    <li>
+                    <li class="dropdown">
                       <a href=<%=item88.trim() %>><%=item8 %> </a>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown active">
                       <a href=<%=item99.trim() %>><%=item9%>
                       <i class="icon-angle-down">
                       </i>

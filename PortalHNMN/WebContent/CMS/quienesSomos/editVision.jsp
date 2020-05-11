@@ -161,7 +161,7 @@ for(Tbl_publicaciones tbpub : listaAyudas)
                		}
                	%>      
                   <div class="form-group">
-                    <label for="exampleInputEmail1">Historia:</label>
+                    <label for="exampleInputEmail1">Visión:</label>
                     <textarea id="contenido" name="contenido" class="form-control" rows="4" maxlength="5000" required 
                     onkeyup="contar()" onkeydown="contar()"><%=contenido %></textarea>
                     <br>

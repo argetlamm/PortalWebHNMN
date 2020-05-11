@@ -129,12 +129,12 @@
               <div class="span3">
                 <div class="box aligncenter">
                   <div class="aligncenter icon">
-                    <a href = "noticias.jsp"><i class="icon-bullhorn icon-circled icon-64 active"></i></a>
+                    <a href = "noticias.jsp?category=all&page=1"><i class="icon-bullhorn icon-circled icon-64 active"></i></a>
                   </div>
                   <div class="text">
                     <h6>Noticias</h6>
                     <p><%=item3 %></p>
-                    <a href="noticias.jsp">Infórmate...</a>
+                    <a href="noticias.jsp?category=all&page=1">Infórmate...</a>
                   </div>
                 </div>
               </div>

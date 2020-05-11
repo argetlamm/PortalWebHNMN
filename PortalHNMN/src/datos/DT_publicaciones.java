@@ -1481,7 +1481,7 @@ public class DT_publicaciones {
 		Connection c = PoolConexion.getConnection();
 		boolean guardado = false;
 		int menu = obtenerMenuOrderArt();
-		String enlace = "http://localhost:8080/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
+		String enlace = "http://165.98.12.158:9090/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
 		java.util.Date d1 = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
 		
@@ -1520,7 +1520,7 @@ public class DT_publicaciones {
 		Connection c = PoolConexion.getConnection();
 		boolean guardado = false;
 		int menu = obtenerMenuOrderArt();
-		String enlace = "http://localhost:8080/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
+		String enlace = "http://165.98.12.158:9090/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
 		java.util.Date d1 = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
 		try
@@ -1557,7 +1557,7 @@ public class DT_publicaciones {
 		Connection c = PoolConexion.getConnection();
 		boolean guardado = false;
 		int menu = obtenerMenuOrderArt();
-		String enlace = "http://localhost:8080/PortalHNMN/eventos.jsp";
+		String enlace = "http://165.98.12.158:9090/PortalHNMN/eventos.jsp";
 		java.util.Date d1 = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
 		
@@ -1595,7 +1595,7 @@ public class DT_publicaciones {
 		Connection c = PoolConexion.getConnection();
 		boolean guardado = false;
 		int menu = obtenerMenuOrderArt();
-		String enlace = "http://localhost:8080/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
+		String enlace = "http://165.98.12.158:9090/PortalHNMN/articulo-individual.jsp?ArticuloID="+menu;
 		java.util.Date d1 = new java.util.Date();
 		java.sql.Date sqlDate = new java.sql.Date(d1.getTime());
 		try

@@ -38,9 +38,9 @@
 </head>
 
 <body>
-  <div id="wrapper" class="boxed">
+  <div id="wrapper">
   	<!-- MENU -->
-  	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
+  	<jsp:include page="WEB-INF/layouts/menu6.jsp"></jsp:include>
     <!-- MENU -->
     <section id="inner-headline">
       <div class="container">

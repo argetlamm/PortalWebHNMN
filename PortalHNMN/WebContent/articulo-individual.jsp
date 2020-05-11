@@ -32,7 +32,7 @@
 <body>
   <div id="wrapper">
     <!-- MENU -->
-  	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
+  	<jsp:include page="WEB-INF/layouts/menu4.jsp"></jsp:include>
     <!-- MENU -->
   	
     <section id="inner-headline">
