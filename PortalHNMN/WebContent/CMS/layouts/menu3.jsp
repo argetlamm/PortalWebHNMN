@@ -74,7 +74,7 @@
             </ul>
           </li>
           <li class="nav-item">
-                <a href="editMenu.jsp" class="nav-link active">
+                <a href="../menu/editMenu.jsp" class="nav-link">
                   <i class="fas fa-stream nav-icon"></i>
                   <p>Edición de Menu</p>
                 </a>
@@ -96,13 +96,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="editBanner.jsp" class="nav-link">
+                <a href="../menu/editBanner.jsp" class="nav-link">
                   <i class="fas fa-images nav-icon"></i>
                   <p>Banners de Inicio</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="editInicio.jsp" class="nav-link">
+                <a href="../menu/editInicio.jsp" class="nav-link">
                   <i class="far fa-newspaper nav-icon"></i>
                   <p>Navegación del Menu</p>
                 </a>

@@ -163,7 +163,7 @@
           </li>
             <!--           ///////////////////////Sexta Sección//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="fas fa-hand-holding-usd nav-icon"></i>
               <p>
                 Donación

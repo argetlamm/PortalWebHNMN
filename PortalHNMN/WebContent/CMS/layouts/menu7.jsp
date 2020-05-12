@@ -60,7 +60,7 @@
                 </a>
               </li>
               <li class="nav-item">
-              <a href="../seguridad/listRolOpcion.jsp" class="nav-link">
+              <a href="../seguridad/addRolOpcion.jsp" class="nav-link">
                 <i class="fas fa-toolbox nav-icon"></i>
                 <p>Opciones de Rol</p>
               </a>
@@ -197,7 +197,7 @@
             </ul>
            </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
              <i class="fas fa-paste nav-icon"></i>
               <p>
                	Publicaciones

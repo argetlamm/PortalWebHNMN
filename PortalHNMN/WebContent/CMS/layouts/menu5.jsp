@@ -145,7 +145,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link../menu/">
               <i class="fas fa-check-square nav-icon"></i>
               <p>
                 Suscripción

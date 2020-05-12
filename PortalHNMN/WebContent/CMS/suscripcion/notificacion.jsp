@@ -40,7 +40,13 @@ if(!permiso)
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="Shortcut Icon" href="../dist/img/favicon.ico"/>
   <title>Envío de Notificaciones | Herbario Nacional de Nicaragua</title>
-
+<script>
+  function ddlselect(){
+	  var d=document.getElementById("origen");
+	  var displaytext=d.options[d.selectedIndex].text;
+	  document.getElementById("correosEst").value=displaytext;
+  }
+</script>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Font Awesome -->
@@ -124,7 +130,7 @@ if(!permiso)
 	                      </div>
 	                      <div class="card-body">
 	                        <div class="form-group row">
-	                          <select name="origen" id="origen"  multiple="multiple" class="form-control" size="8">
+	                          <select name="origen" id="origen"  multiple="multiple" onchange="ddlselect();" class="form-control" size="8">
 	                          <%
 			                    DT_usuario dtus = new DT_usuario();
 				        		ArrayList<Tbl_user> listEmail = new ArrayList<Tbl_user>();

@@ -54,15 +54,15 @@
 <!-- SCRIPT DE GOOGLE ANALITYCS QUE DA SEGUIMIENTO A LA PAGINA -->
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-image: url('dist/img/background.jpg');">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Admin </b>Herbario Nacional</a>
+    <a href="#" style="color: white;"><b>Admin </b>Herbario Nacional</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Inicia Sesion</p>
+      <p class="login-box-msg">Inicia Sesión</p>
 
       <form action="../SL_login_usuarios" method="post">
         <div class="input-group mb-3">
@@ -110,6 +110,7 @@
         </div>
       </form>
       <p class="mb-0">
+      <br>
         <a href="../index.jsp" class="text-center">Regresar al sitio web</a>
       </p>
     </div>
@@ -132,6 +133,6 @@
     $('.select2').select2({theme: 'bootstrap4'})
 	});
 </script>
-
 </body>
+
 </html>

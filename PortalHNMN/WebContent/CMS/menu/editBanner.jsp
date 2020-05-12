@@ -83,7 +83,7 @@ tus = dtus.obtenerUserId(user);
 	<!-- /.navbar -->
 	
 	<!-- SIDEBAR -->
-	  	<jsp:include page="../../CMS/layouts/menu3.jsp"></jsp:include>
+	  	<jsp:include page="../../CMS/layouts/menu2.jsp"></jsp:include>
 	<!-- SIDEBAR -->
 	
 	  <!-- Content Wrapper. Contains page content -->

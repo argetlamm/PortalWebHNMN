@@ -60,7 +60,7 @@
                 </a>
               </li>
               <li class="nav-item">
-              <a href="../seguridad/listRolOpcion.jsp" class="nav-link">
+              <a href="../seguridad/addRolOpcion.jsp" class="nav-link">
                 <i class="fas fa-toolbox nav-icon"></i>
                 <p>Opciones de Rol</p>
               </a>
@@ -81,7 +81,7 @@
          </li>
          </li>
           <li class="nav-item">
-                <a href="editFooter.jsp" class="nav-link active">
+                <a href="editFooter.jsp" class="nav-link">
                   <i class="fas fa-stream nav-icon"></i>
                   <p>Edición de Footer</p>
                 </a>
