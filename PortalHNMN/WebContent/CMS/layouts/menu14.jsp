@@ -33,7 +33,7 @@
           <li class="nav-header">Menú</li>
           
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-shield-alt"></i>
               <p>
                 Seguridad
@@ -291,7 +291,7 @@
             </ul>
             </li>
             <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="fas fa-hands-helping nav-icon"></i>
               <p>
                 Colaboraciones
@@ -300,7 +300,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="editColaboraciones.jsp" class="nav-link">
+              <a href="../colaboraciones/editColaboraciones.jsp" class="nav-link">
                   <i class="fas fa-handshake nav-icon"></i>
                   <p>Modificar Colaboraciones</p>
                 </a>
@@ -308,9 +308,10 @@
                
             </ul>
             </li>
-             <li class="nav-item has-treeview">
+            
+            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="fas fa-hands-helping nav-icon"></i>
+              <i class="fas fa-shopping-cart nav-icon"></i>
               <p>
                Visitas
                 <i class="fas fa-angle-left right"></i>
@@ -318,7 +319,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../visitas/editVisitas.jsp" class="nav-link">
+                <a href="editVisitas.jsp" class="nav-link">
                   <i class="fas fa-pen nav-icon"></i>
                   <p>Modificar Visitas</p>
                 </a>

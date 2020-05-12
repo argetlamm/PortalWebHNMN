@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +59,46 @@
         </div>
       </div>
     </section>
-    <img alt="" src="img/building.jpeg">
+    <section id="content">
+      <div class="container">
+      	  <%
+          	DT_publicaciones dtpus = new DT_publicaciones();
+            ArrayList<Tbl_publicaciones> listaVisitas = new ArrayList<Tbl_publicaciones>();
+           	listaVisitas = dtpus.visitas();
+           	Collections.sort(listaVisitas);
+           	String publicado = "publicado";
+           	String titulo = "";
+           	String parrafo = "";
+           	String guid = "";
+           			         	
+            for(Tbl_publicaciones tbpub : listaVisitas)
+           	{
+           		if(tbpub.getPublic_estado().trim().equals(publicado))
+           		{
+           			titulo = tbpub.getPublic_titulo();
+           			parrafo = tbpub.getPublic_content();
+           			guid = tbpub.getGuid().trim();
+           	
+          %>
+         <div class="row">
+          <div class="span6">
+          	<h2><b><%=titulo %></b></h2>
+          	
+                <p><%=parrafo %></p>
+                
+          </div>
+          <div class="span6">
+          <% 
+           }
+          %>
+                    	  
+      		
+        </div>
+         <% 
+           }
+          %>
+           </div>
+	   	</section>
 	<!-- Footer -->
   	<jsp:include page="WEB-INF/layouts/footer.jsp"></jsp:include>
   	<!-- ./Footer -->

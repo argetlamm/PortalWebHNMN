@@ -279,10 +279,10 @@
                   <i class="fas fa-cart-plus nav-icon"></i>
                   <p>Modificar Productos</p>
                 </a>
-               </li>
-               
+               </li>               
             </ul>
             </li>
+            
 <!--           ///////////////////////Duodecima Sección - COLECCIONES//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -316,6 +316,25 @@
                 <a href="colaboraciones/editColaboraciones.jsp" class="nav-link">
                   <i class="fas fa-handshake nav-icon"></i>
                   <p>Modificar Colaboraciones</p>
+                </a>
+               </li>
+               
+            </ul>
+            </li>
+            <!--           ///////////////////////Decimacuarta Sección - Visitas//////////////////////////////////// --> 
+            <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="fas fa-envelope-open-text nav-icon"></i>
+              <p>
+                Visitas
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="visitas/editVisitas.jsp" class="nav-link">
+                  <i class="fas fa-pen nav-icon"></i>
+                  <p>Modificar Visitas</p>
                 </a>
                </li>
                
