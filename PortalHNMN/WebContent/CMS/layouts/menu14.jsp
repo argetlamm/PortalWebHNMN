@@ -155,7 +155,7 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../suscripcion/notificacion.jsp" class="nav-link">
-                  <i class="fas fa-envelope-open-text nav-icon"></i>
+                  <i class="fas fa-users nav-icon"></i>
                   <p>Notificaciones</p>
                 </a>
                 </li>
@@ -206,19 +206,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="newArticulos.jsp" class="nav-link">
+                <a href="../publicaciones/newArticulos.jsp" class="nav-link">
                   <i class="fas fa-vote-yea nav-icon"></i>
                   <p>Agregar artículos sólo texto</p>
                 </a>
                </li>
                <li class="nav-item">
-                <a href="newArticulosImagen.jsp" class="nav-link">
+                <a href="../publicaciones/newArticulosImagen.jsp" class="nav-link">
                   <i class="fas fa-images nav-icon"></i>
                   <p>Agregar artículos con imagen</p>
                 </a>
                </li>
                <li class="nav-item">
-                <a href="editArticulos.jsp" class="nav-link">
+                <a href="../publicaciones/editArticulos.jsp" class="nav-link">
                   <i class="fas fa-pen nav-icon"></i>
                   <p>Editar artículos</p>
                 </a>
@@ -256,6 +256,24 @@
            </li>
            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
+              <i class="fas fa-shopping-cart nav-icon"></i>
+              <p>
+                Productos
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="../productos/editProductos.jsp" class="nav-link">
+                  <i class="fas fa-cart-plus nav-icon"></i>
+                  <p>Modificar Productos</p>
+                </a>
+               </li>
+               
+            </ul>
+            </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
               <i class="fab fa-pagelines nav-icon"></i>
               <p>
                 Colecciones
@@ -272,7 +290,6 @@
                
             </ul>
             </li>
-          
             <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="fas fa-hands-helping nav-icon"></i>
@@ -283,7 +300,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../colaboraciones/editColaboraciones.jsp" class="nav-link">
+              <a href="../colaboraciones/editColaboraciones.jsp" class="nav-link">
                   <i class="fas fa-handshake nav-icon"></i>
                   <p>Modificar Colaboraciones</p>
                 </a>
@@ -292,9 +309,9 @@
             </ul>
             </li>
             
-             <li class="nav-item has-treeview">
+            <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="fas fa-hands-helping nav-icon"></i>
+              <i class="fas fa-shopping-cart nav-icon"></i>
               <p>
                Visitas
                 <i class="fas fa-angle-left right"></i>
@@ -302,7 +319,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../visitas/editVisitas.jsp" class="nav-link">
+                <a href="editVisitas.jsp" class="nav-link">
                   <i class="fas fa-pen nav-icon"></i>
                   <p>Modificar Visitas</p>
                 </a>
