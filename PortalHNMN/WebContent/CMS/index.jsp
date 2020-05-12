@@ -54,7 +54,8 @@
 <!-- SCRIPT DE GOOGLE ANALITYCS QUE DA SEGUIMIENTO A LA PAGINA -->
 
 </head>
-<body class="hold-transition login-page" style="background-image: url('dist/img/background.jpg');">
+<body class="hold-transition login-page" style="background-image: url('dist/img/background.jpg'); background-repeat: no-repeat;
+  background-size: cover;">
 <div class="login-box">
   <div class="login-logo">
     <a href="#" style="color: white;"><b>Admin </b>Herbario Nacional</a>
