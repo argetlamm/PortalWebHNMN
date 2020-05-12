@@ -33,7 +33,7 @@
           <li class="nav-header">Menú</li>
           
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shield-alt"></i>
               <p>
                 Seguridad
@@ -163,7 +163,7 @@
           </li>
             <!--           ///////////////////////Sexta Sección//////////////////////////////////// -->                             
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
+            <a href="#" class="nav-link active">
               <i class="fas fa-hand-holding-usd nav-icon"></i>
               <p>
                 Donación

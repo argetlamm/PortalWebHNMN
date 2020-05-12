@@ -33,7 +33,7 @@
           <li class="nav-header">Menú</li>
           
           <li class="nav-item has-treeview">
-            <a href="#" class="nav-link active">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-shield-alt"></i>
               <p>
                 Seguridad
@@ -74,7 +74,7 @@
             </ul>
           </li>
           <li class="nav-item">
-                <a href="editMenu.jsp" class="nav-link">
+                <a href="editMenu.jsp" class="nav-link active">
                   <i class="fas fa-stream nav-icon"></i>
                   <p>Edición de Menu</p>
                 </a>

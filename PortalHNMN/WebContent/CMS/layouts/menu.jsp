@@ -172,7 +172,7 @@
             <a href="#" class="nav-link">
               <i class="fas fa-hand-holding-usd nav-icon"></i>
               <p>
-                Donaciones
+                Donación
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
