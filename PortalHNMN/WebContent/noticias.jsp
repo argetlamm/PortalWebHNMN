@@ -115,7 +115,7 @@
 	      		if(categoriaActual.equals("all"))
 	      		{
 					//Primero, le damos valor a la cantidad de artículos, que la usaremos para saber cuántas páginas hay.
-					cantidadArt = dpus.cantidadArticulos();
+					cantidadArt = dpus.cantidadNoticias();
 					
 					//Si existen más de 5 artículos, entrará al if para calcular cuántas páginas hay y comprobar en cuál se está
 					if(cantidadArt>5)
@@ -171,6 +171,7 @@
 						//Sino hay más de cinco artículos, sólo puede haber una página
 						cantidadPaginas = 1;
 						articulosARestar = 0;
+						listaArticulos = dpus.listarNoticiasPorPagina(articulosARestar);
 					}
 	      		}
 	      		else

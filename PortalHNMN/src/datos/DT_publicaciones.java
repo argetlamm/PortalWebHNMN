@@ -1231,6 +1231,31 @@ public class DT_publicaciones {
 		return cantidad;
 	}
 	
+	public int cantidadNoticias() throws SQLException
+	{
+		
+		int cantidad = 0;
+		
+		try
+		{
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM tbl_publicaciones WHERE public_name = 'articulo'", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			rsPublicaciones = ps.executeQuery();
+			while(rsPublicaciones.next())
+			{
+				cantidad++;
+			}
+		}
+		catch(Exception e)
+		{
+			System.out.println("Datos: Error en el cálculo de la cantidad de artículos."+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return cantidad;
+	}
+	
 	public ArrayList<Tbl_publicaciones> listarNoticiasPorPagina(int num) throws SQLException
 	{
 		Connection c = PoolConexion.getConnection();
