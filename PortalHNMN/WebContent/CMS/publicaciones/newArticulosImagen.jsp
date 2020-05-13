@@ -146,7 +146,7 @@ mensaje = mensaje==null?"":mensaje;
                     <label for="exampleInputEmail1">Contenido del artículo: </label>
                     <textarea id="contenido" name="contenido" class="form-control" rows="5" maxlength="5000" required></textarea>
 					<label for="exampleInputEmail1">Categoría del artículo: </label>
-					<input type="text" id="categoria" name="categoria" class="form-control" value="" required>
+					<input type="text" id="categoria" name="categoria" class="form-control" value="" placeholder="Se recomienda poner la Categoría en mayúsculas, evitando el uso de palabras con tilde" required>
                     <label for="exampleInputEmail1">Artículo creado por: <%=nombreCompleto%></label>
                     <input type="hidden" id="redactor" name="redactor" class="form-control" value="<%=nombreCompleto%>" required>
                   </div>
