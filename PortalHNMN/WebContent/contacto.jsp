@@ -56,7 +56,7 @@
         <div class="row">
           <div class="span12">
             <h4>Contacta con nosotros llenando <strong>el siguiente formulario:</strong></h4>
-			<form action="https://formspree.io/hjoshua2013@gmail.com" method="post" role="form" class="contact-form">
+			<form action="https://formspree.io/temporalherbariouca@gmail.com" method="post" role="form" class="contact-form">
               <div class="row">
                 <div class="span4 form-group">
                   <label><strong>Nombre:</strong></label><input type="text" name="Nombre" class="form-control" id="name" placeholder="Tu nombre" required/>
