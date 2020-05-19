@@ -829,6 +829,7 @@ public class DT_publicaciones {
 				tpub.setPublic_name(rsPublicaciones.getString("public_name"));
 				tpub.setPublic_tipo(rsPublicaciones.getString("public_tipo"));
 				tpub.setPublic_titulo(rsPublicaciones.getString("public_titulo"));
+				tpub.setPublic_enlace(rsPublicaciones.getString("public_enlace"));
 				listaBdy.add(tpub);
 			}
 		}

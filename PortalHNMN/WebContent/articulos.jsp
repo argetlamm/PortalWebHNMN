@@ -103,6 +103,7 @@
        			String categoriaActual = request.getParameter("category");
           		String paginaCadena = request.getParameter("page");
           		int paginaActual = Integer.parseInt(paginaCadena);
+          		System.out.println("La url es: "+request.getRequestURL());
           		//Declaramos nuestras variables a usar
 				int cantidadArt = 0;
 				int cantidadPaginas = 0;

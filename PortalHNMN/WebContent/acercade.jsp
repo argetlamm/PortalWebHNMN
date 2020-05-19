@@ -61,7 +61,6 @@
            	ArrayList<Tbl_publicaciones> listaImagenes = new ArrayList<Tbl_publicaciones>();
            	listaQuienesSomos = dtpus.quienesSomos();
            	Collections.sort(listaQuienesSomos);
-           	listaImagenes = dtpus.imagenesQuienesSomos();
            	String publicado = "publicado";
            	String titulo = "";
            	String parrafo = "";
@@ -75,6 +74,7 @@
            			titulo = tbpub.getPublic_titulo();
            			parrafo = tbpub.getPublic_content();
            			guid = tbpub.getGuid().trim();
+           			imagen = tbpub.getPublic_enlace();
           %>
          <div class="row">
           <div class="span6">
@@ -86,24 +86,9 @@
             <!-- start flexslider -->
             <div class="flexslider">
               <ul class="slides">
-	       <% 
-	              	for(Tbl_publicaciones tblpub : listaImagenes)
-	              	{
-	             		if(tblpub.getPublic_estado().trim().equals(publicado))
-	              		{
-	              			if(tblpub.getGuid().trim().equals(guid))
-	              			{
-	              				imagen = tblpub.getPublic_enlace();
-	       %>	
                 <li>
                   <img src="<%=imagen %>" alt="" />
                 </li>
-	       <%
-	              			}
-	              		}
-	              	}
-            	}
-           	%>	
               </ul>
             </div>
             <!-- end flexslider -->
@@ -116,7 +101,8 @@
 	       	</div>
 	   	</div>
           <% 
-           }
+           		}
+           	}
           %>
          <!-- divider -->
     </section>

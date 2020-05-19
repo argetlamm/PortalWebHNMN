@@ -78,6 +78,7 @@ String vision = "vision";
 String contenido = "";
 String ayudaT = "";
 String ayudaC = "";
+String imagen = "";
 int caracteresIniciales = 0;
 
 for(Tbl_publicaciones tbpub : listaVision)
@@ -89,6 +90,7 @@ for(Tbl_publicaciones tbpub : listaVision)
 			contenido = tbpub.getPublic_content();
 			caracteresIniciales = contenido.trim().length();
 			contenido = contenido.replace("<br>","\n");
+			imagen = tbpub.getPublic_enlace();
 		}
 	}
 }
@@ -148,7 +150,8 @@ for(Tbl_publicaciones tbpub : listaAyudas)
               </div>
               <!-- /.card-header -->
               <!-- form start -->
-              <form role="form" action="${pageContext.request.contextPath}/SL_vision" method="post">
+              <div id="foto" class="panel">
+              <form role="form" name="Frm-foto" action="${pageContext.request.contextPath}/SL_vision" method="post" enctype="multipart/form-data">
                 <div class="card-body">
                 <%
                		if(ayuda==1)
@@ -161,12 +164,34 @@ for(Tbl_publicaciones tbpub : listaAyudas)
                		}
                	%>      
                   <div class="form-group">
+                  <div class="form-group">
+                  	<table class="table table-hover table-heading table-datatable" id="datatable-1">
+    	                  	<tbody>
+    	                  		<tr align="center">
+    								<td>
+    									<div class="cuadro-fotoNima" align="center">
+    										<img id="preview" src="../../<%=imagen %>" name="preview"  alt="Foto NIMA"
+    										style="width: 870x; height: 350px; border-bottom-color: white; margin: 2px;" />
+    									</div> &nbsp;
+    								</td>
+    							</tr>
+    							<tr align="center">
+    								<td>
+    									<input type="file" id="foto" name="foto"
+    									onchange="Test.UpdatePreview(this)" required="required">
+    									&nbsp; <input type="hidden" name="idNIMA" value="">
+    									&nbsp; <input type="hidden" name="codNIMA" value="">
+    								</td>
+    							</tr>
+    	                  	</tbody>
+    	            </table> 
                     <label for="exampleInputEmail1">Visión:</label>
                     <textarea id="contenido" name="contenido" class="form-control" rows="4" maxlength="5000" required 
                     onkeyup="contar()" onkeydown="contar()"><%=contenido %></textarea>
                     <br>
                  	<label style="float:right">Caracteres actuales: <input disabled size="3" value=<%=caracteresIniciales %> id="contador"> </label>
                  	<input type="hidden" id="vision" name="vision" class="form-control" value="vision" required>
+                 	<input type="hidden" id="url" name="url" class="form-control" value="<%=imagen %>" required>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -176,6 +201,7 @@ for(Tbl_publicaciones tbpub : listaAyudas)
                   <button type="button" class="btn btn-danger">Cancelar</button>
                 </div>
              </form>
+             </div>
             </div>
             <!-- /.card -->
            </div>
@@ -204,9 +230,27 @@ for(Tbl_publicaciones tbpub : listaAyudas)
     
   <script>
     $(document).ready(function ()
-    {
-	/////////////// ASIGNAR VALORES A LOS CONTROLES AL CARGAR LA PAGINA ///////////////
-
+    {	    	
+ 		Test = {
+		UpdatePreview: function(obj)
+		{
+		// if IE < 10 doesn't support FileReader
+		if(!window.FileReader)
+		{
+		} 
+		else 
+		{
+			var reader = new FileReader();
+	    	var target = null;
+	    	reader.onload = function(e) 
+	    	{
+			    target =  e.target || e.srcElement;
+	    	    $("#preview").prop("src", target.result);
+	    	};
+			reader.readAsDataURL(obj.files[0]);
+		    }
+		}
+	};
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;
       nuevo = "<%=mensaje%>";
@@ -219,6 +263,10 @@ for(Tbl_publicaciones tbpub : listaAyudas)
       {
         errorAlert('Error', 'Revise los datos e intente nuevamente.');
       }
+      if(nuevo == "3")
+  	  {
+  		errorAlert('Error', 'Revise que la imagen cumpla con el formato requerido.')  
+  	  }
     });
     </script>
     
