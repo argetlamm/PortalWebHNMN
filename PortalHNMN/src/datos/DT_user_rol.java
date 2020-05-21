@@ -46,9 +46,9 @@ public class DT_user_rol {
 		{
 			System.out.println("DATOS: ERROR en vlistUserRol() "+ e.getMessage());
 			e.printStackTrace();
-		} finally {
+		} /*finally {
 			c.close();
-		}		
+		}*/		
 		return vlistaUserRol;
 	}
 	
@@ -79,9 +79,9 @@ public class DT_user_rol {
 		{
 			System.out.println("DATOS: ERROR en listUserRol() "+ e.getMessage());
 			e.printStackTrace();
-		} finally {
+		} /*finally {
 			c.close();
-		}		
+		}*/		
 		return userRol;
 	}
 	

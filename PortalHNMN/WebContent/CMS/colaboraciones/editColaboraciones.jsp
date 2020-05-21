@@ -103,6 +103,8 @@ for(Tbl_publicaciones tbpub : listaColaboraciones)
 			//Luego, en el contenido, reemplazamos los <br>, o sea, los saltos de línea de html, por los saltos de línea
 			//de programación, o sea \n
 			contenido = contenido.replace("<br>","\n");
+			contenido = contenido.replace("<li>","*");
+			contenido = contenido.replace("</li>","");
 		}
 	}
 }
