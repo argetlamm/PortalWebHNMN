@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*, java.util.Map.Entry;"%>
+    pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*, java.util.Map.Entry, java.io.File;"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -184,7 +184,18 @@
                     <div class="post-heading">
                       <h3><a href="#"><%=titulo %></a></h3>
                     </div>
-                    <img src=<%=url %> alt="" />
+                    <% 
+                   	File f = new File(url);
+                   	if(f.exists() && !f.isDirectory()){
+                   		%>
+                       	<img src=<%=url %> alt="" />
+                       	<%
+                   	}else{
+                   		%>
+                       	<img src="img/events/imagenEjemplo.jpg"/>
+                       	<%
+                   	}
+                    %>
                   </div>
                   <p>
                     <%=contenido%>
