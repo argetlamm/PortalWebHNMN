@@ -297,7 +297,7 @@
                        	<%
                    	}else{
                    		%>
-                       	<img src="img/events/imagenEjemplo.jpg"/>
+                       	<img src="img/events/servidor_caido.jpeg"/>
                        	<%
                    	}
                     %>
