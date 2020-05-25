@@ -1,14 +1,22 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
  <!-- start header -->
+ <%
+	String loginUser = "";
+	int rolId = 0;
+
+	loginUser = (String) session.getAttribute("login");
+	loginUser = loginUser==null?"":loginUser;
+%>
     <header>
       <div class="container ">
         <div class="row nomargin">
           <div class="span12">
             <div class="headnav">
               <ul>
-                <li><a href="registro.jsp"><i class="icon-user"></i> Regístrate</a></li>
-                <li><a href="././CMS/index.jsp">Iniciar Sesión</a></li>
+                <li><a href="#">Bienvenido: <%=loginUser %></a></li>
+            	<li><a class="dropdown-item dropdown-footer" href="${pageContext.request.contextPath}/index.jsp"> <i class="fa fa-power-off"></i>
+		  		<span>Cerrar Sesión</span></a></li>
               </ul>
             </div>
           </div>
@@ -76,10 +84,10 @@
                 }
                 %>
                   <ul class="nav topnav">
-                    <li class="dropdown">
+                    <li class="dropdown active">
                       <a href=<%=item1_1.trim() %>><%=item1 %></a>
                     </li>
-                    <li class="dropdown active">
+                    <li class="dropdown">
                       <a href=<%=item22.trim() %>><%=item2 %></a>
                     </li>
                     <li class="dropdown">

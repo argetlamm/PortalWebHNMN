@@ -69,9 +69,16 @@ public class SL_login_usuarios extends HttpServlet {
 			{
 				if(dtus.dtverificarLogin2(login, pwd))
 				{
-					HttpSession hts = request.getSession(true);
-					hts.setAttribute("login", login);
-					response.sendRedirect("index2.jsp");
+					Tbl_user user = dtus.obtenerUserLogin(login);
+					int id = user.getId_user();
+					Tbl_user tus = new Tbl_user();
+					tus.setId_user(id);
+					tus.setSesion(1);
+					if(dtus.modificarSesion(tus)) {
+						HttpSession hts = request.getSession(true);
+						hts.setAttribute("login", login);
+						response.sendRedirect("index2.jsp");
+					}
 				}
 				else
 				{

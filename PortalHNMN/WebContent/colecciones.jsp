@@ -37,7 +37,7 @@
 
 <body>
 	<!-- MENU -->
-  	<jsp:include page="WEB-INF/layouts/menu3.jsp"></jsp:include>
+  	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
     <!-- MENU -->
     <section id="inner-headline">
       <div class="container">

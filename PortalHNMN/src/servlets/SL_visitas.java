@@ -45,6 +45,9 @@ public class SL_visitas extends HttpServlet {
 		
 		String contenido = request.getParameter("contenido");
 		contenido = contenido.replace("\n","<br>");
+		contenido = contenido.replace("\u2022","<b>");
+		contenido = contenido.replace("*","<b>");
+		contenido = contenido.replace("-","</b>");
 		String guid = request.getParameter("visitas");
 		
 		try

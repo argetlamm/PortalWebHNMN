@@ -44,6 +44,9 @@ public class SL_colaboraciones extends HttpServlet {
 		
 		String contenido = request.getParameter("contenido");
 		contenido = contenido.replace("\n","<br>");
+		contenido = contenido.replace("\u2022","<li>");
+		contenido = contenido.replace("*","<li>");
+		contenido = contenido.replace("-","</li>");
 		String guid = request.getParameter("colaboraciones");
 		
 		try
