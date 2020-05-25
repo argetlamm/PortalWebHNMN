@@ -15,6 +15,7 @@ public class Tbl_user
 	private int estado;
 	private int ayuda;
 	private int notificacion;
+	private int sesion;
 
 	//METODOS
 	public int getId_user() {
@@ -88,6 +89,12 @@ public class Tbl_user
 	}
 	public void setNotificacion(int notificacion) {
 		this.notificacion = notificacion;
+	}
+	public int getSesion() {
+		return sesion;
+	}
+	public void setSesion(int sesion) {
+		this.sesion = sesion;
 	}
 	
 	
