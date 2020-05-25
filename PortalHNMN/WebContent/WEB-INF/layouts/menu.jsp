@@ -1,31 +1,14 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1" import="entidades.*, datos.*, java.util.*;"%>
  <!-- start header -->
- <%
- String loginUser = "";
- int rolId = 0;
- loginUser = (String) session.getAttribute("login");
- loginUser = loginUser==null?"":loginUser;
- DT_usuario dtus = new DT_usuario();
- Tbl_user user = dtus.obtenerUserLogin(loginUser);
- int sesion = user.getSesion();
- System.out.println("LOGUEO: "+loginUser);
- System.out.println("SESION: "+sesion);
- %>
     <header>
       <div class="container ">
         <div class="row nomargin">
           <div class="span12">
             <div class="headnav">
               <ul>
-                <%if(sesion==1){%>
-					<li><a>Bienvenido: <%=loginUser%></a></li>
-					<li><a class="dropdown-item dropdown-footer"><i class="fa fa-power-off"></i>
-					<span>Cerrar Sesión</span></a></li>
-				<%}else{%>
-					<li><a href="registro.jsp"><i class="icon-user"></i> Regístrate</a></li>
-					<li><a href="././CMS/index.jsp">Iniciar Sesión</a></li>
-				<%}%>
+                <li><a href="registro.jsp"><i class="icon-user"></i> Regístrate</a></li>
+                <li><a href="././CMS/index.jsp">Iniciar Sesión</a></li>
               </ul>
             </div>
           </div>
