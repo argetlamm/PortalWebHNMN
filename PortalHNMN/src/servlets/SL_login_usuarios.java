@@ -77,7 +77,7 @@ public class SL_login_usuarios extends HttpServlet {
 					if(dtus.modificarSesion(tus)) {
 						HttpSession hts = request.getSession(true);
 						hts.setAttribute("login", login);
-						response.sendRedirect("index.jsp");
+						response.sendRedirect("index2.jsp");
 					}
 				}
 				else

@@ -31,7 +31,7 @@
 <body>
   <div id="wrapper">
     <!-- MENU -->
-  	<jsp:include page="WEB-INF/layouts/menu5.jsp"></jsp:include>
+  	<jsp:include page="WEB-INF/layouts/menu.jsp"></jsp:include>
     <!-- MENU -->
     <section id="inner-headline">
       <div class="container">
