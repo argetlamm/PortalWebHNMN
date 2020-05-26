@@ -65,7 +65,9 @@ System.out.println("mensaje1="+mensaje);
 <div class="container">
         <div class="row">
           <div class="span12">
-            <h3>Regístrate en el portal llenando el siguiente formulario:</h3>
+            <h3>Regístrate en el portal llenando el siguiente formulario:</h3><br>
+            <h6>Estimado usuario, ahora mismo no existen los perfiles de usuarios, 
+            al crear una cuenta sólo le permitirá recibir correos acerca de las últimas actualizaciones del sitio.</h6><br>
 
                 <form role="form" action="${pageContext.request.contextPath}/SL_registro" method="post">
                 <div class="card-body">

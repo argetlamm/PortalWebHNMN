@@ -77,7 +77,6 @@ public class DT_usuario
 				tus.setPwd_tmp(rsUsuario.getString("pwd_tmp"));
 				tus.setEstado(rsUsuario.getInt("estado"));
 				tus.setAyuda(rsUsuario.getInt("ayuda"));
-				tus.setSesion(rsUsuario.getInt("sesion"));
 			}
 		}
 		catch (Exception e)
@@ -218,35 +217,6 @@ public class DT_usuario
 					rsUsuario.updateString("password", tus.getPassword());
 					rsUsuario.updateString("email", tus.getEmail());
 					rsUsuario.updateInt("estado", 2);
-					rsUsuario.updateRow();
-					modificado=true;
-					break;
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			System.err.println("ERROR modificarUser() "+e.getMessage());
-			e.printStackTrace();
-		} finally {
-			c.close();
-		}
-		return modificado;
-	}
-	
-	public boolean modificarSesion(Tbl_user tus) throws SQLException
-	{
-		Connection c = PoolConexion.getConnection();
-		boolean modificado=false;	
-		try
-		{
-			this.listUser();
-			rsUsuario.beforeFirst();
-			while (rsUsuario.next())
-			{
-				if(rsUsuario.getInt(1)==tus.getId_user())
-				{
-					rsUsuario.updateInt("sesion", tus.getSesion());
 					rsUsuario.updateRow();
 					modificado=true;
 					break;
