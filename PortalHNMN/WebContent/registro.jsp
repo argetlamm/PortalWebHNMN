@@ -114,8 +114,8 @@ System.out.println("mensaje1="+mensaje);
                   </div>
                   <div class="form-group" align="center">
                     <label for="exampleInputEmail1">¿Desea recibir notificaciones de publicaciones del Herbario?:</label>
-                    <input type="radio" id="notificacion" name="notificacion" value="a"> Si
-                    <input type="radio" id="notificacion" name="notificacion" value="b"> No<br><br>
+                    <input type="radio" id="notificacion" name="notificacion" value="a" required> Si
+                    <input type="radio" id="notificacion" name="notificacion" value="b" required> No<br><br>
                   </div>
                 </div>
                 <!-- /.card-body -->

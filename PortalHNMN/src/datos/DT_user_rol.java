@@ -114,6 +114,37 @@ public class DT_user_rol {
 		}		
 		return vtur;
 	}
+	
+	public V_tbl_Usuario_Rol getUserRol(int idUser) throws SQLException{
+		Connection c = PoolConexion.getConnection();
+		V_tbl_Usuario_Rol vtur = new V_tbl_Usuario_Rol();
+		try {
+			PreparedStatement ps = c.prepareStatement("SELECT * FROM public.\"V_tbl_Usuario_Rol\" WHERE id_user=?", 
+					ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE, 
+					ResultSet.HOLD_CURSORS_OVER_COMMIT);
+			ps.setInt(1, idUser);
+			
+			rsVUserRol = ps.executeQuery();
+			if(rsVUserRol.next()) {				
+				vtur.setId_user_rol(rsVUserRol.getInt("id_user_rol"));
+				vtur.setId_user(rsVUserRol.getInt("id_user"));
+				vtur.setUsername(rsVUserRol.getString("username"));
+				vtur.setPassword(rsVUserRol.getString("password"));
+				vtur.setId_rol(rsVUserRol.getInt("id_rol"));
+				vtur.setRol_name(rsVUserRol.getString("rol_name"));
+				vtur.setTipo_rol(rsVUserRol.getInt("tipo_rol"));
+				vtur.setUser_estado(rsVUserRol.getInt("user_estado"));
+				vtur.setRol_estado(rsVUserRol.getInt("rol_estado"));
+			}
+			System.out.println("idUserRol en DT_user_rol: "+idUser);
+		}catch(Exception e) {
+			System.out.println("DATOS: ERROR en getUserRol() " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			c.close();
+		}		
+		return vtur;
+	}
 ///////////////////////////// METODO PARA GUARDAR USUARIOS ROL /////////////////////////////
 
 	public boolean guardarUserRol (Tbl_user_rol tur) throws SQLException{

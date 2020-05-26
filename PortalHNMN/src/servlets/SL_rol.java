@@ -109,15 +109,33 @@ public class SL_rol extends HttpServlet {
 		switch (opcion) {
 			case 1:{
 				try {
-					trl.setRol_name(request.getParameter("rolname"));
-					trl.setRol_desc(request.getParameter("roldesc"));
-					if(drol.guardarRol(trl)) {
-						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=1");
+					int opcionA = 0;
+					String tipo = request.getParameter("tipo_rol");
+					if("a".trim().equals(tipo.trim())) {
+						opcionA=1;
+						trl.setRol_name(request.getParameter("rolname"));
+						trl.setRol_desc(request.getParameter("roldesc"));
+						trl.setTipo_rol(opcionA);
+						if(drol.guardarRol(trl)) {
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=1");
+						}else
+						{
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=2");
+						}
+					} else {
+						opcionA=2;
+						trl.setRol_name(request.getParameter("rolname"));
+						trl.setRol_desc(request.getParameter("roldesc"));
+						trl.setTipo_rol(opcionA);
+						if(drol.guardarRol(trl)) {
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=1");
+						}else
+						{
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=2");
+						}
 					}
-					else
-					{
-						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newRol.jsp?msj=2");
-					}
+					
+					
 				}catch(Exception e) {
 					e.printStackTrace();
 					System.out.println("Servlet: Error al guardar el rol!!!");
@@ -128,18 +146,37 @@ public class SL_rol extends HttpServlet {
 			{
 				try
 				{
-					trl.setId_rol(Integer.parseInt(request.getParameter("IdRol")));
-					trl.setRol_name(request.getParameter("rolname"));
-					trl.setRol_desc(request.getParameter("roldesc"));
-					
-					if(drol.modificarRol(trl))
-					{
-						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=1");
-					}
-					else
-					{
-						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=2");
-					}
+					int opcionA = 0;
+					String tipo = request.getParameter("tipo_rol");
+					if("a".trim().equals(tipo.trim())) {
+						opcionA=1;
+						trl.setId_rol(Integer.parseInt(request.getParameter("IdRol")));
+						trl.setRol_name(request.getParameter("rolname"));
+						trl.setRol_desc(request.getParameter("roldesc"));
+						trl.setTipo_rol(opcionA);
+						if(drol.modificarRol(trl))
+						{
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=1");
+						}
+						else
+						{
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=2");
+						}
+					} else {
+						opcionA=2;
+						trl.setId_rol(Integer.parseInt(request.getParameter("IdRol")));
+						trl.setRol_name(request.getParameter("rolname"));
+						trl.setRol_desc(request.getParameter("roldesc"));
+						trl.setTipo_rol(opcionA);
+						if(drol.modificarRol(trl))
+						{
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=1");
+						}
+						else
+						{
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/tblRol.jsp?msj=2");
+						}
+					}															
 				}
 				catch(Exception e)
 				{

@@ -107,6 +107,8 @@ mensaje = mensaje==null?"":mensaje;
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_usuario" method="post">
                 <div class="card-body">
+                <p><b>NOTA:</b> Los usuarios registrados en este formulario, recibirán automáticamente rol de administradores,
+                 si desea cambiar dicho rol, favor editarlo en el módulo de Roles de Usuario.</p>
                   <input name="opc" id="opc" type="hidden" value="1"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   <div class="form-group">
                     <label for="exampleInputEmail1">Nombre de Usuario:</label>
@@ -149,7 +151,6 @@ mensaje = mensaje==null?"":mensaje;
                     <input type="email" id="email" name="email" class="form-control" 
                     placeholder="Ingrese una cuenta de correo electrónico válida, Ejemplo: ejemplo@ejemplo.com" required>
                   </div>
-
                 </div>
                 <!-- /.card-body -->
 

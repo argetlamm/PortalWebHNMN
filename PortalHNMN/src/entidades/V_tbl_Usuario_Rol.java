@@ -10,6 +10,7 @@ public class V_tbl_Usuario_Rol {
 	private String password;
 	private int id_rol;
 	private String rol_name;
+	private int tipo_rol;
 	private int user_estado;
 	private int rol_estado;
 	
@@ -61,5 +62,11 @@ public class V_tbl_Usuario_Rol {
 	}
 	public void setId_user_rol(int id_user_rol) {
 		this.id_user_rol = id_user_rol;
+	}
+	public int getTipo_rol() {
+		return tipo_rol;
+	}
+	public void setTipo_rol(int tipo_rol) {
+		this.tipo_rol = tipo_rol;
 	}
 }

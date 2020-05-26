@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Tbl_user;
+import entidades.Tbl_user_rol;
+import datos.DT_user_rol;
 import datos.DT_usuario;
 
 /**
@@ -108,7 +110,9 @@ public class SL_usuario extends HttpServlet {
 		System.out.println("opcion: "+opcion);
 		
 		Tbl_user tus = new Tbl_user();
+		Tbl_user_rol tur = new Tbl_user_rol();
 		DT_usuario dtus = new DT_usuario();
+		DT_user_rol dtur = new DT_user_rol();
 		
 		switch(opcion)
 		{
@@ -123,10 +127,16 @@ public class SL_usuario extends HttpServlet {
 					tus.setApellido1(request.getParameter("apellido1"));
 					tus.setApellido2(request.getParameter("apellido2"));
 					tus.setEmail(request.getParameter("email"));
-					
 					if(dtus.guardarUser(tus))
 					{
-						response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newUser.jsp?msj=1");
+						Tbl_user user = dtus.obtenerUserLogin(tus.getUsername());
+						int userId = user.getId_user();
+						System.out.println("USER ID EN REGISTRO: "+userId);
+						tur.setId_user(userId);
+						tur.setId_rol(1);
+						if(dtur.guardarUserRol(tur)) {
+							response.sendRedirect(request.getContextPath()+ "/CMS/seguridad/newUser.jsp?msj=1");
+						}
 					}
 					else
 					{

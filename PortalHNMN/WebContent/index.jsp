@@ -173,8 +173,7 @@ mensaje = mensaje==null?"":mensaje;
   <script src="CMS/plugins/jAlert/dist/jAlert.min.js"></script>
   <script src="CMS/plugins/jAlert/dist/jAlert-functions.min.js"> </script>
   <script src="CMS/plugins/select2/js/select2.full.min.js"></script>
-  
-    <script>
+<script>
     $(document).ready(function ()
     {
      
@@ -186,12 +185,7 @@ mensaje = mensaje==null?"":mensaje;
       {
         successAlert('Estimado Usuario', 'Ha sido redirigido al sitio web original debido a que los perfiles de usuario aún no están disponibles. ¡espere a futuras actualizaciones del sitio!"');
       }
-      if(nuevo == "2")
-      {
-        errorAlert('Error', 'El usuario ingresado no existe, verifique sus credenciales');
-      }
     });
     </script>
-
 <script async type="text/javascript" src="https://userlike-cdn-widgets.s3-eu-west-1.amazonaws.com/0af277ee13dc0508efad8915517bf694eb1dbc21bb4152cf920a8ae1b3d35228.js"></script></body>
 </html>

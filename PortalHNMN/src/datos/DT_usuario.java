@@ -268,35 +268,6 @@ public class DT_usuario
 	{
 		Connection c = PoolConexion.getConnection();
 		boolean existe=false;
-		String SQL = ("SELECT * FROM public.\"V_tbl_Usuario_Rol\" where username=? and password=? and id_rol=1");
-		try
-		{
-			PreparedStatement ps = c.prepareStatement(SQL);
-			ps.setString(1, user);
-			ps.setString(2, pwd);
-			ps.setString(2, getMd5(pwd).trim());
-			ResultSet rs = null;
-			rs = ps.executeQuery();
-		
-			if(rs.next())
-			{
-				existe=true;
-			}
-		}
-		catch (Exception e)
-		{
-			System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
-			e.printStackTrace();
-		} finally {
-			c.close();
-		}	
-		return existe;
-	}
-	
-	public boolean dtverificarLogin2(String user, String pwd) throws SQLException
-	{
-		Connection c = PoolConexion.getConnection();
-		boolean existe=false;
 		String SQL = ("SELECT * FROM public.\"V_tbl_Usuario_Rol\" where username=? and password=?");
 		try
 		{
@@ -314,7 +285,7 @@ public class DT_usuario
 		}
 		catch (Exception e)
 		{
-			System.out.println("DATOS: ERROR dtverificarLogin2() "+ e.getMessage());
+			System.out.println("DATOS: ERROR dtverificarLogin() "+ e.getMessage());
 			e.printStackTrace();
 		} finally {
 			c.close();

@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Tbl_user;
+import entidades.Tbl_user_rol;
 import datos.DT_usuario;
+import datos.DT_user_rol;
 /**
  * Servlet implementation class SL_registro
  */
@@ -38,7 +40,9 @@ public class SL_registro extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Tbl_user tus = new Tbl_user();
+		Tbl_user_rol tur = new Tbl_user_rol();
 		DT_usuario dtus = new DT_usuario();
+		DT_user_rol dtur = new DT_user_rol();
 		
 		try
 		{
@@ -56,7 +60,14 @@ public class SL_registro extends HttpServlet {
 				tus.setNotificacion(opcionA);
 				if(dtus.guardarUser(tus))
 				{
-					response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=1");
+					Tbl_user user = dtus.obtenerUserLogin(tus.getUsername());
+					int userId = user.getId_user();
+					System.out.println("USER ID EN REGISTRO: "+userId);
+					tur.setId_user(userId);
+					tur.setId_rol(2);
+					if(dtur.guardarUserRol(tur)) {
+						response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=1");
+					}
 				}
 				else
 				{
@@ -74,7 +85,13 @@ public class SL_registro extends HttpServlet {
 				tus.setNotificacion(opcionA);
 				if(dtus.guardarUser(tus))
 				{
-					response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=1");
+					Tbl_user user = dtus.obtenerUserLogin(tus.getUsername());
+					int userId = user.getId_user();
+					tur.setId_user(userId);
+					tur.setId_rol(2);
+					if(dtur.guardarUserRol(tur)) {
+						response.sendRedirect(request.getContextPath()+ "/registro.jsp?msj=1");
+					}
 				}
 				else
 				{

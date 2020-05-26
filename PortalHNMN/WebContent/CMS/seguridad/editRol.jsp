@@ -119,6 +119,8 @@ trl = drol.obtenerRol(rol);
               <!-- form start -->
               <form role="form" action="${pageContext.request.contextPath}/SL_rol" method="post">
                 <div class="card-body">
+                <p><b>NOTA:</b> Si modifica la categoría del Rol, debe considerar que la categoría <b>Administradores</b> contiene los roles con acceso al CMS,
+                 mientras que la categoría <b>Visitantes</b> contiene los roles con acceso a la página principal al iniciar sesión.</p>
                   <input name="opc" id="opc" type="hidden" value="2"> <!-- ESTE INPUT ES UTILIZADO PARA EL CASE DEL SERVLET -->
                   <input name="IdRol" id="IdRol" type="hidden">
                   <div class="form-group">
@@ -131,6 +133,11 @@ trl = drol.obtenerRol(rol);
                     <input type="text" id="roldesc" name="roldesc" class="form-control" 
                     title="Breve descripcion del rol" 
                     placeholder="Ingrese una breve descripcion del rol">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Categoría del Rol:</label><br>
+                    <input type="radio" id="tipo_rol1" name="tipo_rol" value="a" required> Administradores<br>
+                    <input type="radio" id="tipo_rol2" name="tipo_rol" value="b" required> Visitantes<br>
                   </div>
                 </div>
                 <!-- /.card-body -->
@@ -171,6 +178,11 @@ trl = drol.obtenerRol(rol);
     	$("#IdRol").val("<%=trl.getId_rol()%>");
     	$("#rolname").val("<%=trl.getRol_name()%>");
     	$("#roldesc").val("<%=trl.getRol_desc()%>");
+    	if(<%=trl.getTipo_rol()%>==1){
+    		document.getElementById("tipo_rol1").checked=true;
+    	}else{
+    		document.getElementById("tipo_rol2").checked=true;
+    	}
      
       /////////// VARIABLES DE CONTROL MSJ ///////////
       var nuevo = 0;

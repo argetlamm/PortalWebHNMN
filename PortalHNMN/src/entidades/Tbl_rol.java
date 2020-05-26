@@ -7,6 +7,7 @@ public class Tbl_rol
 	private String rol_name;
 	private String rol_desc;
 	private int estado;
+	private int tipo_rol;
 	
 	//METODOS
 	public int getId_rol() {
@@ -32,6 +33,12 @@ public class Tbl_rol
 	}
 	public void setEstado(int estado) {
 		this.estado = estado;
+	}
+	public int getTipo_rol() {
+		return tipo_rol;
+	}
+	public void setTipo_rol(int tipo_rol) {
+		this.tipo_rol = tipo_rol;
 	}
 	
 	

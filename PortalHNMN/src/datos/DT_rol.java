@@ -81,6 +81,7 @@ public class DT_rol
 				trl.setRol_name(rsRol.getString("rol_name"));
 				trl.setRol_desc(rsRol.getString("rol_desc"));
 				trl.setEstado(rsRol.getInt("estado"));
+				trl.setTipo_rol(rsRol.getInt("tipo_rol"));
 			}
 		}
 		catch (Exception e)
@@ -105,6 +106,7 @@ public class DT_rol
 			rsRol.updateString("rol_name", trl.getRol_name());
 			rsRol.updateString("rol_desc", trl.getRol_desc());
 			rsRol.updateInt("estado", 1);
+			rsRol.updateInt("tipo_rol", trl.getTipo_rol());
 			rsRol.insertRow();
 			rsRol.moveToCurrentRow();
 			guardado = true;
@@ -134,6 +136,7 @@ public class DT_rol
 					rsRol.updateString("rol_name", trl.getRol_name());
 					rsRol.updateString("rol_desc", trl.getRol_desc());
 					rsRol.updateInt("estado", 2);
+					rsRol.updateInt("tipo_rol", trl.getTipo_rol());
 					rsRol.updateRow();
 					modificado=true;
 					break;

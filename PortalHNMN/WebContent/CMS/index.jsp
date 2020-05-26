@@ -39,7 +39,15 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="plugins/select2/css/select2.min.css">
   <link rel="stylesheet" href="plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
-  
+  <!-- jAlert css  -->
+  <link rel="stylesheet" href="../js/jAlert/dist/jAlert.css" />
+<%
+/* RECUPERAMOS EL VALOR DE LA VARIABLE MSJ */
+String mensaje = "";
+mensaje = request.getParameter("msj");
+mensaje = mensaje==null?"":mensaje;
+System.out.println("mensaje1="+mensaje);
+%>  
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-153329080-1"></script>
 
@@ -126,7 +134,10 @@
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
  <!-- Select2 -->
 <script src="plugins/select2/js/select2.full.min.js"></script>
-
+  <!-- jAlert js -->
+  <script src="./plugins/jAlert/dist/jAlert.min.js"></script>
+  <script src="./plugins/jAlert/dist/jAlert-functions.min.js"> </script>
+  <script src="./plugins/select2/js/select2.full.min.js"></script>
 <script>
   $(function () 
 	{
@@ -134,6 +145,19 @@
     $('.select2').select2({theme: 'bootstrap4'})
 	});
 </script>
+<script>
+    $(document).ready(function ()
+    {
+     
+      /////////// VARIABLES DE CONTROL MSJ ///////////
+      var nuevo = 0;
+      nuevo = "<%=mensaje%>";
+      if(nuevo == "2")
+      {
+        errorAlert('Error', 'El usuario ingresado no existe, verifique sus credenciales');
+      }
+    });
+    </script>
 </body>
 
 </html>

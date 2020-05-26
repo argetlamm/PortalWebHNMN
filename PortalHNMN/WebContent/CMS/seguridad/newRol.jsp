@@ -119,6 +119,11 @@ mensaje = mensaje==null?"":mensaje;
                     title="Breve descripcion del rol" 
                     placeholder="Ingrese una breve descripcion del rol">
                   </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Categoría del Rol:</label><br>
+                    <input type="radio" id="tipo_rol" name="tipo_rol" value="a" required> Administradores<br>
+                    <input type="radio" id="tipo_rol" name="tipo_rol" value="b" required> Visitantes<br>
+                  </div>
                 </div>
                 <!-- /.card-body -->
 
